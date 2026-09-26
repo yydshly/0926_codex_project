@@ -11,6 +11,7 @@
 | 003 | [anandprtp/Antra](https://github.com/anandprtp/Antra) | 匹配多来源音源，下载、校验、打标并整理本地曲库。 | [研究记录](projects/003-antra/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/003-antra/) · [网页源码](sites/003-antra/index.html) |
 | 004 | [stemdeckapp/stemdeck](https://github.com/stemdeckapp/stemdeck) | Demucs 估计六类音轨，支持试听、循环练习、混音与导出。 | [研究记录](projects/004-stemdeck/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/) · [网页源码](sites/004-stemdeck/index.html) |
 | 006 | [vercel/eve](https://github.com/vercel/eve) | 把模型、工具、持久会话和人工审批组合成可部署的 Agent 服务。 | [研究记录](projects/006-vercel-eve/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/) · [网页源码](sites/006-vercel-eve/index.html) |
+| 007 | [palmier-io/palmier-pro](https://github.com/palmier-io/palmier-pro) | macOS AI 剪辑器：按画面与语音找素材，Agent 经 MCP 修改帧级时间线，交付成片或可编辑工程；适合重复初剪与人工复核。 | [研究记录](projects/007-palmier-pro/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/007-palmier-pro/) · [网页源码](sites/007-palmier-pro/index.html) |
 
 ## 子项目速览
 
@@ -69,6 +70,17 @@
 - **输入与输出：** 输入包括开发者配置的模型、指令、工具和权限，以及运行时请求与审批答复；输出包括回复、事件、工具动作和会话状态。具体业务动作要由开发者实现。
 - **场景与意义：** 可构建仓库研究受理、客服复核和周期巡检等长期流程。你自己发起研究、整理资料时用 Codex 更直接；需要多人入口、跨天续跑和自己的审批服务时，eve 才有明确价值。
 - **验证边界：** 本项目示例已构建，GitHub 查询工具取回真实数据，服务健康检查返回 `ready`；完整模型循环和真实审批仍待验证。[研究记录与源码](projects/006-vercel-eve/README.md) · [在线交互演示](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/)。
+
+### 007 · Palmier Pro
+
+<img src="projects/007-palmier-pro/assets/capability-map.png" width="460" alt="Palmier Pro 能力全景图：输入、画面和声音理解、Agent 与时间线模块、输出、扩展方向及研究价值">
+
+图片说明：本仓库依据 [Palmier 官方文档](https://www.palmier.io/docs/agent-and-mcp)与[历史公开源码](https://github.com/palmier-io/palmier-pro/tree/last-gpl-source)绘制的研究引导图；模块分组与扩展方向是归纳，不是官方架构或运行截图。[放大查看 SVG](projects/007-palmier-pro/assets/capability-map.svg)。
+
+- **能力与原理：** Palmier Pro 是 macOS 非线性剪辑应用。它并列利用画面语义检索、语音转写与音频分析定位素材；Agent 经本地 MCP 读取工程、调用剪辑工具修改多轨时间线，人可预览、撤销并继续编辑。公开历史源码使用帧级 Timeline → Track → Clip 模型和 AVFoundation 等媒体技术。
+- **输入与输出：** 输入视频、图片、音频、字幕、工程状态与人的剪辑要求；输出可编辑工程、H.264/H.265/ProRes 成片、XML/FCPXML 交换文件及生成素材。
+- **场景与对我们的意义：** 适合访谈课程粗剪、字幕处理、批量短视频和实拍与生成素材混剪。它提供了“Agent 操作专业创作软件，并由人复核结果”的研究案例；当前 Windows 环境无法直接运行，实际试用需要兼容的 Apple Silicon Mac。
+- **边界：** 现行产品能力依据官方文档；源码只能验证截至 v0.7.6 的 GPLv3 历史版本，不能据此断言后续专有版本的内部实现。[详细研究记录](projects/007-palmier-pro/README.md) · [在线能力地图](https://yydshly.github.io/0926_codex_project/sites/007-palmier-pro/)。
 
 ## 仓库结构
 

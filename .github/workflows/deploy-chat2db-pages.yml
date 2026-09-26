@@ -17,6 +17,8 @@ on:
       - "sites/004-stemdeck/**"
       - "projects/006-vercel-eve/**"
       - "sites/006-vercel-eve/**"
+      - "projects/007-palmier-pro/**"
+      - "sites/007-palmier-pro/**"
   workflow_dispatch:
 
 permissions:
@@ -51,6 +53,8 @@ jobs:
           cp -R projects/004-stemdeck _site/projects/
           cp -R sites/006-vercel-eve _site/sites/
           cp -R projects/006-vercel-eve _site/projects/
+          cp -R sites/007-palmier-pro _site/sites/
+          cp -R projects/007-palmier-pro _site/projects/
           cp README.md _site/README.md
           cp .github/pages-index.html _site/index.html
       - name: Configure Pages

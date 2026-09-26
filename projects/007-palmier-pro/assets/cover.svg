@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 620" width="800" height="620" role="img" aria-labelledby="title desc">
+  <title id="title">Palmier Pro 能力架构示意图</title>
+  <desc id="desc">视频、音频和字幕素材进入多轨时间线；Agent 通过 MCP 控制编辑，最后得到可预览与导出的项目。</desc>
+  <defs>
+    <linearGradient id="back" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#26382c"/><stop offset="1" stop-color="#101b15"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#14251b"/><stop offset="1" stop-color="#0e1812"/></linearGradient>
+    <linearGradient id="shot1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c6e685"/><stop offset=".53" stop-color="#6f9e65"/><stop offset="1" stop-color="#244c3c"/></linearGradient>
+    <linearGradient id="shot2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f3c68b"/><stop offset=".55" stop-color="#a1644d"/><stop offset="1" stop-color="#493b45"/></linearGradient>
+    <linearGradient id="shot3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b4d5de"/><stop offset=".55" stop-color="#567988"/><stop offset="1" stop-color="#263e50"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="22" stdDeviation="25" flood-color="#000" flood-opacity=".25"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="28"/></filter>
+    <pattern id="grain" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".6" fill="#fff" opacity=".08"/><circle cx="11" cy="13" r=".5" fill="#fff" opacity=".06"/></pattern>
+    <clipPath id="previewClip"><rect x="329" y="93" width="389" height="252" rx="7"/></clipPath>
+  </defs>
+  <rect width="800" height="620" fill="url(#back)"/>
+  <circle cx="688" cy="6" r="205" fill="#94c874" opacity=".12" filter="url(#glow)"/>
+  <circle cx="95" cy="550" r="150" fill="#bde989" opacity=".09" filter="url(#glow)"/>
+  <rect width="800" height="620" fill="url(#grain)"/>
+
+  <g filter="url(#shadow)"><rect x="42" y="46" width="716" height="516" rx="15" fill="#18231b" stroke="#455a46" stroke-width="1.5"/></g>
+  <rect x="43" y="47" width="714" height="39" rx="14" fill="#243328"/>
+  <path d="M43 72h714v14H43z" fill="#243328"/>
+  <circle cx="64" cy="66" r="5" fill="#e49a81"/><circle cx="82" cy="66" r="5" fill="#e1bd74"/><circle cx="100" cy="66" r="5" fill="#9bbf7a"/>
+  <text x="400" y="70" text-anchor="middle" fill="#c2d1c2" font-family="Arial,sans-serif" font-size="10" letter-spacing="2.3">PALMIER PRO / AI EDITING WORKSPACE</text>
+
+  <rect x="58" y="99" width="251" height="255" rx="7" fill="#111b15" stroke="#334536"/>
+  <text x="74" y="122" fill="#dcebd5" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">MEDIA LIBRARY</text>
+  <text x="281" y="121" text-anchor="end" fill="#98bd84" font-family="Arial,sans-serif" font-size="12">＋</text>
+  <rect x="74" y="138" width="103" height="71" rx="4" fill="url(#shot1)"/><path d="M74 192l32-27 17 12 19-20 35 39v13H74z" fill="#234d40" opacity=".55"/><circle cx="151" cy="156" r="12" fill="#f4f7bb" opacity=".6"/>
+  <rect x="190" y="138" width="103" height="71" rx="4" fill="url(#shot2)"/><path d="M190 190q24-42 48-18t55-9v46H190z" fill="#5d3c41" opacity=".65"/><circle cx="239" cy="160" r="10" fill="#ffd89e" opacity=".55"/>
+  <rect x="74" y="225" width="103" height="71" rx="4" fill="url(#shot3)"/><path d="M74 278q30-30 51-15t52-23v56H74z" fill="#274b5c" opacity=".62"/><path d="M133 225l-24 71" stroke="#e6f0d8" stroke-width="3" opacity=".25"/>
+  <rect x="190" y="225" width="103" height="71" rx="4" fill="#314b3d"/><path d="M206 263h72M206 251h72M206 275h72" stroke="#87bb81" stroke-width="2" opacity=".65"/><text x="241" y="247" text-anchor="middle" fill="#c9f08a" font-family="Arial,sans-serif" font-size="10" font-weight="700">SRT</text>
+  <rect x="74" y="313" width="219" height="24" rx="4" fill="#27382b"/><circle cx="88" cy="325" r="4" fill="#c8ec78"/><text x="101" y="329" fill="#abc0a9" font-family="Arial,sans-serif" font-size="10">4 ASSETS READY TO EDIT</text>
+
+  <rect x="329" y="99" width="389" height="255" rx="7" fill="url(#screen)" stroke="#3a4d3d"/>
+  <g clip-path="url(#previewClip)"><rect x="329" y="99" width="389" height="245" fill="#253d32"/><rect x="329" y="99" width="389" height="245" fill="url(#shot1)" opacity=".25"/><path d="M329 289q64-50 111-15t97-42q67-90 181-15v128H329z" fill="#183e35"/><path d="M329 325q89-55 150-30t109-15q60-36 130-16v80H329z" fill="#103026"/><circle cx="593" cy="177" r="43" fill="#eaf29e" opacity=".18"/><circle cx="593" cy="177" r="25" fill="#eaf29e" opacity=".35"/><rect x="382" y="268" width="282" height="39" rx="4" fill="#0b1611" opacity=".8"/><text x="523" y="294" text-anchor="middle" fill="#f7f9ed" font-family="Arial,sans-serif" font-size="17" font-weight="700">把故事交给时间线</text></g>
+  <path d="M509 181l28 17-28 17z" fill="#e2f59d" opacity=".9"/>
+  <text x="345" y="337" fill="#9ab49d" font-family="Arial,sans-serif" font-size="9" letter-spacing="1">PREVIEW / FRAME 00:00:14:08</text>
+  <text x="702" y="337" text-anchor="end" fill="#9ab49d" font-family="Arial,sans-serif" font-size="9">1920 × 1080</text>
+
+  <rect x="58" y="369" width="660" height="175" rx="7" fill="#111b15" stroke="#344637"/>
+  <text x="74" y="391" fill="#e5efda" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">TIMELINE</text>
+  <text x="690" y="391" text-anchor="end" fill="#a5b9a4" font-family="Arial,sans-serif" font-size="9">30 FPS</text>
+  <path d="M75 404h626" stroke="#354839"/>
+  <g fill="#7f987f" font-family="Arial,sans-serif" font-size="9"><text x="125" y="417">00:00</text><text x="263" y="417">00:05</text><text x="401" y="417">00:10</text><text x="539" y="417">00:15</text><text x="659" y="417">00:20</text></g>
+  <g stroke="#2c3d2f" stroke-width="1"><path d="M153 423v104M291 423v104M429 423v104M567 423v104M692 423v104"/></g>
+  <text x="76" y="448" fill="#8fa58f" font-family="Arial,sans-serif" font-size="9" font-weight="700">V1</text><text x="76" y="482" fill="#8fa58f" font-family="Arial,sans-serif" font-size="9" font-weight="700">A1</text><text x="76" y="515" fill="#8fa58f" font-family="Arial,sans-serif" font-size="9" font-weight="700">TXT</text>
+  <rect x="104" y="431" width="155" height="29" rx="3" fill="#5d8e67"/><path d="M108 452l30-15 25 12 25-14 30 13 36-13" fill="none" stroke="#b8e27e" stroke-width="2" opacity=".7"/>
+  <rect x="263" y="431" width="145" height="29" rx="3" fill="#986f5a"/><path d="M267 453q40-26 74-12t63-7" fill="none" stroke="#e7ba84" stroke-width="2" opacity=".7"/>
+  <rect x="412" y="431" width="141" height="29" rx="3" fill="#607d89"/><path d="M416 453q37-26 67-12t66-8" fill="none" stroke="#bdd9d9" stroke-width="2" opacity=".7"/>
+  <rect x="557" y="431" width="134" height="29" rx="3" fill="#678764"/><path d="M561 451q42-22 72-7t54-11" fill="none" stroke="#c6ed91" stroke-width="2" opacity=".7"/>
+  <rect x="104" y="467" width="587" height="25" rx="3" fill="#314d3d"/><path d="M112 480q9-13 18 0t18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0 18 0" fill="none" stroke="#91bb85" stroke-width="1.5" opacity=".7"/>
+  <rect x="198" y="500" width="222" height="25" rx="3" fill="#aebf76"/><text x="309" y="516" text-anchor="middle" fill="#213221" font-family="Arial,sans-serif" font-size="10" font-weight="700">AI CAPTIONS</text>
+  <rect x="429" y="500" width="147" height="25" rx="3" fill="#aebf76"/><text x="503" y="516" text-anchor="middle" fill="#213221" font-family="Arial,sans-serif" font-size="10" font-weight="700">TITLE</text>
+  <path d="M425 422v107" stroke="#e5f494" stroke-width="2"/><path d="M420 422h10l-5 7z" fill="#e5f494"/>
+
+  <g filter="url(#shadow)"><rect x="569" y="18" width="168" height="69" rx="10" fill="#daf387"/></g><circle cx="594" cy="52" r="13" fill="#1b3420"/><path d="M589 53l4 4 7-9" fill="none" stroke="#daf387" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="616" y="46" fill="#1d3322" font-family="Arial,sans-serif" font-size="10" font-weight="700">AGENT CONNECTED</text><text x="616" y="63" fill="#527044" font-family="Arial,sans-serif" font-size="9">MCP · LOCAL</text>
+  <path d="M54 577h166" stroke="#8bb374" stroke-width="1" opacity=".5"/><text x="54" y="593" fill="#a2b7a0" font-family="Arial,sans-serif" font-size="10" letter-spacing="2">MEDIA → EDIT → REVIEW → EXPORT</text>
+</svg>

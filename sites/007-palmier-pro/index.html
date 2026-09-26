@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101513">
+  <meta name="description" content="Palmier Pro 能力全景图：画面与声音理解、MCP Agent、帧级时间线编辑、输入输出、适用场景及对 Windows 研究者的意义。">
+  <title>Palmier Pro · AI 视频剪辑能力地图</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="header-inner wrap">
+      <a class="brand" href="#top" aria-label="Palmier Pro 能力地图，返回顶部"><span class="brand-mark" aria-hidden="true">P<span>·</span></span><span>PALMIER <b>PRO</b><small>RESEARCH / 007</small></span></a>
+      <nav class="main-nav" aria-label="页面导航">
+        <a href="#map">全景图</a><a href="#abilities">能力</a><a href="#how">原理</a><a href="#scenarios">场景</a><a href="#extensions">扩展</a><a href="#sources">依据</a>
+      </nav>
+      <a class="header-link" href="https://github.com/palmier-io/palmier-pro" target="_blank" rel="noopener noreferrer">源仓库 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> OPEN SOURCE RESEARCH · 2026.09.26</p>
+          <h1 id="hero-title">让 AI <em>真正动手</em><br>剪视频。</h1>
+          <p class="hero-lead">Palmier Pro 是一款 macOS 非线性剪辑软件。它按画面与声音查找素材，让 Agent 经 MCP 修改帧级时间线、生成媒体并导出；人负责设定剪辑意图和审片。适合重复初剪，也提供研究可审查 Agent 工作流的样本。</p>
+          <div class="hero-actions"><a class="button button-primary" href="#map">查看能力全景图 <span aria-hidden="true">↘</span></a><a class="button button-quiet" href="#how">理解工作原理 <span aria-hidden="true">→</span></a></div>
+          <div class="hero-facts" aria-label="项目关键事实"><div><strong>macOS 26</strong><span>Apple Silicon</span></div><div><strong>本地 MCP</strong><span>Agent 可读可编辑</span></div><div><strong>GPLv3</strong><span>仅历史源码</span></div></div>
+        </div>
+        <figure class="hero-visual"><img src="../../projects/007-palmier-pro/assets/cover.svg" alt="素材、时间线、Agent 和导出之间的关系示意图" width="800" height="620"><figcaption>架构示意图 · 本研究项目原创绘制，非产品截图</figcaption></figure>
+      </div>
+      <div class="hero-bottom wrap"><span>01 — PRODUCT CAPABILITY MAP</span><span>向下浏览 <span aria-hidden="true">↓</span></span></div>
+    </section>
+
+    <section class="section intro-section" aria-labelledby="one-line-title">
+      <div class="wrap intro-grid"><p class="section-kicker">一句话定位</p><div><h2 id="one-line-title">剪辑软件 <span class="plus">+</span> Agent 操作接口 <span class="plus">+</span> 生成工具</h2><p>输入视频、图片、声音、字幕和剪辑要求，输出可编辑工程、成片或编辑器交换文件。Agent 可使用画面、对白和时间线状态作为依据；具体取舍由任务要求和人工复核决定。它本身是应用，并非可直接嵌入其他产品的剪辑 SDK。</p></div></div>
+    </section>
+
+    <section class="section map-section" id="map" aria-labelledby="map-title">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="section-kicker">一图总览</p><h2 id="map-title">输入、模块、原理与输出，<br>放在同一张图里。</h2></div><p>画面检索与声音分析是并列路径。图中的模块分组和扩展方向是研究归纳，并非官方架构图。</p></div>
+        <figure class="map-figure"><div class="map-frame"><img src="../../projects/007-palmier-pro/assets/capability-map.svg" alt="Palmier Pro 能力全景图：媒体、任务和工程作为输入，经过工程与素材、多模态理解、Agent 与 MCP、时间线编辑、渲染与生成模块，输出可编辑工程、视频、交换文件及可复用素材；下方列出扩展方向和对 Windows 用户的意义。" width="1800" height="1440"></div><figcaption>本研究项目原创绘制。依据当前官方文档与历史公开源码；后续专有版本的内部实现不由旧源码推断。<span><a href="../../projects/007-palmier-pro/assets/capability-map.svg" target="_blank" rel="noopener">打开可缩放原图 ↗</a><a href="../../projects/007-palmier-pro/assets/capability-map.png" download="palmier-pro-capability-map.png">下载 PNG ↓</a></span></figcaption></figure>
+        <p class="map-swipe-hint">在窄屏上左右滑动，可查看整张图。</p>
+      </div>
+    </section>
+
+    <section class="section abilities-section" id="abilities" aria-labelledby="abilities-title">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="section-kicker">01 / 能力地图</p><h2 id="abilities-title">从素材到成片，<br>Agent 能参与哪些环节？</h2></div><p>选择一个环节，查看当前官方文档列出的主要操作。实际工具清单以安装版本为准。</p></div>
+        <div class="capability-shell">
+          <div class="capability-tabs" role="tablist" aria-label="能力分类">
+            <button id="tab-media" class="capability-tab is-active" role="tab" aria-selected="true" aria-controls="capability-panel" data-category="media"><span class="tab-no">01</span><span>素材理解</span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+            <button id="tab-edit" class="capability-tab" role="tab" aria-selected="false" aria-controls="capability-panel" tabindex="-1" data-category="edit"><span class="tab-no">02</span><span>时间线编辑</span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+            <button id="tab-finish" class="capability-tab" role="tab" aria-selected="false" aria-controls="capability-panel" tabindex="-1" data-category="finish"><span class="tab-no">03</span><span>后期处理</span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+            <button id="tab-generate" class="capability-tab" role="tab" aria-selected="false" aria-controls="capability-panel" tabindex="-1" data-category="generate"><span class="tab-no">04</span><span>AI 生成</span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+            <button id="tab-deliver" class="capability-tab" role="tab" aria-selected="false" aria-controls="capability-panel" tabindex="-1" data-category="deliver"><span class="tab-no">05</span><span>交付导出</span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+          </div>
+          <div class="capability-panel" id="capability-panel" role="tabpanel" aria-labelledby="tab-media" tabindex="0">
+            <div class="panel-topline"><span id="panel-counter">CAPABILITY / 01</span><span class="panel-glyph" aria-hidden="true">✳</span></div>
+            <h3 id="panel-title">先理解素材，再决定怎么剪。</h3><p id="panel-description">读取项目和时间线，导入媒体，检查画面与语音内容，并按画面或对白搜索素材。</p>
+            <div class="feature-grid" id="feature-grid"><div class="feature"><span class="feature-dot"></span><strong>项目与时间线</strong><p>读取轨道、片段、标记和工程设置。</p></div><div class="feature"><span class="feature-dot"></span><strong>媒体导入</strong><p>导入本地文件、目录、URL 或字幕。</p></div><div class="feature"><span class="feature-dot"></span><strong>内容检索</strong><p>按画面内容或所说的话查找素材。</p></div><div class="feature"><span class="feature-dot"></span><strong>画面检查</strong><p>抽取帧并检查合成后的时间线画面。</p></div></div>
+            <p class="tool-line"><span>对应工具示例</span><code id="panel-tools">get_timeline · import_media · search_media · inspect_timeline</code></p>
+          </div>
+        </div>
+        <p class="source-note">能力依据：<a href="https://www.palmier.io/docs/agent-and-mcp" target="_blank" rel="noopener noreferrer">Palmier 官方 Agent 与 MCP 文档 ↗</a></p>
+      </div>
+    </section>
+
+    <section class="section how-section" id="how" aria-labelledby="how-title"><div class="wrap"><div class="section-heading"><div><p class="section-kicker">02 / 技术原理</p><h2 id="how-title">一句需求，如何变成<br>时间线上的实际修改？</h2></div><p>下面把公开源码能验证的结构，与当前文档描述的产品工作流合在一起理解。</p></div>
+      <ol class="flow"><li><span class="flow-number">01</span><div><h3>表达意图</h3><p>用户提出任务，例如“删除停顿、加字幕，再导出竖屏版”。</p></div></li><li><span class="flow-number">02</span><div><h3>Agent 调用 MCP</h3><p>应用开放本地服务；Agent 读取项目上下文并调用明确的剪辑工具。</p></div></li><li><span class="flow-number">03</span><div><h3>修改领域模型</h3><p>时间线由轨道和片段组成。片段位置、时长、裁切和关键帧按帧记录，操作进入编辑器的撤销历史。</p></div></li><li><span class="flow-number">04</span><div><h3>预览、复核、导出</h3><p>AVFoundation 与 Core Image／Metal 参与画面合成；人可查看结果、继续修改或撤销。</p></div></li></ol>
+      <div class="architecture-card"><div><p class="mini-label">关键设计判断</p><h3>AI 输出的是可继续编辑的工程，<br>而不只是一次性的成片文件。</h3></div><p>这让批量自动化与人工精修处于同一工作区。公开代码展示了帧级时间线模型、Agent 工具与撤销调用；闭源新版本的内部实现不能从旧源码直接推断。</p></div>
+      <p class="source-note">实现依据：<a href="https://github.com/palmier-io/palmier-pro/blob/last-gpl-source/Sources/PalmierPro/Models/Timeline.swift" target="_blank" rel="noopener noreferrer">时间线模型</a> · <a href="https://github.com/palmier-io/palmier-pro/blob/last-gpl-source/Sources/PalmierPro/Agent/Tools/ToolExecutor%2BTimeline.swift" target="_blank" rel="noopener noreferrer">工具实现示例</a> · <a href="https://github.com/palmier-io/palmier-pro/blob/main/Sources/PalmierPro/Compositing/CustomVideoCompositor.swift" target="_blank" rel="noopener noreferrer">合成器</a></p>
+    </div></section>
+
+    <section class="section scenarios-section" id="scenarios" aria-labelledby="scenarios-title"><div class="wrap"><div class="section-heading"><div><p class="section-kicker">03 / 使用场景</p><h2 id="scenarios-title">适合重复生产，<br>也保留人工判断。</h2></div><p>这些是基于已公布能力推导出的适用场景，并非项目方承诺的效果指标。</p></div><div class="scenario-grid"><article class="scenario-card"><span class="scenario-index">A / CONTENT</span><h3>访谈与课程</h3><p>转写对白，检索主题，删除口头禅与静音段，再生成字幕供人工校对。</p><span class="scenario-tag">转写 · 粗剪 · 字幕</span></article><article class="scenario-card"><span class="scenario-index">B / CAMPAIGN</span><h3>批量短视频</h3><p>按画面内容挑选镜头，把片头、字幕样式和节奏规则写成工作流，制作多个版本并审片。</p><span class="scenario-tag">视觉选镜 · 多版本 · 审片</span></article><article class="scenario-card"><span class="scenario-index">C / CREATIVE</span><h3>实拍与生成混剪</h3><p>为缺少的镜头生成图片、视频或音效，直接放回同一工程继续剪辑。</p><span class="scenario-tag">生成 · 组合 · 调整</span></article></div></div></section>
+
+    <section class="section extensions-section" id="extensions" aria-labelledby="extensions-title"><div class="wrap"><div class="section-heading"><div><p class="section-kicker">04 / 可扩展方向</p><h2 id="extensions-title">值得借鉴的，<br>是可复用的工作流。</h2></div><p>下面是本研究提出的方向，不代表 Palmier 已提供相应现成产品。</p></div><div class="extension-list"><article><span>01</span><div><h3>剪辑 Skill</h3><p>记录一次成功的剪辑规则：镜头选择、停顿处理、字幕风格、导出设置。下一条视频复用并保留复核步骤。</p></div><span class="effort">近期可试</span></article><article><span>02</span><div><h3>任务型复合工具</h3><p>把“按讲稿初剪”“生成三种画幅”“检查字幕溢出”封装成完整任务，减少 Agent 串联低级操作的负担。</p></div><span class="effort">需要开发</span></article><article><span>03</span><div><h3>长任务的质量闭环</h3><p>为批量编辑建立进度、可检查结果、失败重试和人工验收，避免仅凭工具返回的“成功”判断成片质量。</p></div><span class="effort">系统方向</span></article></div></div></section>
+
+    <section class="section verdict-section" aria-labelledby="verdict-title"><div class="wrap verdict-grid"><div><p class="section-kicker">对当前工作环境</p><h2 id="verdict-title">研究价值高。<br><em>直接使用有门槛。</em></h2></div><div><p>你当前使用 Windows，而 Palmier Pro 需要 macOS 26 和 Apple Silicon。若是为研究仓库选题，它是“专业创作软件如何被 Agent 操作”的好案例；若要现在就落地视频生产，需要先具备兼容的 Mac。</p><a href="../../projects/007-palmier-pro/README.md">阅读完整研究记录 <span aria-hidden="true">↗</span></a></div></div></section>
+
+    <section class="section sources-section" id="sources" aria-labelledby="sources-title"><div class="wrap"><div class="section-heading"><div><p class="section-kicker">05 / 资料与边界</p><h2 id="sources-title">把事实、源码和判断<br>放在各自的位置。</h2></div></div><div class="source-grid"><div class="source-card"><span>PRODUCT DOCS</span><h3>当前产品能力</h3><p>官方文档用于核对现行剪辑、Agent、生成与导出功能。</p><a href="https://www.palmier.io/docs/agent-and-mcp" target="_blank" rel="noopener noreferrer">Agent 与 MCP ↗</a><a href="https://www.palmier.io/docs/generative-ai" target="_blank" rel="noopener noreferrer">生成式 AI ↗</a><a href="https://www.palmier.io/docs/export" target="_blank" rel="noopener noreferrer">导出 ↗</a></div><div class="source-card"><span>PUBLIC SOURCE</span><h3>历史公开实现</h3><p>截至 v0.7.6 的 GPLv3 源码可供研究；之后的二进制版本为专有软件。</p><a href="https://github.com/palmier-io/palmier-pro/tree/last-gpl-source" target="_blank" rel="noopener noreferrer">last-gpl-source ↗</a><a href="https://github.com/palmier-io/palmier-pro/blob/last-gpl-source/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0 许可 ↗</a></div><div class="source-card"><span>RESEARCH NOTE</span><h3>本页判断</h3><p>场景、扩展方向和“对你”的意义是基于公开材料与当前 Windows 环境所作的研究分析。</p><a href="../../projects/007-palmier-pro/README.md">查看归档说明 ↗</a></div></div><p class="image-credit">封面图与能力全景图：本研究项目原创示意，非 Palmier Pro 产品截图。<a href="https://github.com/palmier-io/palmier-pro/blob/last-gpl-source/assets/palmier-ui.png" target="_blank" rel="noopener noreferrer">查看原项目真实界面 ↗</a></p></div></section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><span>007 / PALMIER PRO RESEARCH</span><a href="../../README.md">← 项目总索引</a><span>资料核对：2026-09-26</span><a href="#top">回到顶部 ↑</a></div></footer>
+</body>
+</html>

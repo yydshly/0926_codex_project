@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1440" width="1800" height="1440" role="img" aria-labelledby="title description">
+  <title id="title">Palmier Pro 能力全景图</title>
+  <desc id="description">从输入到输出汇总 Palmier Pro 的能力、内部模块、实现原理、可扩展方向和对 Windows 研究者的意义，并区分当前产品文档和历史公开源码。</desc>
+  <defs>
+    <style>
+      .zh{font-family:Inter,"Segoe UI","Noto Sans SC","Microsoft YaHei",sans-serif}.mono{font-family:Consolas,"SFMono-Regular",monospace}.title{font-size:56px;font-weight:800;letter-spacing:-2px}.subtitle{font-size:22px;font-weight:500}.section{font-size:20px;font-weight:800;letter-spacing:3px}.cardtitle{font-size:27px;font-weight:800}.body{font-size:19px;font-weight:500}.small{font-size:15px;font-weight:600}.tiny{font-size:13px;font-weight:600}.module{font-size:14px;font-weight:700}.outputtitle{font-size:22px;font-weight:800}.badge{font-size:16px;font-weight:800}.muted{fill:#66756a}.dark{fill:#183025}.white{fill:#f7fbef}.lime{fill:#d9f477}.line{stroke:#cad8c9;stroke-width:2}.arrow{stroke:#669169;stroke-width:3;fill:none;marker-end:url(#arrowhead)}
+    </style>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#102319"/><stop offset="1" stop-color="#25412c"/></linearGradient>
+    <linearGradient id="modulegrad" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#f6f9f4"/></linearGradient>
+    <marker id="arrowhead" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L8 4.5 0 9" fill="none" stroke="#669169" stroke-width="2"/></marker>
+    <filter id="shadow" x="-10%" y="-15%" width="120%" height="135%"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#37513b" flood-opacity=".1"/></filter>
+  </defs>
+
+  <rect width="1800" height="1440" fill="#f3f6ef"/>
+  <path d="M0 0h1800v199H0z" fill="url(#header)"/>
+  <circle cx="1690" cy="-90" r="320" fill="#9ac36e" opacity=".09"/>
+  <circle cx="1470" cy="-80" r="220" fill="#d9f477" opacity=".055"/>
+  <rect x="80" y="45" width="52" height="52" rx="14" fill="none" stroke="#d9f477" stroke-width="2"/>
+  <text x="106" y="80" text-anchor="middle" class="zh" font-size="31" font-weight="800" fill="#d9f477">P</text>
+  <text x="151" y="72" class="zh title white">Palmier Pro 能力全景图</text>
+  <text x="151" y="122" class="zh subtitle" fill="#b9caba">AI 可操作的 macOS 视频剪辑应用：素材 → 理解 → 编辑 → 交付</text>
+  <text x="81" y="173" class="mono small" fill="#d9f477" letter-spacing="2">RESEARCH MAP / 007 / 2026-09-26</text>
+  <rect x="1310" y="53" width="410" height="47" rx="23.5" fill="#36553a"/>
+  <text x="1515" y="83" text-anchor="middle" class="zh badge" fill="#e7f4cc">macOS 26 · Apple Silicon</text>
+  <rect x="1395" y="112" width="325" height="42" rx="21" fill="#d9f477"/>
+  <text x="1558" y="138" text-anchor="middle" class="zh small dark">当前产品文档 + 历史公开源码</text>
+
+  <text x="80" y="240" class="zh section" fill="#517258">01  输入 INPUT</text>
+  <text x="1720" y="240" text-anchor="end" class="zh small muted">来自用户、媒体库、其他工具与生成模型的素材</text>
+  <g filter="url(#shadow)">
+    <rect x="80" y="258" width="395" height="148" rx="18" fill="#fff" stroke="#d5e0d1"/>
+    <rect x="495" y="258" width="395" height="148" rx="18" fill="#fff" stroke="#d5e0d1"/>
+    <rect x="910" y="258" width="395" height="148" rx="18" fill="#fff" stroke="#d5e0d1"/>
+    <rect x="1325" y="258" width="395" height="148" rx="18" fill="#fff" stroke="#d5e0d1"/>
+  </g>
+  <circle cx="122" cy="297" r="18" fill="#dae8f0"/><text x="122" y="304" text-anchor="middle" class="zh badge" fill="#426b80">▶</text>
+  <text x="154" y="306" class="zh cardtitle dark">媒体素材</text>
+  <text x="107" y="346" class="zh body muted">视频、图片、音频、字幕文件</text>
+  <text x="107" y="378" class="zh small" fill="#4d6854">本地文件 · URL · SRT / WebVTT</text>
+  <circle cx="537" cy="297" r="18" fill="#eadff0"/><text x="537" y="304" text-anchor="middle" class="zh badge" fill="#8759a2">✦</text>
+  <text x="569" y="306" class="zh cardtitle dark">人的意图</text>
+  <text x="522" y="346" class="zh body muted">任务、保留标准、风格与时长</text>
+  <text x="522" y="378" class="zh small" fill="#4d6854">自然语言指令 · 可复用 Skill</text>
+  <circle cx="952" cy="297" r="18" fill="#e8edc8"/><text x="952" y="304" text-anchor="middle" class="zh badge" fill="#6d8326">◇</text>
+  <text x="984" y="306" class="zh cardtitle dark">生成参考</text>
+  <text x="937" y="346" class="zh body muted">提示词、首尾帧、参考图片/视频</text>
+  <text x="937" y="378" class="zh small" fill="#4d6854">生成结果回到工程媒体库</text>
+  <circle cx="1367" cy="297" r="18" fill="#f3e5d9"/><text x="1367" y="304" text-anchor="middle" class="zh badge" fill="#a36b43">▦</text>
+  <text x="1399" y="306" class="zh cardtitle dark">工程约束</text>
+  <text x="1352" y="346" class="zh body muted">已有片段、轨道、画幅和帧率</text>
+  <text x="1352" y="378" class="zh small" fill="#4d6854">可编辑项目与人审片的上下文</text>
+
+  <path d="M900 416v33" class="arrow"/>
+  <text x="80" y="470" class="zh section" fill="#517258">02  内部模块与数据流 SYSTEM</text>
+  <text x="1720" y="470" text-anchor="end" class="zh small muted">以下模块分组为研究归纳；目录名来自公开 Swift 工程</text>
+  <g filter="url(#shadow)" fill="url(#modulegrad)" stroke="#cddccd">
+    <rect x="80" y="490" width="312" height="354" rx="20"/>
+    <rect x="412" y="490" width="312" height="354" rx="20"/>
+    <rect x="744" y="490" width="312" height="354" rx="20"/>
+    <rect x="1076" y="490" width="312" height="354" rx="20"/>
+    <rect x="1408" y="490" width="312" height="354" rx="20"/>
+  </g>
+  <path d="M392 670h16M724 670h16M1056 670h16M1388 670h16" class="arrow"/>
+
+  <circle cx="124" cy="537" r="23" fill="#e0ecdb"/><text x="124" y="545" text-anchor="middle" class="mono badge" fill="#4c7d55">01</text>
+  <text x="158" y="548" class="zh cardtitle dark">工程与素材</text>
+  <text x="108" y="581" class="mono module" fill="#62936b">Project · MediaPanel</text>
+  <path d="M108 602h255" class="line"/>
+  <text x="108" y="637" class="zh body dark">• 导入、组织媒体与工程</text>
+  <text x="108" y="674" class="zh body dark">• 多时间线与素材身份</text>
+  <text x="108" y="711" class="zh body dark">• 保留原片与编辑状态</text>
+  <text x="108" y="780" class="zh small muted">输出：可被 Agent 引用的素材 ID</text>
+
+  <circle cx="456" cy="537" r="23" fill="#dbe8ef"/><text x="456" y="545" text-anchor="middle" class="mono badge" fill="#457184">02</text>
+  <text x="490" y="548" class="zh cardtitle dark">多模态理解</text>
+  <text x="440" y="581" class="mono module" fill="#5d8b9c">Search · Transcription</text>
+  <path d="M440 602h255" class="line"/>
+  <rect x="440" y="619" width="255" height="46" rx="8" fill="#e5f0f5"/>
+  <text x="455" y="648" class="zh body" fill="#315e74">画面：语义检索、抽帧</text>
+  <rect x="440" y="676" width="255" height="46" rx="8" fill="#f5ebe3"/>
+  <text x="455" y="705" class="zh body" fill="#8b5d47">声音：转写、静音、节拍</text>
+  <text x="440" y="780" class="zh small muted">输出：候选片段与时间位置</text>
+
+  <circle cx="788" cy="537" r="23" fill="#eee3f4"/><text x="788" y="545" text-anchor="middle" class="mono badge" fill="#8d60a3">03</text>
+  <text x="822" y="548" class="zh cardtitle dark">Agent 与 MCP</text>
+  <text x="772" y="581" class="mono module" fill="#9a6bac">Agent · local MCP server</text>
+  <path d="M772 602h255" class="line"/>
+  <text x="772" y="637" class="zh body dark">• 读工程、选工具、执行</text>
+  <text x="772" y="674" class="zh body dark">• 结合指令/Skill 定标准</text>
+  <text x="772" y="711" class="zh body dark">• 读回结果、可撤销</text>
+  <text x="772" y="780" class="zh small muted">入口：应用内 Agent / 外部 Agent</text>
+
+  <circle cx="1120" cy="537" r="23" fill="#e4eacb"/><text x="1120" y="545" text-anchor="middle" class="mono badge" fill="#72853a">04</text>
+  <text x="1154" y="548" class="zh cardtitle dark">时间线编辑</text>
+  <text x="1104" y="581" class="mono module" fill="#82933f">Models · Editor · Timeline</text>
+  <path d="M1104 602h255" class="line"/>
+  <text x="1104" y="637" class="zh body dark">• Timeline → Track → Clip</text>
+  <text x="1104" y="674" class="zh body dark">• 帧级裁切、波纹、关键帧</text>
+  <text x="1104" y="711" class="zh body dark">• 链接音画、多机位、字幕</text>
+  <text x="1104" y="780" class="zh small muted">状态：可检查、可继续手动编辑</text>
+
+  <circle cx="1452" cy="537" r="23" fill="#f2e7cf"/><text x="1452" y="545" text-anchor="middle" class="mono badge" fill="#9b783c">05</text>
+  <text x="1486" y="548" class="zh cardtitle dark">渲染与生成</text>
+  <text x="1436" y="581" class="mono module" fill="#a48450">Preview · Export · Generation</text>
+  <path d="M1436 602h255" class="line"/>
+  <text x="1436" y="637" class="zh body dark">• AVFoundation 合成</text>
+  <text x="1436" y="674" class="zh body dark">• Core Image / Metal 效果</text>
+  <text x="1436" y="711" class="zh body dark">• AI 生成任务回流素材库</text>
+  <text x="1436" y="780" class="zh small muted">生成服务使用积分，剪辑可独立用</text>
+
+  <rect x="80" y="868" width="1640" height="73" rx="16" fill="#193528"/>
+  <circle cx="121" cy="904" r="15" fill="#d9f477"/><path d="M114 904l5 5 10-12" fill="none" stroke="#193528" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="154" y="911" class="zh body white">实现主线：多模态索引定位素材 → Agent 依据任务选择操作 → 帧级时间线修改 → 预览核对 → 导出</text>
+  <text x="1691" y="911" text-anchor="end" class="zh small" fill="#d9f477">音频与画面并列，不以声音为唯一标准</text>
+
+  <text x="80" y="989" class="zh section" fill="#517258">03  输出 OUTPUT</text>
+  <text x="1720" y="989" text-anchor="end" class="zh small muted">既能交付成片，也保留可修改的工程</text>
+  <g fill="#fff" stroke="#d5e0d1">
+    <rect x="80" y="1007" width="395" height="126" rx="16"/>
+    <rect x="495" y="1007" width="395" height="126" rx="16"/>
+    <rect x="910" y="1007" width="395" height="126" rx="16"/>
+    <rect x="1325" y="1007" width="395" height="126" rx="16"/>
+  </g>
+  <text x="108" y="1052" class="zh outputtitle dark">可编辑工程</text><text x="108" y="1091" class="zh body muted">时间线、素材、标记与编辑状态</text>
+  <text x="523" y="1052" class="zh outputtitle dark">视频成片</text><text x="523" y="1091" class="zh body muted">H.264 / H.265 / ProRes 等</text>
+  <text x="938" y="1052" class="zh outputtitle dark">编辑器交换文件</text><text x="938" y="1091" class="zh body muted">XML / FCPXML 供继续精修</text>
+  <text x="1353" y="1052" class="zh outputtitle dark">可复用素材</text><text x="1353" y="1091" class="zh body muted">生成媒体、字幕、截取画面</text>
+
+  <text x="80" y="1182" class="zh section" fill="#517258">04  扩展方向 &amp; 对你的意义</text>
+  <rect x="80" y="1202" width="800" height="161" rx="18" fill="#e6efe3" stroke="#bfd2ba"/>
+  <rect x="900" y="1202" width="820" height="161" rx="18" fill="#213c2b"/>
+  <text x="110" y="1244" class="zh outputtitle dark">可扩展方向 · 研究建议</text>
+  <text x="110" y="1284" class="zh body dark">复用剪辑 Skill  /  视觉质量核查  /  多画幅批量生产</text>
+  <text x="110" y="1322" class="zh body dark">长任务审片与恢复  /  跨平台方案需另建渲染层</text>
+  <text x="932" y="1244" class="zh outputtitle" fill="#d9f477">对你当前工作的意义</text>
+  <text x="932" y="1284" class="zh body white">Windows 不能直接运行；研究价值在“Agent 操作专业软件”</text>
+  <text x="932" y="1322" class="zh body" fill="#b9d0bc">有兼容 Mac 时，可试重复视频流程的人机协作与复核</text>
+
+  <path d="M80 1391h1640" stroke="#c5d4c3" stroke-width="2"/>
+  <text x="80" y="1415" class="zh tiny muted">资料：palmier.io/docs/agent-and-mcp · docs/generative-ai · docs/export · github.com/palmier-io/palmier-pro</text>
+  <text x="1720" y="1415" text-anchor="end" class="zh tiny muted">历史 GPLv3 源码止于 v0.7.6；后续二进制为专有发行版。本图非官方架构图。</text>
+</svg>
