@@ -1,0 +1,37 @@
+{
+  "description": "人工核对的本仓库研究资料清单；修改后重新建图。",
+  "sources": [
+    {
+      "number": "005",
+      "name": "Autoresearch",
+      "path": "projects/005-autoresearch/README.md",
+      "anchor": "寻找在当前 GPU、数据与短时间预算下表现更好的训练方案",
+      "role": null,
+      "reason": "研究重点是训练实验循环，不属于本次查询的任务协调、知识上下文或长期记忆层。"
+    },
+    {
+      "number": "008",
+      "name": "Oh My OpenAgent",
+      "path": "projects/008-oh-my-openagent/README.md",
+      "anchor": "Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制",
+      "role": "任务协调",
+      "reason": "安排任务、工具与执行流程。"
+    },
+    {
+      "number": "011",
+      "name": "Semantica",
+      "path": "projects/011-semantica/README.md",
+      "anchor": "Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策",
+      "role": "知识上下文",
+      "reason": "把资料、关系和来源组织为可查询的图。"
+    },
+    {
+      "number": "012",
+      "name": "Hindsight",
+      "path": "projects/012-hindsight/README.md",
+      "anchor": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆",
+      "role": "长期记忆",
+      "reason": "保存并检索跨轮次的外部记忆。"
+    }
+  ]
+}

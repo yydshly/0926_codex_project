@@ -27,6 +27,8 @@ on:
       - "sites/009-superfile/**"
       - "projects/010-ghidra/**"
       - "sites/010-ghidra/**"
+      - "projects/011-semantica/**"
+      - "sites/011-semantica/**"
       - "projects/013-gitreverse/**"
       - "sites/013-gitreverse/**"
   workflow_dispatch:
@@ -73,6 +75,8 @@ jobs:
           cp -R projects/009-superfile _site/projects/
           cp -R sites/010-ghidra _site/sites/
           cp -R projects/010-ghidra _site/projects/
+          cp -R sites/011-semantica _site/sites/
+          cp -R projects/011-semantica _site/projects/
           cp -R sites/013-gitreverse _site/sites/
           cp -R projects/013-gitreverse _site/projects/
           cp README.md _site/README.md

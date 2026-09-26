@@ -1,0 +1,37 @@
+{
+  "build_id": "20260926T131820Z-2396cd",
+  "built_at": "2026-09-26T13:18:20.230348+00:00",
+  "semantica_version": "0.7.0",
+  "inputs_sha256": "30e87e6b6d6cc3a8ac705157732317ff3a9e666d7aef7b784a762912b6eb86f9",
+  "duration_ms": 49,
+  "source_count": 4,
+  "node_count": 12,
+  "edge_count": 10,
+  "checks": {
+    "anchors_unique": true,
+    "graph_reloaded": true,
+    "source_snapshots_match": true
+  },
+  "steps": [
+    {
+      "title": "读取入口清单",
+      "owner": "接入脚本",
+      "detail": "读取 4 份真实 README，记录文件路径、字节数与摘要。其中 1 份使用已保存快照。"
+    },
+    {
+      "title": "核对证据锚点",
+      "owner": "人工标注 + 脚本校验",
+      "detail": "每段原文必须存在且只出现一次；角色含义由人预先确认。"
+    },
+    {
+      "title": "写入并保存图谱",
+      "owner": "Semantica",
+      "detail": "保存 12 个节点和 10 条关系。"
+    },
+    {
+      "title": "从磁盘重新加载",
+      "owner": "Semantica",
+      "detail": "重新加载保存的图文件，三跳主题查询返回 3 个项目及来源路径。"
+    }
+  ]
+}

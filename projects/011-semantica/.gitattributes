@@ -1,0 +1,4 @@
+# Preserve bytes used by SHA-256 provenance across Windows/Linux checkouts.
+artifacts/** -text
+pilot-inputs.json -text
+pilot-result.json -text

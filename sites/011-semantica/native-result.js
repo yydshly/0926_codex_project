@@ -1,0 +1,58 @@
+window.semanticaNative = {
+  "build_id": "20260926T131820Z-2396cd",
+  "graph_sha256": "c0e7afeb4df2214e2dfd7e3db7a86ea2b1e3d32d0463d4a1c8350e17b4610399",
+  "semantica_version": "0.7.0",
+  "plotly_version": "7.1.0",
+  "renderer": "semantica.visualization.KGVisualizer.visualize_network",
+  "exporter": "semantica.visualization.utils.export_formats.export_plotly_figure",
+  "seed": 42,
+  "views": [
+    {
+      "id": "force",
+      "title": "力导向布局",
+      "file": "native/force.html",
+      "layout": "force",
+      "node_count": 12,
+      "edge_count": 10,
+      "highlight_path": null
+    },
+    {
+      "id": "circular",
+      "title": "环形布局",
+      "file": "native/circular.html",
+      "layout": "circular",
+      "node_count": 12,
+      "edge_count": 10,
+      "highlight_path": null
+    },
+    {
+      "id": "path",
+      "title": "Hindsight 路径高亮",
+      "file": "native/path.html",
+      "layout": "force",
+      "node_count": 12,
+      "edge_count": 10,
+      "highlight_path": [
+        "theme:agent-context-stack",
+        "role:012",
+        "project:012",
+        "evidence:012"
+      ]
+    },
+    {
+      "id": "raw",
+      "title": "原始长标签",
+      "file": "native/raw.html",
+      "layout": "force",
+      "node_count": 12,
+      "edge_count": 10,
+      "highlight_path": null
+    }
+  ],
+  "input_adjustments": [
+    "source_id/target_id duplicated as source/target for the 0.7.0 visualizer",
+    "compact views shorten question/evidence labels; full text remains in hover metadata"
+  ],
+  "unchanged": "Node IDs, node types, relation types and endpoints remain unchanged; no hand-set coordinates or custom drawing.",
+  "extraction": "Roles and evidence were human-reviewed in pilot-inputs.json; this run does not perform automatic extraction."
+};

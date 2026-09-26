@@ -1,0 +1,65 @@
+{
+  "build_id": "20260926T131820Z-2396cd",
+  "records": [
+    {
+      "number": "005",
+      "project": "Autoresearch",
+      "role": null,
+      "reason": "研究重点是训练实验循环，不属于本次查询的任务协调、知识上下文或长期记忆层。",
+      "quote": "寻找在当前 GPU、数据与短时间预算下表现更好的训练方案",
+      "source": "projects/005-autoresearch/README.md",
+      "line": 71,
+      "source_sha256": "1b67d2daea16d3ab542366ae9638c9c818b4b92c19d104c147d1e83eb5aa5031",
+      "snapshot": "projects/011-semantica/artifacts/sources/005.md",
+      "path": [
+        "project:005",
+        "evidence:005"
+      ]
+    },
+    {
+      "number": "008",
+      "project": "Oh My OpenAgent",
+      "role": "任务协调",
+      "reason": "安排任务、工具与执行流程。",
+      "quote": "Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制",
+      "source": "projects/008-oh-my-openagent/README.md",
+      "line": 18,
+      "source_sha256": "6d23b218eabd4919baad9192ac51945bede8403aca5a1e5962bfc0c022492b5e",
+      "snapshot": "projects/011-semantica/artifacts/sources/008.md",
+      "path": [
+        "project:008",
+        "evidence:008"
+      ]
+    },
+    {
+      "number": "011",
+      "project": "Semantica",
+      "role": "知识上下文",
+      "reason": "把资料、关系和来源组织为可查询的图。",
+      "quote": "Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策",
+      "source": "projects/011-semantica/README.md",
+      "line": 18,
+      "source_sha256": "43ffc75510eef0e35d75c780440e64db018c74762258dfc4665b8b81ca850aa7",
+      "snapshot": "projects/011-semantica/artifacts/sources/011.md",
+      "path": [
+        "project:011",
+        "evidence:011"
+      ]
+    },
+    {
+      "number": "012",
+      "project": "Hindsight",
+      "role": "长期记忆",
+      "reason": "保存并检索跨轮次的外部记忆。",
+      "quote": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆",
+      "source": "projects/012-hindsight/README.md",
+      "line": 3,
+      "source_sha256": "bfab88c73080336cfd898ee520d2ffac1a810cd46310a24d3704845a94440ee4",
+      "snapshot": "projects/011-semantica/artifacts/sources/012.md",
+      "path": [
+        "project:012",
+        "evidence:012"
+      ]
+    }
+  ]
+}

@@ -44,6 +44,10 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 
 [在线完整引导图与游戏存档分析过程](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#overview)汇总 Ghidra 的输入、能力、原理、输出、扩展方式与研究价值，并接入四类使用场景。自制 Windows EXE 已由 Ghidra 12.1.4 分析；[六步证据链](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#analysis-path)从 PE 文件头走到指令、p-code、伪代码和三份存档的实际运行结果。其他场景标为工作流示例，另有 COFF 教学交互。[网页源码](010-ghidra/index.html) · [研究记录与验证边界](../projects/010-ghidra/README.md)。
 
+## 011 · Semantica
+
+[011 · Semantica 能力摘要与演示](https://yydshly.github.io/0926_codex_project/sites/011-semantica/)：用完整总览图说明知识处理能力、实体与关系的实现原理、跨资料研究和 Agent 场景，以及对本仓库证据复用的意义。附[完整引导与 Obsidian 对比](https://yydshly.github.io/0926_codex_project/sites/011-semantica/guide.html)、[库原生图形](https://yydshly.github.io/0926_codex_project/sites/011-semantica/native-graph.html)和真实运行快照；重建与实时运行需本机服务。[网页源码](011-semantica/index.html) · [研究记录](../projects/011-semantica/README.md)。
+
 ## 013 · GitReverse
 
 [能力总览与 Chippy Tea 前后对比](https://yydshly.github.io/0926_codex_project/sites/013-gitreverse/#summary)用原创总览图说明两条输入路线、提示词与 design.md 的作用、实现原理、使用场景和研究价值；再展示根据两份文字结果实做的网页与原站桌面、手机截图。网页落地由本研究继续开发，GitReverse 没有直接生成代码。[网页源码](013-gitreverse/index.html) · [研究记录与来源](../projects/013-gitreverse/README.md)。

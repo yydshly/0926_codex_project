@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Semantica 知识处理库：从资料抽取实体和关系，经去重、校验与建图形成可查询的知识；用于跨资料研究、证据问答和 Agent 上下文。附完整总览图、Obsidian 对比及本仓库真实试验。">
+  <title>Semantica 能力体验｜项目 011</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./pilot-result.js"></script>
+  <script defer src="./app.js"></script>
+  <script defer src="./knowledge-map.js"></script>
+  <script defer src="./flow.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="https://github.com/yydshly/0926_codex_project" aria-label="返回 GitHub 项目研究集仓库"><span class="brand-mark">S<span class="mark-dot"></span></span><span class="brand-name">Semantica <small>研究项目 011</small></span></a>
+      <nav aria-label="本页导航">
+        <a href="./guide.html">完整引导图</a>
+        <a href="#scenarios">使用场景</a>
+        <a href="#pilot">资料到业务</a>
+        <a href="#lab">概念体验</a>
+        <a href="#principle">工作原理</a>
+      </nav>
+      <a class="top-source" href="https://github.com/semantica-agi/semantica" target="_blank" rel="noopener noreferrer">原项目 ↗</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> KNOWLEDGE, WITH CONTEXT</p>
+        <h1 id="hero-title">让答案带着<br><em>关系与证据</em>出现。</h1>
+        <p class="hero-lead">Semantica 是搭建知识处理系统的 Python 库：把分散资料组织成实体、关系和来源，保存后供搜索、规则检查与 Agent 调用。我们用真实研究记录，展示资料如何成为可复用的知识。</p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="./guide.html">先看完整引导图 <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="#pilot">从资料入口开始</a>
+        </div>
+        <p class="demo-disclosure"><span class="disclosure-icon" aria-hidden="true">i</span> 线上与文件模式展示真实运行快照，可筛选和导出快照简报；本机服务支持重新建图。当前角色由人工标注，库负责保存、重载、查询与原生画图。</p>
+      </div>
+      <figure class="hero-figure overview-figure">
+        <a href="../../projects/011-semantica/assets/guide-overview.svg" target="_blank" rel="noopener" aria-label="放大完整理解与使用总览图"><img src="../../projects/011-semantica/assets/guide-overview.svg" width="1600" height="2940" alt="Semantica 完整总览：Obsidian 对比、六步原理、九组模块、十二类场景、用法、实测效果和扩展路线"></a>
+        <figcaption>完整理解与使用总览图 · 点击放大 · 本项目依据官方资料与实测整理</figcaption>
+      </figure>
+    </section>
+
+    <div class="principle-strip">
+      <div class="shell strip-inner" aria-label="能力流程">
+        <span>分散资料</span><b aria-hidden="true">→</b><span>实体与关系</span><b aria-hidden="true">→</b><span>知识图谱</span><b aria-hidden="true">→</b><span>可核对的答案</span>
+      </div>
+    </div>
+
+    <section class="section shell summary-section" id="summary" aria-labelledby="summary-heading">
+      <div class="section-intro"><div><p class="section-number">AT A GLANCE / 理解摘要</p><h2 id="summary-heading">从库的能力，走到我们的研究工作。</h2></div><p>共同的图模型只是起点；资料如何加工、留下什么，以及如何继续使用，才决定接入价值。</p></div>
+      <div class="summary-grid">
+        <article><span>01 / 能力</span><h3>组织可查询、可追溯的知识</h3><p>提供资料接入、实体与关系抽取、去重、冲突处理、建图、图查询、规则、来源追踪与可视化组件；需要按任务组合。</p></article>
+        <article><span>02 / 实现原理</span><h3>从文本到有含义的连接</h3><p>解析与切分资料，用规则、模型或人工确认对象和关系，经核对后保存为带属性的图。查询沿关系取回对象及证据，也可配置向量检索。</p></article>
+        <article><span>03 / 使用场景</span><h3>跨资料找关联，并解释依据</h3><p>用于跨项目研究、证据问答、Agent 上下文、工单排查、供应链追踪与决策审计。图形帮助理解，业务应用继续使用保存的数据。</p></article>
+        <article><span>04 / 对我们的意义</span><h3>让一次研究能被下一次复用</h3><p>把项目、能力、结论和原文联系起来，按角色找项目、回查依据、交接简报。已实测 4 份资料、12 个节点、10 条关系；自动抽取和效率收益仍待验证。</p></article>
+      </div>
+      <p class="scenario-note">能力范围见<a href="https://github.com/semantica-agi/semantica#architecture">官方架构</a>；对本仓库的价值是待持续检验的应用判断。<a href="./guide.html#comparison">查看与 Obsidian 的共同点、差异和选择建议 →</a></p>
+    </section>
+
+    <section class="section scenarios-section shell" id="scenarios" aria-labelledby="scenarios-heading">
+      <div class="guide-entry"><div><strong>把前面的讨论，整理成一张完整地图。</strong><p>从 Obsidian 关系图的类比出发，串起能力、模块、场景、使用方法、实测效果、对你的意义与扩展路线。</p><p><a href="./guide.html#comparison">与 Obsidian 对比：共同原理、机制差异与选择建议 →</a></p></div><a href="./guide.html">打开完整引导 →</a></div>
+      <div class="section-intro">
+        <div><p class="section-number">01 / WHERE IT HELPS</p><h2 id="scenarios-heading">12 个场景，先看你会遇到什么问题</h2></div>
+        <p>当问题要跨多份资料找关系、处理相互矛盾的说法，或解释答案依据时，知识图谱才开始有价值。前四项直接对应本仓库的研究工作。</p>
+      </div>
+      <div class="scenario-filters" role="group" aria-label="筛选使用场景">
+        <button type="button" class="scenario-filter is-current" data-scenario-filter="all" aria-pressed="true">全部 12 个</button>
+        <button type="button" class="scenario-filter" data-scenario-filter="ours" aria-pressed="false">我们的研究工作</button>
+        <button type="button" class="scenario-filter" data-scenario-filter="team" aria-pressed="false">团队协作</button>
+        <button type="button" class="scenario-filter" data-scenario-filter="business" aria-pressed="false">业务系统</button>
+      </div>
+      <div class="scenario-grid">
+        <article class="scenario-card" data-scenario-group="ours"><span>01 · 本仓库</span><h3>跨项目研究检索</h3><p><strong>你会问：</strong>哪些项目都与 Agent 上下文有关，各负责哪一层？</p><p><strong>得到：</strong>项目之间的角色关系，以及能回到 README 的依据。</p></article>
+        <article class="scenario-card" data-scenario-group="ours"><span>02 · 本仓库</span><h3>结论与来源复核</h3><p><strong>你会问：</strong>网页上的一条判断，来自哪篇研究和哪份上游资料？</p><p><strong>得到：</strong>结论 → 研究记录 → 原始来源的核查路径。</p></article>
+        <article class="scenario-card" data-scenario-group="ours"><span>03 · 本仓库</span><h3>资料更新影响检查</h3><p><strong>你会问：</strong>原项目许可或 API 改了，哪些研究页要复核？</p><p><strong>得到：</strong>被该来源支持的结论和展示页清单；仍需人工判断是否过时。</p></article>
+        <article class="scenario-card" data-scenario-group="ours"><span>04 · 本仓库</span><h3>持续研究助手</h3><p><strong>你会问：</strong>上次为什么选这个演示方向，已有哪项验证？</p><p><strong>得到：</strong>任务、决策、证据与后续行动的关联上下文。</p></article>
+        <article class="scenario-card" data-scenario-group="team"><span>05 · 团队</span><h3>多 Agent 协作</h3><p><strong>你会问：</strong>研究、开发和核查任务依赖谁的产出？</p><p><strong>得到：</strong>共享实体、任务关系及可追溯的交接依据。</p></article>
+        <article class="scenario-card" data-scenario-group="team"><span>06 · 团队</span><h3>客服问题排查</h3><p><strong>你会问：</strong>同一故障在工单、文档和版本记录里怎样关联？</p><p><strong>得到：</strong>相关用户、功能、版本、修复记录和来源。</p></article>
+        <article class="scenario-card" data-scenario-group="team"><span>07 · 团队</span><h3>软件事故复盘</h3><p><strong>你会问：</strong>一次故障涉及哪些服务、变更和应对决定？</p><p><strong>得到：</strong>事件路径与决策依据；因果仍需独立验证。</p></article>
+        <article class="scenario-card" data-scenario-group="team"><span>08 · 团队</span><h3>漏洞影响定位</h3><p><strong>你会问：</strong>有风险的组件经哪些依赖影响我们的产品？</p><p><strong>得到：</strong>漏洞 → 组件 → 服务 → 负责人的多跳路径。</p></article>
+        <article class="scenario-card" data-scenario-group="business"><span>09 · 业务</span><h3>供应商选型</h3><p><strong>你会问：</strong>两份资料对签约状态说法不一，能批准吗？</p><p><strong>得到：</strong>并列保留的冲突、来源和待复核的规则结果。</p></article>
+        <article class="scenario-card" data-scenario-group="business"><span>10 · 业务</span><h3>审批与审计</h3><p><strong>你会问：</strong>当时依据哪个版本的规则批准了这件事？</p><p><strong>得到：</strong>申请、规则版本、证据和决策之间的记录链。</p></article>
+        <article class="scenario-card" data-scenario-group="business"><span>11 · 业务</span><h3>供应链追踪</h3><p><strong>你会问：</strong>一个零件问题会波及哪些批次和客户？</p><p><strong>得到：</strong>供应商、批次、产品和客户的受影响路径。</p></article>
+        <article class="scenario-card" data-scenario-group="business"><span>12 · 业务</span><h3>多系统记录对齐</h3><p><strong>你会问：</strong>CRM、合同和工单中的两个名字是否同一客户？</p><p><strong>得到：</strong>候选匹配、冲突字段与人工确认后的统一实体。</p></article>
+      </div>
+      <p class="scenario-note">这些是适用问题与预期工作方式，不表示本页已实现全部场景。下面只实测场景 01。</p>
+    </section>
+
+    <section class="section pilot-section" id="pilot" aria-labelledby="pilot-heading">
+      <div class="shell">
+        <div class="section-intro">
+          <div><p class="section-number">02 / FROM SOURCE TO ACTION</p><h2 id="pilot-heading">一次接入，留下知识，<br>让搜索与业务接着用。</h2></div>
+          <p>以“为持续研究助手选择组件”为任务，逐步查看原文如何变成可保存、可查询的记录，再把搜索结果交给一个真实可导出的研究简报。</p>
+        </div>
+        <div class="runtime-bar"><div><span class="runtime-dot" id="runtime-dot"></span><strong id="runtime-mode">保存的运行快照</strong><span id="runtime-detail">正在读取知识库状态…</span></div><a id="live-entry" href="http://127.0.0.1:8761/sites/011-semantica/index.html#pilot">进入本机实时演示 ↗</a></div>
+        <div class="flow-nav" role="group" aria-label="选择资料处理步骤">
+          <button type="button" data-step="0" class="is-current" aria-pressed="true"><b>01</b><strong>资料入口</strong><small>从哪里来</small></button>
+          <button type="button" data-step="1" aria-pressed="false"><b>02</b><strong>加工记录</strong><small>如何形成知识</small></button>
+          <button type="button" data-step="2" aria-pressed="false"><b>03</b><strong>知识资产</strong><small>看懂关系图</small></button>
+          <button type="button" data-step="3" aria-pressed="false"><b>04</b><strong>搜索验证</strong><small>如何找到答案</small></button>
+          <button type="button" data-step="4" aria-pressed="false"><b>05</b><strong>业务交付</strong><small>如何变成行动</small></button>
+        </div>
+        <div class="flow-workspace">
+          <section class="flow-panel" data-panel="0" aria-labelledby="entry-heading">
+            <div class="panel-heading"><span>INPUT / 资料入口</span><h3 id="entry-heading">把哪些资料交给系统？从这份清单开始。</h3><p>本例已接入仓库中的四份 README。选择一项，可以查看它的原文、来源和人工确认的角色；点击重建，会重新读取这些文件并保存新一批知识。</p></div>
+            <div class="input-layout"><div id="source-list" class="source-list" aria-label="已接入的研究资料"></div><article id="source-detail" class="source-detail" aria-live="polite"></article></div>
+            <div class="flow-action-row"><button type="button" class="button button-dark" id="rebuild-button" disabled>重新读取资料并建图</button><a href="../../projects/011-semantica/pilot-inputs.json">查看实际输入清单 ↗</a></div>
+            <p id="build-status" class="flow-message" role="status">本地服务连接后可重新执行。</p>
+            <details class="flow-more"><summary>新增资料从哪里进入？</summary><p>本例入口是研究资料清单：增加一条仓库文件路径、证据原文和经人工核对的角色，再执行重建。产品化后可把这个入口做成文件上传、网页地址或系统同步；这些入口需要应用开发，目前未接入本页。</p><p>本机启动方法：使用项目独立环境运行 <code>projects/011-semantica/serve_pilot.py</code>。完整步骤见<a href="../../projects/011-semantica/README.md">研究记录</a>。</p></details>
+          </section>
+          <section class="flow-panel" data-panel="1" hidden aria-labelledby="process-heading">
+            <div class="panel-heading"><span>TRANSFORM / 从原文到记录</span><h3 id="process-heading">保留原话，再明确“谁、做什么、依据在哪”。</h3><p>下方沿用第一步选中的资料。字段含义由人核对，脚本检查原文确实存在，Semantica 再把这些记录连接起来。点击步骤只是在查看本次履历；重新执行入口在第一步。</p></div>
+            <div id="transform-example" class="transform-example"></div>
+            <a class="graph-jump" href="#graph-guide">“节点、关系、三跳”是什么意思？看一条实际关系 →</a>
+            <h4 class="flow-subheading">本次真实处理履历</h4><ol id="run-steps" class="run-steps"></ol>
+          </section>
+          <section class="flow-panel" data-panel="2" hidden aria-labelledby="asset-heading">
+            <div class="panel-heading"><span>PERSIST / 可继续使用的知识资产</span><h3 id="asset-heading">先看懂关系图，再看保存了什么。</h3><p>这里的图是一张“关系地图”。它把研究问题、项目角色、具体项目和原文证据连接起来。下面显示的是本次实际保存的图谱，可选一个项目，顺着高亮连线读。</p></div>
+            <div class="graph-guide" id="graph-guide" aria-labelledby="graph-guide-title">
+              <div class="native-entry"><div><strong>先分清：知识图谱、图形和使用知识的应用。</strong><p>下方是我们制作的读图说明。可另看<a class="native-inline-link" href="./native-graph.html">库自带图形的实际输出 ↗</a>，或用完整引导串起模块、场景和使用流程。</p></div><a href="./guide.html">看完整引导图 ↗</a></div>
+              <div class="graph-guide-intro"><h4 id="graph-guide-title">读图只需要看两件事</h4><div><span><i class="map-box-icon" aria-hidden="true"></i>一个框：一个问题、角色、项目或证据</span><span><i class="map-line-icon" aria-hidden="true">→</i>一条线：两个框之间已记录的关系</span></div></div>
+              <div class="map-controls" id="map-controls" role="group" aria-label="选择要解释的项目关系"></div>
+              <p class="map-current" id="map-current" role="status"></p>
+              <div class="knowledge-map-scroll" tabindex="0" role="region" aria-label="实际知识图谱，窄屏可横向滚动"><svg id="knowledge-map" viewBox="0 0 1080 560" role="img" aria-labelledby="knowledge-map-title knowledge-map-desc"><title id="knowledge-map-title">本仓库研究资料的实际关系图</title><desc id="knowledge-map-desc">根据保存的知识图谱绘制。选择项目后，相关节点和连线高亮；下方文字逐条解释关系。</desc></svg></div>
+              <p class="map-scroll-hint">窄屏可左右滑动全图；下面的关系解读会完整显示所选路径。</p>
+              <div id="map-reading" class="map-reading" aria-live="polite"></div>
+              <div class="map-evidence" id="map-evidence"></div>
+              <div class="map-use"><strong>这与搜索有什么关系？</strong><p id="map-search-explanation"></p><button type="button" id="try-map-search">带着“记忆”去搜索 →</button></div>
+              <details class="map-counts"><summary id="map-counts-title">“12 个节点、10 条关系”如何计算？</summary><p id="map-counts-detail"></p><p>这些数量描述知识的结构，不代表准确率。箭头表示已写入的关联；它不表示项目之间已经集成，也不证明因果。</p></details>
+            </div>
+            <h4 class="flow-subheading">这张图与它的依据，保存在哪里？</h4>
+            <p class="asset-save-note">以下文件已保存在本地。服务重启后可重新加载；当前保留最新一批产物，尚未实现多版本历史管理。</p>
+            <div class="asset-grid" id="asset-grid"></div>
+            <div class="asset-summary" id="asset-summary"></div>
+            <div class="flow-callout"><strong>保存知识，才能支撑后续动作</strong><p>项目与角色用于筛选，关系用于找到关联，原文与来源用于复核，文件摘要用于发现资料变化。来源更新后，先核对归类和证据，再重建知识库。</p></div>
+          </section>
+          <section class="flow-panel" data-panel="3" hidden aria-labelledby="search-heading">
+            <div class="panel-heading"><span>RETRIEVE / 搜索入口</span><h3 id="search-heading">现在用这些已保存的知识回答一个问题。</h3><p>输入项目名、角色或证据中的关键词。系统先找命中的记录，再沿项目关系取出原文依据。本例使用关键词查询；尚未接入自然语言理解或向量语义搜索。</p></div>
+            <form id="knowledge-search" class="knowledge-search"><label class="sr-only" for="search-query">搜索项目、角色或证据</label><input id="search-query" type="search" maxlength="200" placeholder="试试：记忆、Semantica、任务协调" autocomplete="off"><button class="button button-dark" type="submit">搜索知识库</button></form>
+            <div class="query-presets" aria-label="示例搜索"><button type="button" data-query="记忆">记忆</button><button type="button" data-query="任务协调">任务协调</button><button type="button" data-query="Semantica">Semantica</button><button type="button" data-query="Autoresearch">Autoresearch</button><button type="button" data-query="">全部项目</button></div>
+            <p id="search-summary" class="flow-message" role="status"></p><div id="search-results" class="search-results"></div>
+            <a class="graph-jump" href="#graph-guide">看不清项目如何连到证据？回到关系图 →</a>
+            <div class="flow-callout"><strong>为什么还能搜到 Autoresearch？</strong><p>它进入了知识库，只是没有被人工归入“任务协调、知识上下文、长期记忆”这个主题。主题未命中与资料不存在是两回事；搜索项目名仍可找到它。</p></div>
+          </section>
+          <section class="flow-panel" data-panel="4" hidden aria-labelledby="business-heading">
+            <div class="panel-heading"><span>ACT / 从知识到业务产物</span><h3 id="business-heading">把选中的依据，交给下一项研究任务。</h3><p>在搜索结果中勾选项目，或采用三个主题示例。生成前检查来源版本是否仍一致，再把角色、证据和待核查事项写入研究简报，供人或后续 Agent 使用。</p></div>
+            <div class="business-layout"><div><h4 class="flow-subheading">本次简报采用的项目</h4><div id="brief-selection" class="brief-selection"></div><button type="button" class="quiet-button" id="select-theme">采用三个主题示例</button><div class="business-gate"><span>交付条件</span><p>已选项目 → 来源版本一致 → 生成带证据的简报</p></div><button type="button" id="make-brief" class="button button-dark" disabled>生成研究简报</button><p id="brief-status" class="flow-message" role="status"></p></div><div class="brief-output"><label for="brief-text">可交接的研究简报</label><textarea id="brief-text" readonly placeholder="选择项目并生成后，简报会出现在这里。"></textarea><a id="brief-download" hidden download="research-brief.md">下载简报 ↘</a></div></div>
+            <div class="flow-callout"><strong>接入业务，还需要明确动作和规则</strong><p>本例已实现“选结果 → 核对版本 → 生成本地研究简报”。接入任务系统、审批系统或 Agent 工具接口时，应用还要定义权限、触发条件与执行动作；这些外部系统尚未连接。</p></div>
+          </section>
+          <div class="flow-footer"><button type="button" id="flow-prev" disabled>← 上一步</button><span id="flow-position">01 / 05 · 先看输入，再看产物</span><button type="button" id="flow-next">下一步：加工记录 →</button></div>
+        </div>
+        <div class="pilot-analysis"><article><span>入口</span><h3>应用负责收集资料</h3><p>本例读取仓库文件。上传、URL、定时同步可以作为扩展入口，再将资料交给后续处理链。</p></article><article><span>沉淀</span><h3>留下能复用的知识记录</h3><p>Semantica 保存和重载图谱；接入脚本记录来源、证据与处理履历。每条关系都需要可信的输入。</p></article><article><span>业务</span><h3>把检索结果交给明确的动作</h3><p>本例生成研究简报。是否采用项目、是否批准流程，仍需要业务规则、权限与人工或系统决策。</p></article></div>
+        <p class="pilot-provenance" id="pilot-provenance"></p>
+        <div class="pilot-links"><a href="../../projects/011-semantica/pilot-result.json">完整运行数据 ↗</a><a href="../../projects/011-semantica/run_pilot.py">处理脚本 ↗</a><a href="../../projects/011-semantica/README.md">复现与效果分析 ↗</a></div>
+      </div>
+    </section>
+
+    <section class="section lab-section shell" id="lab" aria-labelledby="lab-heading">
+      <div class="section-intro">
+        <div><p class="section-number">03 / CONCEPT LAB</p><h2 id="lab-heading">概念体验：一件事，看四种能力效果</h2></div>
+        <p>示例任务：为团队选客服平台。星桥云和远山云是虚构供应商；审查报告、销售邮件、法务记录和选型规则也都是本页编写的示例资料。</p>
+      </div>
+      <div class="lab-card">
+        <div class="lab-topline"><div><span class="status-dot"></span> 选型资料图谱 <span class="topline-muted">/ 纯前端示意数据</span></div><span>4 份资料 · 2 家供应商 · 1 条选型规则</span></div>
+        <div class="lab-layout">
+          <aside class="lab-menu" aria-label="选择观察方式">
+            <p class="menu-label">选择一种效果</p>
+            <button class="lab-tab is-current" type="button" data-mode="relation" aria-pressed="true"><span class="tab-index">01</span><span><strong>关系检索</strong><small>答案如何连到证据</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+            <button class="lab-tab" type="button" data-mode="conflict" aria-pressed="false"><span class="tab-index">02</span><span><strong>冲突检测</strong><small>资料说法不一致时</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+            <button class="lab-tab" type="button" data-mode="rule" aria-pressed="false"><span class="tab-index">03</span><span><strong>规则校验</strong><small>条件是否得到满足</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+            <button class="lab-tab" type="button" data-mode="decision" aria-pressed="false"><span class="tab-index">04</span><span><strong>决策溯源</strong><small>为什么得到这个结论</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+            <div class="menu-note"><span>说明</span><p>这幅图和结果由页面内的示例数据驱动。真实项目的抽取与推理效果，需要接入 Semantica 后另行验证。</p></div>
+          </aside>
+
+          <div class="graph-area">
+            <div class="graph-heading"><div><small>CONTEXT GRAPH</small><strong id="graph-title">答案背后的关系路径</strong></div><span class="graph-badge">示意图谱</span></div>
+            <div class="graph-scroll">
+              <svg class="graph-svg" viewBox="0 0 790 460" role="img" aria-labelledby="graph-access-title graph-access-desc">
+                <title id="graph-access-title">供应商选型资料关系图</title>
+                <desc id="graph-access-desc">左侧为审查报告、销售邮件和法务记录，中间为两家供应商，右侧为选型规则和最终决策。高亮节点和线条随左侧所选能力改变。</desc>
+                <g class="graph-links">
+                  <path data-edge="audit-star" d="M207 98 C250 98 256 98 301 98"/>
+                  <path data-edge="sales-far" d="M207 234 C255 234 255 262 301 268"/>
+                  <path data-edge="legal-far" d="M207 365 C258 365 253 292 301 282"/>
+                  <path data-edge="star-decision" d="M468 98 C526 98 529 301 561 307"/>
+                  <path data-edge="far-decision" d="M468 275 C513 275 526 319 561 319"/>
+                  <path data-edge="policy-decision" d="M644 174 L644 270"/>
+                </g>
+                <g class="graph-node source" data-node="audit" transform="translate(38 59)"><rect width="169" height="77" rx="15"/><text x="18" y="30" class="node-kicker">SOURCE 01</text><text x="18" y="58" class="node-title">审查报告</text></g>
+                <g class="graph-node source" data-node="sales" transform="translate(38 195)"><rect width="169" height="77" rx="15"/><text x="18" y="30" class="node-kicker">SOURCE 02</text><text x="18" y="58" class="node-title">销售邮件</text></g>
+                <g class="graph-node source" data-node="legal" transform="translate(38 326)"><rect width="169" height="77" rx="15"/><text x="18" y="30" class="node-kicker">SOURCE 03</text><text x="18" y="58" class="node-title">法务记录</text></g>
+                <g class="graph-node entity" data-node="star" transform="translate(301 59)"><rect width="167" height="77" rx="15"/><text x="18" y="30" class="node-kicker">ENTITY A</text><text x="18" y="58" class="node-title">星桥云</text></g>
+                <g class="graph-node entity" data-node="far" transform="translate(301 236)"><rect width="167" height="77" rx="15"/><text x="18" y="30" class="node-kicker">ENTITY B</text><text x="18" y="58" class="node-title">远山云</text></g>
+                <g class="graph-node rule" data-node="policy" transform="translate(561 98)"><rect width="167" height="77" rx="15"/><text x="18" y="30" class="node-kicker">POLICY</text><text x="18" y="58" class="node-title">选型规则</text></g>
+                <g class="graph-node decision" data-node="decision" transform="translate(561 270)"><rect width="167" height="77" rx="15"/><text x="18" y="30" class="node-kicker">DECISION</text><text x="18" y="58" class="node-title">选择星桥云</text></g>
+              </svg>
+            </div>
+            <div class="graph-legend"><span><i class="legend-source"></i> 来源</span><span><i class="legend-entity"></i> 实体</span><span><i class="legend-rule"></i> 规则</span><span><i class="legend-decision"></i> 决策</span></div>
+          </div>
+
+          <div class="result-area" aria-live="polite">
+            <p class="result-eyebrow"><span id="result-tag">关联路径</span><span> / 观察结果</span></p>
+            <h3 id="result-title">从结论找到支持它的资料</h3>
+            <p id="result-body" class="result-body"></p>
+            <div class="result-controls" id="result-controls" hidden>
+              <label for="vendor-select">切换要检查的供应商</label>
+              <select id="vendor-select"><option value="star">星桥云</option><option value="far">远山云</option></select>
+            </div>
+            <div class="result-status" id="result-status"></div>
+            <p class="evidence-label">可查看的依据</p>
+            <div id="evidence-list" class="evidence-list"></div>
+            <p class="result-footnote" id="result-footnote"></p>
+          </div>
+        </div>
+      </div>
+      <p class="lab-caption">注：同名节点之间的连线只表示示例资料中记录的关联。页面没有自动抽取事实，也没有根据连线证明因果。</p>
+    </section>
+
+    <section class="section mechanism-section" id="principle" aria-labelledby="mechanism-heading">
+      <div class="shell">
+        <div class="section-intro">
+          <div><p class="section-number">04 / HOW IT WORKS</p><h2 id="mechanism-heading">从网页效果到技术路径</h2></div>
+          <p>上面的真实流程已使用 ContextGraph 建图，并保存到本地文件后重载查询。自动抽取、向量检索、业务规则与外部数据库仍需按场景逐项接入和验证。</p>
+        </div>
+        <div class="pipeline">
+          <article><span class="step-number">01</span><h3>接入资料</h3><p>文件、网页、数据库等先解析与规范化，再切分为可处理内容。</p></article>
+          <article><span class="step-number">02</span><h3>形成事实</h3><p>用规则、模型或 LLM 抽取实体与关系；识别重复和冲突，并保存来源。</p></article>
+          <article><span class="step-number">03</span><h3>建立图谱</h3><p>把实体、关系、事实、时间和决策连接起来；用本体与约束定义含义。</p></article>
+          <article><span class="step-number">04</span><h3>查询与解释</h3><p>结合图遍历、语义检索和规则，输出结果及系统层面的证据路径。</p></article>
+        </div>
+        <div class="mechanism-note"><strong>一个重要边界</strong><p>“可解释”指能查看系统用了哪些来源、关系和规则；它不揭示大模型内部的思考。源码中的因果链主要追踪已记录的关系，不能独立证明因果。</p><a href="https://github.com/semantica-agi/semantica/blob/main/semantica/context/causal_analyzer.py" target="_blank" rel="noopener noreferrer">查看相关源码 ↗</a></div>
+      </div>
+    </section>
+
+    <section class="section value-section shell" id="value" aria-labelledby="value-heading">
+      <div class="section-intro">
+        <div><p class="section-number">05 / FOR YOUR RESEARCH</p><h2 id="value-heading">对这个研究集的意义</h2></div>
+        <p>我们已跑通“资料 → 知识资产 → 搜索 → 研究简报”的最小流程。接下来要评估维护成本和实际收益，再决定扩展范围。</p>
+      </div>
+      <div class="value-grid">
+        <div class="value-card">
+          <span class="card-index">A / 可以连接</span>
+          <h3>项目、方法与证据</h3>
+          <p>把项目、原仓库、所用技术、结论、许可证和图片来源建成可追溯的关系，而不止是关键词列表。</p>
+        </div>
+        <div class="value-card">
+          <span class="card-index">B / 可以提问</span>
+          <h3>跨项目找共性</h3>
+          <p>例如：“哪些项目都使用实体匹配？”“这个结论来自哪份文档？”“两项研究有没有相互矛盾的描述？”</p>
+        </div>
+        <div class="value-card">
+          <span class="card-index">C / 下一步验证</span>
+          <h3>从跑通到值得长期使用</h3>
+          <p>在更多条目上比较检索正确率、证据定位时间和关系维护成本，再决定是否接入自动抽取与持续同步。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="shell footer-inner"><span>011 / SEMANTICA STUDY</span><p>研究与交互页由本仓库制作。原项目归 Semantica 团队及贡献者所有。</p><a href="../../projects/011-semantica/README.md">阅读研究记录 ↗</a></div></footer>
+</body>
+</html>

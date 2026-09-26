@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="从 Obsidian 关系图的类比出发，一张完整引导图理解 Semantica 的能力、模块、场景、使用流程、实测结果与扩展方向。">
+  <title>一张图看懂 Semantica｜完整使用引导</title>
+  <link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./guide.css">
+  <script defer src="./guide-content.js"></script><script defer src="./pilot-result.js"></script><script defer src="./guide.js"></script>
+</head>
+<body class="guide-page">
+  <a class="skip-link" href="#guide-main">跳到引导内容</a>
+  <header class="guide-top"><div class="guide-shell"><a href="./index.html">← Semantica 项目 011</a><span>理解地图 / 2026.09</span><a href="./native-graph.html#path">看库的实际图形 ↗</a></div></header>
+  <main id="guide-main">
+    <section class="guide-hero guide-shell">
+      <div><p class="guide-kicker">FROM DOCUMENTS TO REUSABLE KNOWLEDGE</p><h1>从一张关系图，<br>看懂一套<span>知识工作流程。</span></h1><p class="guide-lead">Semantica 帮应用把分散资料组织成<strong>有关系、有来源、能查询的知识</strong>。图形让人看见结构；保存的知识还能用于搜索、研究简报和后续任务。</p><div class="guide-actions"><a class="button button-dark" href="#journey">沿流程读一遍 ↓</a><a class="button button-outline" href="../../projects/011-semantica/assets/guide-overview.png" download>下载完整引导图</a></div><div class="guide-hero-note"><strong>这次把三件事讲清楚</strong><p>库能做什么 · 我们实际验证了什么 · 做成业务还需要补什么</p></div></div>
+      <a class="guide-poster-card" href="../../projects/011-semantica/assets/guide-overview.svg" target="_blank" rel="noopener" aria-label="打开完整高清引导图"><div class="poster-paper"><img src="../../projects/011-semantica/assets/guide-overview.svg" alt="Semantica 完整引导图：理解方式、六步流程、九组模块、使用场景、实测效果和扩展路线"></div><span>完整引导图 <b>放大阅读 ↗</b></span></a>
+    </section>
+    <nav class="guide-nav" aria-label="完整引导目录"><div class="guide-shell"><a href="#understand">01 先理解</a><a href="#comparison">与 Obsidian 对比</a><a href="#journey">02 全流程</a><a href="#modules">03 模块</a><a href="#situations">04 场景</a><a href="#use">05 怎么用</a><a href="#results">06 看效果</a><a href="#meaning">07 对我的意义</a><a href="#extend">08 如何扩展</a></div></nav>
+
+    <section id="understand" class="guide-section guide-shell">
+      <div class="guide-heading"><div><p class="guide-kicker">01 / BUILD THE MENTAL MODEL</p><h2>像 Obsidian 的关系图，<br>再往下看一层。</h2></div><p>先分清“知识的结构”“画出来的图”和“使用这些知识的应用”，就不会把所有能力都归到一张图上。</p></div>
+      <div class="understanding-grid">
+        <article><span class="guide-tag">你熟悉的类比</span><h3>Obsidian 默认关系图</h3><p>一个圆点主要是一篇笔记；一条线表示两篇笔记之间的内部链接。</p><div class="simple-chain"><span>Agent 研究笔记</span><b>链接 →</b><span>Hindsight 笔记</span></div><a class="guide-reference" href="https://obsidian.md/help/plugins/graph" target="_blank" rel="noopener">Obsidian 官方说明 ↗</a></article>
+        <article class="understanding-focus"><span class="guide-tag">我们这次保存的知识</span><h3>项目、角色和证据也成为节点</h3><p>把“谁是什么、依据在哪”明确记录下来。连线带有含义，程序可以沿关系查询。</p><div class="simple-chain"><span>长期记忆</span><b>对应 →</b><span>Hindsight</span><b>依据 →</b><span>README 原文</span></div><p class="guide-small">这条角色关系由我们人工确认，随后交给 Semantica 保存与查询。</p></article>
+      </div>
+      <div class="three-layers"><article><i>1</i><h3>图谱：保存的知识结构</h3><p>节点、关系、属性、来源。关掉图形页面后，保存的数据仍可加载和使用。</p></article><article><i>2</i><h3>图形：结构的一种看法</h3><p>库自带画图功能，能布局、缩放、悬停和高亮路径。换布局不会增加事实。</p></article><article><i>3</i><h3>应用：把知识用起来</h3><p>网页、问答、研究简报、Agent 工具。应用决定如何接入、复核和触发动作。</p></article></div>
+      <div class="guide-callout"><strong>自动抽取、自动建图、自动画图，是三项不同能力。</strong><p>抽取负责从资料找出候选对象与关系；建图负责组织这些记录；画图负责显示已有结构。本例已经验证建图和画图，中文自动抽取还需要独立测试。</p></div>
+      <div class="guide-faq">
+        <details><summary>一定需要大模型或 API 密钥吗？</summary><p>本例的建图、文件保存、关键词查询与画图都在本地完成，没有调用大模型，也不需要模型 API 密钥。自动抽取可选择规则、机器学习或 LLM；是否需要模型、联网和付费取决于所选方法。</p></details>
+        <details><summary>连线是谁决定的，能保证正确吗？</summary><p>当前关系由人核对后录入。未来可让抽取模块提出候选，但仍要检查原文依据和错漏。图谱保存了一个判断，不代表这个判断已经得到独立证明。</p></details>
+        <details><summary>为什么有库原生图，也有我们画的图？</summary><p>库原生图展示真实的自动布局、悬停和高亮效果。我们制作的说明图把同一批关系排成更容易读的流程，并加入逐句解释。完整引导图则用来说明整套能力和使用方式。</p></details>
+        <details><summary>画出图后，搜索和业务就自动完成了吗？</summary><p>图中保存的关系能被查询。搜索界面、问答方式和业务动作需要应用接入；本例已实现关键词查询与简报模板，自动问答、任务系统和审批动作仍未连接。</p></details>
+      </div>
+    </section>
+
+    <section id="comparison" class="guide-section comparison-section guide-shell" aria-labelledby="comparison-title">
+      <div class="guide-heading"><div><p class="guide-kicker">COMPARE / OBSIDIAN × SEMANTICA</p><h2 id="comparison-title">图模型相通，<br>产品与处理机制各有侧重。</h2></div><p>两者都涉及知识组织与关系图，但主要交付形态不同：Obsidian 是直接使用的知识管理应用，Semantica 提供搭建知识处理系统的组件。</p></div>
+      <div class="compare-principle"><div><span>共同基础</span><strong>对象 → 关系 → 对象</strong><p>都可以用“节点 + 连线”表达关联，沿连接查看相关内容。</p></div><div><span>需要继续比较</span><strong>资料如何变成可靠、可用的记录？</strong><p>数据怎样组织、谁来建立关系、如何检查质量，以及结果如何被人或程序使用。</p></div></div>
+      <div class="compare-table-wrap"><table class="compare-table"><caption>以官方内置能力与当前演示为准；插件或自行开发可以扩展能力。</caption><thead><tr><th scope="col">比较维度</th><th scope="col">Obsidian</th><th scope="col">Semantica</th></tr></thead><tbody>
+        <tr><th scope="row">产品定位</th><td data-label="Obsidian">用于阅读、写作、整理和浏览知识的应用。</td><td data-label="Semantica">主要面向开发者，提供知识处理、查询与服务组件。</td></tr>
+        <tr><th scope="row">数据组织</th><td data-label="Obsidian">围绕本地 Markdown 笔记、属性和内部链接；也可把一条事实单独写成笔记。</td><td data-label="Semantica">可把实体、关系、证据和决策分别组织成带属性的记录；持久化方式按需求选择。</td></tr>
+        <tr><th scope="row">关系从哪里来</th><td data-label="Obsidian">常见方式是人写笔记、填属性、建立链接；自动化可通过插件或开发补充。</td><td data-label="Semantica">可接收已定义的关系，也提供规则、模型或 LLM 抽取组件；当前演示关系由人工确认。</td></tr>
+        <tr><th scope="row">资料处理</th><td data-label="Obsidian">提供笔记编辑、属性管理；Bases 支持按文件与属性查看、排序和筛选。</td><td data-label="Semantica">提供接入、抽取、去重、冲突处理、约束与规则等模块，需要配置并验证具体效果。</td></tr>
+        <tr><th scope="row">图形的角色</th><td data-label="Obsidian">默认图主要显示笔记之间的内部链接，也可按设置显示标签等对象。</td><td data-label="Semantica">把已构建的图谱可视化；节点、关系和查询结果也可独立交给程序使用。</td></tr>
+        <tr><th scope="row">常见工作方式</th><td data-label="Obsidian">自己阅读与整理，保存成便于维护的笔记库；可按需要逐步扩展。</td><td data-label="Semantica">开发资料处理与查询流程，再接入网页、研究工具或 Agent；还要维护规则、质量和运行环境。</td></tr>
+      </tbody></table></div>
+      <p class="compare-sources">依据：<a href="https://obsidian.md/help/plugins/graph">Obsidian 关系图</a> · <a href="https://obsidian.md/help/properties">属性</a> · <a href="https://obsidian.md/help/bases">Bases</a> · <a href="https://github.com/semantica-agi/semantica#architecture">Semantica 架构</a>。这是产品与机制对照，尚未进行两者的效率或准确率对测。</p>
+      <div class="compare-reading"><h3>“底层原理一样吗？”分三层回答。</h3><div><p><b>表达关系：基本相同。</b>图模型的共同抽象都是节点与边。</p><p><b>数据系统：不能直接等同。</b>文件、属性、类型化关系和存储适配的组织方式有差异。</p><p><b>处理流程：会有实质差别。</b>抽取、去重、冲突检查和规则处理涉及数据加工，需要实际配置与验证。</p></div><p class="guide-small">这些差异不是不可跨越的能力边界。Obsidian 可以扩展，Semantica 也需要应用接入；仅凭图形相似或模块数量，不能判断谁更适合你的任务。</p></div>
+      <div class="compare-example"><div class="compare-example-heading"><span>同一个问题 / 哪些研究项目负责长期记忆，依据在哪里？</span><h3>用 Hindsight 对照，两边都能从人工整理开始。</h3></div><div class="compare-example-grid"><article><span class="guide-tag">Obsidian 用法示例 · 未在本项目实测</span><h4>把知识放进笔记与属性</h4><ol><li>建立《Hindsight》笔记。</li><li>填写“角色：长期记忆”，保存原文和来源链接。</li><li>用 Bases 筛选角色，打开笔记查看依据。</li></ol></article><article><span class="guide-tag tested">Semantica · 当前已经实测</span><h4>把知识放进节点与关系</h4><ol><li>人工确认 Hindsight 的角色与证据。</li><li>调用库保存角色、项目、证据及其连接。</li><li>搜索“记忆”，沿关系取回项目和原文。</li></ol></article></div></div>
+      <div class="compare-verdict"><span>当前试验的结论</span><h3>四份 README 的人工整理与筛选，两种方式有很大重合。</h3><p>我们已证明 Semantica 能保存、查询和显示这些关系；还没有证明它比 Obsidian 或直接搜索 README 更省时间。额外价值需要在新资料自动处理、质量检查、持续更新与应用调用中继续验证。</p></div>
+      <div class="compare-choices"><article><span>以个人研究整理为主</span><h3>先用现成的笔记能力</h3><p>如果主要任务是自己阅读、写研究、记录来源和按属性筛选，Obsidian 是更直接的起点。</p></article><article><span>准备搭建研究系统</span><h3>测试 Semantica 的处理组件</h3><p>当需要批量处理多处资料、复用规则，并向网页或多个 Agent 提供知识时，再检验它能减少多少开发与维护工作。</p></article><article><span>可以组合使用</span><h3>笔记负责编辑，系统负责处理</h3><p>可设计为：Obsidian 维护原文 → Semantica 读取确认版本并组织知识 → 网页或 Agent 查询。此方案尚未接通。</p></article></div>
+      <p class="guide-small">选择建议基于我们当前的 GitHub 项目研究任务。下一次对测应采用相同资料、相同问题，记录答案与证据正确性、操作耗时、开发投入和维护成本。</p>
+    </section>
+
+    <section id="journey" class="guide-section guide-tinted"><div class="guide-shell">
+      <div class="guide-heading"><div><p class="guide-kicker">02 / THE COMPLETE JOURNEY</p><h2>资料如何变成可用的知识？</h2></div><p>点击任意一步，看它的输入、处理和产物。切换视角，对照库的完整能力与我们的实际做法。</p></div>
+      <div class="guide-mode" role="group" aria-label="选择流程解读视角"><button type="button" data-view="capability" aria-pressed="true" class="is-current">库的完整能力</button><button type="button" data-view="ours" aria-pressed="false">我们已经跑通的路径</button></div>
+      <div id="journey-steps" class="journey-steps" role="group" aria-label="选择流程步骤"></div>
+      <div id="journey-detail" class="journey-detail" aria-live="polite"></div>
+      <div class="journey-feedback"><span>来源更新 / 发现错误</span><b>↩</b><p>回到资料与关系复核，再更新图谱、检索和下游简报。知识库需要持续维护。</p></div>
+      <div class="responsibility"><strong>应用与人的责任贯穿全程</strong><span>选资料与权限</span><span>定义领域词义</span><span>复核抽取与冲突</span><span>评估质量与成本</span><span>决定业务动作</span></div>
+      <p class="guide-small">完整能力依据<a href="https://github.com/semantica-agi/semantica/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener">官方架构</a>整理；六步是便于理解的分组，模块可以独立组合使用。</p>
+    </div></section>
+
+    <section id="modules" class="guide-section guide-shell">
+      <div class="guide-heading"><div><p class="guide-kicker">03 / WHAT IS INSIDE</p><h2>九组模块，各负责哪一段？</h2></div><p>先看中文职责，需要技术细节再展开。状态明确区分“库已经提供”与“我们已经验证”。</p></div>
+      <div id="module-grid" class="module-grid"></div>
+      <p class="guide-small">这是按工作职责整理的主要模块地图，未逐项罗列底层工具与全部 API。使用哪组模块，取决于你的资料、问题与交付目标。</p>
+    </section>
+
+    <section id="situations" class="guide-section guide-tinted"><div class="guide-shell">
+      <div class="guide-heading"><div><p class="guide-kicker">04 / WHERE IT HELPS</p><h2>什么问题值得用它解决？</h2></div><p>共同点是：答案分散在多处，问题需要跨关系查找，且必须说明依据。这里列的是具体使用方式和验证状态。</p></div>
+      <div class="guide-filters" role="group" aria-label="筛选使用场景"><button type="button" data-group="全部" aria-pressed="true" class="is-current">全部 12 个</button><button type="button" data-group="研究" aria-pressed="false">我们的研究</button><button type="button" data-group="团队" aria-pressed="false">团队协作</button><button type="button" data-group="业务" aria-pressed="false">业务应用</button></div>
+      <p id="scenario-count" class="guide-small" role="status"></p><div id="guide-scenarios" class="guide-scenarios"></div>
+    </div></section>
+
+    <section id="use" class="guide-section guide-shell">
+      <div class="guide-heading"><div><p class="guide-kicker">05 / GET STARTED</p><h2>从现在能操作的入口开始。</h2></div><p>先用小样本把输入、关系和依据核对清楚，再评估自动化和业务集成。下面三条路线分别对应体验、试点与扩展。</p></div>
+      <div class="usage-grid">
+        <article><span class="guide-tag tested">现在可用</span><h3>A · 体验已有演示</h3><ol><li>打开“资料到业务”，看四份 README。</li><li>看人工确认的角色如何写进图谱。</li><li>搜索“记忆”，打开命中项目的原文。</li><li>选择项目，生成带出处的研究简报。</li><li>打开原生图形，查看橙色证据路径。</li></ol><a class="guide-link" href="./index.html#pilot">开始五步真实流程 →</a></article>
+        <article><span class="guide-tag app">需要准备资料</span><h3>B · 加入自己的研究</h3><ol><li>确定一个问题和一小组可信资料。</li><li>定义项目、能力、证据等对象与关系。</li><li>在输入清单填写路径、原文和已核对角色。</li><li>重建，再检查证据是否还存在且唯一。</li><li>用固定问题比较结果与人工答案。</li></ol><a class="guide-link" href="../../projects/011-semantica/pilot-inputs.json">查看当前接入配置 →</a></article>
+        <article><span class="guide-tag pending">待开发验证</span><h3>C · 接入持续业务</h3><ol><li>选择文件同步、上传或数据接口。</li><li>配置抽取方法，保留候选与人工复核。</li><li>根据规模选择存储和更新机制。</li><li>让搜索、问答或 Agent 调用知识。</li><li>定义动作条件、权限、记录与评估。</li></ol><a class="guide-link" href="#extend">看分阶段扩展路线 →</a></article>
+      </div>
+      <details class="guide-technical"><summary>需要自己运行时：安装、启动与文件入口</summary><p>下面使用本项目验证的固定依赖，从仓库根目录执行。安装需要网络；Python 3.12 是本地已验证环境。</p><pre><code>python -m pip install -r projects/011-semantica/requirements.txt
+python projects/011-semantica/run_pilot.py
+python projects/011-semantica/serve_pilot.py --port 8761</code></pre><p>本机打开 <a href="http://127.0.0.1:8761/sites/011-semantica/index.html#pilot">真实流程入口</a>。本仓库已有环境时，可用 <code>projects/011-semantica/.venv/Scripts/python.exe</code> 替代 <code>python</code>。直接打开 HTML 可看快照；重建和实时查询需要本机服务。</p><p>输入：<a href="../../projects/011-semantica/pilot-inputs.json">pilot-inputs.json</a> · 处理：<a href="../../projects/011-semantica/run_pilot.py">run_pilot.py</a> · 原生画图：<a href="../../projects/011-semantica/native_graph.py">native_graph.py</a>。这三个文件是我们的演示接入代码。</p></details>
+    </section>
+
+    <section id="results" class="guide-section guide-dark"><div class="guide-shell">
+      <div class="guide-heading"><div><p class="guide-kicker">06 / WHAT ACTUALLY CAME OUT</p><h2>留下的产物，和已经验证的效果。</h2></div><p>本地实测版本为 Semantica 0.7.0。下面的数字描述这个小样本，不代表准确率或生产性能。</p></div>
+      <div class="guide-stats"><div><b data-stat="source_count">4</b><span>份真实 README</span></div><div><b data-stat="node_count">12</b><span>个节点</span></div><div><b data-stat="edge_count">10</b><span>条关系</span></div><div><b>4</b><span>种原生图形视图</span></div></div>
+      <div class="result-pair"><a href="./native-graph.html#path"><img loading="lazy" src="../../projects/011-semantica/assets/native-path-preview.png" alt="Semantica 原生图形实际截图，橙色高亮三条 Hindsight 关系"><div><span>库实际生成的图形</span><h3>布局、悬停、路径高亮 ↗</h3><p>已验证 12 个节点、10 条关系与三条高亮连接。原始长标签容易拥挤，可对照短标签版。</p></div></a><a href="./index.html#graph-guide"><img loading="lazy" src="../../projects/011-semantica/assets/graph-preview.png" alt="本项目自制关系图导读截图，逐句解释主题到证据的路径"><div><span>我们制作的说明界面</span><h3>把每条关系读成一句话 ↗</h3><p>同一批保存数据，用方框、逐句说明和原文帮助理解。这个外观由应用实现。</p></div></a></div>
+      <div class="artifact-grid"><a href="../../projects/011-semantica/artifacts/source-manifest.json"><strong>原文与来源</strong><span>文件、快照、行号与版本摘要</span></a><a href="../../projects/011-semantica/artifacts/knowledge-graph.json"><strong>可重载图谱</strong><span>节点、关系与元数据</span></a><a href="../../projects/011-semantica/artifacts/run-report.json"><strong>运行记录</strong><span>批次、规模与校验结果</span></a><a href="../../projects/011-semantica/artifacts/research-brief.md"><strong>研究简报</strong><span>应用模板整理的角色、证据和待核查事项</span></a></div>
+      <div class="result-boundary"><p><strong>已经验证</strong>保存后重载；“记忆”找到 012；“任务协调”找到 008；项目名搜索也能找到主题之外的 005；沿图回查原文；按证据生成简报。</p><p><strong>仍未验证</strong>中文自动抽取、语义问答、原生冲突与推理、外部数据库、规模性能，以及比直接读 README 节省多少时间。</p></div><p id="guide-batch" class="guide-small"></p>
+    </div></section>
+
+    <section id="meaning" class="guide-section guide-shell">
+      <div class="guide-heading"><div><p class="guide-kicker">07 / WHAT IT MEANS FOR US</p><h2>让研究集逐步拥有可复用的知识。</h2></div><p>你现在在持续收录编号项目、核对能力并制作网页。最值得试的是：把分散的研究判断和出处连起来，减少重复找资料的工作。</p></div>
+      <div class="meaning-grid"><article><span>找项目</span><h3>从项目名，走向能力关系</h3><p>按“任务协调、知识上下文、长期记忆”等角色找条目，再看到对应依据。当前已验证这三项角色的小样本查询。</p></article><article><span>管结论</span><h3>从一段描述，走向可回查记录</h3><p>保留“结论由哪段资料支持”。来源变化时能要求复核，避免继续沿用旧依据；影响传播仍需扩展。</p></article><article><span>交接工作</span><h3>从一次阅读，走向后续任务输入</h3><p>把已核对角色、原文和待验证事项交给下一项研究。本例已生成简报，后续 Agent 与任务系统接入仍待验证。</p></article></div>
+      <div class="fit-grid"><article><h3>什么时候更值得投入</h3><p>项目增多，跨项目问题反复出现；来源与结论需要长期维护；多个人或 Agent 需要共享同一套依据。是否节省时间，要通过对照试验判断。</p></article><article><h3>什么时候可以先用简单方式</h3><p>资料量少、主要是个人阅读和全文检索，或只是想浏览笔记链接时，可以先保留现有笔记与搜索方式。图谱额外需要关系设计、复核和维护成本。</p></article></div>
+      <p class="guide-small">以上是结合本仓库工作方式作出的应用判断；当前尚未测出效率提升或成本下降。</p>
+    </section>
+
+    <section id="extend" class="guide-section guide-tinted"><div class="guide-shell">
+      <div class="guide-heading"><div><p class="guide-kicker">08 / WHERE TO GO NEXT</p><h2>扩展方向，按可验证的顺序推进。</h2></div><p>先确认正确和有用，再增加自动化与系统规模。下面每一步都写明需要留下什么、怎样检查成效；它们是建议路线，尚未完成。</p></div>
+      <div id="roadmap" class="guide-roadmap"></div>
+      <div class="guide-callout"><strong>下一项最能回答“值不值得用”的试验</strong><p>选择一批新的中文研究资料，先人工建立正确答案，再测试自动抽取、证据定位与查询。比较错漏、耗时和维护成本，决定哪些步骤值得自动化。</p></div>
+    </div></section>
+
+    <section id="guide-download" class="guide-section guide-shell">
+      <div class="guide-download"><div><p class="guide-kicker">TAKE THE MAP WITH YOU</p><h2>完整引导图，留作复习和讨论。</h2><p>一张图汇总理解方式、工作流程、模块、场景、使用方法、实际效果、对你的意义与扩展路线。它是我们整理的说明图；库生成的原生关系图在效果页。</p></div><div class="guide-download-actions"><a class="button button-dark" href="../../projects/011-semantica/assets/guide-overview.png" download>下载 PNG 长图 ↓</a><a class="button button-outline" href="../../projects/011-semantica/assets/guide-overview.svg" target="_blank" rel="noopener">打开高清 SVG ↗</a><button type="button" class="quiet-button" id="toggle-poster" aria-expanded="false" aria-controls="full-poster">在本页展开完整图</button></div></div>
+      <figure id="full-poster" hidden><img loading="lazy" src="../../projects/011-semantica/assets/guide-overview.svg" alt="Semantica 完整引导长图，覆盖本页八个主题"><figcaption>本项目原创整理 · 根据官方文档与本地实测制作 · 2026-09-26</figcaption></figure>
+      <details class="guide-technical" id="sources"><summary>资料来源、验证范围与图片归属</summary><p>完整能力依据官方文档与本地安装包核对；主分支能力可能变化。本例实际运行固定为 Semantica 0.7.0、Plotly 7.1.0。画图成功不证明知识正确，关系查询也只反映已经记录的内容。</p><div id="guide-sources"></div><p>Semantica 原项目及文档归其团队与贡献者所有，采用 <a href="https://github.com/semantica-agi/semantica/blob/main/LICENSE">MIT 许可</a>。引导图、文字说明与外层网页由本仓库制作；图形效果截图来自实际运行，底层可视化使用 Semantica / Plotly。没有使用第三方照片。<a href="../../projects/011-semantica/README.md">完整研究与复现记录 ↗</a></p></details>
+    </section>
+  </main>
+  <footer class="guide-footer guide-shell"><span>011 / SEMANTICA · 理解 → 实测 → 评估 → 扩展</span><a href="./index.html">返回场景与完整演示 →</a></footer>
+</body>
+</html>

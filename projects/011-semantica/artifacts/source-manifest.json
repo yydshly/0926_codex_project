@@ -1,0 +1,65 @@
+{
+  "build_id": "20260926T131820Z-2396cd",
+  "sources": [
+    {
+      "number": "005",
+      "name": "Autoresearch",
+      "path": "projects/005-autoresearch/README.md",
+      "anchor": "寻找在当前 GPU、数据与短时间预算下表现更好的训练方案",
+      "role": null,
+      "reason": "研究重点是训练实验循环，不属于本次查询的任务协调、知识上下文或长期记忆层。",
+      "input_path": "projects/005-autoresearch/README.md",
+      "source_mode": "original",
+      "line": 71,
+      "line_text": "其直接目标是**寻找在当前 GPU、数据与短时间预算下表现更好的训练方案**。这不等于证明长时间训练、其他硬件或其他任务也一定更好。[设计说明](https://github.com/karpathy/autoresearch#design-choices)",
+      "sha256": "1b67d2daea16d3ab542366ae9638c9c818b4b92c19d104c147d1e83eb5aa5031",
+      "bytes": 22257,
+      "snapshot": "projects/011-semantica/artifacts/sources/005.md"
+    },
+    {
+      "number": "008",
+      "name": "Oh My OpenAgent",
+      "path": "projects/008-oh-my-openagent/README.md",
+      "anchor": "Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制",
+      "role": "任务协调",
+      "reason": "安排任务、工具与执行流程。",
+      "input_path": "projects/008-oh-my-openagent/README.md",
+      "source_mode": "original",
+      "line": 18,
+      "line_text": "**一句话摘要：** Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制，目标是让较大的开发任务能被分解、执行并核查。[项目 README](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md)",
+      "sha256": "6d23b218eabd4919baad9192ac51945bede8403aca5a1e5962bfc0c022492b5e",
+      "bytes": 11776,
+      "snapshot": "projects/011-semantica/artifacts/sources/008.md"
+    },
+    {
+      "number": "011",
+      "name": "Semantica",
+      "path": "projects/011-semantica/README.md",
+      "anchor": "Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策",
+      "role": "知识上下文",
+      "reason": "把资料、关系和来源组织为可查询的图。",
+      "input_path": "projects/011-semantica/README.md",
+      "source_mode": "original",
+      "line": 18,
+      "line_text": "**一句话摘要：** Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策，提供图查询、规则推理、冲突处理及来源追踪。它可以作为 AI 应用的语义层，但抽取质量和业务判断仍要用真实数据检验。[官方 README](https://github.com/semantica-agi/semantica/blob/main/README.md)",
+      "sha256": "43ffc75510eef0e35d75c780440e64db018c74762258dfc4665b8b81ca850aa7",
+      "bytes": 26815,
+      "snapshot": "projects/011-semantica/artifacts/sources/011.md"
+    },
+    {
+      "number": "012",
+      "name": "Hindsight",
+      "path": "projects/012-hindsight/README.md",
+      "anchor": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆",
+      "role": "长期记忆",
+      "reason": "保存并检索跨轮次的外部记忆。",
+      "input_path": "projects/011-semantica/artifacts/sources/012.md",
+      "source_mode": "archived_snapshot",
+      "line": 3,
+      "line_text": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆。研究重点是能力、底层流程、适用边界，以及如何复用本仓库积累的研究经验。",
+      "sha256": "bfab88c73080336cfd898ee520d2ffac1a810cd46310a24d3704845a94440ee4",
+      "bytes": 10772,
+      "snapshot": "projects/011-semantica/artifacts/sources/012.md"
+    }
+  ]
+}

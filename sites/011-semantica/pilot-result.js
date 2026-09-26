@@ -1,0 +1,521 @@
+window.semanticaPilot = {
+  "question": "本仓库哪些项目分别负责 Agent 的任务协调、知识上下文和长期记忆？依据是什么？",
+  "method": "人工确认角色与证据；Semantica 建图、保存、重新加载、查询。",
+  "semantica_version": "0.7.0",
+  "source_count": 4,
+  "answer_count": 3,
+  "node_count": 12,
+  "edge_count": 10,
+  "build": {
+    "build_id": "20260926T131820Z-2396cd",
+    "built_at": "2026-09-26T13:18:20.230348+00:00",
+    "semantica_version": "0.7.0",
+    "inputs_sha256": "30e87e6b6d6cc3a8ac705157732317ff3a9e666d7aef7b784a762912b6eb86f9",
+    "duration_ms": 49,
+    "source_count": 4,
+    "node_count": 12,
+    "edge_count": 10,
+    "checks": {
+      "anchors_unique": true,
+      "graph_reloaded": true,
+      "source_snapshots_match": true
+    },
+    "steps": [
+      {
+        "title": "读取入口清单",
+        "owner": "接入脚本",
+        "detail": "读取 4 份真实 README，记录文件路径、字节数与摘要。其中 1 份使用已保存快照。"
+      },
+      {
+        "title": "核对证据锚点",
+        "owner": "人工标注 + 脚本校验",
+        "detail": "每段原文必须存在且只出现一次；角色含义由人预先确认。"
+      },
+      {
+        "title": "写入并保存图谱",
+        "owner": "Semantica",
+        "detail": "保存 12 个节点和 10 条关系。"
+      },
+      {
+        "title": "从磁盘重新加载",
+        "owner": "Semantica",
+        "detail": "重新加载保存的图文件，三跳主题查询返回 3 个项目及来源路径。"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "number": "005",
+      "name": "Autoresearch",
+      "path": "projects/005-autoresearch/README.md",
+      "anchor": "寻找在当前 GPU、数据与短时间预算下表现更好的训练方案",
+      "role": null,
+      "reason": "研究重点是训练实验循环，不属于本次查询的任务协调、知识上下文或长期记忆层。",
+      "input_path": "projects/005-autoresearch/README.md",
+      "source_mode": "original",
+      "line": 71,
+      "line_text": "其直接目标是**寻找在当前 GPU、数据与短时间预算下表现更好的训练方案**。这不等于证明长时间训练、其他硬件或其他任务也一定更好。[设计说明](https://github.com/karpathy/autoresearch#design-choices)",
+      "sha256": "1b67d2daea16d3ab542366ae9638c9c818b4b92c19d104c147d1e83eb5aa5031",
+      "bytes": 22257,
+      "snapshot": "projects/011-semantica/artifacts/sources/005.md"
+    },
+    {
+      "number": "008",
+      "name": "Oh My OpenAgent",
+      "path": "projects/008-oh-my-openagent/README.md",
+      "anchor": "Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制",
+      "role": "任务协调",
+      "reason": "安排任务、工具与执行流程。",
+      "input_path": "projects/008-oh-my-openagent/README.md",
+      "source_mode": "original",
+      "line": 18,
+      "line_text": "**一句话摘要：** Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制，目标是让较大的开发任务能被分解、执行并核查。[项目 README](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md)",
+      "sha256": "6d23b218eabd4919baad9192ac51945bede8403aca5a1e5962bfc0c022492b5e",
+      "bytes": 11776,
+      "snapshot": "projects/011-semantica/artifacts/sources/008.md"
+    },
+    {
+      "number": "011",
+      "name": "Semantica",
+      "path": "projects/011-semantica/README.md",
+      "anchor": "Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策",
+      "role": "知识上下文",
+      "reason": "把资料、关系和来源组织为可查询的图。",
+      "input_path": "projects/011-semantica/README.md",
+      "source_mode": "original",
+      "line": 18,
+      "line_text": "**一句话摘要：** Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策，提供图查询、规则推理、冲突处理及来源追踪。它可以作为 AI 应用的语义层，但抽取质量和业务判断仍要用真实数据检验。[官方 README](https://github.com/semantica-agi/semantica/blob/main/README.md)",
+      "sha256": "43ffc75510eef0e35d75c780440e64db018c74762258dfc4665b8b81ca850aa7",
+      "bytes": 26815,
+      "snapshot": "projects/011-semantica/artifacts/sources/011.md"
+    },
+    {
+      "number": "012",
+      "name": "Hindsight",
+      "path": "projects/012-hindsight/README.md",
+      "anchor": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆",
+      "role": "长期记忆",
+      "reason": "保存并检索跨轮次的外部记忆。",
+      "input_path": "projects/011-semantica/artifacts/sources/012.md",
+      "source_mode": "archived_snapshot",
+      "line": 3,
+      "line_text": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆。研究重点是能力、底层流程、适用边界，以及如何复用本仓库积累的研究经验。",
+      "sha256": "bfab88c73080336cfd898ee520d2ffac1a810cd46310a24d3704845a94440ee4",
+      "bytes": 10772,
+      "snapshot": "projects/011-semantica/artifacts/sources/012.md"
+    }
+  ],
+  "catalog": [
+    {
+      "number": "005",
+      "project": "Autoresearch",
+      "role": null,
+      "reason": "研究重点是训练实验循环，不属于本次查询的任务协调、知识上下文或长期记忆层。",
+      "quote": "寻找在当前 GPU、数据与短时间预算下表现更好的训练方案",
+      "source": "projects/005-autoresearch/README.md",
+      "line": 71,
+      "source_sha256": "1b67d2daea16d3ab542366ae9638c9c818b4b92c19d104c147d1e83eb5aa5031",
+      "snapshot": "projects/011-semantica/artifacts/sources/005.md",
+      "path": [
+        "project:005",
+        "evidence:005"
+      ]
+    },
+    {
+      "number": "008",
+      "project": "Oh My OpenAgent",
+      "role": "任务协调",
+      "reason": "安排任务、工具与执行流程。",
+      "quote": "Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制",
+      "source": "projects/008-oh-my-openagent/README.md",
+      "line": 18,
+      "source_sha256": "6d23b218eabd4919baad9192ac51945bede8403aca5a1e5962bfc0c022492b5e",
+      "snapshot": "projects/011-semantica/artifacts/sources/008.md",
+      "path": [
+        "project:008",
+        "evidence:008"
+      ]
+    },
+    {
+      "number": "011",
+      "project": "Semantica",
+      "role": "知识上下文",
+      "reason": "把资料、关系和来源组织为可查询的图。",
+      "quote": "Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策",
+      "source": "projects/011-semantica/README.md",
+      "line": 18,
+      "source_sha256": "43ffc75510eef0e35d75c780440e64db018c74762258dfc4665b8b81ca850aa7",
+      "snapshot": "projects/011-semantica/artifacts/sources/011.md",
+      "path": [
+        "project:011",
+        "evidence:011"
+      ]
+    },
+    {
+      "number": "012",
+      "project": "Hindsight",
+      "role": "长期记忆",
+      "reason": "保存并检索跨轮次的外部记忆。",
+      "quote": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆",
+      "source": "projects/012-hindsight/README.md",
+      "line": 3,
+      "source_sha256": "bfab88c73080336cfd898ee520d2ffac1a810cd46310a24d3704845a94440ee4",
+      "snapshot": "projects/011-semantica/artifacts/sources/012.md",
+      "path": [
+        "project:012",
+        "evidence:012"
+      ]
+    }
+  ],
+  "answers": [
+    {
+      "number": "008",
+      "project": "Oh My OpenAgent",
+      "role": "任务协调",
+      "reason": "安排任务、工具与执行流程。",
+      "quote": "Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制",
+      "source": "projects/008-oh-my-openagent/README.md",
+      "line": 18,
+      "source_sha256": "6d23b218eabd4919baad9192ac51945bede8403aca5a1e5962bfc0c022492b5e",
+      "snapshot": "projects/011-semantica/artifacts/sources/008.md",
+      "path": [
+        "theme:agent-context-stack",
+        "role:008",
+        "project:008",
+        "evidence:008"
+      ]
+    },
+    {
+      "number": "011",
+      "project": "Semantica",
+      "role": "知识上下文",
+      "reason": "把资料、关系和来源组织为可查询的图。",
+      "quote": "Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策",
+      "source": "projects/011-semantica/README.md",
+      "line": 18,
+      "source_sha256": "43ffc75510eef0e35d75c780440e64db018c74762258dfc4665b8b81ca850aa7",
+      "snapshot": "projects/011-semantica/artifacts/sources/011.md",
+      "path": [
+        "theme:agent-context-stack",
+        "role:011",
+        "project:011",
+        "evidence:011"
+      ]
+    },
+    {
+      "number": "012",
+      "project": "Hindsight",
+      "role": "长期记忆",
+      "reason": "保存并检索跨轮次的外部记忆。",
+      "quote": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆",
+      "source": "projects/012-hindsight/README.md",
+      "line": 3,
+      "source_sha256": "bfab88c73080336cfd898ee520d2ffac1a810cd46310a24d3704845a94440ee4",
+      "snapshot": "projects/011-semantica/artifacts/sources/012.md",
+      "path": [
+        "theme:agent-context-stack",
+        "role:012",
+        "project:012",
+        "evidence:012"
+      ]
+    }
+  ],
+  "knowledge_graph": {
+    "graph_id": "b48dc163-0919-453e-8092-cba6c357ecbd",
+    "nodes": [
+      {
+        "id": "theme:agent-context-stack",
+        "type": "question",
+        "properties": {
+          "content": "Agent 的任务协调、知识上下文与长期记忆"
+        }
+      },
+      {
+        "id": "project:005",
+        "type": "project",
+        "properties": {
+          "project_number": "005",
+          "content": "Autoresearch"
+        }
+      },
+      {
+        "id": "evidence:005",
+        "type": "evidence",
+        "properties": {
+          "project_number": "005",
+          "source_path": "projects/005-autoresearch/README.md",
+          "line": 71,
+          "sha256": "1b67d2daea16d3ab542366ae9638c9c818b4b92c19d104c147d1e83eb5aa5031",
+          "snapshot": "projects/011-semantica/artifacts/sources/005.md",
+          "content": "寻找在当前 GPU、数据与短时间预算下表现更好的训练方案"
+        }
+      },
+      {
+        "id": "project:008",
+        "type": "project",
+        "properties": {
+          "project_number": "008",
+          "content": "Oh My OpenAgent"
+        }
+      },
+      {
+        "id": "evidence:008",
+        "type": "evidence",
+        "properties": {
+          "project_number": "008",
+          "source_path": "projects/008-oh-my-openagent/README.md",
+          "line": 18,
+          "sha256": "6d23b218eabd4919baad9192ac51945bede8403aca5a1e5962bfc0c022492b5e",
+          "snapshot": "projects/011-semantica/artifacts/sources/008.md",
+          "content": "Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制"
+        }
+      },
+      {
+        "id": "role:008",
+        "type": "role",
+        "properties": {
+          "project_number": "008",
+          "content": "任务协调"
+        }
+      },
+      {
+        "id": "project:011",
+        "type": "project",
+        "properties": {
+          "project_number": "011",
+          "content": "Semantica"
+        }
+      },
+      {
+        "id": "evidence:011",
+        "type": "evidence",
+        "properties": {
+          "project_number": "011",
+          "source_path": "projects/011-semantica/README.md",
+          "line": 18,
+          "sha256": "43ffc75510eef0e35d75c780440e64db018c74762258dfc4665b8b81ca850aa7",
+          "snapshot": "projects/011-semantica/artifacts/sources/011.md",
+          "content": "Semantica 是 Python 知识与上下文基础设施：把多来源信息组织为实体、关系、事实、来源和决策"
+        }
+      },
+      {
+        "id": "role:011",
+        "type": "role",
+        "properties": {
+          "project_number": "011",
+          "content": "知识上下文"
+        }
+      },
+      {
+        "id": "project:012",
+        "type": "project",
+        "properties": {
+          "project_number": "012",
+          "content": "Hindsight"
+        }
+      },
+      {
+        "id": "evidence:012",
+        "type": "evidence",
+        "properties": {
+          "project_number": "012",
+          "source_path": "projects/012-hindsight/README.md",
+          "line": 3,
+          "sha256": "bfab88c73080336cfd898ee520d2ffac1a810cd46310a24d3704845a94440ee4",
+          "snapshot": "projects/011-semantica/artifacts/sources/012.md",
+          "content": "给长期工作的 AI Agent 增加可检索、可更新、可追溯的外部记忆"
+        }
+      },
+      {
+        "id": "role:012",
+        "type": "role",
+        "properties": {
+          "project_number": "012",
+          "content": "长期记忆"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "c75a2651-3bb7-5992-9240-758d6941d1d3",
+        "familyId": "c75a2651-3bb7-5992-9240-758d6941d1d3",
+        "source_id": "project:005",
+        "target_id": "evidence:005",
+        "type": "supported_by",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "4f015558-5bbb-57b5-9ac6-ae7fa0651d69",
+        "familyId": "4f015558-5bbb-57b5-9ac6-ae7fa0651d69",
+        "source_id": "project:008",
+        "target_id": "evidence:008",
+        "type": "supported_by",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "24960d8d-ca45-54e7-b88b-f2540474afab",
+        "familyId": "24960d8d-ca45-54e7-b88b-f2540474afab",
+        "source_id": "theme:agent-context-stack",
+        "target_id": "role:008",
+        "type": "includes_layer",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "e005e74a-978c-5f94-b6c3-76100a6dafb9",
+        "familyId": "e005e74a-978c-5f94-b6c3-76100a6dafb9",
+        "source_id": "role:008",
+        "target_id": "project:008",
+        "type": "represented_by",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "df00cf70-6ec9-501e-abec-7800161d92cc",
+        "familyId": "df00cf70-6ec9-501e-abec-7800161d92cc",
+        "source_id": "project:011",
+        "target_id": "evidence:011",
+        "type": "supported_by",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "25710b07-6860-50a5-bb9f-5c5552bcf8a2",
+        "familyId": "25710b07-6860-50a5-bb9f-5c5552bcf8a2",
+        "source_id": "theme:agent-context-stack",
+        "target_id": "role:011",
+        "type": "includes_layer",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "5d120b3c-a7d7-51c3-ad4b-8b960f011c33",
+        "familyId": "5d120b3c-a7d7-51c3-ad4b-8b960f011c33",
+        "source_id": "role:011",
+        "target_id": "project:011",
+        "type": "represented_by",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "ca29a59d-31ec-549b-9bfd-f2963d413807",
+        "familyId": "ca29a59d-31ec-549b-9bfd-f2963d413807",
+        "source_id": "project:012",
+        "target_id": "evidence:012",
+        "type": "supported_by",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "08a7d375-0257-5c57-8324-3884477270b2",
+        "familyId": "08a7d375-0257-5c57-8324-3884477270b2",
+        "source_id": "theme:agent-context-stack",
+        "target_id": "role:012",
+        "type": "includes_layer",
+        "weight": 1.0,
+        "properties": {}
+      },
+      {
+        "id": "b5732f26-0cdc-5f92-a74d-0c450d64198b",
+        "familyId": "b5732f26-0cdc-5f92-a74d-0c450d64198b",
+        "source_id": "role:012",
+        "target_id": "project:012",
+        "type": "represented_by",
+        "weight": 1.0,
+        "properties": {}
+      }
+    ],
+    "links": []
+  },
+  "native_visualization": {
+    "build_id": "20260926T131820Z-2396cd",
+    "graph_sha256": "c0e7afeb4df2214e2dfd7e3db7a86ea2b1e3d32d0463d4a1c8350e17b4610399",
+    "semantica_version": "0.7.0",
+    "plotly_version": "7.1.0",
+    "renderer": "semantica.visualization.KGVisualizer.visualize_network",
+    "exporter": "semantica.visualization.utils.export_formats.export_plotly_figure",
+    "seed": 42,
+    "views": [
+      {
+        "id": "force",
+        "title": "力导向布局",
+        "file": "native/force.html",
+        "layout": "force",
+        "node_count": 12,
+        "edge_count": 10,
+        "highlight_path": null
+      },
+      {
+        "id": "circular",
+        "title": "环形布局",
+        "file": "native/circular.html",
+        "layout": "circular",
+        "node_count": 12,
+        "edge_count": 10,
+        "highlight_path": null
+      },
+      {
+        "id": "path",
+        "title": "Hindsight 路径高亮",
+        "file": "native/path.html",
+        "layout": "force",
+        "node_count": 12,
+        "edge_count": 10,
+        "highlight_path": [
+          "theme:agent-context-stack",
+          "role:012",
+          "project:012",
+          "evidence:012"
+        ]
+      },
+      {
+        "id": "raw",
+        "title": "原始长标签",
+        "file": "native/raw.html",
+        "layout": "force",
+        "node_count": 12,
+        "edge_count": 10,
+        "highlight_path": null
+      }
+    ],
+    "input_adjustments": [
+      "source_id/target_id duplicated as source/target for the 0.7.0 visualizer",
+      "compact views shorten question/evidence labels; full text remains in hover metadata"
+    ],
+    "unchanged": "Node IDs, node types, relation types and endpoints remain unchanged; no hand-set coordinates or custom drawing.",
+    "extraction": "Roles and evidence were human-reviewed in pilot-inputs.json; this run does not perform automatic extraction."
+  },
+  "negative_control": {
+    "number": "005",
+    "project": "Autoresearch",
+    "reached_by_query": false
+  },
+  "artifacts": [
+    {
+      "title": "原文与版本",
+      "file": "source-manifest.json",
+      "purpose": "记录来自哪个文件、哪一版，并链接到完整原文快照。"
+    },
+    {
+      "title": "证据记录",
+      "file": "evidence.json",
+      "purpose": "保存项目、角色、原文片段和出处，供核查与应用复用。"
+    },
+    {
+      "title": "可重载的图谱",
+      "file": "knowledge-graph.json",
+      "purpose": "保存节点与关系；下次查询可以直接加载，继续找关联。"
+    },
+    {
+      "title": "处理履历",
+      "file": "run-report.json",
+      "purpose": "记录本次处理时间、库版本、规模与校验结果。"
+    }
+  ],
+  "limitations": [
+    "关系由人标注；未启用中文自动抽取或语义向量搜索。",
+    "本试验使用本地 JSON 保存最新一批知识，未接外部数据库或业务系统。"
+  ]
+};

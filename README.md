@@ -16,6 +16,7 @@
 | 008 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 编程 Agent 的任务编排层：主 Agent 按类别分派工作会话，结合模型路由、工具、规则与续跑完成核查；适合跨模块开发，也为本仓库的研究任务分工提供可验证样本。 | [研究记录](projects/008-oh-my-openagent/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/) · [网页源码](sites/008-oh-my-openagent/index.html) |
 | 009 | [yorukot/superfile](https://github.com/yorukot/superfile) | 终端文件管理器：多面板浏览、当前目录搜索、预览与批量整理；Go/Bubble Tea 管理界面状态，本机文件系统执行操作。适合工程目录、SSH 远端和素材整理，为本仓库提供人工文件管理与终端交互设计参考。 | [研究记录](projects/009-superfile/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/009-superfile/) · [网页源码](sites/009-superfile/index.html) |
 | 010 | [NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra) | 二进制逆向工作台：加载器与 SLEIGH/p-code 把程序或固件变成函数、引用、图和类 C 伪代码；适合无源码审查、固件研究与版本对比，为本仓库提供可复核的证据链方法。 | [研究记录](projects/010-ghidra/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/) · [网页源码](sites/010-ghidra/index.html) |
+| 011 | [semantica-agi/semantica](https://github.com/semantica-agi/semantica) | 知识处理库：抽取并核对实体与关系，保存带来源的图谱，供查询、规则和应用复用；适合跨资料研究、证据问答与 Agent 上下文，帮助本仓库按能力找项目并回查依据。 | [研究记录](projects/011-semantica/README.md) · [在线摘要与演示](https://yydshly.github.io/0926_codex_project/sites/011-semantica/) · [完整引导与对比](https://yydshly.github.io/0926_codex_project/sites/011-semantica/guide.html) |
 | 013 | [filiksyos/gitreverse](https://github.com/filiksyos/gitreverse) | 从公开仓库或网站的可见线索生成合成开发提示词；网站路线另给设计说明。适合初筛和原型需求，复刻效果仍需核对。 | [研究记录](projects/013-gitreverse/README.md) · [在线总览与实测对比](https://yydshly.github.io/0926_codex_project/sites/013-gitreverse/#summary) · [网页源码](sites/013-gitreverse/index.html) |
 
 ## 子项目速览
@@ -129,6 +130,17 @@
 - **实现原理：** 加载器建立地址空间，SLEIGH 描述指令并转为 p-code；分析器恢复控制流和数据流，反编译器给出可读推断。伪代码仍需和指令、运行证据核对。
 - **场景与对我们的意义：** 已实测游戏存档加载失败的原因定位；无源码程序初筛、固件研究与版本差异是可迁移工作流。本仓库可借鉴“输入与选项 → 地址线索 → 运行核对 → 证据交付”的可复现研究方法。
 - **实测与边界：** 自制游戏 EXE 已由 Ghidra 12.1.4 分析；网页从 PE 文件头、机器字节、指令和 p-code 逐步走到伪代码，并用三份存档的运行结果核对。另一个 COFF 教学样本未导入 Ghidra；未分析第三方游戏。[详细研究](projects/010-ghidra/README.md) · [在线查看完整过程](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#analysis-path)。
+
+### 011 · Semantica
+
+<img src="projects/011-semantica/assets/guide-overview.png" width="620" alt="Semantica 完整总览图：能力、原理、模块、场景、实际效果、研究价值与扩展路线">
+
+图片说明：本仓库依据官方资料、源码与本地试验原创整理的完整总览图，明确区分库能力、人工整理、实测效果和扩展建议。[放大 SVG](projects/011-semantica/assets/guide-overview.svg) · [在线完整引导](https://yydshly.github.io/0926_codex_project/sites/011-semantica/guide.html)。
+
+- **能力：** 提供资料接入、实体与关系抽取、去重、冲突处理、建图、查询、规则、来源追踪和可视化组件。
+- **原理：** 解析资料，通过规则、模型或人工确认对象与关系，保存为带属性和来源的节点与边；图遍历和可选向量检索再为应用取回知识。
+- **场景：** 跨资料研究、证据问答、Agent 上下文、工单排查、供应链追踪与决策审计。
+- **对我们的意义：** 连接项目、能力、结论与原文，让研究能被搜索、复核与交接。已实测 4 份资料、12 个节点、10 条关系及原生画图；自动抽取和效率收益尚待验证。[研究与复现](projects/011-semantica/README.md) · [线上快照演示](https://yydshly.github.io/0926_codex_project/sites/011-semantica/)。
 
 ### 013 · GitReverse
 
