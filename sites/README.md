@@ -22,4 +22,4 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 
 ## 006 · vercel/eve
 
-[网页源码](006-vercel-eve/index.html)以原创能力图为引导，说明 eve 的能力、执行原理、模块、输入输出、使用场景和相对 Codex 的价值；可交互场景实时查询公开 GitHub 数据，但建议、审批和跨轮读回只在浏览器中模拟。[研究记录与验证边界](../projects/006-vercel-eve/README.md)。
+[在线展示](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/)以原创能力图为引导，说明 eve 的能力、执行原理、模块、输入输出、使用场景和相对 Codex 的价值；可交互场景实时查询公开 GitHub 数据，但建议、审批和跨轮读回只在浏览器中模拟。[网页源码](006-vercel-eve/index.html) · [研究记录与验证边界](../projects/006-vercel-eve/README.md)。

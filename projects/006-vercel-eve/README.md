@@ -14,7 +14,7 @@
 | 研究日期 | 2026-09-26 |
 | 研究状态 | 官方文档已核查；示例已构建、读取真实 GitHub 数据、启动服务并通过健康检查；完整模型与审批流程尚未验证 |
 | 本项目演示 | [`demo/`](demo/)：仓库研究筛选 Agent；完整对话需配置模型凭据 |
-| 网页展示 | [交互教学页面](../../sites/006-vercel-eve/index.html)；网页查询真实 GitHub 数据，但审批与判断为模拟，不运行 eve 或模型 |
+| 网页展示 | [在线交互教学页](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/) · [网页源码](../../sites/006-vercel-eve/index.html)；网页查询真实 GitHub 数据，但审批与判断为模拟，不运行 eve 或模型 |
 
 **一句话摘要：** eve 是采用文件约定的 TypeScript Agent 框架。开发者配置模型、指令、工具与入口；eve 管理多轮会话、工具调用、人工审批、暂停恢复和服务交付。网页可以作为客户端接入。它适合开发自己的长期 Agent 服务；对于个人临时研究，直接使用 Codex 更省事。[项目 README](https://github.com/vercel/eve/blob/main/README.md)
 
@@ -44,7 +44,7 @@
 | 审批与状态 | 敏感动作先等人；保留同一会话的工作记忆 | 工具审批策略、暂停恢复、`defineState` |
 | 交付与观察 | 返回回复和事件，接前端，部署运行，评估行为 | 客户端 SDK、流式事件、评测、Vercel 或自托管 Node 服务 |
 
-**输入与输出：** 建置时输入的是指令、模型配置、工具实现、凭据和入口规则；运行时输入的是用户消息、渠道事件或定时触发，也可能有审批答复。输出包括回复、流式事件、审批请求、工具执行结果和会话状态。外部写入只会在开发者提供相应工具与权限后发生。[前端接入](https://github.com/vercel/eve/blob/main/docs/guides/frontend/overview.mdx)、[执行模型](https://github.com/vercel/eve/blob/main/docs/concepts/execution-model-and-durability.mdx)
+**输入与输出：** 开发时输入的是指令、模型配置、工具实现、凭据和入口规则；运行时输入的是用户消息、渠道事件或定时触发，也可能有审批答复。输出包括回复、流式事件、审批请求、工具执行结果和会话状态。外部写入只会在开发者提供相应工具与权限后发生。[前端接入](https://github.com/vercel/eve/blob/main/docs/guides/frontend/overview.mdx)、[执行模型](https://github.com/vercel/eve/blob/main/docs/concepts/execution-model-and-durability.mdx)
 
 ### 一张图看全貌
 
@@ -82,7 +82,7 @@ eve 的核心区分是**应用运行环境与沙箱分开**：模型可用的文
 
 [`demo/`](demo/) 实现了一个小型 eve Agent。场景是：有人提交 `vercel/eve`，希望先看公开仓库信息，再决定是否继续研究。示例保留一个需要人工批准的“保存判断”动作，使循环、暂停和跨轮状态可以被观察。当前已验证工具和服务启动；审批环节仍需在有模型连接的会话中试跑。
 
-想先看完整流程的位置，可以打开[交互网页](../../sites/006-vercel-eve/index.html)：输入公开仓库后，网页会实时读取 GitHub 元数据；也可手动选用标明日期的验证快照。初步建议、审批与下一轮读回均由浏览器代码模拟，状态只存在当前页面内，不能据此认定 eve 的模型循环或持久会话已经跑通。页面同时链接下面的实际 eve 示例源码。
+想先看完整流程的位置，可以打开[在线交互网页](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/)：输入公开仓库后，网页会实时读取 GitHub 元数据；也可手动选用标明日期的验证快照。初步建议、审批与下一轮读回均由浏览器代码模拟，状态只存在当前页面内，不能据此认定 eve 的模型循环或持久会话已经跑通。页面同时链接下面的实际 eve 示例源码。
 
 | 阶段 | 示例中的实现 | 可观察的行为 |
 | --- | --- | --- |

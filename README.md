@@ -10,7 +10,7 @@
 | 002 | [browser-use/web-ui](https://github.com/browser-use/web-ui) | 配置、运行并观察浏览器代理，展示读取、决策、执行与核对循环。 | [研究记录](projects/002-browser-use-web-ui/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/) · [网页源码](sites/002-browser-use-web-ui/index.html) |
 | 003 | [anandprtp/Antra](https://github.com/anandprtp/Antra) | 匹配多来源音源，下载、校验、打标并整理本地曲库。 | [研究记录](projects/003-antra/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/003-antra/) · [网页源码](sites/003-antra/index.html) |
 | 004 | [stemdeckapp/stemdeck](https://github.com/stemdeckapp/stemdeck) | Demucs 估计六类音轨，支持试听、循环练习、混音与导出。 | [研究记录](projects/004-stemdeck/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/) · [网页源码](sites/004-stemdeck/index.html) |
-| 006 | [vercel/eve](https://github.com/vercel/eve) | 把模型、工具、持久会话和人工审批组合成可部署的 Agent 服务。 | [研究记录](projects/006-vercel-eve/README.md) · [网页源码](sites/006-vercel-eve/index.html) |
+| 006 | [vercel/eve](https://github.com/vercel/eve) | 把模型、工具、持久会话和人工审批组合成可部署的 Agent 服务。 | [研究记录](projects/006-vercel-eve/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/) · [网页源码](sites/006-vercel-eve/index.html) |
 
 ## 子项目速览
 
@@ -68,7 +68,7 @@
 - **原理与模块：** 指令和模型配置定义 Agent；渠道鉴权接收请求；Workflow SDK 把会话按轮次和步骤保存；模型选工具，工具结果返回模型；审批与会话状态支持等待和继续。自定义工具、连接、沙箱、前端与部署构成外围模块。
 - **输入与输出：** 输入包括开发者配置的模型、指令、工具和权限，以及运行时请求与审批答复；输出包括回复、事件、工具动作和会话状态。具体业务动作要由开发者实现。
 - **场景与意义：** 可构建仓库研究受理、客服复核和周期巡检等长期流程。你自己发起研究、整理资料时用 Codex 更直接；需要多人入口、跨天续跑和自己的审批服务时，eve 才有明确价值。
-- **验证边界：** 本项目示例已构建，GitHub 查询工具取回真实数据，服务健康检查返回 `ready`；完整模型循环和真实审批仍待验证。[研究记录与源码](projects/006-vercel-eve/README.md) · [交互网页源码](sites/006-vercel-eve/index.html)。
+- **验证边界：** 本项目示例已构建，GitHub 查询工具取回真实数据，服务健康检查返回 `ready`；完整模型循环和真实审批仍待验证。[研究记录与源码](projects/006-vercel-eve/README.md) · [在线交互演示](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/)。
 
 ## 仓库结构
 
