@@ -1,0 +1,62 @@
+{
+  "httpStatus": 200,
+  "pageTitle": "Hindsight · Agent 的长期记忆｜研究 012",
+  "brokenAnchors": [],
+  "missingFiles": [],
+  "pageErrors": [],
+  "stageTitles": [
+    "保留事情，也保留语境",
+    "同一份记忆，多种索引",
+    "找到相关，也找到关联",
+    "先找依据，再组织回答"
+  ],
+  "keyboardTab": "tab-store",
+  "timelineVersions": [
+    "V.01",
+    "V.02",
+    "V.03"
+  ],
+  "timelineDistinct": 3,
+  "disclosureOpened": true,
+  "overflow": [
+    {
+      "width": 1440,
+      "viewport": 1440,
+      "scroll": 1440,
+      "offenders": []
+    },
+    {
+      "width": 1024,
+      "viewport": 1024,
+      "scroll": 1024,
+      "offenders": []
+    },
+    {
+      "width": 768,
+      "viewport": 768,
+      "scroll": 768,
+      "offenders": []
+    },
+    {
+      "width": 390,
+      "viewport": 390,
+      "scroll": 390,
+      "offenders": []
+    },
+    {
+      "width": 320,
+      "viewport": 320,
+      "scroll": 320,
+      "offenders": []
+    }
+  ],
+  "textEnlargement": {
+    "viewport": 720,
+    "scroll": 720
+  },
+  "screenshots": [
+    "cover.png",
+    "desktop-full.png",
+    "mobile-full.png"
+  ]
+}

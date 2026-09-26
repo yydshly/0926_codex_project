@@ -48,6 +48,10 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 
 [011 · Semantica 能力摘要与演示](https://yydshly.github.io/0926_codex_project/sites/011-semantica/)：用完整总览图说明知识处理能力、实体与关系的实现原理、跨资料研究和 Agent 场景，以及对本仓库证据复用的意义。附[完整引导与 Obsidian 对比](https://yydshly.github.io/0926_codex_project/sites/011-semantica/guide.html)、[库原生图形](https://yydshly.github.io/0926_codex_project/sites/011-semantica/native-graph.html)和真实运行快照；重建与实时运行需本机服务。[网页源码](011-semantica/index.html) · [研究记录](../projects/011-semantica/README.md)。
 
+## 012 · Hindsight
+
+[012 · Hindsight 中文研究网页](https://yydshly.github.io/0926_codex_project/sites/012-hindsight/)：用[理解总览图](https://yydshly.github.io/0926_codex_project/sites/012-hindsight/map.html)说明长期记忆的能力、PostgreSQL 与模型协作的原理、持续研究和排障场景，以及复用 GitHub 研究证据的意义。含输入输出、扩展方向和个人研究闭环；当前为静态研究展示，未运行原库。[网页源码](012-hindsight/index.html) · [研究记录](../projects/012-hindsight/README.md)。
+
 ## 013 · GitReverse
 
 [能力总览与 Chippy Tea 前后对比](https://yydshly.github.io/0926_codex_project/sites/013-gitreverse/#summary)用原创总览图说明两条输入路线、提示词与 design.md 的作用、实现原理、使用场景和研究价值；再展示根据两份文字结果实做的网页与原站桌面、手机截图。网页落地由本研究继续开发，GitReverse 没有直接生成代码。[网页源码](013-gitreverse/index.html) · [研究记录与来源](../projects/013-gitreverse/README.md)。

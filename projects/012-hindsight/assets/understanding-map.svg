@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="2710" viewBox="0 0 2560 2710" role="img" aria-labelledby="mapTitle mapDesc"><title id="mapTitle">Hindsight 理解全景图：输入、内部原理、数据库、输出、场景、扩展与个人研究闭环</title><desc id="mapDesc">Hindsight 是建立在 PostgreSQL 等数据库上的长期记忆服务。应用送入带来源的资料，retain 提取事实，记忆库存储原文、经历、归纳与专题知识，recall 多路检索，reflect 综合证据；采集、权限、业务执行和核验由外部应用负责。本图还展示个人 GitHub 研究的持续分析闭环、六类使用场景及六个可扩展方向。图中为研究解释和建议，不是运行结果。</desc><defs><marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 Z" fill="#176453"/></marker><marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 Z" fill="#a44823"/></marker><marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 Z" fill="#245f8f"/></marker></defs><g font-family="Microsoft YaHei, Noto Sans SC, Segoe UI, sans-serif">
+<rect x="0" y="0" width="2560" height="2710" rx="0" fill="#f4f8fa" stroke="#f4f8fa" stroke-width="2"/>
+<text id="t1" data-max-width="1100" x="64" y="62" fill="#176453" font-size="24" font-weight="600"><tspan x="64" dy="0">012 / OPEN-SOURCE RESEARCH</tspan></text>
+<text id="t2" data-max-width="1700" x="64" y="135" fill="#19333e" font-size="62" font-weight="750"><tspan x="64" dy="0">Hindsight 理解全景图</tspan></text>
+<text id="t3" data-max-width="2432" x="64" y="192" fill="#4e6873" font-size="31" font-weight="400"><tspan x="64" dy="0">把你研究过的 GitHub 库，变成有来源、会更新、可持续分析的个人知识库</tspan></text>
+<text id="t4" data-max-width="466" x="2030" y="62" fill="#4e6873" font-size="24" font-weight="500"><tspan x="2030" dy="0">2026.09.26 · 研究整理</tspan></text>
+<rect x="1750" y="91" width="222" height="49" rx="9" fill="#eaf5ee" stroke="#176453" stroke-width="2"/>
+<text id="t5" data-max-width="180" x="1771" y="124" fill="#176453" font-size="25" font-weight="600"><tspan x="1771" dy="0">原库已有能力</tspan></text>
+<rect x="1994" y="91" width="245" height="49" rx="9" fill="#fcf2eb" stroke="#a44823" stroke-width="2"/>
+<text id="t6" data-max-width="200" x="2016" y="124" fill="#a44823" font-size="25" font-weight="600"><tspan x="2016" dy="0">应用负责接入</tspan></text>
+<rect x="2261" y="91" width="235" height="49" rx="9" fill="#eef5fb" stroke="#245f8f" stroke-width="2"/>
+<text id="t7" data-max-width="193" x="2283" y="124" fill="#245f8f" font-size="25" font-weight="600"><tspan x="2283" dy="0">研究应用建议</tspan></text>
+<rect x="64" y="235" width="790" height="205" rx="16" fill="#ffffff" stroke="#cad8de" stroke-width="2"/>
+<rect x="885" y="235" width="790" height="205" rx="16" fill="#ffffff" stroke="#cad8de" stroke-width="2"/>
+<rect x="1706" y="235" width="790" height="205" rx="16" fill="#ffffff" stroke="#cad8de" stroke-width="2"/>
+<text id="t8" data-max-width="734" x="92" y="282" fill="#19333e" font-size="32" font-weight="700"><tspan x="92" dy="0">核心本质：AI 的外部长期记忆层</tspan></text>
+<text id="t9" data-max-width="734" x="92" y="331" fill="#4e6873" font-size="28" font-weight="400"><tspan x="92" dy="0">组织事实、经历、关系和时间</tspan><tspan x="92" dy="41">检索证据，归纳认识，再辅助判断</tspan></text>
+<text id="t10" data-max-width="734" x="92" y="415" fill="#176453" font-size="26" font-weight="550"><tspan x="92" dy="0">“学习”是更新记忆，不是训练模型权重</tspan></text>
+<text id="t11" data-max-width="734" x="913" y="282" fill="#19333e" font-size="32" font-weight="700"><tspan x="913" dy="0">数据库：你的内容，它管理结构</tspan></text>
+<text id="t12" data-max-width="734" x="913" y="331" fill="#4e6873" font-size="28" font-weight="400"><tspan x="913" dy="0">主后端 PostgreSQL；支持自托管或托管</tspan><tspan x="913" dy="41">Bank 是逻辑记忆库，可按项目或用户组织</tspan></text>
+<text id="t13" data-max-width="734" x="913" y="415" fill="#176453" font-size="26" font-weight="550"><tspan x="913" dy="0">Bank 不等于独立数据库；访问权限仍需配置</tspan></text>
+<text id="t14" data-max-width="734" x="1734" y="282" fill="#19333e" font-size="32" font-weight="700"><tspan x="1734" dy="0">分工：数据库、模型、你的应用</tspan></text>
+<text id="t15" data-max-width="734" x="1734" y="331" fill="#4e6873" font-size="28" font-weight="400"><tspan x="1734" dy="0">数据库保存；模型完成抽取、归纳与推理</tspan><tspan x="1734" dy="41">Hindsight 编排记忆；应用采集资料、执行任务</tspan></text>
+<text id="t16" data-max-width="734" x="1734" y="415" fill="#a44823" font-size="26" font-weight="550"><tspan x="1734" dy="0">它不自动抓取全网，也不自动证实所有信息</tspan></text>
+<rect x="64" y="490" width="430" height="1030" rx="16" fill="#ffffff" stroke="#cad8de" stroke-width="2"/>
+<rect x="530" y="490" width="1440" height="1030" rx="16" fill="#eaf1f4" stroke="#cad8de" stroke-width="2"/>
+<rect x="2006" y="490" width="490" height="1030" rx="16" fill="#ffffff" stroke="#cad8de" stroke-width="2"/>
+<text id="t17" data-max-width="60" x="92" y="548" fill="#a44823" font-size="24" font-weight="600"><tspan x="92" dy="0">01</tspan></text>
+<text id="t18" data-max-width="314" x="152" y="549" fill="#19333e" font-size="34" font-weight="700"><tspan x="152" dy="0">写入的输入</tspan></text>
+<text id="t19" data-max-width="374" x="92" y="588" fill="#4e6873" font-size="25" font-weight="400"><tspan x="92" dy="0">你的资料 ＋ 来源信息</tspan></text>
+<text id="t20" data-max-width="60" x="562" y="548" fill="#176453" font-size="24" font-weight="600"><tspan x="562" dy="0">02</tspan></text>
+<text id="t21" data-max-width="1316" x="622" y="549" fill="#19333e" font-size="34" font-weight="700"><tspan x="622" dy="0">内部核心：构建记忆，再按问题调用</tspan></text>
+<text id="t22" data-max-width="1376" x="562" y="588" fill="#4e6873" font-size="25" font-weight="400"><tspan x="562" dy="0">以下是模块与知识层次示意，不是数据库物理表结构</tspan></text>
+<text id="t23" data-max-width="60" x="2034" y="548" fill="#245f8f" font-size="24" font-weight="600"><tspan x="2034" dy="0">03</tspan></text>
+<text id="t24" data-max-width="374" x="2094" y="549" fill="#19333e" font-size="34" font-weight="700"><tspan x="2094" dy="0">查询与输出</tspan></text>
+<text id="t25" data-max-width="434" x="2034" y="588" fill="#4e6873" font-size="25" font-weight="400"><tspan x="2034" dy="0">由具体问题驱动</tspan></text>
+<text id="t26" data-max-width="374" x="92" y="656" fill="#19333e" font-size="29" font-weight="650"><tspan x="92" dy="0">上游资料</tspan></text>
+<text id="t27" data-max-width="374" x="92" y="699" fill="#4e6873" font-size="25" font-weight="400"><tspan x="92" dy="0">README、文档、源码摘录</tspan><tspan x="92" dy="35">版本、许可证、更新记录</tspan></text>
+<path d="M92,745 L466,745" fill="none" stroke="#cad8de" stroke-width="2"/>
+<text id="t28" data-max-width="374" x="92" y="793" fill="#19333e" font-size="29" font-weight="650"><tspan x="92" dy="0">你的研究</tspan></text>
+<text id="t29" data-max-width="374" x="92" y="836" fill="#4e6873" font-size="25" font-weight="400"><tspan x="92" dy="0">能力分析、架构理解</tspan><tspan x="92" dy="35">跨库比较、选型理由</tspan></text>
+<path d="M92,882 L466,882" fill="none" stroke="#cad8de" stroke-width="2"/>
+<text id="t30" data-max-width="374" x="92" y="930" fill="#19333e" font-size="29" font-weight="650"><tspan x="92" dy="0">你的实践</tspan></text>
+<text id="t31" data-max-width="374" x="92" y="973" fill="#4e6873" font-size="25" font-weight="400"><tspan x="92" dy="0">环境、步骤、真实结果</tspan><tspan x="92" dy="35">失败原因、反馈与纠正</tspan></text>
+<rect x="88" y="1042" width="382" height="192" rx="10" fill="#fcf2eb" stroke="#e7c8b6" stroke-width="2"/>
+<text id="t32" data-max-width="338" x="110" y="1084" fill="#a44823" font-size="26" font-weight="650"><tspan x="110" dy="0">建议随资料一起保留</tspan></text>
+<text id="t33" data-max-width="338" x="110" y="1126" fill="#4e6873" font-size="24" font-weight="400"><tspan x="110" dy="0">仓库 / 文件位置 / commit</tspan><tspan x="110" dy="35">日期 / 项目 / 验证状态</tspan><tspan x="110" dy="35">官方声明、实测与推测分开</tspan></text>
+<rect x="88" y="1270" width="382" height="215" rx="10" fill="#f4f8fa" stroke="#cad8de" stroke-width="2"/>
+<text id="t34" data-max-width="338" x="110" y="1312" fill="#a44823" font-size="27" font-weight="650"><tspan x="110" dy="0">接入由应用负责</tspan></text>
+<text id="t35" data-max-width="338" x="110" y="1357" fill="#4e6873" font-size="24" font-weight="400"><tspan x="110" dy="0">采集、增量同步、去重</tspan><tspan x="110" dy="34">通过 SDK / REST / MCP 写入</tspan><tspan x="110" dy="34">无需先手工建完整知识图谱</tspan><tspan x="110" dy="34">原始资料继续留在 Git 中</tspan></text>
+<rect x="562" y="625" width="386" height="265" rx="16" fill="#ffffff" stroke="#176453" stroke-width="2"/>
+<text id="t36" data-max-width="334" x="588" y="670" fill="#176453" font-size="32" font-weight="700"><tspan x="588" dy="0">Retain / 写入</tspan></text>
+<text id="t37" data-max-width="334" x="588" y="720" fill="#19333e" font-size="26" font-weight="400"><tspan x="588" dy="0">分块 → 叙述事实抽取</tspan><tspan x="588" dy="43">实体识别与名称归一</tspan><tspan x="588" dy="43">发生时间 ≠ 录入时间</tspan><tspan x="588" dy="43">保留上下文与来源</tspan></text>
+<rect x="992" y="625" width="458" height="664" rx="16" fill="#19333e" stroke="#19333e" stroke-width="2"/>
+<text id="t38" data-max-width="406" x="1018" y="672" fill="#ffffff" font-size="36" font-weight="700"><tspan x="1018" dy="0">Memory Bank</tspan></text>
+<text id="t39" data-max-width="406" x="1018" y="711" fill="#cae0e7" font-size="25" font-weight="450"><tspan x="1018" dy="0">主要持久化：PostgreSQL</tspan></text>
+<path d="M1018,738 L1424,738" fill="none" stroke="#58727c" stroke-width="2"/>
+<text id="t40" data-max-width="406" x="1018" y="781" fill="#c3ed9c" font-size="29" font-weight="650"><tspan x="1018" dy="0">原文与片段</tspan></text>
+<text id="t41" data-max-width="406" x="1018" y="822" fill="#d9e5e9" font-size="25" font-weight="400"><tspan x="1018" dy="0">保留材料，便于回溯核对</tspan></text>
+<text id="t42" data-max-width="406" x="1018" y="884" fill="#c3ed9c" font-size="25" font-weight="650"><tspan x="1018" dy="0">事实 world / 经历 experience</tspan></text>
+<text id="t43" data-max-width="406" x="1018" y="925" fill="#d9e5e9" font-size="25" font-weight="400"><tspan x="1018" dy="0">提取后的叙述、实体与时序</tspan></text>
+<text id="t44" data-max-width="406" x="1018" y="989" fill="#c3ed9c" font-size="28" font-weight="650"><tspan x="1018" dy="0">归纳认识 Observations</tspan></text>
+<text id="t45" data-max-width="406" x="1018" y="1030" fill="#d9e5e9" font-size="25" font-weight="400"><tspan x="1018" dy="0">关联依据，随新证据修正</tspan></text>
+<text id="t46" data-max-width="406" x="1018" y="1094" fill="#c3ed9c" font-size="28" font-weight="650"><tspan x="1018" dy="0">专题知识 Mental Models</tspan></text>
+<text id="t47" data-max-width="406" x="1018" y="1135" fill="#d9e5e9" font-size="25" font-weight="400"><tspan x="1018" dy="0">为固定问题维护可刷新的答案</tspan></text>
+<path d="M1018,1170 L1424,1170" fill="none" stroke="#58727c" stroke-width="2"/>
+<text id="t48" data-max-width="406" x="1018" y="1215" fill="#d9e5e9" font-size="25" font-weight="400"><tspan x="1018" dy="0">索引：向量 / 全文 / 图关系</tspan><tspan x="1018" dy="39">元数据：时间 / 标签 / 来源</tspan></text>
+<rect x="1494" y="625" width="444" height="250" rx="16" fill="#ffffff" stroke="#176453" stroke-width="2"/>
+<text id="t49" data-max-width="392" x="1520" y="670" fill="#176453" font-size="32" font-weight="700"><tspan x="1520" dy="0">Recall / 检索</tspan></text>
+<rect x="1520" y="698" width="185" height="47" rx="7" fill="#eaf5ee" stroke="#eaf5ee" stroke-width="2"/>
+<text id="t50" data-max-width="153" x="1536" y="730" fill="#176453" font-size="25" font-weight="550"><tspan x="1536" dy="0">语义相似</tspan></text>
+<rect x="1727" y="698" width="185" height="47" rx="7" fill="#eaf5ee" stroke="#eaf5ee" stroke-width="2"/>
+<text id="t51" data-max-width="153" x="1743" y="730" fill="#176453" font-size="25" font-weight="550"><tspan x="1743" dy="0">关键词</tspan></text>
+<rect x="1520" y="757" width="185" height="47" rx="7" fill="#eaf5ee" stroke="#eaf5ee" stroke-width="2"/>
+<text id="t52" data-max-width="153" x="1536" y="789" fill="#176453" font-size="25" font-weight="550"><tspan x="1536" dy="0">图关系</tspan></text>
+<rect x="1727" y="757" width="185" height="47" rx="7" fill="#eaf5ee" stroke="#eaf5ee" stroke-width="2"/>
+<text id="t53" data-max-width="153" x="1743" y="789" fill="#176453" font-size="25" font-weight="550"><tspan x="1743" dy="0">时间范围</tspan></text>
+<text id="t54" data-max-width="392" x="1520" y="850" fill="#19333e" font-size="26" font-weight="500"><tspan x="1520" dy="0">融合 → 重排 → 上下文预算</tspan></text>
+<rect x="562" y="965" width="386" height="324" rx="16" fill="#ffffff" stroke="#176453" stroke-width="2"/>
+<text id="t55" data-max-width="334" x="588" y="1012" fill="#176453" font-size="30" font-weight="700"><tspan x="588" dy="0">后台归纳 / 更新</tspan></text>
+<text id="t56" data-max-width="334" x="588" y="1060" fill="#19333e" font-size="26" font-weight="400"><tspan x="588" dy="0">相关事实 → 归纳认识</tspan><tspan x="588" dy="42">新证据可支持或修正</tspan><tspan x="588" dy="42">旧认识保留变迁依据</tspan><tspan x="588" dy="42">专题知识可按规则刷新</tspan></text>
+<text id="t57" data-max-width="334" x="588" y="1239" fill="#4e6873" font-size="22" font-weight="400"><tspan x="588" dy="0">自动归纳记录中的认识；</tspan><tspan x="588" dy="31">专题问题与更新规则由你定义。</tspan></text>
+<rect x="1494" y="965" width="444" height="324" rx="16" fill="#ffffff" stroke="#176453" stroke-width="2"/>
+<text id="t58" data-max-width="392" x="1520" y="1012" fill="#176453" font-size="32" font-weight="700"><tspan x="1520" dy="0">Reflect / 反思</tspan></text>
+<text id="t59" data-max-width="392" x="1520" y="1060" fill="#19333e" font-size="26" font-weight="400"><tspan x="1520" dy="0">先查专题知识与归纳</tspan><tspan x="1520" dy="42">必要时追查原始记忆</tspan><tspan x="1520" dy="42">多轮工具调用 → 综合回答</tspan><tspan x="1520" dy="42">返回使用到的记忆依据</tspan></text>
+<text id="t60" data-max-width="392" x="1520" y="1256" fill="#a44823" font-size="25" font-weight="550"><tspan x="1520" dy="0">引用可追溯 ≠ 内容已证真</tspan></text>
+<path d="M494,735 L560,735" fill="none" stroke="#a44823" stroke-width="3" marker-end="url(#arrowOrange)"/>
+<path d="M948,735 L990,735" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<path d="M1450,735 L1492,735" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<path d="M755,890 L755,963" fill="none" stroke="#176453" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowTeal)"/>
+<text id="t61" data-max-width="158" x="773" y="936" fill="#176453" font-size="22" font-weight="400"><tspan x="773" dy="0">新事实</tspan></text>
+<path d="M948,1126 L990,1126" fill="none" stroke="#176453" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowTeal)"/>
+<path d="M1716,875 L1716,963" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<text id="t62" data-max-width="146" x="1736" y="930" fill="#176453" font-size="22" font-weight="400"><tspan x="1736" dy="0">证据</tspan></text>
+<path d="M1450,1092 L1492,1092" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<rect x="562" y="1325" width="1376" height="159" rx="10" fill="#ffffff" stroke="#cad8de" stroke-width="2"/>
+<text id="t63" data-max-width="850" x="588" y="1367" fill="#19333e" font-size="28" font-weight="650"><tspan x="588" dy="0">你配置的模型能力</tspan></text>
+<text id="t64" data-max-width="1324" x="588" y="1414" fill="#4e6873" font-size="26" font-weight="400"><tspan x="588" dy="0">LLM：抽取 / 归纳 / 推理     Embedding：语义表示     Reranker：候选重排</tspan></text>
+<text id="t65" data-max-width="1324" x="588" y="1460" fill="#4e6873" font-size="25" font-weight="400"><tspan x="588" dy="0">可选择云端或本地模型；质量、延迟与费用受配置和数据规模影响。</tspan></text>
+<rect x="2030" y="625" width="442" height="264" rx="10" fill="#eef5fb" stroke="#b9cfdf" stroke-width="2"/>
+<text id="t66" data-max-width="394" x="2054" y="671" fill="#245f8f" font-size="29" font-weight="650"><tspan x="2054" dy="0">查询输入</tspan></text>
+<text id="t67" data-max-width="394" x="2054" y="718" fill="#19333e" font-size="26" font-weight="400"><tspan x="2054" dy="0">问题 ＋ 记忆范围 ＋ 预算</tspan><tspan x="2054" dy="43">例如：以前为什么放弃 A？</tspan><tspan x="2054" dy="43">哪些库可组合解决新需求？</tspan></text>
+<text id="t68" data-max-width="394" x="2054" y="861" fill="#245f8f" font-size="24" font-weight="550"><tspan x="2054" dy="0">通过 recall / reflect 查询</tspan></text>
+<path d="M2030,788 L1940,788" fill="none" stroke="#245f8f" stroke-width="3" marker-end="url(#arrowBlue)"/>
+<text id="t69" data-max-width="434" x="2034" y="970" fill="#245f8f" font-size="29" font-weight="700"><tspan x="2034" dy="0">你能得到</tspan></text>
+<text id="t70" data-max-width="434" x="2034" y="1027" fill="#19333e" font-size="28" font-weight="650"><tspan x="2034" dy="0">Recall → 相关记忆</tspan></text>
+<text id="t71" data-max-width="434" x="2034" y="1064" fill="#4e6873" font-size="24" font-weight="400"><tspan x="2034" dy="0">返回事实、经历与原文线索</tspan></text>
+<text id="t72" data-max-width="434" x="2034" y="1123" fill="#19333e" font-size="28" font-weight="650"><tspan x="2034" dy="0">Reflect → 分析回答</tspan></text>
+<text id="t73" data-max-width="434" x="2034" y="1160" fill="#4e6873" font-size="24" font-weight="400"><tspan x="2034" dy="0">综合已有证据，说明依据</tspan></text>
+<text id="t74" data-max-width="434" x="2034" y="1219" fill="#19333e" font-size="28" font-weight="650"><tspan x="2034" dy="0">Mental Models → 专题知识</tspan></text>
+<text id="t75" data-max-width="434" x="2034" y="1256" fill="#4e6873" font-size="24" font-weight="400"><tspan x="2034" dy="0">项目现状、偏好、经验手册</tspan></text>
+<text id="t76" data-max-width="434" x="2034" y="1315" fill="#19333e" font-size="28" font-weight="650"><tspan x="2034" dy="0">Agent 上下文</tspan></text>
+<text id="t77" data-max-width="434" x="2034" y="1352" fill="#4e6873" font-size="24" font-weight="400"><tspan x="2034" dy="0">支持下一轮回答或任务决策</tspan></text>
+<path d="M1938,850 L1979,850 L1979,1027 L2004,1027" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<path d="M1938,1138 L2004,1138" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<path d="M2034,1394 L2468,1394" fill="none" stroke="#cad8de" stroke-width="2"/>
+<text id="t78" data-max-width="434" x="2034" y="1437" fill="#a44823" font-size="24" font-weight="550"><tspan x="2034" dy="0">后续执行与核验仍由你或应用完成</tspan></text>
+<text id="t79" data-max-width="434" x="2034" y="1478" fill="#4e6873" font-size="24" font-weight="400"><tspan x="2034" dy="0">分析建议不等于已经完成业务动作</tspan></text>
+<rect x="64" y="1555" width="2432" height="322" rx="16" fill="#eaf5ee" stroke="#b7d4c3" stroke-width="2"/>
+<text id="t80" data-max-width="2368" x="96" y="1610" fill="#19333e" font-size="38" font-weight="700"><tspan x="96" dy="0">对你的意义：把 GitHub 研究积累变成自己的持续分析能力</tspan></text>
+<text id="t81" data-max-width="2368" x="96" y="1653" fill="#4e6873" font-size="27" font-weight="400"><tspan x="96" dy="0">先从已有 README、研究笔记和验证记录开始；原文仍保留在 Git，记忆层帮助查找、联结和重新评估。</tspan></text>
+<rect x="100" y="1687" width="435" height="106" rx="10" fill="#ffffff" stroke="#b7d4c3" stroke-width="2"/>
+<text id="t82" data-max-width="391" x="122" y="1728" fill="#176453" font-size="30" font-weight="650"><tspan x="122" dy="0">已有研究</tspan></text>
+<text id="t83" data-max-width="391" x="122" y="1772" fill="#4e6873" font-size="24" font-weight="400"><tspan x="122" dy="0">README / 笔记 / 实测</tspan></text>
+<path d="M535,1740 L576,1740" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<rect x="578" y="1687" width="435" height="106" rx="10" fill="#ffffff" stroke="#b7d4c3" stroke-width="2"/>
+<text id="t84" data-max-width="391" x="600" y="1728" fill="#176453" font-size="30" font-weight="650"><tspan x="600" dy="0">带证据入库</tspan></text>
+<text id="t85" data-max-width="391" x="600" y="1772" fill="#4e6873" font-size="24" font-weight="400"><tspan x="600" dy="0">仓库 / 版本 / 日期 / 等级</tspan></text>
+<path d="M1013,1740 L1054,1740" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<rect x="1056" y="1687" width="435" height="106" rx="10" fill="#ffffff" stroke="#b7d4c3" stroke-width="2"/>
+<text id="t86" data-max-width="391" x="1078" y="1728" fill="#176453" font-size="30" font-weight="650"><tspan x="1078" dy="0">持续分析</tspan></text>
+<text id="t87" data-max-width="391" x="1078" y="1772" fill="#4e6873" font-size="24" font-weight="400"><tspan x="1078" dy="0">找库 / 比较 / 组合 / 溯源</tspan></text>
+<path d="M1491,1740 L1532,1740" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<rect x="1534" y="1687" width="435" height="106" rx="10" fill="#ffffff" stroke="#b7d4c3" stroke-width="2"/>
+<text id="t88" data-max-width="391" x="1556" y="1728" fill="#176453" font-size="30" font-weight="650"><tspan x="1556" dy="0">核查与实践</tspan></text>
+<text id="t89" data-max-width="391" x="1556" y="1772" fill="#4e6873" font-size="24" font-weight="400"><tspan x="1556" dy="0">回到原文 / 运行验证</tspan></text>
+<path d="M1969,1740 L2010,1740" fill="none" stroke="#176453" stroke-width="3" marker-end="url(#arrowTeal)"/>
+<rect x="2012" y="1687" width="435" height="106" rx="10" fill="#ffffff" stroke="#b7d4c3" stroke-width="2"/>
+<text id="t90" data-max-width="391" x="2034" y="1728" fill="#176453" font-size="30" font-weight="650"><tspan x="2034" dy="0">确认后写回</tspan></text>
+<text id="t91" data-max-width="391" x="2034" y="1772" fill="#4e6873" font-size="24" font-weight="400"><tspan x="2034" dy="0">新事实 / 新限制 / 新经验</tspan></text>
+<path d="M2229,1793 L2229,1846 L796,1846 L796,1795" fill="none" stroke="#176453" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowTeal)"/>
+<rect x="1050" y="1819" width="955" height="50" rx="0" fill="#eaf5ee" stroke="#eaf5ee" stroke-width="2"/>
+<text id="t92" data-max-width="895" x="1080" y="1851" fill="#176453" font-size="25" font-weight="550"><tspan x="1080" dy="0">新证据回流；分析推测继续标为推测，不自动升级为事实</tspan></text>
+<rect x="64" y="1910" width="1196" height="465" rx="16" fill="#ffffff" stroke="#cad8de" stroke-width="2"/>
+<rect x="1292" y="1910" width="1204" height="465" rx="16" fill="#ffffff" stroke="#cad8de" stroke-width="2"/>
+<text id="t93" data-max-width="1132" x="96" y="1965" fill="#19333e" font-size="35" font-weight="700"><tspan x="96" dy="0">使用场景</tspan></text>
+<text id="t94" data-max-width="1132" x="96" y="2008" fill="#4e6873" font-size="26" font-weight="400"><tspan x="96" dy="0">长期对象 × 持续变化 × 经验复用</tspan></text>
+<text id="t95" data-max-width="1140" x="1324" y="1965" fill="#19333e" font-size="35" font-weight="700"><tspan x="1324" dy="0">可扩展方向</tspan></text>
+<text id="t96" data-max-width="1140" x="1324" y="2008" fill="#245f8f" font-size="26" font-weight="400"><tspan x="1324" dy="0">以下需要你接入或实现，不是已经完成的业务系统</tspan></text>
+<text id="t97" data-max-width="540" x="96" y="2071" fill="#19333e" font-size="29" font-weight="650"><tspan x="96" dy="0">个人技术研究</tspan></text>
+<text id="t98" data-max-width="540" x="96" y="2114" fill="#4e6873" font-size="25" font-weight="400"><tspan x="96" dy="0">跨库比较、回看选型理由</tspan></text>
+<text id="t99" data-max-width="540" x="675" y="2071" fill="#19333e" font-size="29" font-weight="650"><tspan x="675" dy="0">研发与排障</tspan></text>
+<text id="t100" data-max-width="540" x="675" y="2114" fill="#4e6873" font-size="25" font-weight="400"><tspan x="675" dy="0">复用有适用条件的修复经验</tspan></text>
+<text id="t101" data-max-width="540" x="96" y="2177" fill="#19333e" font-size="29" font-weight="650"><tspan x="96" dy="0">长期项目协作</tspan></text>
+<text id="t102" data-max-width="540" x="96" y="2220" fill="#4e6873" font-size="25" font-weight="400"><tspan x="96" dy="0">保留需求变化与决策来由</tspan></text>
+<text id="t103" data-max-width="540" x="675" y="2177" fill="#19333e" font-size="29" font-weight="650"><tspan x="675" dy="0">客户服务与跟进</tspan></text>
+<text id="t104" data-max-width="540" x="675" y="2220" fill="#4e6873" font-size="25" font-weight="400"><tspan x="675" dy="0">连续理解诉求、承诺与进展</tspan></text>
+<text id="t105" data-max-width="540" x="96" y="2283" fill="#19333e" font-size="29" font-weight="650"><tspan x="96" dy="0">学习与辅导</tspan></text>
+<text id="t106" data-max-width="540" x="96" y="2326" fill="#4e6873" font-size="25" font-weight="400"><tspan x="96" dy="0">根据历史表现安排复习</tspan></text>
+<text id="t107" data-max-width="540" x="675" y="2283" fill="#19333e" font-size="29" font-weight="650"><tspan x="675" dy="0">重复任务 Agent</tspan></text>
+<text id="t108" data-max-width="540" x="675" y="2326" fill="#4e6873" font-size="25" font-weight="400"><tspan x="675" dy="0">执行前查经验，结束后记结果</tspan></text>
+<text id="t109" data-max-width="546" x="1324" y="2071" fill="#19333e" font-size="29" font-weight="650"><tspan x="1324" dy="0">增量采集与同步</tspan></text>
+<text id="t110" data-max-width="546" x="1324" y="2114" fill="#4e6873" font-size="25" font-weight="400"><tspan x="1324" dy="0">GitHub、笔记、工单、版本更新</tspan></text>
+<text id="t111" data-max-width="546" x="1906" y="2071" fill="#19333e" font-size="29" font-weight="650"><tspan x="1906" dy="0">证据分级与溯源</tspan></text>
+<text id="t112" data-max-width="546" x="1906" y="2114" fill="#4e6873" font-size="25" font-weight="400"><tspan x="1906" dy="0">官方声明 / 源码 / 实测 / 推测</tspan></text>
+<text id="t113" data-max-width="546" x="1324" y="2177" fill="#19333e" font-size="29" font-weight="650"><tspan x="1324" dy="0">经验变成操作手册</tspan></text>
+<text id="t114" data-max-width="546" x="1324" y="2220" fill="#4e6873" font-size="25" font-weight="400"><tspan x="1324" dy="0">条件 → 步骤 → 结果 → 验收</tspan></text>
+<text id="t115" data-max-width="546" x="1906" y="2177" fill="#19333e" font-size="29" font-weight="650"><tspan x="1906" dy="0">多助手与团队共享</tspan></text>
+<text id="t116" data-max-width="546" x="1906" y="2220" fill="#4e6873" font-size="25" font-weight="400"><tspan x="1906" dy="0">授权、分层记忆、跨库编排</tspan></text>
+<text id="t117" data-max-width="546" x="1324" y="2283" fill="#19333e" font-size="29" font-weight="650"><tspan x="1324" dy="0">领域化与中文优化</tspan></text>
+<text id="t118" data-max-width="546" x="1324" y="2326" fill="#4e6873" font-size="25" font-weight="400"><tspan x="1324" dy="0">抽取规则、嵌入、重排、分词</tspan></text>
+<text id="t119" data-max-width="546" x="1906" y="2283" fill="#19333e" font-size="29" font-weight="650"><tspan x="1906" dy="0">质量与生命周期</tspan></text>
+<text id="t120" data-max-width="546" x="1906" y="2326" fill="#4e6873" font-size="25" font-weight="400"><tspan x="1906" dy="0">纠错、过期、删除、成本评测</tspan></text>
+<rect x="64" y="2410" width="2432" height="190" rx="16" fill="#19333e" stroke="#19333e" stroke-width="2"/>
+<text id="t121" data-max-width="2368" x="96" y="2463" fill="#ffffff" font-size="33" font-weight="650"><tspan x="96" dy="0">采用时守住三个边界</tspan></text>
+<text id="t122" data-max-width="760" x="96" y="2511" fill="#c3ed9c" font-size="27" font-weight="650"><tspan x="96" dy="0">证据质量</tspan></text>
+<text id="t123" data-max-width="760" x="96" y="2555" fill="#d9e5e9" font-size="25" font-weight="400"><tspan x="96" dy="0">归纳可能出错；必须能回到原文核对</tspan></text>
+<text id="t124" data-max-width="760" x="892" y="2511" fill="#c3ed9c" font-size="27" font-weight="650"><tspan x="892" dy="0">更新与权限</tspan></text>
+<text id="t125" data-max-width="760" x="892" y="2555" fill="#d9e5e9" font-size="25" font-weight="400"><tspan x="892" dy="0">定期采集、跨库授权，需要应用安排</tspan></text>
+<text id="t126" data-max-width="760" x="1688" y="2511" fill="#c3ed9c" font-size="27" font-weight="650"><tspan x="1688" dy="0">成本与收益</tspan></text>
+<text id="t127" data-max-width="760" x="1688" y="2555" fill="#d9e5e9" font-size="25" font-weight="400"><tspan x="1688" dy="0">中文链路单独验证，先做小规模对照试验</tspan></text>
+<text id="t128" data-max-width="2432" x="64" y="2644" fill="#4e6873" font-size="22" font-weight="400"><tspan x="64" dy="0">研究图解，不是官方架构图或原库运行结果。原项目：Vectorize AI, Inc. 与贡献者 · MIT · 研究快照 a921929a0e0e</tspan></text>
+<a href="https://github.com/vectorize-io/hindsight" target="_blank" rel="noopener noreferrer">
+<text id="t129" data-max-width="200" x="64" y="2682" fill="#245f8f" font-size="22" font-weight="500"><tspan x="64" dy="0">[1] 原仓库</tspan></text>
+</a>
+<a href="https://hindsight.vectorize.io/developer/retain" target="_blank" rel="noopener noreferrer">
+<text id="t130" data-max-width="240" x="290" y="2682" fill="#245f8f" font-size="22" font-weight="500"><tspan x="290" dy="0">[2] 写入与检索</tspan></text>
+</a>
+<a href="https://hindsight.vectorize.io/developer/storage" target="_blank" rel="noopener noreferrer">
+<text id="t131" data-max-width="220" x="560" y="2682" fill="#245f8f" font-size="22" font-weight="500"><tspan x="560" dy="0">[3] 存储架构</tspan></text>
+</a>
+<a href="https://hindsight.vectorize.io/developer/observations" target="_blank" rel="noopener noreferrer">
+<text id="t132" data-max-width="240" x="810" y="2682" fill="#245f8f" font-size="22" font-weight="500"><tspan x="810" dy="0">[4] 归纳与反思</tspan></text>
+</a>
+<a href="https://hindsight.vectorize.io/developer/mental-models" target="_blank" rel="noopener noreferrer">
+<text id="t133" data-max-width="220" x="1080" y="2682" fill="#245f8f" font-size="22" font-weight="500"><tspan x="1080" dy="0">[5] 专题知识</tspan></text>
+</a>
+<a href="https://hindsight.vectorize.io/developer/extensions" target="_blank" rel="noopener noreferrer">
+<text id="t134" data-max-width="220" x="1330" y="2682" fill="#245f8f" font-size="22" font-weight="500"><tspan x="1330" dy="0">[6] 扩展接口</tspan></text>
+</a>
+<text id="t135" data-max-width="696" x="1800" y="2682" fill="#4e6873" font-size="22" font-weight="400"><tspan x="1800" dy="0">资料核验 / 原创制图：本研究仓库</tspan></text>
+</g></svg>

@@ -1,0 +1,34 @@
+{
+  "status": 200,
+  "image": {
+    "complete": true,
+    "naturalWidth": 2560,
+    "naturalHeight": 2710
+  },
+  "actualSize": 2560,
+  "zoomOut": "90%",
+  "zoomIn": "100%",
+  "fitAll": {
+    "imageHeight": 843.984375,
+    "canvasHeight": 884
+  },
+  "downloadName": "hindsight-understanding-map.png",
+  "downloadFailure": null,
+  "missingLocalFiles": [],
+  "mobile": {
+    "width": 390,
+    "pageWidth": 390,
+    "imageWidth": 350,
+    "canvasWidth": 390
+  },
+  "mainEmbed": {
+    "complete": true,
+    "naturalWidth": 2560
+  },
+  "mainMobile": {
+    "width": 390,
+    "pageWidth": 390
+  },
+  "linkOpensMap": true,
+  "errors": []
+}

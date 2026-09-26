@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hindsight 中文理解全景图：外部长期记忆、数据库、输入输出、内部原理、场景、扩展及个人 GitHub 研究闭环。">
+  <title>Hindsight 理解全景图｜研究 012</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b3039'/%3E%3Cpath d='M9 8v16m14-16v16M9 16h14' stroke='%23b9ec92' stroke-width='3'/%3E%3C/svg%3E">
+  <style>
+    :root{font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#19333e;background:#e8eef1}*{box-sizing:border-box}body{margin:0;font-size:1rem}.viewer{height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto}header{background:#fff;border-bottom:1px solid #c4d3da;padding:16px 25px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between}.heading{display:flex;align-items:center;gap:24px}.heading a{font-size:.875rem;color:#496572}.heading h1{font-size:1.125rem;line-height:1.5;margin:0}.toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px}a{color:#245f8f;text-decoration:none}button,.download{padding:9px 12px;border:1px solid #b7c8d0;background:#fff;border-radius:5px;font:inherit;font-size:.875rem;color:#19333e;cursor:pointer;min-height:40px}button:hover,.download:hover{background:#edf5f0;border-color:#176453}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #a44823;outline-offset:3px}.scale{font: .875rem Consolas,monospace;min-width:51px;text-align:center}#canvas{overflow:auto;overscroll-behavior:contain;padding:20px;outline-offset:-4px}#diagram{display:block;height:auto;max-width:none;margin:0 auto;box-shadow:0 2px 18px #19333e17;background:#f4f8fa}footer{background:#fff;border-top:1px solid #c4d3da;padding:11px 25px;display:flex;justify-content:space-between;gap:15px;font-size:.75rem;line-height:1.7;color:#4e6873}footer a{white-space:nowrap}.zoom-range{width:100px;accent-color:#176453}.visually-hidden{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}@media(max-width:760px){header{padding:12px 15px;gap:10px}.heading{width:100%;justify-content:space-between;gap:12px}.heading h1{font-size:1rem}.toolbar{width:100%;gap:6px}.toolbar button,.download{padding:8px;font-size:.8125rem}.zoom-range{display:none}.scale{min-width:44px}.download{margin-left:auto}.svg-download{display:none}#canvas{padding:10px}footer{padding:9px 15px}footer span{max-width:75%}}@media print{.viewer{display:block;height:auto}header,footer{display:none}#canvas{padding:0;overflow:visible}#diagram{width:100%!important;box-shadow:none}}
+  </style>
+</head>
+<body>
+  <div class="viewer">
+    <header><div class="heading"><a href="./index.html#understanding-map">← 研究网页</a><h1>Hindsight 理解全景图</h1></div><div class="toolbar" aria-label="图片缩放与下载"><button type="button" id="fit-width">适应宽度</button><button type="button" id="fit-all">整图</button><button type="button" id="zoom-out" aria-label="缩小图片">−</button><output class="scale" id="scale" aria-live="polite">100%</output><button type="button" id="zoom-in" aria-label="放大图片">＋</button><label class="visually-hidden" for="zoom-range">图片缩放百分比</label><input class="zoom-range" id="zoom-range" type="range" min="10" max="160" step="1" value="100"><button type="button" id="actual-size">100%</button><a class="download" href="./assets/understanding-map.png" download="hindsight-understanding-map.png">下载 PNG</a><a class="download svg-download" href="./assets/understanding-map.svg" download="hindsight-understanding-map.svg">SVG</a></div></header>
+    <main id="canvas" tabindex="0" aria-label="可滚动的 Hindsight 理解全景图"><img id="diagram" src="./assets/understanding-map.svg" width="2560" height="2710" alt="Hindsight 理解全景图：它是建立在 PostgreSQL 上的外部长期记忆服务。输入资料和来源，经 Retain 抽取、Memory Bank 存储、Recall 检索与 Reflect 反思，输出记忆、分析、专题知识及 Agent 上下文。下半部分展示个人 GitHub 研究闭环、六类使用场景、六个扩展方向，以及证据、权限和成本边界。"></main>
+    <footer><span>放大后可横向、纵向滚动。原创研究图解；建议与已有能力分别标注，未运行原库。</span><a href="https://github.com/yydshly/0926_codex_project/blob/main/projects/012-hindsight/README.md">来源与研究记录 ↗</a></footer>
+  </div>
+  <script>
+    (() => {
+      const canvas=document.getElementById('canvas'), diagram=document.getElementById('diagram'), output=document.getElementById('scale'), range=document.getElementById('zoom-range');
+      let scale=1, mode='width';
+      function setScale(value, nextMode='manual') {
+        const oldWidth=diagram.getBoundingClientRect().width || 2560;
+        const centerX=(canvas.scrollLeft+canvas.clientWidth/2)/oldWidth;
+        const centerY=(canvas.scrollTop+canvas.clientHeight/2)/oldWidth;
+        scale=Math.max(.1,Math.min(1.6,value));mode=nextMode;
+        diagram.style.width=`${2560*scale}px`;
+        output.textContent=`${Math.round(scale*100)}%`;range.value=Math.round(scale*100);
+        if(mode==='manual'){canvas.scrollLeft=Math.max(0,centerX*2560*scale-canvas.clientWidth/2);canvas.scrollTop=Math.max(0,centerY*2560*scale-canvas.clientHeight/2);}else{canvas.scrollLeft=0;canvas.scrollTop=0;}
+      }
+      function fitWidth(){setScale(Math.min(1,(canvas.clientWidth-40)/2560),'width');}
+      function fitAll(){setScale(Math.min(1,(canvas.clientWidth-40)/2560,(canvas.clientHeight-40)/2710),'all');}
+      document.getElementById('fit-width').addEventListener('click',fitWidth);
+      document.getElementById('fit-all').addEventListener('click',fitAll);
+      document.getElementById('zoom-out').addEventListener('click',()=>setScale(scale-.1));
+      document.getElementById('zoom-in').addEventListener('click',()=>setScale(scale+.1));
+      document.getElementById('actual-size').addEventListener('click',()=>setScale(1));
+      range.addEventListener('input',()=>setScale(Number(range.value)/100));
+      window.addEventListener('resize',()=>{if(mode==='width')fitWidth();else if(mode==='all')fitAll();});
+      fitWidth();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Hindsight 为 Agent 提供外部长期记忆：在 PostgreSQL 上组织资料，经模型抽取、多路检索和证据反思辅助分析。适合持续研究与排障，可把已有 GitHub 研究变成可追溯、可更新的个人知识。">
+  <title>Hindsight · Agent 的长期记忆｜研究 012</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b3039'/%3E%3Cpath d='M9 8v16m14-16v16M9 16h14' stroke='%23b9ec92' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <a class="collection" href="../../"><span class="collection-symbol" aria-hidden="true">R.</span>开源研究集 <span class="slash">/</span> <span class="mono">012</span></a>
+    <nav aria-label="页内导航"><a href="#summary">摘要</a><a href="#understanding-map">总览图</a><a href="#mechanism">原理</a><a href="#scenarios">场景</a><a href="#value">对我们的意义</a></nav>
+    <a class="source-link" href="https://github.com/vectorize-io/hindsight" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main">
+    <section class="overview section-shell" aria-labelledby="page-title">
+      <div class="overview-main">
+        <p class="eyebrow"><span class="tiny-rule"></span>AGENT MEMORY / 研究手册</p>
+        <h1 id="page-title">Hindsight<span>让过去的经验，<br>进入下一次判断。</span></h1>
+        <p class="lead">把文档、对话和任务经历整理为长期记忆，在 PostgreSQL 上保存与关联，再通过检索和模型分析，把过去的证据带入当前问题。</p>
+        <div class="overview-meta"><span>Vectorize</span><span>MIT 许可证</span><span>核对于 2026.09.26</span></div>
+        <div class="editor-note"><span class="note-index">研究判断</span><p>适合需要跨会话积累经验的助手。它的“学习”发生在外部记忆中，不是更新大模型的参数。</p></div>
+      </div>
+      <a class="overview-cover" href="./map.html" aria-label="放大查看 Hindsight 理解全景图"><img src="./assets/understanding-map.svg" width="2560" height="2710" alt="Hindsight 理解全景图，串联核心本质、数据库、输入输出、内部原理、场景、扩展与个人研究闭环"><span>我们的理解总览 · 点击放大 ↗</span></a>
+    </section>
+    <div class="evidence-strip section-shell"><span class="evidence-label">阅读口径</span><p>官方能力与源码分析 <span>·</span> 页面中的案例为预设示意 <span>·</span> 尚未运行 Hindsight 或测量实际效果</p><a href="#sources">核对来源 ↗</a></div>
+    <section class="content-section section-shell summary-section" id="summary" aria-labelledby="summary-title">
+      <div class="section-heading"><div><p class="eyebrow">START HERE / 研究摘要</p><h2 id="summary-title">这个库，如何帮助我们积累研究？</h2></div><p>数据库保存记忆，模型理解与分析，<br>我们的应用负责采集、更新和核验。</p></div>
+      <dl class="summary-grid">
+        <div><dt><span>01</span> 能力</dt><dd>整理资料与经历，检索相关记忆，生成带来源的分析，并维护可更新的经验归纳和专题知识。</dd></div>
+        <div><dt><span>02</span> 实现原理</dt><dd>模型抽取信息后写入以 PostgreSQL 为主的存储；组合语义、关键词、图关系和时间检索，再由模型综合证据。Bank 是逻辑记忆范围，不是每个项目独建一套数据库。</dd></div>
+        <div><dt><span>03</span> 使用场景</dt><dd>持续研究与技术选型、开发排障、长期客户服务，以及需要跨会话理解历史和复用经验的 Agent。</dd></div>
+        <div><dt><span>04</span> 对我们的意义</dt><dd>把已有 GitHub 研究、源码发现、实测结果和选型理由作为来源，持续做跨项目比较、回查依据、修正过期结论，减少重复调研。</dd></div>
+      </dl>
+      <p class="summary-boundary">输入是资料、经历及其来源；输出是相关记忆、分析回答、专题知识和 Agent 上下文。采集与同步需要接入，分析结论需要核查；目前完成的是研究整理与网页展示，个人知识库方案尚未实施。</p>
+    </section>
+    <section class="content-section section-shell understanding-section" id="understanding-map" aria-labelledby="understanding-title">
+      <div class="section-heading"><div><p class="eyebrow">THE WHOLE PICTURE / 理解全景图</p><h2 id="understanding-title">一张图，把我们的理解连起来</h2></div><p>输入、内部记忆、数据库、输出、场景与扩展，<br>以及你自己的 GitHub 研究闭环。</p></div>
+      <a class="understanding-image" href="./map.html" aria-label="打开可放大的 Hindsight 理解全景图"><img src="./assets/understanding-map.svg" width="2560" height="2710" alt="Hindsight 理解全景图：原始资料经应用送入，在 PostgreSQL 之上构建外部长期记忆，通过写入、检索、归纳与反思辅助持续分析；包含个人研究闭环、使用场景、扩展方向及边界。"><span>打开大图 · 支持放大与下载 ↗</span></a>
+      <div class="understanding-links"><p>本仓库原创图解，依据官方文档和已核对源码整理；不是官方架构图或原库实测结果。</p><a href="./assets/understanding-map.png" download="hindsight-understanding-map.png">下载高清 PNG</a><a href="./assets/understanding-map.svg" download="hindsight-understanding-map.svg">下载 SVG</a></div>
+    </section>
+    <section class="content-section section-shell" id="capabilities" aria-labelledby="cap-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / CAPABILITIES</p><h2 id="cap-title">从记住信息，到复用经验</h2></div><p>三个核心操作，加上两层可更新的知识。</p></div>
+      <div class="capability-list">
+        <article><span class="row-number">01</span><div class="cap-name"><h3>Retain</h3><span>写入记忆</span></div><p>提取有上下文的事实、实体、时间和关系；区分外部信息与 Agent 自身经历。</p><a href="https://hindsight.vectorize.io/developer/retain" target="_blank" rel="noopener noreferrer">写入原理 ↗</a></article>
+        <article><span class="row-number">02</span><div class="cap-name"><h3>Recall</h3><span>找回证据</span></div><p>组合语义、关键词、图关系与时间检索，在限定的上下文预算内返回相关记忆。</p><a href="https://hindsight.vectorize.io/developer/retrieval" target="_blank" rel="noopener noreferrer">检索原理 ↗</a></article>
+        <article><span class="row-number">03</span><div class="cap-name"><h3>Reflect</h3><span>综合判断</span></div><p>通过多轮工具调用收集材料，形成带来源的回答；推理仍然依赖所接入的模型。</p><a href="https://hindsight.vectorize.io/developer/reflect" target="_blank" rel="noopener noreferrer">反思原理 ↗</a></article>
+        <article><span class="row-number">04</span><div class="cap-name"><h3>Observations</h3><span>归纳认识</span></div><p>后台合并相关记录，关联支持证据，并在出现新信息或纠正时更新认识。</p><a href="https://hindsight.vectorize.io/developer/observations" target="_blank" rel="noopener noreferrer">归纳机制 ↗</a></article>
+        <article><span class="row-number">05</span><div class="cap-name"><h3>Mental Models</h3><span>维护专题知识</span></div><p>为“当前架构与限制”等固定问题保存可刷新的答案。读取无需重新生成，刷新仍有成本。</p><a href="https://hindsight.vectorize.io/developer/mental-models" target="_blank" rel="noopener noreferrer">知识模型 ↗</a></article>
+      </div>
+      <div class="integration-line"><strong>接入现有助手</strong><p>SDK / REST API / MCP · 支持自托管。由应用或集成组件决定何时写入、检索，以及如何使用记忆。</p></div>
+    </section>
+    <section class="mechanism-section" id="mechanism" aria-labelledby="mechanism-title">
+      <div class="section-shell">
+        <div class="section-heading"><div><p class="eyebrow">02 / UNDER THE HOOD</p><h2 id="mechanism-title">一条记录，如何成为下一次的依据？</h2></div><p>点击步骤，查看信息的变化。<br>此处是前端概念示意，不调用原库或模型。</p></div>
+        <div class="pipeline-tabs" role="tablist" aria-label="查看记忆处理阶段">
+          <button id="tab-retain" class="pipeline-tab is-active" role="tab" aria-selected="true" aria-controls="pipeline-panel" data-stage="retain" tabindex="0"><span>01</span><strong>记录与抽取</strong><small>Retain</small></button>
+          <button id="tab-store" class="pipeline-tab" role="tab" aria-selected="false" aria-controls="pipeline-panel" data-stage="store" tabindex="-1"><span>02</span><strong>存储与连接</strong><small>Memory bank</small></button>
+          <button id="tab-recall" class="pipeline-tab" role="tab" aria-selected="false" aria-controls="pipeline-panel" data-stage="recall" tabindex="-1"><span>03</span><strong>并行检索</strong><small>Recall</small></button>
+          <button id="tab-reflect" class="pipeline-tab" role="tab" aria-selected="false" aria-controls="pipeline-panel" data-stage="reflect" tabindex="-1"><span>04</span><strong>证据与判断</strong><small>Reflect</small></button>
+        </div>
+        <div class="pipeline-panel" id="pipeline-panel" role="tabpanel" aria-labelledby="tab-retain" tabindex="0"><div class="stage-explanation"><span class="stage-kicker" id="stage-kicker">让记录可以被理解</span><h3 id="stage-title">保留事情，也保留语境</h3><p id="stage-description">LLM 从输入中抽取自包含的叙述信息，识别实体、时间和关系。事情发生的时间与录入时间分别记录。</p><a id="stage-source" href="https://hindsight.vectorize.io/developer/retain" target="_blank" rel="noopener noreferrer">查看原理文档 ↗</a></div><div class="stage-visual" id="stage-visual"><div class="sample-label">示例记录 · 非真实项目结果</div><blockquote>“9 月补记：我们在 6 月选择方案 A，因为部署简单。”</blockquote><div class="fact-grid"><div><span>发生时间</span><strong>6 月</strong></div><div><span>记录时间</span><strong>9 月</strong></div><div><span>对象</span><strong>方案 A</strong></div><div><span>决策依据</span><strong>部署简单</strong></div></div></div></div>
+        <p class="mechanism-note">技术取舍：主要采用 PostgreSQL，把向量、全文、关系和元数据集中存储。默认原生全文后端并非真正的 BM25；检索效果取决于模型和后端配置。<a href="https://hindsight.vectorize.io/developer/storage" target="_blank" rel="noopener noreferrer">存储说明 ↗</a></p>
+      </div>
+    </section>
+    <section class="content-section section-shell evolution-section" aria-labelledby="evolution-title">
+      <div class="section-heading"><div><p class="eyebrow">IN PRACTICE / MEMORY EVOLUTION</p><h2 id="evolution-title">有了新证据，认识也要改变</h2></div><p>同一个方案，不同时间的条件可能不同。<br>切换记录，观察应当保留的变化过程。</p></div>
+      <div class="evolution-layout"><div class="timeline" aria-label="选择示例记录阶段">
+        <button class="timeline-event is-current" type="button" data-moment="0" aria-pressed="true"><span class="event-date">06.12</span><span class="event-copy"><strong>第一次选择</strong><span>试验项目采用方案 A，原因是部署简单。</span></span><span class="event-marker" aria-hidden="true">01</span></button>
+        <button class="timeline-event" type="button" data-moment="1" aria-pressed="false"><span class="event-date">08.21</span><span class="event-copy"><strong>发现适用边界</strong><span>数据规模增大后，运行成本超出预算。</span></span><span class="event-marker" aria-hidden="true">02</span></button>
+        <button class="timeline-event" type="button" data-moment="2" aria-pressed="false"><span class="event-date">09.05</span><span class="event-copy"><strong>调整使用方式</strong><span>小型原型保留 A，大规模任务另做选型。</span></span><span class="event-marker" aria-hidden="true">03</span></button>
+      </div><div class="belief-panel" aria-live="polite" aria-atomic="true"><div class="belief-top"><span>归纳认识 · 预设示意</span><span class="mono" id="belief-version">V.01</span></div><p class="belief-text" id="belief-text">这次试验选择了方案 A，主要依据是部署简单；尚不足以判断它在更大规模下是否合适。</p><div class="belief-evidence"><span>依据记录</span><strong id="belief-evidence">06.12 · 初次选型</strong></div><p class="belief-question" id="belief-question">下一次需要补问：是否有运行规模与成本的数据？</p></div></div>
+      <p class="small-note">日期、方案和结果均为虚构示例；点击只切换本页预设文本。真实归纳仍可能遗漏条件或误判，需要核对源记录。<a href="https://hindsight.vectorize.io/developer/observations" target="_blank" rel="noopener noreferrer">官方更新机制 ↗</a></p>
+    </section>
+    <section class="content-section section-shell scenarios-section" id="scenarios" aria-labelledby="scenario-title">
+      <div class="section-heading"><div><p class="eyebrow">03 / WHEN IT FITS</p><h2 id="scenario-title">什么时候值得增加一层记忆？</h2></div><p>对象长期存在，信息持续变化，<br>而且过去的结果会影响下一次行动。</p></div>
+      <div class="scenario-grid"><article><span class="scenario-number">A</span><h3>个人研究助手</h3><p>跨项目找回已有发现、实测结果和否决理由，减少重复调研。</p><div><span>值得保存</span>来源 · 版本 · 结论 · 验证状态</div></article><article><span class="scenario-number">B</span><h3>研发与排障助手</h3><p>把架构决策、故障条件与处理结果，带入后续开发任务。</p><div><span>值得保存</span>环境 · 动作 · 结果 · 失败原因</div></article><article><span class="scenario-number">C</span><h3>长期客户服务</h3><p>让多轮服务理解过去的问题、承诺与处理进展，减少背景重复。</p><div><span>值得保存</span>诉求 · 约束 · 承诺 · 状态变化</div></article><article><span class="scenario-number">D</span><h3>重复执行任务的 Agent</h3><p>在相似条件下检索过去经验，作为本次行动的参考，而不是自动照搬。</p><div><span>值得保存</span>适用条件 · 反馈 · 成功与失败</div></article></div>
+      <div class="fit-note"><span>先用简单方法的情况</span><p>一次性文档总结、稳定手册查询、固定步骤的短流程。历史经验很少被复用时，额外的抽取、归纳与维护成本可能不值得。</p></div>
+      <div class="boundaries"><div class="boundary-title"><h3>采用之前，核对三个边界</h3><p>有记忆，不等于有可靠判断。</p></div><div class="boundary-details"><details open><summary><span>01</span>中文需要整条检索链配合</summary><p>除了中文 LLM，还要检查多语言嵌入、重排与中文分词。官方文档所列默认本地模型和原生全文配置偏向英文。<a href="https://hindsight.vectorize.io/developer/multilingual" target="_blank" rel="noopener noreferrer">多语言配置 ↗</a></p></details><details><summary><span>02</span>源信息、抽取与归纳都可能出错</summary><p>保留来源、区分事实与推测，审查纠正后的结论。检索到真实存在的记忆，并不证明记忆内容真实或推理正确。记忆库分组也不能替代应用的访问鉴权。<a href="https://hindsight.vectorize.io/developer/extensions" target="_blank" rel="noopener noreferrer">权限扩展 ↗</a></p></details><details><summary><span>03</span>效果要和成本一起测量</summary><p>记录写入成本、背景归纳开销、回答耗时与失败情况。作者论文报告 LongMemEval 最高 91.4%，属于特定实验设置，不能直接当成你的中文任务准确率。<a href="https://arxiv.org/abs/2512.12818" target="_blank" rel="noopener noreferrer">论文 ↗</a> · <a href="https://hindsight.vectorize.io/developer/performance" target="_blank" rel="noopener noreferrer">性能说明 ↗</a></p></details></div></div>
+    </section>
+    <section class="extensions-section" id="extensions" aria-labelledby="extensions-title"><div class="section-shell"><div class="section-heading"><div><p class="eyebrow">04 / DIRECTIONS TO BUILD</p><h2 id="extensions-title">在记忆之上，还能构建什么？</h2></div><p>以下为研究建议，尚未实现或验证。<br>先保证证据质量，再扩大使用范围。</p></div><div class="extension-list"><article><span class="extension-priority">优先 01</span><div><h3>研究证据管理</h3><p>区分官方声明、源码发现、本人实测与待验证推测，为每条结论补上版本和出处。</p></div><span class="extension-outcome">可核对</span></article><article><span class="extension-priority">优先 02</span><div><h3>任务经验与操作手册</h3><p>把条件、动作、结果和失败原因连起来，再将验证过的经验整理为可复用步骤。</p></div><span class="extension-outcome">可复用</span></article><article><span class="extension-priority">优先 03</span><div><h3>个人、项目与团队记忆</h3><p>定义共享范围与访问权限，通过应用编排决定查哪些记忆库；跨库汇总需要自行设计。</p></div><span class="extension-outcome">可协作</span></article><article><span class="extension-priority">贯穿全程</span><div><h3>记忆质量与生命周期</h3><p>用纠错、过期、删除和证据引用用例，检查认识是否更新、旧结论是否继续误导回答。</p></div><span class="extension-outcome">可评估</span></article></div><p class="extension-footnote">可利用的接口：租户与身份扩展、操作校验、HTTP 接口和 MCP 工具扩展。具体业务规则仍需实现。<a href="https://hindsight.vectorize.io/developer/extensions" target="_blank" rel="noopener noreferrer">查看扩展点 ↗</a></p></div></section>
+    <section class="content-section section-shell value-section" id="value" aria-labelledby="value-title"><div class="section-heading"><div><p class="eyebrow">05 / FOR YOUR RESEARCH</p><h2 id="value-title">让研究成果，回到下一次研究中</h2></div><p>结合这个仓库的工作方式：<br>保留可审查材料，再增加经验的调用能力。</p></div><div class="value-layout"><div class="value-copy"><p class="value-statement">记住“为什么这么选”，<br>也记住“后来验证得怎样”。</p><p>Git 中的来源、源码证据和人工确认结论继续作为依据；Hindsight 负责检索、关联和生成待核验的归纳。</p><ul class="research-questions"><li>以前哪些项目解决过相似问题？</li><li>这项能力是文档声明，还是已经实测？</li><li>当时放弃方案的原因，现在还成立吗？</li></ul><a class="research-record-link" href="https://github.com/yydshly/0926_codex_project/blob/main/projects/012-hindsight/README.md">查看完整研究记录 <span aria-hidden="true">↗</span></a></div><div class="pilot-plan"><div class="pilot-heading"><span class="mono">FIRST EXPERIMENT</span><span>建议方案 · 尚未执行</span></div><h3>从一组真实记录开始</h3><ol><li><span>01</span><div><strong>选择 3–5 个研究项目</strong><p>整理约 30–50 条材料，保留日期、来源与验证状态。</p></div></li><li><span>02</span><div><strong>设计约 20 个检验问题</strong><p>加入明确纠错、条件变化和找不到依据的情况。</p></div></li><li><span>03</span><div><strong>比较三种方式</strong><p>直接搜索文档、基础 RAG、Hindsight，使用同一组材料。</p></div></li></ol><div class="pilot-metrics"><span>答案正确性</span><span>引用支持度</span><span>新旧状态</span><span>耗时与成本</span></div></div></div><p class="value-bottom">采用标准：它是否减少了重新解释背景、重复调研和重复踩坑的次数。材料还少时，先积累高质量记录；材料很多却难以复用时，再评估记忆层的收益。</p></section>
+    <section class="content-section section-shell source-section" id="sources" aria-labelledby="sources-title"><div class="section-heading"><div><p class="eyebrow">REFERENCE / EVIDENCE</p><h2 id="sources-title">回到来源，核对判断</h2></div><p>研究快照：2026.09.26<br><span class="mono">a921929a0e0e</span></p></div><div class="source-grid"><a href="https://github.com/vectorize-io/hindsight/tree/a921929a0e0ea82fb49da1daa0ca3e152e41fcc1" target="_blank" rel="noopener noreferrer"><span>01 / SOURCE</span><strong>原始仓库与代码 ↗</strong><p>Vectorize 与 Hindsight 贡献者</p></a><a href="https://hindsight.vectorize.io/developer/retain" target="_blank" rel="noopener noreferrer"><span>02 / DOCUMENTATION</span><strong>架构与操作文档 ↗</strong><p>各能力行另有对应文档链接</p></a><a href="https://arxiv.org/abs/2512.12818" target="_blank" rel="noopener noreferrer"><span>03 / PAPER</span><strong>Hindsight is 20/20 ↗</strong><p>作者实验与架构研究</p></a></div><p class="attribution">原项目采用 <a href="https://github.com/vectorize-io/hindsight/blob/a921929a0e0ea82fb49da1daa0ca3e152e41fcc1/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可证</a>，Copyright © 2025 Vectorize AI, Inc.。本页为独立中文研究整理，案例和图示由本仓库编写，不是官方产品界面。</p></section>
+  </main>
+  <footer class="site-footer section-shell"><a href="../../">← 返回研究集索引</a><span>Hindsight / Research note 012</span><a href="https://github.com/yydshly/0926_codex_project/blob/main/projects/012-hindsight/README.md">完整研究记录 ↗</a></footer>
+</body>
+</html>

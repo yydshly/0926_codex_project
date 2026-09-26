@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-09-26T13:30:41.960Z",
+  "httpStatus": 200,
+  "summary": [
+    "01 能力",
+    "02 实现原理",
+    "03 使用场景",
+    "04 对我们的意义"
+  ],
+  "heroUsesOverview": "./assets/understanding-map.svg",
+  "viewports": [
+    {
+      "width": 1440,
+      "pageWidth": 1440
+    },
+    {
+      "width": 768,
+      "pageWidth": 768
+    },
+    {
+      "width": 390,
+      "pageWidth": 390
+    },
+    {
+      "width": 320,
+      "pageWidth": 320
+    },
+    {
+      "page": "collection",
+      "width": 1440,
+      "pageWidth": 1440
+    },
+    {
+      "page": "collection",
+      "width": 390,
+      "pageWidth": 390
+    }
+  ],
+  "missingAnchors": [],
+  "recallSelected": "true",
+  "timelineVersion": "V.03",
+  "mapOpened": true,
+  "mapZoom": "100%",
+  "download": {
+    "name": "hindsight-understanding-map.png",
+    "failure": null
+  },
+  "collectionHasHindsight": true,
+  "collectionOrder": [
+    "001 / 数据库与 AI",
+    "002 / AI 与浏览器",
+    "003 / 本地音乐曲库",
+    "004 / 六轨音源分离",
+    "005 / 由实验反馈驱动的研究",
+    "006 / Agent 服务框架",
+    "007 / AI 视频剪辑",
+    "008 / 编程 Agent 编排",
+    "009 / 终端文件管理",
+    "010 / 二进制逆向分析",
+    "011 / 知识图谱与上下文",
+    "012 / Agent 长期记忆",
+    "013 / 需求反推与网页实测"
+  ],
+  "diagramCopiesMatch": true,
+  "missingLocalFiles": [],
+  "missingDeploySources": [],
+  "errors": [],
+  "passed": true
+}
