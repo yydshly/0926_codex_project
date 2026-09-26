@@ -10,6 +10,7 @@
 | 002 | [browser-use/web-ui](https://github.com/browser-use/web-ui) | 配置、运行并观察浏览器代理，展示读取、决策、执行与核对循环。 | [研究记录](projects/002-browser-use-web-ui/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/) · [网页源码](sites/002-browser-use-web-ui/index.html) |
 | 003 | [anandprtp/Antra](https://github.com/anandprtp/Antra) | 匹配多来源音源，下载、校验、打标并整理本地曲库。 | [研究记录](projects/003-antra/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/003-antra/) · [网页源码](sites/003-antra/index.html) |
 | 004 | [stemdeckapp/stemdeck](https://github.com/stemdeckapp/stemdeck) | Demucs 估计六类音轨，支持试听、循环练习、混音与导出。 | [研究记录](projects/004-stemdeck/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/) · [网页源码](sites/004-stemdeck/index.html) |
+| 006 | [vercel/eve](https://github.com/vercel/eve) | 把模型、工具、持久会话和人工审批组合成可部署的 Agent 服务。 | [研究记录](projects/006-vercel-eve/README.md) · [网页源码](sites/006-vercel-eve/index.html) |
 
 ## 子项目速览
 
@@ -56,6 +57,18 @@
 - **能力与原理：** 本地音频经 FFmpeg 预处理，由 Demucs 估计固定六类音轨，再进入分析、波形播放、循环练习与导出流程。
 - **效果与场景：** 可把歌曲变成可静音、独奏和重混的练习素材，适合乐器跟练、歌唱、扒谱和创作准备。
 - **对音频创作产品的价值：** 它示范了从分离模型到可用工作台的路径；新音色识别、时间线编排等仍需另行设计。输出并非录音室原始分轨，质量尚待实测。[研究记录](projects/004-stemdeck/README.md) · [在线能力展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/)。
+
+### 006 · vercel/eve
+
+<img src="projects/006-vercel-eve/assets/eve-capability-map.png" width="460" alt="eve 能力与原理引导图：输入、持久会话、模型与工具、审批、输出、场景和 Codex 使用判断">
+
+图片说明：本仓库依据 [eve 官方文档](https://github.com/vercel/eve/blob/main/docs/README.md)原创绘制的能力引导图；场景是可构建的方案，图中另标出本机实测范围。它不是官方架构图或运行截图。[放大查看 SVG](projects/006-vercel-eve/assets/eve-capability-map.svg)。
+
+- **能力：** eve 是文件式 TypeScript Agent 框架，管理多轮工具调用、持久会话、人工审批与暂停恢复，并提供网页、HTTP、聊天和计划任务等接入方式。
+- **原理与模块：** 指令和模型配置定义 Agent；渠道鉴权接收请求；Workflow SDK 把会话按轮次和步骤保存；模型选工具，工具结果返回模型；审批与会话状态支持等待和继续。自定义工具、连接、沙箱、前端与部署构成外围模块。
+- **输入与输出：** 输入包括开发者配置的模型、指令、工具和权限，以及运行时请求与审批答复；输出包括回复、事件、工具动作和会话状态。具体业务动作要由开发者实现。
+- **场景与意义：** 可构建仓库研究受理、客服复核和周期巡检等长期流程。你自己发起研究、整理资料时用 Codex 更直接；需要多人入口、跨天续跑和自己的审批服务时，eve 才有明确价值。
+- **验证边界：** 本项目示例已构建，GitHub 查询工具取回真实数据，服务健康检查返回 `ready`；完整模型循环和真实审批仍待验证。[研究记录与源码](projects/006-vercel-eve/README.md) · [交互网页源码](sites/006-vercel-eve/index.html)。
 
 ## 仓库结构
 

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="一张图与可交互场景解释 Vercel eve 的能力、技术原理、六层模块、输入输出、使用场景，以及已有 Codex 时何时需要它。">
+  <title>eve 能力与原理全览｜项目 006</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="../../index.html" aria-label="返回 GitHub 项目研究集在线首页"><span class="brand-number">006</span><span>GitHub 项目研究集</span></a>
+      <nav aria-label="本页导航"><a href="#summary">理解摘要</a><a href="#lab">动手体验</a><a href="#capabilities">能力模块</a><a href="#scenarios">场景</a><a href="#decision">对我的价值</a></nav>
+      <a class="top-record" href="https://github.com/yydshly/0926_codex_project/blob/main/projects/006-vercel-eve/README.md" target="_blank" rel="noopener noreferrer">研究记录 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="overview">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> PROJECT 006 / VERCEL EVE</p>
+        <h1>eve 到底解决<br><span>Agent 的什么问题？</span></h1>
+        <p class="lead">eve 是用来开发 Agent 后台服务的 TypeScript 框架。你定义模型、指令、工具与入口；它组织多轮执行、会话进度、人工审批和暂停恢复。网页可以连接这个服务。</p>
+        <div class="hero-actions"><a class="button primary" href="#summary">先看理解摘要 <span aria-hidden="true">↘</span></a><a class="button quiet" href="#lab">体验研究场景</a><a class="button quiet" href="../../projects/006-vercel-eve/assets/eve-capability-map.svg" target="_blank" rel="noopener noreferrer">放大引导图 ↗</a></div>
+        <p class="honesty"><span aria-hidden="true">●</span> 本页是独立制作的教学演示。它查询真实 GitHub 数据，但不运行 eve 或大模型；真正的 eve 示例代码见下方。</p>
+      </div>
+      <figure class="hero-art">
+        <div class="art-top"><span>EVE / 能力与原理引导图</span><span>本仓库原创</span></div>
+        <a href="../../projects/006-vercel-eve/assets/eve-capability-map.svg" target="_blank" rel="noopener noreferrer" aria-label="打开可放大的 eve 能力全景图"><img src="../../projects/006-vercel-eve/assets/eve-capability-map.png" alt="eve 能力全景图：输入、会话与工具循环、审批、输出、八类能力、场景和与 Codex 的选择" width="2100" height="3260"></a>
+        <figcaption>这张图是全页引导图。点击可放大；场景为应用方案，实测范围在图中单独标明。</figcaption>
+      </figure>
+    </section>
+
+    <section class="band" aria-label="四个角色"><div class="wrap roles">
+      <div><small>你看到的界面</small><strong>网页</strong><span>收集请求，显示过程</span></div>
+      <div><small>作出判断</small><strong>大模型</strong><span>决定下一步和工具</span></div>
+      <div><small>真正动手</small><strong>工具</strong><span>调用 API，读取数据</span></div>
+      <div><small>持续协调</small><strong>eve</strong><span>会话、审批、恢复</span></div>
+    </div></section>
+
+    <section class="section summary-section" id="summary"><div class="wrap">
+      <div class="section-heading"><div><p class="kicker">01 / 理解摘要</p><h2>用六个问题看清 eve</h2></div><p>先分清框架提供的运行机制、你要接入的业务能力，以及这次研究真正验证到的范围。</p></div>
+      <div class="summary-grid">
+        <article><small>WHAT / 能力</small><h3>把多步 Agent 运行成服务</h3><p>管理会话、工具循环、人工审批、暂停恢复与多入口接入；业务知识和可执行动作需要由开发者提供。</p></article>
+        <article><small>HOW / 原理</small><h3>工作流按步骤保存进度</h3><p>请求进入会话后，模型决定调用工具或回复；工具结果再交给模型。Workflow SDK 在步骤边界记录进度，等待审批后继续。</p></article>
+        <article><small>MODULES / 模块</small><h3>六层拼成完整应用</h3><p>Agent 定义、入口鉴权、会话工作流、模型与工具、审批与状态、前端与部署。沙箱隔离命令环境，连接层接外部 API。</p></article>
+        <article><small>IN / OUT / 输入输出</small><h3>从请求到可追踪的结果</h3><p>输入包括指令、模型与工具配置，以及用户消息、定时触发和审批答复；输出是回复、事件、工具动作与会话状态。</p></article>
+        <article><small>WHERE / 使用场景</small><h3>需要长期运行的业务流程</h3><p>仓库研究受理、客服查询与复核、周期巡检与通知等都可以构建；具体 API、权限和数据存储仍需接入。</p></article>
+        <article><small>WHY / 对你的意义</small><h3>把个人助手变成自己的服务</h3><p>你自己发起研究、写条目，用 Codex 更直接。要让多用户提交任务、跨天续跑并审批业务动作时，再考虑 eve。</p></article>
+      </div>
+    </div></section>
+
+    <section class="section lab-section" id="lab">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="kicker">02 / 动手体验</p><h2>一次仓库研究请求，会经过什么？</h2></div><p>输入公开 GitHub 仓库，页面实际读取仓库元数据，再让你操作一次审批。每一步对应 eve 示例中的一项能力。</p></div>
+        <div class="lab-grid">
+          <div class="lab-controls">
+            <div class="panel-head"><span>场景输入</span><span class="panel-index">RESEARCH INTAKE</span></div>
+            <label for="repo-input">GitHub 仓库</label>
+            <div class="input-row"><input id="repo-input" type="text" value="vercel/eve" inputmode="url" autocomplete="off" spellcheck="false" aria-describedby="input-help"><button id="start-button" class="button primary" type="button">开始研究</button></div>
+            <p id="input-help" class="help">格式：owner/repo。点击后直接请求 GitHub 公共 API；无需登录。</p>
+            <div class="secondary-actions"><button id="snapshot-button" class="text-button" type="button">使用已验证快照</button><button id="reset-button" class="text-button" type="button">开始新演示会话</button></div>
+            <p class="notice"><strong>演示边界</strong> 此页用浏览器代码模拟会话与审批；建议由明确标注的固定规则产生。它不会调用模型、运行 eve、写入项目库或发送审批给其他人。</p>
+            <div class="source-box"><span>真实 eve 代码</span><a href="../../projects/006-vercel-eve/demo/agent/tools/inspect_repository.ts">GitHub 查询工具 ↗</a><a href="../../projects/006-vercel-eve/demo/agent/tools/save_research_decision.ts">审批保存工具 ↗</a><a href="../../projects/006-vercel-eve/demo/agent/lib/research-state.ts">会话状态定义 ↗</a></div>
+          </div>
+          <div class="lab-output" aria-live="polite">
+            <div class="panel-head"><span>演示会话</span><span id="session-label" class="session-tag">尚未开始</span></div>
+            <ol class="steps" id="steps">
+              <li data-step="receive"><span class="step-no">01</span><div><strong>接收请求</strong><p>真实应用交给 eve；本页在浏览器中演示。</p></div><span class="step-state">待执行</span></li>
+              <li data-step="tool"><span class="step-no">02</span><div><strong>调用查询工具</strong><p>读取公开仓库信息，保留来源与时间。</p></div><span class="step-state">待执行</span></li>
+              <li data-step="reason"><span class="step-no">03</span><div><strong>形成初步建议</strong><p>实际 Agent 由模型判断；这里用固定规则说明位置。</p></div><span class="step-state">待执行</span></li>
+              <li data-step="approve"><span class="step-no">04</span><div><strong>等待人工审批</strong><p>人决定是否保存这条初步判断。</p></div><span class="step-state">待执行</span></li>
+              <li data-step="resume"><span class="step-no">05</span><div><strong>读回会话状态</strong><p>下一轮询问时返回已批准的判断。</p></div><span class="step-state">待执行</span></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="result-grid">
+          <section class="result-card facts" aria-labelledby="facts-title"><div class="card-top"><span>TOOL RESULT</span><span id="data-origin" class="pill">等待数据</span></div><h3 id="facts-title">工具取回了什么</h3><div id="fact-list" class="fact-list"><p class="empty">开始研究后，这里显示真实 GitHub 元数据。</p></div><p id="fetch-status" class="card-note" role="status"></p></section>
+          <section class="result-card review" aria-labelledby="review-title"><div class="card-top"><span>HUMAN IN THE LOOP</span><span id="review-status" class="pill">等待判断</span></div><h3 id="review-title">你来决定是否保存</h3><p id="recommendation" class="recommendation">查询完成后出现初步建议。此页的建议由固定规则生成，专用于理解审批节点。</p><div class="approval-actions"><button id="approve-button" class="button primary" type="button" disabled>批准保存</button><button id="reject-button" class="button outline" type="button" disabled>拒绝</button></div><button id="recall-button" class="recall-button" type="button">下一轮：读回保存的判断 <span aria-hidden="true">→</span></button><p id="recall-result" class="recall-result" role="status">尚无会话记录。</p></section>
+        </div>
+        <div class="trace"><div class="trace-head"><span>过程记录</span><button id="clear-log-button" type="button">清空显示</button></div><ol id="event-log" aria-live="polite"><li>等待你启动演示。</li></ol></div>
+      </div>
+    </section>
+
+    <section class="section capability-section" id="capabilities"><div class="wrap">
+      <div class="section-heading"><div><p class="kicker">03 / 模块与能力</p><h2>按职责拆成哪六层？</h2></div><p>这是帮助理解的功能拆分；可以按产品需求逐步组合，并非官方类图。</p></div>
+      <div class="capability-grid">
+        <article><span>01 / AUTHORING</span><h3>Agent 定义层</h3><p>指令、模型、工具和技能按文件组织；行为与权限边界可在项目中审阅。</p><a href="https://github.com/vercel/eve/blob/main/docs/README.md" target="_blank" rel="noopener noreferrer">查看文件结构 ↗</a></article>
+        <article><span>02 / ENTRY</span><h3>入口与身份层</h3><p>HTTP、网页、聊天渠道或计划任务交付消息；渠道与路由鉴权决定谁能进入。</p><a href="https://github.com/vercel/eve/blob/main/docs/channels/overview.mdx" target="_blank" rel="noopener noreferrer">查看渠道 ↗</a></article>
+        <article><span>03 / WORKFLOW</span><h3>会话执行层</h3><p>任务按 session、turn、step 运行，步骤完成后保存进度；中断步骤可能重跑。</p><a href="https://github.com/vercel/eve/blob/main/docs/concepts/execution-model-and-durability.mdx" target="_blank" rel="noopener noreferrer">查看恢复原理 ↗</a></article>
+        <article><span>04 / ACTION</span><h3>模型与工具层</h3><p>模型选择有输入约束的工具；工具可查询 API 或执行应用代码，命令能力可放入沙箱。</p><a href="https://github.com/vercel/eve/blob/main/docs/tools/overview.mdx" target="_blank" rel="noopener noreferrer">查看工具机制 ↗</a></article>
+        <article><span>05 / CONTROL</span><h3>审批与状态层</h3><p>敏感工具先等人批准；会话状态供后续轮次读取。跨会话数据需另接存储。</p><a href="https://github.com/vercel/eve/blob/main/docs/tools/human-in-the-loop.md" target="_blank" rel="noopener noreferrer">查看审批规则 ↗</a></article>
+        <article><span>06 / DELIVERY</span><h3>交付与评测层</h3><p>前端显示回复、事件和审批；可部署成服务，并用评测检查行为变化。</p><a href="https://github.com/vercel/eve/blob/main/docs/guides/frontend/overview.mdx" target="_blank" rel="noopener noreferrer">查看前端接入 ↗</a></article>
+      </div>
+    </div></section>
+
+    <section class="section scenario-section" id="scenarios"><div class="wrap">
+      <div class="section-heading"><div><p class="kicker">04 / 使用场景</p><h2>什么任务适合交给这种服务？</h2></div><p>这些是可构建的产品方案，需要你接入相应的数据、工具和权限；eve 本身不提供这些业务结果。</p></div>
+      <div class="scenario-grid">
+        <article><small>研究受理</small><h3>让别人提交仓库</h3><p>网页接收仓库名，工具读取公开资料；Agent 给出有来源的初步判断，发布或保存前由人复核。下一轮仍可接着同一会话。</p><strong>适合：研究条目开始由多人提交时</strong></article>
+        <article><small>业务助手</small><h3>查询后处理请求</h3><p>通过聊天入口查询订单、工单或知识库。模型提出处理方案，涉及退款、写入或通知时，先交给有权限的人批准。</p><strong>适合：需要流程控制和操作留痕时</strong></article>
+        <article><small>周期工作</small><h3>定时检查并汇报</h3><p>计划任务触发 Agent 查询监控或项目 API，汇总变化，再通过渠道发送摘要；需要业务动作时加入审批和幂等处理。</p><strong>适合：持续巡检而非一次性问答时</strong></article>
+      </div>
+    </div></section>
+
+    <section class="section deployment-section" id="deployment"><div class="wrap deploy-grid">
+      <div><p class="kicker">05 / 部署方式</p><h2>eve 是网页吗？</h2><p>eve 主要是运行 Agent 的后台服务。网页是它的一种交互界面。你可以把 eve 部署在 Vercel，也可以作为 Node 服务自行托管，并在网页中接入会话 API。</p><p class="deploy-note">本页是部署在 GitHub Pages 的静态研究站点；发布网页不会自动部署真实的模型 Agent。真实服务还需要模型凭据、访问控制、运行环境和工具配置。</p></div>
+      <div class="deploy-diagram"><div><small>浏览器 / 聊天软件 / 定时任务</small><strong>入口</strong></div><span aria-hidden="true">↓</span><div class="emphasis"><small>会话 · 步骤 · 审批 · 恢复</small><strong>eve 后台服务</strong></div><span aria-hidden="true">↓</span><div><small>模型、GitHub API、数据库等</small><strong>能力提供者</strong></div></div>
+    </div></section>
+
+    <section class="section decision-section" id="decision"><div class="wrap decision-grid"><div><p class="kicker">06 / 对我的价值</p><h2>已经有 Codex，<br>什么时候需要 eve？</h2></div><div class="decision-cards"><article><small>现在的研究工作</small><h3>继续用 Codex</h3><p>由你发起研究、核对资料、写 README 或维护代码，现成的 Codex 更直接。</p></article><article><small>将来的产品化需求</small><h3>再考虑 eve</h3><p>当你要让别人从网页或聊天软件提交任务，并让自己的服务长期运行、保存会话和处理审批，eve 才体现价值。</p></article></div></div></section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-inner"><p>独立研究页面 · 2026-09-26 · <a href="https://github.com/yydshly/0926_codex_project/blob/main/projects/006-vercel-eve/README.md" target="_blank" rel="noopener noreferrer">来源、验证记录与许可说明</a></p><p>演示不运行 eve 或模型；真实示例已完成构建与 GitHub 查询验证，完整模型审批流程仍待验证。</p></div></footer>
+</body>
+</html>

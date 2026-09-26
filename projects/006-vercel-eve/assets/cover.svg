@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">eve Agent 工作流程示意</title>
+  <desc id="desc">用户请求进入持久会话；模型调用工具，必要时等待人工审批，再保存判断并回复。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071a2b"/>
+      <stop offset="1" stop-color="#123f50"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17394b"/>
+      <stop offset="1" stop-color="#102a3b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#60d6ca"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1098" cy="58" r="166" fill="#256c70" opacity=".24"/>
+  <circle cx="82" cy="572" r="218" fill="#22778a" opacity=".15"/>
+  <text x="76" y="112" fill="#f0fafb" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="65" font-weight="700">eve</text>
+  <text x="78" y="153" fill="#9dc9cc" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="24">把多步 Agent 工作连成可恢复的服务</text>
+  <g font-family="Arial, 'Microsoft YaHei', sans-serif">
+    <rect x="76" y="235" width="205" height="172" rx="22" fill="url(#card)" stroke="#498594" stroke-width="2"/>
+    <text x="100" y="286" fill="#76e3d7" font-size="18">01 · 入口</text>
+    <text x="100" y="331" fill="#f0fafb" font-size="27" font-weight="700">用户请求</text>
+    <text x="100" y="371" fill="#a9d0d1" font-size="18">网页 / 聊天 / 定时</text>
+
+    <rect x="350" y="235" width="228" height="172" rx="22" fill="url(#card)" stroke="#498594" stroke-width="2"/>
+    <text x="375" y="286" fill="#76e3d7" font-size="18">02 · eve 运行时</text>
+    <text x="375" y="331" fill="#f0fafb" font-size="27" font-weight="700">持久会话</text>
+    <text x="375" y="371" fill="#a9d0d1" font-size="18">步骤检查点 / 状态</text>
+
+    <rect x="648" y="235" width="220" height="172" rx="22" fill="url(#card)" stroke="#498594" stroke-width="2"/>
+    <text x="673" y="286" fill="#76e3d7" font-size="18">03 · 执行</text>
+    <text x="673" y="331" fill="#f0fafb" font-size="27" font-weight="700">模型 + 工具</text>
+    <text x="673" y="371" fill="#a9d0d1" font-size="18">判断 / API / 沙箱</text>
+
+    <rect x="938" y="235" width="185" height="172" rx="22" fill="url(#card)" stroke="#498594" stroke-width="2"/>
+    <text x="960" y="286" fill="#76e3d7" font-size="18">04 · 把关</text>
+    <text x="960" y="331" fill="#f0fafb" font-size="27" font-weight="700">人工审批</text>
+    <text x="960" y="371" fill="#a9d0d1" font-size="18">批准后继续</text>
+  </g>
+  <g fill="none" stroke="#60d6ca" stroke-width="4" marker-end="url(#arrow)">
+    <path d="M 288 322 H 336"/>
+    <path d="M 585 322 H 633"/>
+    <path d="M 875 322 H 923"/>
+  </g>
+  <rect x="76" y="475" width="1047" height="73" rx="19" fill="#0a2636" stroke="#2d7c86"/>
+  <text x="102" y="520" fill="#d6f5f2" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="22">示例：读取真实仓库信息 → 提出初步研究判断 → 审批后保存 → 下轮读回</text>
+</svg>

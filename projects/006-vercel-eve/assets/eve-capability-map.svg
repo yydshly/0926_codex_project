@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="3260" viewBox="0 0 2100 3260" role="img" aria-labelledby="title desc">
+<title id="title">Vercel eve Agent 框架能力全景图</title>
+<desc id="desc">一张图介绍 eve 的定位、输入输出、执行原理、能力、应用场景、验证结果、部署要求，以及它相对于个人使用 Codex 的意义。</desc>
+<defs>
+  <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07141b"/><stop offset=".57" stop-color="#0b2028"/><stop offset="1" stop-color="#08171f"/></linearGradient>
+  <linearGradient id="hero" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#173c3c"/><stop offset="1" stop-color="#10242d"/></linearGradient>
+  <marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M1 1 L13 7 L1 13" fill="none" stroke="#8ef2c1" stroke-width="2.5"/></marker>
+  <marker id="arrow-cyan" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M1 1 L13 7 L1 13" fill="none" stroke="#77d8e9" stroke-width="2.5"/></marker>
+</defs>
+<rect width="2100" height="3260" fill="url(#background)"/>
+<circle cx="1870" cy="120" r="300" fill="#143e3a" opacity=".34"/>
+<circle cx="170" cy="1770" r="270" fill="#0e3b44" opacity=".19"/>
+<text x="90" y="88" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="800" text-anchor="start" letter-spacing="3">FIELD GUIDE  /  PROJECT 006  /  2026-09-26</text>
+<text x="90" y="191" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="76" font-weight="850" text-anchor="start" letter-spacing="0">eve：把 Agent 做成可持续运行的服务</text>
+<text x="92" y="253" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="500" text-anchor="start" letter-spacing="0">Vercel 的文件式 TypeScript Agent 框架  ·  应用运行层与服务端能力</text>
+<rect x="90" y="295" width="1920" height="85" rx="21" fill="url(#hero)" stroke="#3b786f" stroke-width="2"/>
+<text x="126" y="350" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="32" font-weight="750" text-anchor="start" letter-spacing="0">一句话：模型负责判断，工具负责行动；eve 负责会话、循环、审批、恢复与多入口交付。</text>
+<text x="90" y="457" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="800" text-anchor="start" letter-spacing="3">01</text>
+<text x="172" y="462" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="42" font-weight="800" text-anchor="start" letter-spacing="0">从输入到输出：一次任务如何运行</text>
+<text x="2008" y="458" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="end" letter-spacing="0">中心是 Agent 服务；网页只是可选入口</text>
+<rect x="90" y="505" width="440" height="654" rx="24" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<rect x="560" y="505" width="980" height="654" rx="24" fill="#12303a" stroke="#3e7174" stroke-width="2"/>
+<rect x="1570" y="505" width="440" height="654" rx="24" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="124" y="562" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="31" font-weight="800" text-anchor="start" letter-spacing="0">输入 INPUT</text>
+<path d="M124 583 L496 583" fill="none" stroke="#31515a" stroke-width="2"/>
+<text x="124" y="628" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="25" font-weight="750" text-anchor="start" letter-spacing="0">开发时：定义能力</text>
+<text x="124" y="671" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">指令、模型与运行配置</text>
+<text x="124" y="713" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">有类型的工具、技能、子 Agent</text>
+<text x="124" y="755" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">连接、渠道、定时任务、鉴权</text>
+<text x="124" y="797" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">模型密钥与工具凭据</text>
+<path d="M124 834 L496 834" fill="none" stroke="#31515a" stroke-width="2"/>
+<text x="124" y="879" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="25" font-weight="750" text-anchor="start" letter-spacing="0">运行时：提交任务</text>
+<text x="124" y="922" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">用户消息 / HTTP 请求 / 聊天消息</text>
+<text x="124" y="965" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">计划触发、会话 ID 与上下文</text>
+<text x="124" y="1008" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">人的审批答复或追加指令</text>
+<text x="124" y="1109" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="650" text-anchor="start" letter-spacing="0">入口示例：网页、API、Slack 等</text>
+<text x="600" y="562" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="31" font-weight="800" text-anchor="start" letter-spacing="0">eve 运行核心</text>
+<text x="1500" y="559" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="19" font-weight="600" text-anchor="end" letter-spacing="0">session → turn → step</text>
+<path d="M600 583 L1500 583" fill="none" stroke="#31515a" stroke-width="2"/>
+<rect x="600" y="628" width="205" height="132" rx="17" fill="#0a212a" stroke="#49727a" stroke-width="2"/>
+<text x="616" y="681" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="800" text-anchor="start" letter-spacing="0">① 渠道 / 鉴权</text>
+<text x="616" y="725" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" font-weight="500" text-anchor="start" letter-spacing="0">接入并识别请求</text>
+<rect x="825" y="628" width="205" height="132" rx="17" fill="#0a212a" stroke="#49727a" stroke-width="2"/>
+<text x="841" y="681" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="800" text-anchor="start" letter-spacing="0">② 持久会话</text>
+<text x="841" y="725" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" font-weight="500" text-anchor="start" letter-spacing="0">定位任务与上下文</text>
+<rect x="1050" y="628" width="205" height="132" rx="17" fill="#0a212a" stroke="#49727a" stroke-width="2"/>
+<text x="1066" y="681" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="800" text-anchor="start" letter-spacing="0">③ 模型判断</text>
+<text x="1066" y="725" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" font-weight="500" text-anchor="start" letter-spacing="0">决定回复或调用工具</text>
+<rect x="1275" y="628" width="205" height="132" rx="17" fill="#0a212a" stroke="#49727a" stroke-width="2"/>
+<text x="1291" y="681" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="800" text-anchor="start" letter-spacing="0">④ 工具执行</text>
+<text x="1291" y="725" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" font-weight="500" text-anchor="start" letter-spacing="0">查询 API / 执行动作</text>
+<path d="M807 694 L821 694" fill="none" stroke="#8ef2c1" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M1032 694 L1046 694" fill="none" stroke="#8ef2c1" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M1257 694 L1271 694" fill="none" stroke="#8ef2c1" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M1380 786 L1165 786" fill="none" stroke="#77d8e9" stroke-width="2.5" marker-end="url(#arrow-cyan)"/>
+<text x="1265" y="812" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="20" font-weight="650" text-anchor="middle" letter-spacing="0">工具结果回到模型，按需再次循环</text>
+<rect x="600" y="838" width="900" height="105" rx="16" fill="#19362f" stroke="#5a9c7e" stroke-width="2"/>
+<text x="628" y="878" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="25" font-weight="800" text-anchor="start" letter-spacing="0">人工审批 / 等待输入</text>
+<text x="628" y="915" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="450" text-anchor="start" letter-spacing="0">敏感工具先暂停；人批准或拒绝后，任务从等待点继续。</text>
+<rect x="600" y="968" width="900" height="148" rx="16" fill="#0b2028" stroke="#49727a" stroke-width="2"/>
+<text x="628" y="1010" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="24" font-weight="800" text-anchor="start" letter-spacing="0">持久执行的关键：Workflow SDK 按步骤保存进度</text>
+<text x="628" y="1050" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">完成的步骤恢复时重放结果；中断中的步骤可能重跑。</text>
+<text x="628" y="1086" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">会话状态由 defineState 保存；外部写入仍需幂等处理。</text>
+<text x="1604" y="562" fill="#f2c883" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="31" font-weight="800" text-anchor="start" letter-spacing="0">输出 OUTPUT</text>
+<path d="M1604 583 L1976 583" fill="none" stroke="#31515a" stroke-width="2"/>
+<text x="1604" y="628" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="25" font-weight="750" text-anchor="start" letter-spacing="0">给用户</text>
+<text x="1604" y="671" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">回复文本、多轮对话</text>
+<text x="1604" y="713" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">流式事件、任务状态</text>
+<text x="1604" y="755" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">审批请求与处理结果</text>
+<path d="M1604 813 L1976 813" fill="none" stroke="#31515a" stroke-width="2"/>
+<text x="1604" y="858" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="25" font-weight="750" text-anchor="start" letter-spacing="0">给业务系统</text>
+<text x="1604" y="901" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">工具执行结果 / 外部 API 动作</text>
+<text x="1604" y="943" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">会话内持久状态与事件记录</text>
+<text x="1604" y="985" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">跨会话数据需另配存储或记忆</text>
+<text x="1604" y="1110" fill="#f2c883" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="20" font-weight="650" text-anchor="start" letter-spacing="0">具体效果取决于你接入的工具</text>
+<text x="90" y="1235" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="800" text-anchor="start" letter-spacing="3">02</text>
+<text x="172" y="1240" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="42" font-weight="800" text-anchor="start" letter-spacing="0">能力地图：它替应用开发者解决什么</text>
+<text x="2008" y="1236" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="end" letter-spacing="0">框架提供机制；具体业务能力由你编写或接入</text>
+<rect x="90" y="1280" width="460" height="280" rx="23" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="117" y="1328" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="start" letter-spacing="2">01 / CAPABILITY</text>
+<text x="117" y="1383" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="800" text-anchor="start" letter-spacing="0">文件式 Agent</text>
+<text x="117" y="1431" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">用约定目录管理 instructions、</text>
+<text x="117" y="1467" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">agent.ts、tools、skills 等；</text>
+<text x="117" y="1503" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">便于审阅、版本化与扩展。</text>
+<rect x="580" y="1280" width="460" height="280" rx="23" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="607" y="1328" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="start" letter-spacing="2">02 / CAPABILITY</text>
+<text x="607" y="1383" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="800" text-anchor="start" letter-spacing="0">模型 + 工具循环</text>
+<text x="607" y="1431" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">模型决定下一步；工具输入受</text>
+<text x="607" y="1467" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">schema 约束，结果返回模型；</text>
+<text x="607" y="1503" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">可完成多轮查询与行动。</text>
+<rect x="1070" y="1280" width="460" height="280" rx="23" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="1097" y="1328" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="start" letter-spacing="2">03 / CAPABILITY</text>
+<text x="1097" y="1383" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="800" text-anchor="start" letter-spacing="0">持久会话与恢复</text>
+<text x="1097" y="1431" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">session / turn / step 分层；</text>
+<text x="1097" y="1467" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">按步骤检查点恢复长期任务，</text>
+<text x="1097" y="1503" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">等待时可暂停计算。</text>
+<rect x="1560" y="1280" width="460" height="280" rx="23" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="1587" y="1328" fill="#f2c883" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="start" letter-spacing="2">04 / CAPABILITY</text>
+<text x="1587" y="1383" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="800" text-anchor="start" letter-spacing="0">人工审批</text>
+<text x="1587" y="1431" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">工具可配置每次、首次或</text>
+<text x="1587" y="1467" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">按策略审批；把敏感动作</text>
+<text x="1587" y="1503" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">停在人工决定之前。</text>
+<rect x="90" y="1590" width="460" height="280" rx="23" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="117" y="1638" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="start" letter-spacing="2">05 / CAPABILITY</text>
+<text x="117" y="1693" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="800" text-anchor="start" letter-spacing="0">会话状态</text>
+<text x="117" y="1741" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">defineState 保存会话内数据，</text>
+<text x="117" y="1777" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">供后续轮次读取；跨会话</text>
+<text x="117" y="1813" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">共享需外部存储或记忆。</text>
+<rect x="580" y="1590" width="460" height="280" rx="23" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="607" y="1638" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="start" letter-spacing="2">06 / CAPABILITY</text>
+<text x="607" y="1693" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="800" text-anchor="start" letter-spacing="0">运行隔离与访问控制</text>
+<text x="607" y="1741" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">自定义工具与凭据在应用环境；</text>
+<text x="607" y="1777" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">模型可用命令在沙箱；入口</text>
+<text x="607" y="1813" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">还需配置认证与权限。</text>
+<rect x="1070" y="1590" width="460" height="280" rx="23" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="1097" y="1638" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="start" letter-spacing="2">07 / CAPABILITY</text>
+<text x="1097" y="1693" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="800" text-anchor="start" letter-spacing="0">多入口与前端</text>
+<text x="1097" y="1741" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">HTTP、聊天渠道、定时任务；</text>
+<text x="1097" y="1777" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">网页可用 React / Vue / Svelte</text>
+<text x="1097" y="1813" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">客户端连接会话与事件流。</text>
+<rect x="1560" y="1590" width="460" height="280" rx="23" fill="#10242d" stroke="#31515a" stroke-width="2"/>
+<text x="1587" y="1638" fill="#f2c883" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="start" letter-spacing="2">08 / CAPABILITY</text>
+<text x="1587" y="1693" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="29" font-weight="800" text-anchor="start" letter-spacing="0">组合与评测</text>
+<text x="1587" y="1741" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">可接 MCP / OpenAPI、技能与</text>
+<text x="1587" y="1777" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">子 Agent；用评测检查行为</text>
+<text x="1587" y="1813" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">变化，支持复用与分工。</text>
+<text x="90" y="2011" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="800" text-anchor="start" letter-spacing="3">03</text>
+<text x="172" y="2016" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="42" font-weight="800" text-anchor="start" letter-spacing="0">使用场景与实现效果</text>
+<text x="2008" y="2012" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="end" letter-spacing="0">以下是可构建的应用方案，需接入业务 API 与权限</text>
+<rect x="90" y="2060" width="620" height="315" rx="23" fill="#12303a" stroke="#31515a" stroke-width="2"/>
+<rect x="115" y="2082" width="130" height="42" rx="21" fill="#16333a" stroke="#8ef2c1" stroke-width="1.5"/>
+<text x="180.0" y="2111" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="700" text-anchor="middle" letter-spacing="0">场景示意</text>
+<text x="116" y="2179" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="31" font-weight="800" text-anchor="start" letter-spacing="0">仓库研究入口</text>
+<text x="116" y="2235" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">输入 owner/repo → 查询 GitHub 元数据</text>
+<text x="116" y="2276" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">→ 模型给出初步建议 → 人审批保存</text>
+<text x="116" y="2317" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">→ 下一轮读回判断。</text>
+<rect x="740" y="2060" width="620" height="315" rx="23" fill="#12303a" stroke="#31515a" stroke-width="2"/>
+<rect x="765" y="2082" width="130" height="42" rx="21" fill="#16333a" stroke="#77d8e9" stroke-width="1.5"/>
+<text x="830.0" y="2111" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="700" text-anchor="middle" letter-spacing="0">场景示意</text>
+<text x="766" y="2179" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="31" font-weight="800" text-anchor="start" letter-spacing="0">客服与业务办理</text>
+<text x="766" y="2235" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">输入用户问题 → 查订单 / 知识库</text>
+<text x="766" y="2276" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">→ 草拟处理方案 → 敏感修改待审批</text>
+<text x="766" y="2317" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">→ 返回结果并保留会话轨迹。</text>
+<rect x="1390" y="2060" width="620" height="315" rx="23" fill="#12303a" stroke="#31515a" stroke-width="2"/>
+<rect x="1415" y="2082" width="130" height="42" rx="21" fill="#16333a" stroke="#f2c883" stroke-width="1.5"/>
+<text x="1480.0" y="2111" fill="#f2c883" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="700" text-anchor="middle" letter-spacing="0">场景示意</text>
+<text x="1416" y="2179" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="31" font-weight="800" text-anchor="start" letter-spacing="0">周期巡检与通知</text>
+<text x="1416" y="2235" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">计划触发 → 调用监控或项目 API</text>
+<text x="1416" y="2276" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">→ 汇总异常 → 按规则请求复核</text>
+<text x="1416" y="2317" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="400" text-anchor="start" letter-spacing="0">→ 经渠道发送摘要。</text>
+<rect x="90" y="2405" width="1920" height="173" rx="23" fill="#142830" stroke="#42616a" stroke-width="2"/>
+<rect x="116" y="2429" width="118" height="42" rx="21" fill="#163d34" stroke="#8ef2c1" stroke-width="1.5"/>
+<text x="175.0" y="2458" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="700" text-anchor="middle" letter-spacing="0">本机实测</text>
+<text x="260" y="2460" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="600" text-anchor="start" letter-spacing="0">示例已构建；GitHub 查询工具取回真实元数据；eve 服务健康检查返回 ready。</text>
+<rect x="116" y="2501" width="118" height="42" rx="21" fill="#443624" stroke="#f2c883" stroke-width="1.5"/>
+<text x="175.0" y="2530" fill="#f2c883" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="700" text-anchor="middle" letter-spacing="0">待验证</text>
+<text x="260" y="2533" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="500" text-anchor="start" letter-spacing="0">完整模型工具循环、真实审批暂停、同一会话跨轮读回（本机未配置模型，dev 启动遇到路径错误）。</text>
+<text x="90" y="2658" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="22" font-weight="800" text-anchor="start" letter-spacing="3">04</text>
+<text x="172" y="2663" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="42" font-weight="800" text-anchor="start" letter-spacing="0">对你的意义：已经有 Codex，还需要它吗？</text>
+<text x="2008" y="2659" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="end" letter-spacing="0">判断依据：你是否要自己运营一个长期 Agent 服务</text>
+<rect x="90" y="2708" width="905" height="280" rx="23" fill="#10242d" stroke="#3a6665" stroke-width="2"/>
+<rect x="1025" y="2708" width="985" height="280" rx="23" fill="#12303a" stroke="#609482" stroke-width="2"/>
+<rect x="116" y="2730" width="185" height="42" rx="21" fill="#173442" stroke="#77d8e9" stroke-width="1.5"/>
+<text x="208.5" y="2759" fill="#77d8e9" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="700" text-anchor="middle" letter-spacing="0">当前：Codex</text>
+<text x="116" y="2814" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="31" font-weight="800" text-anchor="start" letter-spacing="0">自己发起研究与编写</text>
+<text x="116" y="2860" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">查资料、改 README、写代码、做一次性分析：</text>
+<text x="116" y="2899" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">继续用现成的 Codex 更直接。</text>
+<rect x="1051" y="2730" width="225" height="42" rx="21" fill="#183f35" stroke="#8ef2c1" stroke-width="1.5"/>
+<text x="1163.5" y="2759" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="700" text-anchor="middle" letter-spacing="0">出现产品需求：eve</text>
+<text x="1051" y="2814" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="31" font-weight="800" text-anchor="start" letter-spacing="0">让别人提交，服务持续处理</text>
+<text x="1051" y="2860" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">多用户、网页 / 聊天入口、跨天续跑、人工审批</text>
+<text x="1051" y="2899" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="400" text-anchor="start" letter-spacing="0">和自己的工具权限：再评估 eve 的工程价值。</text>
+<rect x="90" y="3019" width="1920" height="111" rx="20" fill="#0c2229" stroke="#31515a" stroke-width="2"/>
+<text x="120" y="3062" fill="#f2c883" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="24" font-weight="800" text-anchor="start" letter-spacing="0">部署条件</text>
+<text x="267" y="3062" fill="#f1f8f6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="23" font-weight="500" text-anchor="start" letter-spacing="0">可部署到 Vercel 或自托管 Node；需要模型凭据、入口鉴权、工作流与沙箱配置。</text>
+<text x="267" y="3101" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="21" font-weight="400" text-anchor="start" letter-spacing="0">边界：eve 仍处 beta；持久步骤不保证外部动作只执行一次，写操作须考虑审批与幂等。</text>
+<path d="M90 3164 L2010 3164" fill="none" stroke="#31515a" stroke-width="2"/>
+<text x="90" y="3200" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="19" font-weight="400" text-anchor="start" letter-spacing="0">依据：vercel/eve 官方 README、执行模型、工具/审批、状态、前端与部署文档；完整链接见本项目 README。</text>
+<text x="90" y="3232" fill="#b7cdca" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0">制图：本仓库原创。图中场景为应用方案；实测范围明确标注。资料核对日：2026-09-26。</text>
+<text x="2010" y="3232" fill="#8ef2c1" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" font-weight="800" text-anchor="end" letter-spacing="1">GITHUB PROJECT RESEARCH  /  006</text>
+</svg>
