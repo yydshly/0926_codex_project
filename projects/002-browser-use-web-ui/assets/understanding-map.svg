@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1460" viewBox="0 0 1600 1460" role="img" aria-labelledby="title desc">
+  <title id="title">Browser Use Web UI 能力与价值总览图</title>
+  <desc id="desc">这张图说明 browser-use 赋予 AI 操作浏览器的能力，web-ui 提供配置、可视化、暂停与留痕。图中包含用户、Web UI、代理与模型、真实浏览器的分工，以及观察页面、决定动作、执行、复查的循环，并汇总能力、使用场景、对研究仓库的价值、扩展方向和使用边界。</desc>
+  <defs>
+    <style>
+      .canvas{fill:#f2f6f3}.dark{fill:#17382e}.ink{fill:#18332d}.muted{fill:#5a6d64}.green{fill:#177349}.eyebrow{font:700 18px "Microsoft YaHei","Noto Sans CJK SC",sans-serif;letter-spacing:3px}.title{font:800 54px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.subtitle{font:400 25px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.section{font:800 30px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.cardtitle{font:800 29px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.body{font:400 22px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.bodybold{font:700 22px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.small{font:400 18px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.stepnum{font:800 24px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.steptext{font:700 22px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.bullet{font:500 23px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}.foot{font:400 17px "Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#339b65" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+  <rect class="canvas" width="1600" height="1460"/>
+  <rect class="dark" width="1600" height="196"/>
+  <circle cx="1462" cy="12" r="222" fill="#255844" opacity=".48"/>
+  <circle cx="1580" cy="180" r="126" fill="#3c815a" opacity=".35"/>
+  <text x="70" y="52" class="eyebrow" fill="#b4ebc1">002 / GITHUB 项目研究图解</text>
+  <text x="70" y="119" class="title" fill="#fff">AI 操作浏览器，Web UI 让过程看得见</text>
+  <text x="72" y="162" class="subtitle" fill="#d6eee0">browser-use 提供代理能力 · web-ui 提供配置与展示 · Playwright 驱动真实浏览器</text>
+
+  <rect x="64" y="222" width="1472" height="326" rx="26" fill="#fff" stroke="#d7e5db" stroke-width="2"/>
+  <text x="96" y="267" class="section ink">核心分工：它把 AI 的网页操作接成一条可观察的流程</text>
+  <rect x="94" y="292" width="291" height="171" rx="17" fill="#f1f5f2"/>
+  <rect x="409" y="292" width="331" height="171" rx="17" fill="#dff3e5" stroke="#7ac69a" stroke-width="2"/>
+  <rect x="765" y="292" width="343" height="171" rx="17" fill="#ebf3ee"/>
+  <rect x="1134" y="292" width="370" height="171" rx="17" fill="#e6f0f5"/>
+  <path d="M386 376 H402 M741 376 H758 M1109 376 H1127" stroke="#339b65" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="116" y="334" class="cardtitle ink">用户</text>
+  <text x="116" y="373" class="body muted">提出自然语言目标</text>
+  <text x="116" y="407" class="body muted">例如：查许可证、</text>
+  <text x="116" y="439" class="body muted">找资料、填写表单</text>
+  <text x="431" y="334" class="cardtitle green">browser-use/web-ui</text>
+  <text x="431" y="373" class="body ink">设置模型与浏览器</text>
+  <text x="431" y="407" class="body ink">启动、暂停、查看步骤</text>
+  <text x="431" y="439" class="body ink">保存历史与结果</text>
+  <text x="787" y="334" class="cardtitle ink">browser-use ＋ AI 模型</text>
+  <text x="787" y="373" class="body muted">观察页面、选择动作</text>
+  <text x="787" y="407" class="body muted">处理反馈并继续循环</text>
+  <text x="787" y="439" class="body muted">直至完成或停止</text>
+  <text x="1156" y="334" class="cardtitle ink">Playwright ＋ 浏览器</text>
+  <text x="1156" y="373" class="body muted">真实加载网页</text>
+  <text x="1156" y="407" class="body muted">执行点击、输入、跳转</text>
+  <text x="1156" y="439" class="body muted">返回页面状态与截图</text>
+  <rect x="94" y="479" width="1410" height="46" rx="10" fill="#17382e"/>
+  <text x="114" y="509" class="bodybold" fill="#fff">一句话：底层让 AI 能操作网页；Web UI 让人能配置、观看、接管和复盘这个过程。</text>
+
+  <rect x="64" y="572" width="1472" height="190" rx="26" fill="#fff" stroke="#d7e5db" stroke-width="2"/>
+  <text x="96" y="617" class="section ink">技术原理：观察 → 决定 → 执行 → 再观察</text>
+  <path d="M215 679 H360 M506 679 H650 M797 679 H940 M1087 679 H1230" stroke="#80c99a" stroke-width="3" marker-end="url(#arrow)"/>
+  <circle cx="126" cy="680" r="25" fill="#dff3e5"/><text x="118" y="689" class="stepnum green">1</text>
+  <circle cx="417" cy="680" r="25" fill="#dff3e5"/><text x="409" y="689" class="stepnum green">2</text>
+  <circle cx="708" cy="680" r="25" fill="#dff3e5"/><text x="700" y="689" class="stepnum green">3</text>
+  <circle cx="999" cy="680" r="25" fill="#dff3e5"/><text x="991" y="689" class="stepnum green">4</text>
+  <circle cx="1290" cy="680" r="25" fill="#dff3e5"/><text x="1282" y="689" class="stepnum green">5</text>
+  <text x="162" y="687" class="steptext ink">下达目标</text>
+  <text x="453" y="687" class="steptext ink">读取页面</text>
+  <text x="744" y="687" class="steptext ink">模型选动作</text>
+  <text x="1035" y="687" class="steptext ink">浏览器执行</text>
+  <text x="1326" y="687" class="steptext ink">检查结果</text>
+  <text x="96" y="737" class="small muted">读取的是已渲染页面的 DOM、文字、可交互元素和可选截图；不是整个网站的前端工程或后端源码。</text>
+
+  <rect x="64" y="786" width="710" height="249" rx="24" fill="#fff" stroke="#d7e5db" stroke-width="2"/>
+  <text x="96" y="833" class="section ink">它提供哪些能力？</text>
+  <circle cx="104" cy="873" r="6" fill="#52b87a"/><text x="124" y="880" class="bullet ink">自然语言驱动多步骤网页任务</text>
+  <circle cx="104" cy="913" r="6" fill="#52b87a"/><text x="124" y="920" class="bullet ink">搜索、跳转、点击、输入与信息提取</text>
+  <circle cx="104" cy="953" r="6" fill="#52b87a"/><text x="124" y="960" class="bullet ink">模型、浏览器、会话与视觉模式配置</text>
+  <circle cx="104" cy="993" r="6" fill="#52b87a"/><text x="124" y="1000" class="bullet ink">步骤截图、暂停、历史；研究与工具扩展</text>
+
+  <rect x="800" y="786" width="736" height="249" rx="24" fill="#fff" stroke="#d7e5db" stroke-width="2"/>
+  <text x="832" y="833" class="section ink">典型使用场景</text>
+  <circle cx="840" cy="873" r="6" fill="#4f9db3"/><text x="860" y="880" class="bullet ink">跨网页查找仓库、文档、许可证等线索</text>
+  <circle cx="840" cy="913" r="6" fill="#4f9db3"/><text x="860" y="920" class="bullet ink">受控操作缺少 API 的网站或后台</text>
+  <circle cx="840" cy="953" r="6" fill="#4f9db3"/><text x="860" y="960" class="bullet ink">重复表单、网页检查与资料整理</text>
+  <circle cx="840" cy="993" r="6" fill="#4f9db3"/><text x="860" y="1000" class="bullet ink">演示、调试和比较不同浏览器代理</text>
+
+  <rect x="64" y="1059" width="710" height="245" rx="24" fill="#e0f1e6" stroke="#b8dec7" stroke-width="2"/>
+  <text x="96" y="1106" class="section ink">对你的研究仓库有什么意义？</text>
+  <circle cx="104" cy="1146" r="6" fill="#278756"/><text x="124" y="1153" class="bullet ink">理解“界面、模型、代理、浏览器”的分工</text>
+  <circle cx="104" cy="1186" r="6" fill="#278756"/><text x="124" y="1193" class="bullet ink">辅助收集项目资料与官方来源</text>
+  <circle cx="104" cy="1226" r="6" fill="#278756"/><text x="124" y="1233" class="bullet ink">建立“结论 → 证据链接 → 人工核对”流程</text>
+  <circle cx="104" cy="1266" r="6" fill="#278756"/><text x="124" y="1273" class="bullet ink">评估完成率、成本、耗时与接管次数</text>
+
+  <rect x="800" y="1059" width="736" height="245" rx="24" fill="#fff" stroke="#d7e5db" stroke-width="2"/>
+  <text x="832" y="1106" class="section ink">值得扩展与必须核对的边界</text>
+  <circle cx="840" cy="1146" r="6" fill="#d38e4a"/><text x="860" y="1153" class="bullet ink">任务模板、证据引用、结果验收</text>
+  <circle cx="840" cy="1186" r="6" fill="#d38e4a"/><text x="860" y="1193" class="bullet ink">权限隔离、敏感动作确认、失败重试</text>
+  <circle cx="840" cy="1226" r="6" fill="#d38e4a"/><text x="860" y="1233" class="bullet ink">网页会变、模型会误判，结果需复查</text>
+  <circle cx="840" cy="1266" r="6" fill="#d38e4a"/><text x="860" y="1273" class="bullet ink">研究报告须保留可追溯的原始来源</text>
+
+  <rect x="64" y="1328" width="1472" height="84" rx="20" fill="#17382e"/>
+  <text x="96" y="1365" class="bodybold" fill="#e4f8e9">最终价值：从“自动点网页”走向“有证据、可控制、可验收的网页任务”。</text>
+  <text x="96" y="1393" class="foot" fill="#b6d6c1">本图为研究示意，依据 browser-use/web-ui 的 README 与源码整理；未表示本研究项目已实测任务成功率。</text>
+  <text x="65" y="1444" class="foot muted">来源：github.com/browser-use/web-ui · 图解：GitHub 项目研究集 · 2026-09-26</text>
+</svg>

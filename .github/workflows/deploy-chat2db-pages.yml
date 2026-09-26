@@ -1,4 +1,4 @@
-name: Publish Chat2DB research site
+name: Publish research sites
 
 on:
   push:
@@ -9,6 +9,8 @@ on:
       - "README.md"
       - "projects/001-chat2db/**"
       - "sites/001-chat2db/**"
+      - "projects/002-browser-use-web-ui/**"
+      - "sites/002-browser-use-web-ui/**"
   workflow_dispatch:
 
 permissions:
@@ -35,6 +37,8 @@ jobs:
           mkdir -p _site/sites _site/projects
           cp -R sites/001-chat2db _site/sites/
           cp -R projects/001-chat2db _site/projects/
+          cp -R sites/002-browser-use-web-ui _site/sites/
+          cp -R projects/002-browser-use-web-ui _site/projects/
           cp README.md _site/README.md
           cp .github/pages-index.html _site/index.html
       - name: Configure Pages
