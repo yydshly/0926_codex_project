@@ -1,0 +1,246 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2460" viewBox="0 0 1800 2460" role="img" aria-labelledby="map-title map-desc">
+  <title id="map-title">Antra 完整能力地图：入口、核心模块、出口、效果与研究价值</title>
+  <desc id="map-desc">Antra 是将在线音乐目标转化为本地音乐资产的桌面应用。入口包括音乐链接、已连接的在线曲库、任务策略，以及本地文件或播客旁路。核心处理链为提取曲目、统一目标、解析音源、下载校验、打标归档。辅助能力包括进度与重试、歌单同步、去重和本地播放分析。出口为带标签的音频文件、结构化本地曲库和可见的任务结果。图下方解释对多源系统研究的价值及未实测的边界。</desc>
+  <defs>
+    <style>
+      text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC","Segoe UI",sans-serif}
+      .title{font-size:58px;font-weight:850;fill:#11392d}
+      .subtitle{font-size:24px;fill:#557265}
+      .section{font-size:30px;font-weight:850;fill:#115642}
+      .section-note{font-size:19px;fill:#628071}
+      .card-title{font-size:28px;font-weight:820;fill:#143e31}
+      .body{font-size:21px;fill:#385c4a}
+      .small{font-size:18px;fill:#587365}
+      .number{font-size:20px;font-weight:850;fill:#12755a}
+      .kicker{font-size:18px;font-weight:850;letter-spacing:2px;fill:#65e5af}
+      .light-title{font-size:33px;font-weight:850;fill:#f4fff8}
+      .light-body{font-size:22px;fill:#cce8d9}
+      .source-text{font-size:18px;fill:#537363}
+    </style>
+    <marker id="arrow" markerWidth="13" markerHeight="13" refX="10" refY="6.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L10 6.5 L1 12" fill="none" stroke="#138867" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-soft" markerWidth="13" markerHeight="13" refX="10" refY="6.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L10 6.5 L1 12" fill="none" stroke="#6cae88" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1800" height="2460" rx="30" fill="#f4f8f3"/>
+  <rect x="0" y="0" width="1800" height="18" fill="#55d8a0"/>
+  <text class="title" x="68" y="92">Antra · 完整能力地图</text>
+  <text class="subtitle" x="70" y="135">入口 → 内部模块 → 本地出口 → 用户效果与研究价值</text>
+  <rect x="1479" y="57" width="251" height="47" rx="23" fill="#dff3e5"/>
+  <text x="1500" y="88" font-size="19" font-weight="800" fill="#13684d">003 / 源码研究</text>
+
+  <rect x="64" y="172" width="1672" height="174" rx="23" fill="#0e3026"/>
+  <text class="kicker" x="98" y="213">它的本质</text>
+  <text class="light-title" x="98" y="260">把“要找哪段录音”转成“可用的本地音乐资产”</text>
+  <text class="light-body" x="99" y="305">桌面应用：跨平台识别目标 · 多音源匹配与取得 · 校验、打标、建库 · 播放和分析已取得文件</text>
+
+  <text class="section" x="64" y="407">01 入口：用户向 Antra 交付什么？</text>
+  <text class="section-note" x="1075" y="405">链接指定目标；音源与本地文件是另外两类输入</text>
+
+  <g transform="translate(64 430)">
+    <rect width="402" height="267" rx="20" fill="#fff" stroke="#cce1d3" stroke-width="2"/>
+    <rect x="22" y="22" width="46" height="37" rx="9" fill="#def5e8"/>
+    <text class="number" x="31" y="49">A</text>
+    <text class="card-title" x="22" y="102">音乐目标链接</text>
+    <text class="body" x="22" y="142">歌曲 · 专辑 · 歌单 · 艺人</text>
+    <text class="small" x="22" y="181">Spotify / Apple / Amazon / Tidal</text>
+    <text class="small" x="22" y="211">Qobuz / Deezer / YouTube Music</text>
+    <text class="small" x="22" y="246">作用：告诉系统“想要哪首歌”</text>
+  </g>
+  <g transform="translate(487 430)">
+    <rect width="402" height="267" rx="20" fill="#fff" stroke="#cce1d3" stroke-width="2"/>
+    <rect x="22" y="22" width="46" height="37" rx="9" fill="#def5e8"/>
+    <text class="number" x="31" y="49">B</text>
+    <text class="card-title" x="22" y="102">连接的在线曲库</text>
+    <text class="body" x="22" y="142">Spotify / Apple Music 账号</text>
+    <text class="small" x="22" y="181">喜欢的歌曲、歌单、已存专辑</text>
+    <text class="small" x="22" y="211">关注艺人等可浏览目标</text>
+    <text class="small" x="22" y="246">条件：账号会话与平台可用性</text>
+  </g>
+  <g transform="translate(910 430)">
+    <rect width="402" height="267" rx="20" fill="#fff" stroke="#cce1d3" stroke-width="2"/>
+    <rect x="22" y="22" width="46" height="37" rx="9" fill="#def5e8"/>
+    <text class="number" x="31" y="49">C</text>
+    <text class="card-title" x="22" y="102">任务与选择条件</text>
+    <text class="body" x="22" y="142">格式、质量、指定音源</text>
+    <text class="small" x="22" y="181">自动或限定来源 · 严格匹配</text>
+    <text class="small" x="22" y="211">显式版本、目录模板、同步计划</text>
+    <text class="small" x="22" y="246">作用：约束匹配与交付结果</text>
+  </g>
+  <g transform="translate(1333 430)">
+    <rect width="403" height="267" rx="20" fill="#fff8eb" stroke="#e5ce9d" stroke-width="2"/>
+    <rect x="22" y="22" width="46" height="37" rx="9" fill="#ffedc5"/>
+    <text x="31" y="49" font-size="20" font-weight="850" fill="#9a6323">D</text>
+    <text class="card-title" x="22" y="102">两条旁路入口</text>
+    <text class="body" x="22" y="142">本地音频 → 播放 / 分析</text>
+    <text class="small" x="22" y="181">播客链接 + Spotify 会话</text>
+    <text class="small" x="22" y="211">→ 节目 / 单集下载</text>
+    <text class="small" x="22" y="246">不等同于常规音乐匹配链</text>
+  </g>
+
+  <path d="M890 710v43" fill="none" stroke="#138867" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <rect x="64" y="764" width="1672" height="663" rx="25" fill="#e7f2e9" stroke="#b2d2bb" stroke-width="2"/>
+  <text class="section" x="94" y="817">02 核心处理链：一首音乐怎样变为本地资产？</text>
+  <text class="section-note" x="1168" y="815">桌面：Wails / Go + Svelte；核心：Python</text>
+
+  <g transform="translate(91 846)">
+    <rect width="307" height="356" rx="18" fill="#fff" stroke="#c6dece" stroke-width="2"/>
+    <rect x="21" y="23" width="45" height="39" rx="9" fill="#def5e8"/>
+    <text class="number" x="28" y="51">01</text>
+    <text class="card-title" x="21" y="107">提取曲目</text>
+    <text class="body" x="21" y="152">平台链接解析器</text>
+    <text class="small" x="21" y="194">展开专辑 / 歌单曲目</text>
+    <text class="small" x="21" y="224">读取标题、艺人、专辑</text>
+    <text class="small" x="21" y="254">时长、封面、ISRC 等</text>
+    <rect x="21" y="294" width="265" height="40" rx="9" fill="#eff8f1"/>
+    <text x="35" y="321" font-size="18" font-weight="750" fill="#1c7055">输出：待处理曲目清单</text>
+  </g>
+  <path d="M400 1024h22" fill="none" stroke="#138867" stroke-width="3" marker-end="url(#arrow)"/>
+  <g transform="translate(423 846)">
+    <rect width="307" height="356" rx="18" fill="#fff" stroke="#c6dece" stroke-width="2"/>
+    <rect x="21" y="23" width="45" height="39" rx="9" fill="#def5e8"/>
+    <text class="number" x="28" y="51">02</text>
+    <text class="card-title" x="21" y="107">统一目标</text>
+    <text class="body" x="21" y="152">内部曲目数据结构</text>
+    <text class="small" x="21" y="194">统一不同平台字段</text>
+    <text class="small" x="21" y="224">ISRC / 平台 ID / 规范化</text>
+    <text class="small" x="21" y="254">标题与艺人用于识别、去重</text>
+    <rect x="21" y="294" width="265" height="40" rx="9" fill="#eff8f1"/>
+    <text x="35" y="321" font-size="18" font-weight="750" fill="#1c7055">输出：统一的目标曲目</text>
+  </g>
+  <path d="M732 1024h22" fill="none" stroke="#138867" stroke-width="3" marker-end="url(#arrow)"/>
+  <g transform="translate(755 846)">
+    <rect width="307" height="356" rx="18" fill="#fff" stroke="#c6dece" stroke-width="2"/>
+    <rect x="21" y="23" width="45" height="39" rx="9" fill="#def5e8"/>
+    <text class="number" x="28" y="51">03</text>
+    <text class="card-title" x="21" y="107">匹配实际音源</text>
+    <text class="body" x="21" y="152">音源适配器 + 解析器</text>
+    <text class="small" x="21" y="194">ISRC 优先；缺失时用</text>
+    <text class="small" x="21" y="224">标题 / 艺人相似度回退</text>
+    <text class="small" x="21" y="254">按格式、质量、来源筛选</text>
+    <rect x="21" y="294" width="265" height="40" rx="9" fill="#eff8f1"/>
+    <text x="35" y="321" font-size="18" font-weight="750" fill="#1c7055">输出：可用音频候选</text>
+  </g>
+  <path d="M1064 1024h22" fill="none" stroke="#138867" stroke-width="3" marker-end="url(#arrow)"/>
+  <g transform="translate(1087 846)">
+    <rect width="307" height="356" rx="18" fill="#fff" stroke="#c6dece" stroke-width="2"/>
+    <rect x="21" y="23" width="45" height="39" rx="9" fill="#def5e8"/>
+    <text class="number" x="28" y="51">04</text>
+    <text class="card-title" x="21" y="107">取得与校验</text>
+    <text class="body" x="21" y="152">下载引擎</text>
+    <text class="small" x="21" y="194">批量曲目并行处理</text>
+    <text class="small" x="21" y="224">失败回退；容器 / 时长 /</text>
+    <text class="small" x="21" y="254">质量检查；必要时转换</text>
+    <rect x="21" y="294" width="265" height="40" rx="9" fill="#eff8f1"/>
+    <text x="35" y="321" font-size="18" font-weight="750" fill="#1c7055">输出：经检查的音频</text>
+  </g>
+  <path d="M1396 1024h22" fill="none" stroke="#138867" stroke-width="3" marker-end="url(#arrow)"/>
+  <g transform="translate(1419 846)">
+    <rect width="290" height="356" rx="18" fill="#fff" stroke="#c6dece" stroke-width="2"/>
+    <rect x="21" y="23" width="45" height="39" rx="9" fill="#def5e8"/>
+    <text class="number" x="28" y="51">05</text>
+    <text class="card-title" x="21" y="107">打标与归档</text>
+    <text class="body" x="21" y="152">Tagger + Organizer</text>
+    <text class="small" x="21" y="194">曲名、专辑、封面、歌词</text>
+    <text class="small" x="21" y="224">按模板命名与建目录</text>
+    <text class="small" x="21" y="254">更新曲库和下载历史</text>
+    <rect x="21" y="294" width="248" height="40" rx="9" fill="#eff8f1"/>
+    <text x="35" y="321" font-size="18" font-weight="750" fill="#1c7055">输出：可管理的文件</text>
+  </g>
+
+  <path d="M908 1228v-22" fill="none" stroke="#6cae88" stroke-width="3" marker-end="url(#arrow-soft)"/>
+  <path d="M1237 1228v-22" fill="none" stroke="#6cae88" stroke-width="3" marker-end="url(#arrow-soft)"/>
+  <rect x="91" y="1231" width="1618" height="158" rx="17" fill="#fff8e9" stroke="#e5c98e" stroke-width="2"/>
+  <text x="119" y="1275" font-size="23" font-weight="850" fill="#81531b">外部音源与数据服务：为第 03 / 04 步提供候选和音频</text>
+  <text x="119" y="1313" font-size="20" fill="#795b32">Tidal · Qobuz · Amazon Music · Apple Music · Deezer · 镜像与回退 · Soulseek</text>
+  <text x="119" y="1351" font-size="18" fill="#8a6a3e">适配器封装可用性、检索与取得；账号、地区、服务健康、限流和授权决定实际结果。</text>
+
+  <text class="section" x="64" y="1502">03 支撑能力：这条链如何持续可用？</text>
+  <g transform="translate(64 1525)">
+    <rect width="402" height="232" rx="19" fill="#fff" stroke="#d3e3d7" stroke-width="2"/>
+    <text class="card-title" x="22" y="52">可视化任务控制</text>
+    <text class="body" x="22" y="93">曲目预览 · 实时进度 · 日志</text>
+    <text class="small" x="22" y="129">失败曲目收集与单个 / 批量重试</text>
+    <text class="small" x="22" y="162">音源状态展示与任务反馈</text>
+    <rect x="22" y="185" width="120" height="30" rx="15" fill="#e1f3e7"/>
+    <text x="38" y="206" font-size="16" font-weight="800" fill="#187253">桌面交互</text>
+  </g>
+  <g transform="translate(487 1525)">
+    <rect width="402" height="232" rx="19" fill="#fff" stroke="#d3e3d7" stroke-width="2"/>
+    <text class="card-title" x="22" y="52">持续更新与记忆</text>
+    <text class="body" x="22" y="93">定时同步歌单新增曲目</text>
+    <text class="small" x="22" y="129">保存下载会话历史</text>
+    <text class="small" x="22" y="162">记住音源可靠性与失败项</text>
+    <rect x="22" y="185" width="120" height="30" rx="15" fill="#e1f3e7"/>
+    <text x="38" y="206" font-size="16" font-weight="800" fill="#187253">长期维护</text>
+  </g>
+  <g transform="translate(910 1525)">
+    <rect width="402" height="232" rx="19" fill="#fff" stroke="#d3e3d7" stroke-width="2"/>
+    <text class="card-title" x="22" y="52">曲库一致性</text>
+    <text class="body" x="22" y="93">按 ISRC / ID / 文本去重</text>
+    <text class="small" x="22" y="129">完整专辑模式、多碟编号</text>
+    <text class="small" x="22" y="162">文件名与文件夹模板</text>
+    <rect x="22" y="185" width="120" height="30" rx="15" fill="#e1f3e7"/>
+    <text x="38" y="206" font-size="16" font-weight="800" fill="#187253">本地治理</text>
+  </g>
+  <g transform="translate(1333 1525)">
+    <rect width="403" height="232" rx="19" fill="#fff" stroke="#d3e3d7" stroke-width="2"/>
+    <text class="card-title" x="22" y="52">本地消费与分析</text>
+    <text class="body" x="22" y="93">内置播放器 · 同步歌词</text>
+    <text class="small" x="22" y="129">频谱、响度和频率截止检查</text>
+    <text class="small" x="22" y="162">也可交给本地媒体服务器</text>
+    <rect x="22" y="185" width="120" height="30" rx="15" fill="#e1f3e7"/>
+    <text x="38" y="206" font-size="16" font-weight="800" fill="#187253">结果使用</text>
+  </g>
+
+  <text class="section" x="64" y="1825">04 出口与效果：用户最终得到什么？</text>
+  <g transform="translate(64 1849)">
+    <rect width="540" height="247" rx="20" fill="#d9f3e4" stroke="#9dd5b1" stroke-width="2"/>
+    <text class="card-title" x="24" y="52">① 带信息的本地音频文件</text>
+    <text class="body" x="24" y="95">FLAC / ALAC / AAC / MP3 等</text>
+    <text class="small" x="24" y="133">标题、艺人、专辑、曲号、封面、歌词</text>
+    <text class="small" x="24" y="170">按歌手 / 专辑与自定义模板归档</text>
+    <text x="24" y="214" font-size="18" font-weight="780" fill="#126b4b">效果：从在线目标变成可保存文件</text>
+  </g>
+  <g transform="translate(630 1849)">
+    <rect width="540" height="247" rx="20" fill="#d9f3e4" stroke="#9dd5b1" stroke-width="2"/>
+    <text class="card-title" x="24" y="52">② 可浏览、可播放的本地曲库</text>
+    <text class="body" x="24" y="95">内置播放器和歌词视图</text>
+    <text class="small" x="24" y="133">目录可供 Navidrome / Plex / Jellyfin</text>
+    <text class="small" x="24" y="170">等媒体服务读取；可复查文件质量</text>
+    <text x="24" y="214" font-size="18" font-weight="780" fill="#126b4b">效果：拥有可迁移、可复用的曲库</text>
+  </g>
+  <g transform="translate(1196 1849)">
+    <rect width="540" height="247" rx="20" fill="#fff3db" stroke="#e6c88d" stroke-width="2"/>
+    <text class="card-title" x="24" y="52">③ 明确的任务结果与旁路产物</text>
+    <text class="body" x="24" y="95">成功、失败、重试、历史记录</text>
+    <text class="small" x="24" y="133">播客路径可输出 OGG 节目文件</text>
+    <text class="small" x="24" y="170">不满足匹配或质量要求时可能失败</text>
+    <text x="24" y="214" font-size="18" font-weight="780" fill="#91621e">效果：看见处理状态与缺口</text>
+  </g>
+
+  <g transform="translate(64 2133)">
+    <rect width="816" height="227" rx="21" fill="#0e392d"/>
+    <text x="26" y="51" font-size="29" font-weight="850" fill="#9df2c2">05 对你的意义</text>
+    <text x="26" y="94" font-size="21" fill="#e0f4e6">可研究并复用一套多源系统模式：</text>
+    <text x="26" y="128" font-size="20" fill="#c5e6d0">统一领域对象 → 适配器 → 身份匹配与决策 → 交付校验。</text>
+    <text x="26" y="164" font-size="19" fill="#c5e6d0">下一步可验证匹配正确率、真实质量、标签完整率，</text>
+    <text x="26" y="196" font-size="19" fill="#c5e6d0">并扩展来源追溯与“录音 / 发行版”双层身份。</text>
+  </g>
+  <g transform="translate(900 2133)">
+    <rect width="836" height="227" rx="21" fill="#fff" stroke="#d3e2d4" stroke-width="2"/>
+    <text x="27" y="50" font-size="29" font-weight="850" fill="#84571d">关键边界与验证状态</text>
+    <text x="27" y="91" font-size="20" fill="#47604f">链接不等于音源；ISRC 标识录音，不标识专辑发行版。</text>
+    <text x="27" y="126" font-size="20" fill="#47604f">格式选择不证明真实音质；账号、地区、授权影响结果。</text>
+    <text x="27" y="161" font-size="20" fill="#47604f">本图依据官方说明与关键源码；未安装或实测下载。</text>
+    <text x="27" y="196" font-size="19" fill="#6a786c">软件为 Elastic License 2.0；音乐内容权利需另行判断。</text>
+  </g>
+
+  <path d="M65 2393h1670" stroke="#d5e4d7" stroke-width="2"/>
+  <text class="source-text" x="66" y="2426">研究依据：Antra README / FEATURES.md、音源接口、SourceResolver、下载引擎；源码核对基线 07aeef1。</text>
+  <text class="source-text" x="1372" y="2426">本研究绘制 · 2026-09-26</text>
+</svg>

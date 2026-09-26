@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Antra 完整能力地图：一张图看清入口、内部模块、音源匹配、出口、使用效果、研究价值与边界。">
+  <title>Antra 完整能力地图 · 003 研究展示</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="../../README.md"><span class="brand-number">003</span><span>GitHub 项目研究集</span></a>
+      <nav class="top-nav" aria-label="本页目录">
+        <a href="#architecture">能力全图</a>
+        <a href="#abilities">能力汇总</a>
+        <a href="#scenarios">场景与扩展</a>
+        <a class="top-link" href="../../projects/003-antra/README.md">研究记录 ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">ANTRA / 能力解释</p>
+          <h1>从一条音乐链接，<br><em>整理出本地曲库。</em></h1>
+          <p class="lead">Antra 读取歌曲或歌单链接，寻找匹配音频，校验文件，再写入曲目信息、封面和歌词。播放器只是建好曲库后的一个入口。</p>
+          <a class="primary" href="#architecture">查看完整能力图 <span aria-hidden="true">↓</span></a>
+          <p class="hero-note">本页是研究讲解与概念模拟，不连接 Antra、音乐平台或下载服务。</p>
+        </div>
+        <figure class="hero-shot">
+          <img src="./assets/official-main-v117.png" alt="Antra 官方桌面应用截图，包含链接输入区、音源状态、格式选择和歌单曲目" width="1870" height="1190">
+          <figcaption>官方 v1.1.7 应用截图，展示链接入口和待处理歌单。<a href="https://github.com/anandprtp/Antra/blob/main/assets/screenshots/ss_1_v117.png">查看图片来源 ↗</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section architecture" id="architecture" aria-labelledby="architecture-title">
+      <div class="wrap">
+        <div class="architecture-heading">
+          <div>
+            <p class="kicker">完整能力地图 · 一图读懂</p>
+            <h2 id="architecture-title">入口、处理、出口与研究价值</h2>
+            <p class="architecture-intro">Antra 将平台链接与账号曲库转成统一曲目目标，再由音源适配器和解析器寻找匹配录音，经过下载校验、打标与归档交付本地文件。这张图同时展示入口、模块、出口、使用场景、研究价值与边界。</p>
+          </div>
+          <a class="diagram-link" href="./assets/capability-map.svg" target="_blank" rel="noopener">单独打开大图 ↗</a>
+        </div>
+        <figure class="architecture-figure">
+          <div class="architecture-scroll" tabindex="0" aria-label="Antra 完整能力地图，可横向滚动查看">
+            <img src="./assets/capability-map.svg" alt="Antra 完整能力地图：入口有音乐链接、在线曲库、任务策略及本地文件和播客旁路；内部依次提取曲目、统一目标、匹配音源、取得并校验、打标归档，并有同步、重试、去重、播放分析等支撑能力；出口为本地音频文件、曲库和明确的任务结果；图下方说明研究价值与边界" width="1800" height="2460">
+          </div>
+          <figcaption>本研究绘制的源码概念图；手机上可横向滚动，也可查看<a href="./assets/capability-map.png">PNG 版</a>或<a href="./assets/architecture.svg">内部技术架构详图</a>。依据：<a href="https://github.com/anandprtp/Antra/blob/07aeef19966d8e2b72ed53f53442596e8a53255c/FEATURES.md">功能说明</a>、<a href="https://github.com/anandprtp/Antra/blob/07aeef19966d8e2b72ed53f53442596e8a53255c/antra/sources/base.py">音源接口</a>、<a href="https://github.com/anandprtp/Antra/blob/07aeef19966d8e2b72ed53f53442596e8a53255c/antra/core/resolver.py">解析器</a>和<a href="https://github.com/anandprtp/Antra/blob/07aeef19966d8e2b72ed53f53442596e8a53255c/antra/core/engine.py">下载引擎</a>；效果部分表示预期用途，未进行真实下载实测。</figcaption>
+        </figure>
+        <div class="architecture-notes">
+          <p><strong>输入链接</strong>用于确定目标曲目，实际文件由可用音源提供。</p>
+          <p><strong>解析器</strong>综合录音匹配、格式要求、质量与音源状态选候选。</p>
+          <p><strong>下载引擎</strong>负责批量任务、失败回退、文件校验与必要的格式转换。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section roles" aria-labelledby="roles-title">
+      <div class="wrap">
+        <p class="kicker">先分清四个角色</p>
+        <h2 id="roles-title">链接、音源、曲库、播放器</h2>
+        <div class="role-grid">
+          <article class="role"><span class="role-number">01</span><h3>音乐链接</h3><p>告诉程序你想找哪首歌、哪张专辑或哪个歌单。</p><span class="role-label">识别目标</span></article>
+          <article class="role"><span class="role-number">02</span><h3>实际音源</h3><p>适配器寻找对应录音；音频可能来自另一个可用平台。</p><span class="role-label">取得文件</span></article>
+          <article class="role"><span class="role-number">03</span><h3>本地曲库</h3><p>校验、打标签、存封面与歌词，按歌手和专辑归档。</p><span class="role-label">长期整理</span></article>
+          <article class="role"><span class="role-number">04</span><h3>播放器</h3><p>打开已取得的本地文件，也可以交给 Navidrome 等服务。</p><span class="role-label">使用成果</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section walkthrough" id="walkthrough" aria-labelledby="walkthrough-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="kicker">概念流程 · 无真实请求</p><h2 id="walkthrough-title">选一个入口，看看各步骤做什么</h2></div>
+          <p>下面只改变说明文字。它不会寻找歌曲，也不会预言某个平台一定有音频。</p>
+        </div>
+        <div class="demo-layout">
+          <div class="controls">
+            <fieldset>
+              <legend>链接来自哪里？</legend>
+              <div class="choice-list" id="input-choices">
+                <button type="button" class="choice is-selected" data-input="spotify" aria-pressed="true">Spotify 歌单</button>
+                <button type="button" class="choice" data-input="youtube" aria-pressed="false">YouTube Music 歌曲</button>
+                <button type="button" class="choice" data-input="apple" aria-pressed="false">Apple Music 专辑</button>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>希望得到什么格式？</legend>
+              <div class="choice-list" id="format-choices">
+                <button type="button" class="choice is-selected" data-format="auto" aria-pressed="true">自动选择</button>
+                <button type="button" class="choice" data-format="flac" aria-pressed="false">FLAC 无损</button>
+                <button type="button" class="choice" data-format="mp3" aria-pressed="false">MP3</button>
+              </div>
+            </fieldset>
+            <p class="control-note">示意输入不包含真实歌曲、账号或下载地址。真实结果取决于匹配、音源可用性和授权。</p>
+          </div>
+          <div class="flow-panel" aria-live="polite">
+            <div class="flow-top"><span>ANTRA / 工作链路</span><span class="simulation-tag">教学模拟</span></div>
+            <ol class="steps">
+              <li><span class="step-index">01</span><div><h3>读取链接</h3><p id="step-input">展开 Spotify 歌单，获取其中曲目的标题、艺人等元数据。</p></div></li>
+              <li><span class="step-index">02</span><div><h3>确认目标录音</h3><p>优先参考 ISRC；缺失时比较标题、艺人和时长。匹配失败时应停止或尝试其他候选。</p></div></li>
+              <li><span class="step-index">03</span><div><h3>检索实际音源</h3><p id="step-source">按配置与质量偏好查询可用适配器，结果可能来自链接所属平台之外。</p></div></li>
+              <li><span class="step-index">04</span><div><h3>校验并整理</h3><p id="step-output">检查文件，必要时转换格式；写入标签、封面和歌词，再放入本地曲库。</p></div></li>
+            </ol>
+            <p class="flow-summary" id="summary">自动模式优先选择可用的较高质量来源；没有符合条件的结果时可能失败。</p>
+          </div>
+        </div>
+        <p class="source-line">流程依据：<a href="https://github.com/anandprtp/Antra/blob/main/FEATURES.md">Antra 功能说明</a>、<a href="https://github.com/anandprtp/Antra/blob/main/antra/core/resolver.py">音源解析器</a>与<a href="https://github.com/anandprtp/Antra/blob/main/antra/core/engine.py">下载引擎</a>。</p>
+      </div>
+    </section>
+
+    <section class="section abilities" id="abilities" aria-labelledby="abilities-title">
+      <div class="wrap">
+        <p class="kicker">能力总览</p>
+        <h2 id="abilities-title">它管理的是一条完整的入库流程</h2>
+        <div class="ability-grid">
+          <article><span class="icon">↗</span><h3>多平台入口</h3><p>接收歌曲、专辑、歌单和艺人链接，生成待处理曲目。</p></article>
+          <article><span class="icon">◎</span><h3>在线曲库浏览</h3><p>连接 Spotify 或 Apple Music 账号，浏览喜欢的歌曲、歌单与已存专辑等目标。</p></article>
+          <article><span class="icon">⌕</span><h3>多音源匹配</h3><p>用 ISRC 和文本信息匹配录音，按优先级与质量选择候选。</p></article>
+          <article><span class="icon">◇</span><h3>格式与校验</h3><p>设置无损或有损格式，检查下载文件的容器、时长与质量信息。</p></article>
+          <article><span class="icon">▤</span><h3>标签与目录</h3><p>补充封面、歌词、专辑等信息，并按模板整理文件。</p></article>
+          <article><span class="icon">↺</span><h3>批量与同步</h3><p>并行处理歌单曲目，按计划补充歌单中新出现的歌曲。</p></article>
+          <article><span class="icon">♫</span><h3>本地使用</h3><p>在内置播放器听歌，或把曲库交给自己的媒体服务器读取。</p></article>
+          <article><span class="icon">◉</span><h3>播客旁路</h3><p>通过 Spotify 账号会话取得播客单集或节目，按独立路径保存 OGG 文件。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section findings" aria-labelledby="findings-title">
+      <div class="wrap findings-grid">
+        <div><p class="kicker">研究结论</p><h2 id="findings-title">读产品说明时，留意这些边界</h2></div>
+        <div class="finding-list">
+          <article><span>01</span><div><h3>ISRC 识别录音，不识别专辑发行版</h3><p>同一录音可能出现在不同专辑版本中。研究再版与专辑归属还要看发行信息。<a href="https://isrc.ifpi.org/faqs">ISRC 官方说明 ↗</a></p></div></article>
+          <article><span>02</span><div><h3>多首歌可并行，单首歌逐个检索音源</h3><p>解析器按适配器顺序查找；歌单线程池让不同曲目同时处理。<a href="https://github.com/anandprtp/Antra/blob/main/antra/core/resolver.py">查看源码 ↗</a></p></div></article>
+          <article><span>03</span><div><h3>格式选择是一项要求，不是音质保证</h3><p>FLAC 容器和高位深声明仍需核对实际来源与文件；无合适音源时任务会失败。<a href="https://github.com/anandprtp/Antra/blob/main/antra/core/engine.py">查看校验代码 ↗</a></p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section scenarios" id="scenarios" aria-labelledby="scenarios-title">
+      <div class="wrap">
+        <p class="kicker">使用场景与研究方向</p>
+        <h2 id="scenarios-title">何时有用，下一步值得研究什么</h2>
+        <div class="scenario-grid">
+          <div class="scenario-column">
+            <h3>适用场景</h3>
+            <article><span>01</span><div><h4>经授权建立个人曲库</h4><p>将想保存的歌曲或歌单整理为可在本地使用的文件，重点核对取得权限、实际来源、质量与标签。</p></div></article>
+            <article><span>02</span><div><h4>维护不断更新的歌单</h4><p>利用定时同步补充新曲目，持续观察账号会话、重复版本和音源失效。</p></div></article>
+            <article><span>03</span><div><h4>研究多源内容系统</h4><p>把适配器、匹配、优先级、限流和回退作为一套可分析的工程案例。</p></div></article>
+          </div>
+          <div class="scenario-column future-column">
+            <h3>可扩展方向 <small>研究建议</small></h3>
+            <article><span>01</span><div><h4>录音与发行版双层身份</h4><p>用 ISRC 识别录音，同时保存专辑 ID、UPC/EAN、碟号等信息，减少去重误伤。</p></div></article>
+            <article><span>02</span><div><h4>交付结果可追溯</h4><p>记录输入链接、匹配依据、实际音源、文件质量、标签结果和每次回退原因。</p></div></article>
+            <article><span>03</span><div><h4>可复现的实测</h4><p>选少量有权测试的曲目，比较录音匹配、下载完成、标签完整与耗时。</p></div></article>
+          </div>
+        </div>
+        <div class="research-status">
+          <div><strong>本次研究范围</strong><p>已核对官方说明、许可证和关键源码；没有安装软件或运行真实下载，因此这里没有成功率、音质或平台兼容性的实测数字。</p></div>
+          <div><strong>使用与复用边界</strong><p>原项目采用 <a href="https://github.com/anandprtp/Antra/blob/07aeef19966d8e2b72ed53f53442596e8a53255c/LICENSE">Elastic License 2.0</a>。软件许可与音乐内容的取得权限分别判断；具体使用还需遵守相应平台条款。</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-inner"><p>003 · Antra 研究展示。官方截图归原权利人；本页概念交互由本研究仓库制作。</p><a href="../../projects/003-antra/README.md">来源、许可与完整研究 ↗</a></div></footer>
+</body>
+</html>

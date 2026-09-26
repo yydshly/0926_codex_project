@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960" role="img" aria-labelledby="title desc">
+  <title id="title">Antra 内部能力架构</title>
+  <desc id="desc">桌面界面通过 Wails 和逐行 JSON 事件连接 Python 后端。后端依次采集链接元数据、匹配音源、执行下载和校验、写入本地曲库。外部音源适配器为匹配与下载提供候选；本地文件供内置播放器或媒体服务器使用。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L9 5.5 L1 10" fill="none" stroke="#16856b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-dark" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L9 5.5 L1 10" fill="none" stroke="#0d483b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC","Segoe UI",sans-serif}
+      .title{font-size:43px;font-weight:800;fill:#113d31}
+      .sub{font-size:20px;fill:#527367}
+      .layer{font-size:22px;font-weight:800;fill:#1b6651}
+      .card-title{font-size:26px;font-weight:800;fill:#113d31}
+      .body{font-size:18px;fill:#456457}
+      .tiny{font-size:16px;fill:#56786b}
+      .tag{font-size:16px;font-weight:700;fill:#126d57}
+    </style>
+  </defs>
+
+  <rect width="1600" height="960" rx="26" fill="#f4f8f3"/>
+  <text class="title" x="64" y="69">Antra 内部能力架构</text>
+  <text class="sub" x="65" y="102">从“要找哪首歌”到“可使用的本地文件” · 基于公开源码绘制的概念图</text>
+
+  <rect x="48" y="134" width="1504" height="110" rx="19" fill="#0d3027"/>
+  <rect x="68" y="157" width="52" height="52" rx="13" fill="#73dfb7"/>
+  <path d="M85 182h18m-18 8h13m-13 8h18" fill="none" stroke="#0d3027" stroke-width="3" stroke-linecap="round"/>
+  <text x="144" y="177" font-size="25" font-weight="800" fill="#ecfff5">桌面交互层</text>
+  <text x="144" y="212" font-size="19" fill="#b9ded0">Svelte / TypeScript 界面 + Wails / Go 桌面外壳</text>
+  <text x="991" y="176" font-size="18" font-weight="700" fill="#80e7bd">用户操作</text>
+  <text x="991" y="209" font-size="18" fill="#d1e9dd">输入链接 · 选择格式 · 查看进度 · 浏览 / 播放</text>
+
+  <path d="M800 245v36" fill="none" stroke="#16856b" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="646" y="253" width="307" height="26" rx="13" fill="#e7f7ed"/>
+  <text x="666" y="272" font-size="15" font-weight="700" fill="#26775e">命令与逐行 JSON 事件</text>
+
+  <rect x="48" y="292" width="1504" height="420" rx="23" fill="#e8f2ea" stroke="#a9cbb4" stroke-width="2"/>
+  <text class="layer" x="72" y="327">Python 后端 · 曲库构建管线</text>
+  <text class="tiny" x="1161" y="326">每首歌经过这条处理链</text>
+
+  <g>
+    <rect x="72" y="353" width="320" height="308" rx="17" fill="#ffffff" stroke="#cfe2d4" stroke-width="2"/>
+    <rect x="93" y="375" width="42" height="34" rx="8" fill="#d8f4e5"/>
+    <text class="tag" x="102" y="399">01</text>
+    <text class="card-title" x="93" y="453">链接与元数据</text>
+    <text class="body" x="93" y="499">解析歌曲、专辑、歌单</text>
+    <text class="body" x="93" y="535">提取标题、艺人、ISRC 等</text>
+    <rect x="93" y="579" width="246" height="43" rx="10" fill="#edf8f0"/>
+    <text class="tag" x="108" y="607">形成统一曲目对象</text>
+  </g>
+  <path d="M397 508h37" fill="none" stroke="#16856b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="442" y="353" width="320" height="308" rx="17" fill="#ffffff" stroke="#cfe2d4" stroke-width="2"/>
+    <rect x="463" y="375" width="42" height="34" rx="8" fill="#d8f4e5"/>
+    <text class="tag" x="472" y="399">02</text>
+    <text class="card-title" x="463" y="453">音源解析与选择</text>
+    <text class="body" x="463" y="499">ISRC 优先、相似度回退</text>
+    <text class="body" x="463" y="535">按格式、质量、优先级筛选</text>
+    <rect x="463" y="579" width="246" height="43" rx="10" fill="#edf8f0"/>
+    <text class="tag" x="478" y="607">SourceResolver</text>
+  </g>
+  <path d="M767 508h37" fill="none" stroke="#16856b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="812" y="353" width="320" height="308" rx="17" fill="#ffffff" stroke="#cfe2d4" stroke-width="2"/>
+    <rect x="833" y="375" width="42" height="34" rx="8" fill="#d8f4e5"/>
+    <text class="tag" x="842" y="399">03</text>
+    <text class="card-title" x="833" y="453">下载与交付校验</text>
+    <text class="body" x="833" y="499">多曲目并行、失败回退</text>
+    <text class="body" x="833" y="535">容器、时长、质量检查</text>
+    <rect x="833" y="579" width="246" height="43" rx="10" fill="#edf8f0"/>
+    <text class="tag" x="848" y="607">必要时由 ffmpeg 转换</text>
+  </g>
+  <path d="M1137 508h37" fill="none" stroke="#16856b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="1182" y="353" width="320" height="308" rx="17" fill="#ffffff" stroke="#cfe2d4" stroke-width="2"/>
+    <rect x="1203" y="375" width="42" height="34" rx="8" fill="#d8f4e5"/>
+    <text class="tag" x="1212" y="399">04</text>
+    <text class="card-title" x="1203" y="453">标签与曲库整理</text>
+    <text class="body" x="1203" y="499">封面、歌词、专辑标签</text>
+    <text class="body" x="1203" y="535">去重、目录与歌单清单</text>
+    <rect x="1203" y="579" width="246" height="43" rx="10" fill="#edf8f0"/>
+    <text class="tag" x="1218" y="607">Tagger / Organizer</text>
+  </g>
+
+  <rect x="72" y="760" width="320" height="124" rx="17" fill="#ffffff" stroke="#bdd6c4" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="93" y="799" font-size="23" font-weight="800" fill="#1b6651">旁路能力</text>
+  <text class="body" x="93" y="833">定时同步 · 历史 · 音频分析</text>
+  <text class="tiny" x="93" y="862">服务曲库维护与查看</text>
+
+  <path d="M602 754V667" fill="none" stroke="#16856b" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M972 754V667" fill="none" stroke="#16856b" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="442" y="760" width="690" height="124" rx="17" fill="#fff9ec" stroke="#deb66b" stroke-width="2"/>
+  <text x="465" y="799" font-size="23" font-weight="800" fill="#75501f">外部音源与服务</text>
+  <text x="465" y="832" font-size="18" fill="#745d3d">Tidal · Qobuz · Amazon · Apple · Deezer · Soulseek 等适配器</text>
+  <text x="465" y="862" font-size="16" fill="#856c49">账号、镜像、地区、限流和服务状态影响可用性</text>
+
+  <path d="M1342 665v89" fill="none" stroke="#0d483b" stroke-width="3" marker-end="url(#arrow-dark)"/>
+  <rect x="1182" y="760" width="320" height="124" rx="17" fill="#d8f4e5" stroke="#8bc9a6" stroke-width="2"/>
+  <text x="1203" y="800" font-size="23" font-weight="800" fill="#15563f">本地交付结果</text>
+  <text x="1203" y="834" font-size="18" fill="#2b684f">音乐文件 + 元数据</text>
+  <text x="1203" y="862" font-size="16" fill="#3c745d">内置播放器 / 媒体服务器</text>
+
+  <text x="73" y="931" font-size="16" fill="#57766a">关键边界：输入链接不等于音频来源；ISRC 标识录音；单曲依次检索音源，歌单曲目可并行处理。</text>
+</svg>
