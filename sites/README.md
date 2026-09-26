@@ -10,4 +10,4 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 
 ## 002 · Browser Use Web UI
 
-[本地概念展示页](002-browser-use-web-ui/index.html)用研究汇总图和教学模拟说明能力、原理、模块效果、场景与研究价值；它不运行真实代理。
+[在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/)与[本地源码](002-browser-use-web-ui/index.html)用研究汇总图和教学模拟说明能力、原理、模块效果、场景与研究价值；它不运行真实代理。

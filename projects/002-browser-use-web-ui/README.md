@@ -10,7 +10,7 @@
 | 原项目许可证 | [MIT](https://github.com/browser-use/web-ui/blob/main/LICENSE)，Copyright © 2024 Browser Use Inc. |
 | 研究日期 | 2026-09-26 |
 | 研究状态 | 已核对公开文档、依赖和关键源码；尚未安装运行 Web UI |
-| 概念展示 | [打开静态交互页](../../sites/002-browser-use-web-ui/index.html)（不执行真实网页任务） |
+| 在线展示 | [打开网页](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/)；[本地源码](../../sites/002-browser-use-web-ui/index.html)（教学模拟，不执行真实网页任务） |
 
 ## 我们的理解总览图
 

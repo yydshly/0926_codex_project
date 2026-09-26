@@ -7,7 +7,7 @@
 | 编号 | 源库（直达原仓库） | 能力与原理摘要 | 研究记录 | 网页展示 |
 | --- | --- | --- | --- | --- |
 | 001 | [OtterMind/Chat2DB](https://github.com/OtterMind/Chat2DB) | 本地优先的数据库工作台：连接多种数据库，浏览表结构、编写和执行 SQL、管理数据并查看图表。AI 结合所选库的表与字段信息，把自然语言转成可核对的 SQL，再由数据库执行。适合开发排查、DBA 管理和临时分析；销售额、退款等复杂指标仍需明确业务口径。 | [Chat2DB 研究](projects/001-chat2db/README.md) | [在线展示](https://yydshly.github.io/0926_codex_project/sites/001-chat2db/) · [网页源码](sites/001-chat2db/index.html) |
-| 002 | [browser-use/web-ui](https://github.com/browser-use/web-ui) | 让 AI 浏览器代理的任务可配置、过程可观察、运行可控制；底层按“读取页面 → 模型决策 → 浏览器执行 → 再核对”循环。适合资料初探、受控网页操作与代理评测。 | [Browser Use Web UI 研究](projects/002-browser-use-web-ui/README.md) | [概念展示源码](sites/002-browser-use-web-ui/index.html)（待发布） |
+| 002 | [browser-use/web-ui](https://github.com/browser-use/web-ui) | 让 AI 浏览器代理的任务可配置、过程可观察、运行可控制；底层按“读取页面 → 模型决策 → 浏览器执行 → 再核对”循环。适合资料初探、受控网页操作与代理评测。 | [Browser Use Web UI 研究](projects/002-browser-use-web-ui/README.md) | [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/) · [网页源码](sites/002-browser-use-web-ui/index.html) |
 
 ## 001 · Chat2DB 能力与原理速览
 
@@ -28,7 +28,7 @@
 
 图片说明：本仓库依据[原仓库文档与源码](https://github.com/browser-use/web-ui)绘制的理解汇总图，不是原产品运行截图或真实任务结果。[放大查看 SVG](projects/002-browser-use-web-ui/assets/understanding-map.svg)。
 
-**能力与原理：**Web UI 负责任务入口、设置、过程展示与控制；`browser-use` 和浏览器控制层负责网页操作。**模块效果：**模型与浏览器设置决定运行条件，Run Agent 展示步骤，Deep Research 汇总资料，配置与工具扩展便于复用。**对我的意义：**可用来研究代理机制，并探索带来源证据和人工验收的资料收集流程。[研究记录](projects/002-browser-use-web-ui/README.md) · [概念展示](sites/002-browser-use-web-ui/index.html)
+**能力与原理：**Web UI 负责任务入口、设置、过程展示与控制；`browser-use` 和浏览器控制层负责网页操作。**模块效果：**模型与浏览器设置决定运行条件，Run Agent 展示步骤，Deep Research 汇总资料，配置与工具扩展便于复用。**对我的意义：**可用来研究代理机制，并探索带来源证据和人工验收的资料收集流程。[研究记录](projects/002-browser-use-web-ui/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/)
 
 ## 仓库结构
 
