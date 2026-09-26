@@ -12,6 +12,7 @@
 | 004 | [stemdeckapp/stemdeck](https://github.com/stemdeckapp/stemdeck) | Demucs 估计六类音轨，支持试听、循环练习、混音与导出。 | [研究记录](projects/004-stemdeck/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/) · [网页源码](sites/004-stemdeck/index.html) |
 | 006 | [vercel/eve](https://github.com/vercel/eve) | 把模型、工具、持久会话和人工审批组合成可部署的 Agent 服务。 | [研究记录](projects/006-vercel-eve/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/) · [网页源码](sites/006-vercel-eve/index.html) |
 | 007 | [palmier-io/palmier-pro](https://github.com/palmier-io/palmier-pro) | macOS AI 剪辑器：按画面与语音找素材，Agent 经 MCP 修改帧级时间线，交付成片或可编辑工程；适合重复初剪与人工复核。 | [研究记录](projects/007-palmier-pro/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/007-palmier-pro/) · [网页源码](sites/007-palmier-pro/index.html) |
+| 008 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 编程 Agent 的任务编排层：主 Agent 按类别分派工作会话，结合模型路由、工具、规则与续跑完成核查；适合跨模块开发，也为本仓库的研究任务分工提供可验证样本。 | [研究记录](projects/008-oh-my-openagent/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/) · [网页源码](sites/008-oh-my-openagent/index.html) |
 
 ## 子项目速览
 
@@ -81,6 +82,16 @@
 - **输入与输出：** 输入视频、图片、音频、字幕、工程状态与人的剪辑要求；输出可编辑工程、H.264/H.265/ProRes 成片、XML/FCPXML 交换文件及生成素材。
 - **场景与对我们的意义：** 适合访谈课程粗剪、字幕处理、批量短视频和实拍与生成素材混剪。它提供了“Agent 操作专业创作软件，并由人复核结果”的研究案例；当前 Windows 环境无法直接运行，实际试用需要兼容的 Apple Silicon Mac。
 - **边界：** 现行产品能力依据官方文档；源码只能验证截至 v0.7.6 的 GPLv3 历史版本，不能据此断言后续专有版本的内部实现。[详细研究记录](projects/007-palmier-pro/README.md) · [在线能力地图](https://yydshly.github.io/0926_codex_project/sites/007-palmier-pro/)。
+
+### 008 · Oh My OpenAgent
+
+<img src="projects/008-oh-my-openagent/assets/capability-map.png" width="460" alt="Oh My OpenAgent 能力全景图：入口、主 Agent 分派、工具和 Hooks、版本、使用场景，以及 008 研究需求的示例调度">
+
+图片说明：本仓库依据 [OmO 官方文档](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md)原创绘制的全景图；图中的 008 需求与文件是真实的，OmO 调度是示例，未运行 OmO。[放大查看 SVG](projects/008-oh-my-openagent/assets/capability-map.svg)。
+
+- **能力与原理：** OmO 为编程智能体提供主 Agent 编排、任务类别与模型路由、独立工作会话、LSP/AST/MCP 工具、规则注入和续跑机制；可选 Team Mode 用共享任务与消息协调并行成员。不同发行版的能力范围不同。
+- **场景：** 适合需要探索、计划、跨模块实施与核查的开发工作；单文件小修复可直接由主 Agent 处理。
+- **对我们的意义：** 可借鉴其分工与验收方式，把新项目研究拆成来源核对、能力归纳、网页制作与最终检查，并用固定任务比较质量、耗时和人工介入。当前只有文档研究和静态展示，尚无 OmO 实测结论。[详细研究](projects/008-oh-my-openagent/README.md) · [在线能力地图](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/)。
 
 ## 仓库结构
 

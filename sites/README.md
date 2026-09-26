@@ -27,3 +27,7 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 ## 007 · Palmier Pro
 
 [在线能力全景图](https://yydshly.github.io/0926_codex_project/sites/007-palmier-pro/)汇总媒体与任务输入、画面和声音理解、MCP Agent、帧级时间线编辑、生成与导出，并说明访谈、短视频等场景和 Windows 环境下的研究价值。网页是资料归纳，不运行 Palmier Pro。[网页源码](007-palmier-pro/index.html) · [研究记录与来源](../projects/007-palmier-pro/README.md)。
+
+## 008 · Oh My OpenAgent
+
+[在线能力全景图](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/)说明主 Agent 如何按任务类别下发独立工作、路由模型，并借助工具、规则和续跑完成核查；展示跨模块开发场景，以及本研究仓库可借鉴的分工和验收方式。图中的 008 需求真实，OmO 调度为文档支持的示例，未实际运行。[网页源码](008-oh-my-openagent/index.html) · [研究记录与来源](../projects/008-oh-my-openagent/README.md)。

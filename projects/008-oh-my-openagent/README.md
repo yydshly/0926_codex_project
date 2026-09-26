@@ -1,0 +1,108 @@
+# 008 · Oh My OpenAgent：让编程智能体完成较大的任务
+
+![OmO 能力全景图：交互入口、主 Agent 分派、工具与 Hooks、版本与场景，以及真实研究需求的示例调度](assets/capability-map.svg)
+
+**图片说明与来源：** 本仓库依据原项目文档原创绘制的能力全景图；图中的 008 需求与交付文件是真实的，OmO 调度是按文档设计的示例，并非运行日志或性能证据。来源和高清版本见下方“一张图看全貌”；没有使用第三方图片素材。
+
+## 项目速览
+
+| 项目 | 内容 |
+| --- | --- |
+| 原仓库 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) |
+| 作者与归属 | [code-yeongyu](https://github.com/code-yeongyu) 及[原仓库贡献者](https://github.com/code-yeongyu/oh-my-openagent/graphs/contributors) |
+| 原项目许可证 | [Sustainable Use License 1.0 及第三方组件原有许可](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/LICENSE.md)；许可对使用和分发设有限制 |
+| 研究日期 | 2026-09-26 |
+| 研究状态 | 已核对公开文档与许可证；未安装 OmO，未执行真实编程任务或性能评测 |
+| 网页展示 | [在线能力地图](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/) · [网页源码](../../sites/008-oh-my-openagent/index.html) |
+
+**一句话摘要：** Oh My OpenAgent（OmO）为编程智能体提供任务编排、按类别选择模型、规则与工具集成、计划和持续执行机制，目标是让较大的开发任务能被分解、执行并核查。[项目 README](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md)
+
+**我们的理解：** 主 Agent 把目标拆成可交付的工作，通过独立任务会话下发给适合的角色与模型，再用工具结果、项目规则和检查点收束。它适合跨模块开发、调研后实现和可分工的长任务；对本仓库的价值是把来源核对、能力整理、网页制作和验收做成可评测的流程，而不是预设它会提高效率。
+
+## 一张图看全貌
+
+**图片说明与来源：** 本仓库原创绘制的[可放大 SVG 全景图](assets/capability-map.svg)，另有[高清 PNG](assets/capability-map.png)。依据原项目 [README](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md)、[编排指南](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/orchestration.md)、[功能参考](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/features.md)、[Team Mode](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/team-mode.md) 和 [ROADMAP](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/ROADMAP.md) 整理。图中“为本研究仓库新增 008 研究页”是真实需求，列出的交付文件真实存在；OmO 角色分派与时序是按文档设计的**示例调度**，不是 OmO 运行日志或性能证据。图形与文字由本仓库绘制，没有使用第三方图片素材。网页提供[带放大入口的展示](../../sites/008-oh-my-openagent/index.html#map)。
+
+## 为什么研究
+
+本研究要回答：当一个智能体已经能读写代码时，OmO 额外提供什么？它展示了怎样将主智能体、独立工作任务、工具接口、生命周期 hook 和待办状态组成长任务工作流。对本仓库而言，它也提供了一个可研究的“研究任务自动化”样本：资料搜集、来源核对、页面制作与最终验收可分别设计检查点。后者是本研究的应用推断，不是 OmO 已替本仓库实现的功能。
+
+## 已核对的能力
+
+| 能力 | 文档描述的机制 | 版本边界与依据 |
+| --- | --- | --- |
+| 主智能体编排 | 主会话规划、调用 `task` 分派、读取结果并核查 | [编排概览](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/overview.md#how-it-works-agent-orchestration) |
+| 按任务类别路由 | `quick`、`deep`、`visual-engineering` 等类别映射到模型与技能；工作任务使用独立会话 | [编排概览](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/overview.md#how-it-works-agent-orchestration) |
+| 计划与续跑 | `ulw`、`/ulw-plan`、`/ulw-execute` 组织探索、计划、执行、验证；Goal / 待办相关 hook 处理继续执行 | [编排指南](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/orchestration.md)、[功能参考](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/features.md#hooks) |
+| 工具和上下文 | LSP、AST-Grep、MCP、规则与 `AGENTS.md` 注入辅助定位、改动和校验代码 | [项目 README](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md#highlights)、[功能参考](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/features.md) |
+| 生命周期 hook | 在消息、工具调用前后、会话事件和参数阶段拦截或补充行为，包括规则注入、写入保护、失败恢复 | [Hooks 参考](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/features.md#hooks) |
+| 团队协作 | OpenCode Team Mode 可选，提供团队消息、共享任务和并行成员 | [Team Mode 文档](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/team-mode.md)；默认关闭 |
+
+### 三种发行形态
+
+| 版本 | 宿主 | 适合了解的能力 |
+| --- | --- | --- |
+| Ultimate | OpenCode 插件 | 完整的智能体、hook、MCP、Team Mode 与命令体系 |
+| Light | Codex CLI 插件 | 可移植的规则、LSP、`ultrawork`、续跑等组件；不提供 OpenCode 的 `team_*` 工具 |
+| OmO Native | 独立命令，beta | 不依赖 OpenCode 或 Codex 作为宿主，仍处 beta 阶段 |
+
+版本定位来自[原仓库安装说明](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md#installation)。**本研究没有把 Ultimate 的能力当作当前 Codex 桌面版已经具备的功能。**
+
+## 技术原理
+
+```text
+用户目标
+   ↓
+关键词 / 命令选择工作模式
+   ↓
+主智能体规划与维护任务状态
+   ├─ 探索代码、查文档等只读任务
+   └─ 按类别分派独立实现任务 → 对应模型与技能
+   ↓
+LSP / AST-Grep / MCP / 编辑工具执行
+   ↓
+hook 注入规则、拦截工具、处理失败和续跑
+   ↓
+主智能体汇总证据、验证结果、完成交付
+```
+
+这个流程是对[编排概览](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/overview.md)与[Hooks 参考](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/features.md#hooks)的归纳。可选 Hashline 编辑会给读取的行附加内容标记，编辑时检查标记是否仍匹配，以减少过期定位造成的误改；它在 OpenCode 版中需显式开启。[原理说明](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md#codes-better-hash-anchored-edits)
+
+Team Mode 的成员通过共享任务与消息邮箱协调。文档列出的运行状态保存在 `.omo` 下的状态、消息和任务文件；默认最多 8 名成员、同时运行 4 名。具体上限可配置，不能据此推断任意任务都适合并行。[Team Mode 生命周期与存储](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/team-mode.md)
+
+## 场景与适用边界
+
+- **适合：** 跨模块重构、先调研再实现的新功能、长时间迁移、能拆成独立任务的代码库研究。原项目的[编排指南](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/orchestration.md#tldr---when-to-use-what)为不同复杂度给出不同工作方式。
+- **较小任务：** 单文件修补直接让主智能体完成，通常不需要团队或复杂计划；这是原项目指南的建议。
+- **本仓库可试验的场景：** 将一个新研究条目拆成来源核对、能力映射、页面制作、链接与版权检查，并比较启用编排前后的用时、错误与人工介入次数。这是建议的实验方案，尚无实测结论。
+
+### 图中的完整示例调度
+
+输入是真实发生在本仓库的需求：新增 OmO 研究子项目，并用网页展示。若使用原项目文档中的 `/ulw-plan` 和 `/ulw-execute` 路径，一个可核查的调度如下：
+
+1. **规划阶段：** `explore` 只读检查本仓库编号与 `AGENTS.md` 规则；`librarian` 只读核对 OmO 文档和许可证。主 Agent 汇总为任务简报，用户确认关键决定并允许写正式计划；`plan-consultant` 补查遗漏，正式计划写出后由 `plan-reviewer` 检查引用和可执行性。
+2. **执行第一波：** 主 Agent 登记 Goal 与待办，然后把研究记录交给 `writing` 类别，把原创 SVG 和静态网页交给 `visual-engineering` 类别；两项在各自文件范围内并行。
+3. **集成第二波：** 两项交付后，`quick` 类别更新根索引和网页索引，补上相对路径链接。
+4. **独立验收：** 检查来源、许可、图片说明、文件链接、手机页面与页面脚本；主 Agent 读回证据，未过的项目返回修复，通过后交付。
+
+这个示例把真实需求映射到 OmO 的角色和调度机制；**本项目实际制作使用的是当前 Codex 工作环境，没有运行 OmO。** 原项目对规划、分派、状态和验收的具体描述见[编排指南](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/orchestration.md)。
+
+## 可扩展方向
+
+原项目[路线图](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/ROADMAP.md)正在将纯 TypeScript 核心逻辑、MCP、技能和宿主适配代码分层。基于当前机制，本研究提出三个进一步验证的方向：
+
+1. **可量化评测：** 固定任务和验收标准，记录完成率、缺陷、人工干预、时间与模型成本。
+2. **有边界的自治：** 给续跑和并行任务设置预算、退出条件、权限与可追溯的动作日志。
+3. **研究证据工作流：** 让来源、许可证、实际运行结果和图片出处成为交付检查项，避免把项目宣传当作验证结果。
+
+这些是研究建议，不代表原项目已经实现或证明了相应收益。
+
+## 动手验证与风险边界
+
+本次只核对公开文档并制作静态展示页；**没有安装 OmO、连接模型、运行 Team Mode，也没有测量它的开发效率。** 网页上的版本说明和流程步骤是信息展示交互，不调用 OmO。安装指南说明 Codex Light 安装器可选择修改全局自治权限；项目 README 说明匿名遥测默认启用且可关闭。实际使用前应按所选版本核对当前安装行为和权限。[安装指南](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/installation.md#light-codex-cli--one-line-no-agent-needed) · [遥测说明](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md#telemetry)
+
+## 图片、参考与许可
+
+- 封面 [`assets/cover.svg`](assets/cover.svg)、全景图 [`assets/capability-map.svg`](assets/capability-map.svg) 和其 [PNG 导出](assets/capability-map.png) 由本仓库原创绘制；仅使用文字、图形与连线，没有复用原仓库品牌图片。SVG 可用 [`build_capability_map.py`](assets/build_capability_map.py) 再生成。机制来源见上方图片说明。
+- 网页视觉和文字为本仓库整理。网页内所有外链指向原仓库或其文档；不嵌入原项目截图。
+- 原项目代码的许可见 [LICENSE.md](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/LICENSE.md)，第三方组件遵循各自许可。本研究未复制原项目代码；引用原项目名称仅用于说明研究对象。

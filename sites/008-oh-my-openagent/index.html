@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Oh My OpenAgent 用主 Agent 分派、模型路由、工具与规则组织复杂开发任务；一张图看懂能力、原理、使用场景和本研究仓库的可验证价值。">
+  <meta name="color-scheme" content="light">
+  <title>Oh My OpenAgent · 能力地图｜项目 008</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="../../README.md" aria-label="返回 GitHub 优秀项目研究集"><span class="brand-mark">008</span><span>PROJECT ATLAS</span></a>
+      <nav aria-label="本页导航"><a href="#map">总览图</a><a href="#capabilities">能力</a><a href="#mechanism">原理</a><a href="#editions">版本</a><a href="#applications">场景</a><a href="#sources">来源</a></nav>
+      <a class="record-link" href="../../projects/008-oh-my-openagent/README.md">研究记录 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> OPEN SOURCE RESEARCH / 008</p>
+        <h1 id="hero-title">让一个目标，<br><em>走完整条工作流。</em></h1>
+        <p class="lead">Oh My OpenAgent（OmO）让主 Agent 按任务类别分派独立工作会话，用模型路由、工具、规则和续跑机制推进开发。它适合跨模块、需先调研再实现的任务；对本研究仓库，可借鉴其分工与验收方式，设计可比较的研究流程。</p>
+        <div class="hero-actions"><a class="button button-primary" href="#map">查看完整全景图 <span aria-hidden="true">↘</span></a><a class="button button-outline" href="https://github.com/code-yeongyu/oh-my-openagent" target="_blank" rel="noopener noreferrer">原仓库 <span aria-hidden="true">↗</span></a></div>
+        <p class="status-note"><span class="status-dot" aria-hidden="true"></span> 已核对公开文档 · OmO 尚未安装或实测</p>
+      </div>
+      <figure class="hero-figure">
+        <div class="figure-top"><span>RESEARCH MAP / 008</span><span>ORIGINAL DIAGRAM</span></div>
+        <img src="../../projects/008-oh-my-openagent/assets/capability-map.png" width="2400" height="2260" alt="Oh My OpenAgent 全景图：主智能体分派、模型与工具、使用场景，以及本仓库真实需求的示例调度">
+        <figcaption>本仓库依据原项目文档绘制的全景图；下方可放大查看。OmO 调度是示例，并非运行截图。</figcaption>
+      </figure>
+    </section>
+
+    <div class="thesis-band"><div class="wrap thesis-inner"><span class="thesis-label">核心定位</span><p>把<strong>主智能体的规划与验证</strong>，和<strong>独立任务、工具、规则、续跑</strong>连接起来。</p><a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/overview.md" target="_blank" rel="noopener noreferrer">依据：编排概览 ↗</a></div></div>
+
+    <section class="section map-section" id="map" aria-labelledby="map-title"><div class="wrap">
+      <div class="section-head"><div><p class="section-index">00 / COMPLETE RESEARCH MAP</p><h2 id="map-title">一张图看懂 OmO。</h2></div><p>上半部解释 OmO 的系统机制，下半部用本仓库新增 008 研究页的真实需求展示调度顺序、并行任务与验收。图中的 OmO 调度是按文档设计的样例。</p></div>
+      <div class="map-toolbar"><span>原创 SVG · 可缩放查看</span><div><a href="../../projects/008-oh-my-openagent/assets/capability-map.svg" target="_blank" rel="noopener noreferrer">打开原图放大 ↗</a><a href="../../projects/008-oh-my-openagent/assets/capability-map.svg" download="oh-my-openagent-capability-map.svg">保存 SVG ↓</a><a href="../../projects/008-oh-my-openagent/assets/capability-map.png" download="oh-my-openagent-capability-map.png">保存 PNG ↓</a></div></div>
+      <figure class="map-frame"><img src="../../projects/008-oh-my-openagent/assets/capability-map.svg" width="2400" height="2260" alt="Oh My OpenAgent 全景图：交互模式、主智能体调度、专员与类别工作智能体、工具和 Hooks、版本场景，以及为本仓库新增研究页的示例调度"><figcaption>基于项目公开文档的原创研究图。示例使用本仓库真实需求和交付文件；没有运行 OmO，因此不是运行日志或性能结果。图内来源详见<a href="../../projects/008-oh-my-openagent/README.md">研究记录</a>。</figcaption></figure>
+    </div></section>
+
+    <section class="section wrap" id="capabilities" aria-labelledby="capabilities-title">
+      <div class="section-head"><div><p class="section-index">01 / CAPABILITY MAP</p><h2 id="capabilities-title">六块能力，构成一条开发链。</h2></div><p>以下是原项目文档描述的机制。各项功能是否可用，仍取决于选择的发行版与配置。</p></div>
+      <div class="capability-grid">
+        <article class="cap-card"><span class="card-index">01</span><div class="card-icon" aria-hidden="true">◎</div><h3>主智能体编排</h3><p>在当前会话中规划任务、分派工作、读回结果并核查交付。</p><span class="card-tag">计划 / 汇总 / 验证</span></article>
+        <article class="cap-card"><span class="card-index">02</span><div class="card-icon" aria-hidden="true">◇</div><h3>任务类别与模型路由</h3><p>用搜索、快速修改、深度推理等任务类别选择工作智能体的模型与技能。</p><span class="card-tag">独立工作会话</span></article>
+        <article class="cap-card"><span class="card-index">03</span><div class="card-icon" aria-hidden="true">⌘</div><h3>代码与资料工具</h3><p>LSP、AST-Grep 和 MCP 让智能体查找结构、诊断问题并访问外部资料。</p><span class="card-tag">LSP / AST / MCP</span></article>
+        <article class="cap-card"><span class="card-index">04</span><div class="card-icon" aria-hidden="true">▤</div><h3>项目规则注入</h3><p>读取项目的 AGENTS.md 与规则文件，把相关约束带入当前任务。</p><span class="card-tag">上下文与约束</span></article>
+        <article class="cap-card"><span class="card-index">05</span><div class="card-icon" aria-hidden="true">↻</div><h3>计划、状态与续跑</h3><p>用计划和待办跟踪长任务，在可恢复的边界继续工作。</p><span class="card-tag">ULW / Goal / Todo</span></article>
+        <article class="cap-card"><span class="card-index">06</span><div class="card-icon" aria-hidden="true">⊞</div><h3>可选团队协作</h3><p>OpenCode Team Mode 用共享任务与消息邮箱协调并行成员；默认关闭。</p><span class="card-tag">仅完整体验适用</span></article>
+      </div>
+      <p class="inline-source">能力依据：<a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md#highlights" target="_blank" rel="noopener noreferrer">项目功能总览 ↗</a> <a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/features.md#hooks" target="_blank" rel="noopener noreferrer">Hooks 与工具参考 ↗</a> <a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/team-mode.md" target="_blank" rel="noopener noreferrer">Team Mode 文档 ↗</a></p>
+    </section>
+
+    <section class="section mechanism-section" id="mechanism" aria-labelledby="mechanism-title"><div class="wrap">
+      <div class="section-head"><div><p class="section-index">02 / THE ENGINE</p><h2 id="mechanism-title">一次任务，怎样向前推进？</h2></div><p>选择下方节点查看对应机制。这里演示的是文档中的工作方式，不会运行 OmO 或调用模型。</p></div>
+      <div class="mechanism-layout">
+        <ol class="flow-list" aria-label="智能体工作流">
+          <li><button class="flow-step is-active" type="button" data-step="input" aria-pressed="true"><span class="flow-number">01</span><span><strong>接收目标</strong><small>用户要求与模式入口</small></span><span class="flow-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="flow-step" type="button" data-step="plan" aria-pressed="false"><span class="flow-number">02</span><span><strong>主智能体规划</strong><small>拆分任务与确定检查点</small></span><span class="flow-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="flow-step" type="button" data-step="delegate" aria-pressed="false"><span class="flow-number">03</span><span><strong>按类别分派</strong><small>独立会话与模型路由</small></span><span class="flow-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="flow-step" type="button" data-step="tools" aria-pressed="false"><span class="flow-number">04</span><span><strong>工具与 hook 执行</strong><small>查找、编辑、规则、恢复</small></span><span class="flow-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="flow-step" type="button" data-step="verify" aria-pressed="false"><span class="flow-number">05</span><span><strong>汇总与核查</strong><small>证据、诊断与任务完成</small></span><span class="flow-arrow" aria-hidden="true">↗</span></button></li>
+        </ol>
+        <div class="flow-panel" aria-live="polite"><div class="flow-panel-top"><span id="flow-label">STEP 01 / INPUT</span><span class="flow-pulse" aria-hidden="true"></span></div><div class="flow-panel-main"><span id="flow-glyph" class="flow-glyph" aria-hidden="true">◎</span><h3 id="flow-title">从目标进入</h3><p id="flow-description">用户提出开发目标；`ulw` 等关键词或命令可选择更强的工作模式。简单任务也可以直接交给主智能体。</p></div><a id="flow-source" href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/orchestration.md" target="_blank" rel="noopener noreferrer">查看编排指南 ↗</a></div>
+      </div>
+      <div class="mechanism-footer"><span>底层支撑</span><p>生命周期 hooks 可在消息、工具调用前后及会话事件中注入规则、拦截动作、处理失败或触发续跑。</p><a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/features.md#hooks" target="_blank" rel="noopener noreferrer">查看机制 ↗</a></div>
+    </div></section>
+
+    <section class="section wrap" id="editions" aria-labelledby="editions-title">
+      <div class="section-head"><div><p class="section-index">03 / THREE EDITIONS</p><h2 id="editions-title">先分清版本，再谈能力。</h2></div><p>原仓库将 OmO 分成两种宿主插件和一个独立 beta。下面是文档给出的范围，并非本站的安装建议。</p></div>
+      <div class="edition-grid">
+        <article class="edition-card edition-featured"><span class="edition-kicker">OPEN CODE / PLUGIN</span><h3>Ultimate</h3><p class="edition-subtitle">完整版</p><p>提供完整的智能体、hook、内置 MCP、Team Mode、命令与 `ultrawork` 工作流。</p><div class="edition-foot"><span>需要 OpenCode 宿主</span><span>能力最全</span></div></article>
+        <article class="edition-card"><span class="edition-kicker">CODEX CLI / PLUGIN</span><h3>Light</h3><p class="edition-subtitle">可移植组件</p><p>提供规则、LSP、`ultrawork`、续跑等组件；团队工作依赖 Codex 自身的协作能力。</p><div class="edition-foot"><span>面向 Codex CLI</span><span>无 OpenCode team_* 工具</span></div></article>
+        <article class="edition-card"><span class="edition-kicker">STANDALONE / BETA</span><h3>Native</h3><p class="edition-subtitle">独立命令</p><p>以 `omo` 命令运行，内置 OMO 扩展，不加载到 OpenCode 或 Codex；当前为 beta。</p><div class="edition-foot"><span>独立宿主</span><span>beta</span></div></article>
+      </div>
+      <p class="inline-source">版本依据：<a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md#installation" target="_blank" rel="noopener noreferrer">README 安装与版本说明 ↗</a>。此处的 Codex 指 Codex CLI，不能推断 Light 功能会直接进入当前 Codex 桌面会话。</p>
+    </section>
+
+    <section class="section application-section" id="applications" aria-labelledby="applications-title"><div class="wrap">
+      <div class="section-head"><div><p class="section-index">04 / WHERE IT FITS</p><h2 id="applications-title">把复杂度用在有价值的地方。</h2></div><p>原项目指南按任务复杂度选择工作方式。场景与收益需在具体仓库中实测。</p></div>
+      <div class="scenario-grid">
+        <article><span class="scenario-no">A / QUICK</span><h3>小修复</h3><p>单文件改动或边界清楚的任务，直接让主智能体处理。</p><strong>建议：直接提示</strong></article>
+        <article><span class="scenario-no">B / DEEP WORK</span><h3>跨模块任务</h3><p>需要先探索代码，再实施、检查与修复的功能或重构。</p><strong>建议：`ulw` 或先写计划</strong></article>
+        <article><span class="scenario-no">C / COORDINATION</span><h3>并行协作</h3><p>任务能清晰分工，且多个工作成员需要共享任务或中途沟通。</p><strong>建议：按宿主选择团队能力</strong></article>
+      </div>
+      <a class="text-link" href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/orchestration.md#tldr---when-to-use-what" target="_blank" rel="noopener noreferrer">查看原项目的任务选择指南 <span aria-hidden="true">↗</span></a>
+    </div></section>
+
+    <section class="section wrap extensions-section" id="extensions" aria-labelledby="extensions-title">
+      <div class="section-head"><div><p class="section-index">05 / EXTENSION IDEAS</p><h2 id="extensions-title">下一步，可以往哪里延伸？</h2></div><p>区分上游已经在做的工程方向，与本研究提出、仍待验证的工作方式。</p></div>
+      <div class="extension-grid">
+        <article><span>上游路线图</span><h3>跨宿主的核心层</h3><p>把通用逻辑、MCP、技能与 OpenCode、Codex 等宿主适配代码分层，减少重复。</p></article>
+        <article><span>研究建议</span><h3>可量化评测</h3><p>对固定任务比较完成率、缺陷、人工介入、耗时与模型成本。</p></article>
+        <article><span>研究建议</span><h3>有边界的长任务</h3><p>为续跑和并行工作增加预算、停止条件、权限和动作记录。</p></article>
+        <article><span>研究建议</span><h3>证据驱动的交付</h3><p>将出处、许可、实测结果和图片来源变成研究任务的验收项。</p></article>
+      </div>
+      <p class="inline-source">上游方向依据：<a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/ROADMAP.md" target="_blank" rel="noopener noreferrer">OmO 路线图 ↗</a>；其余为本研究提出的扩展设想。</p>
+    </section>
+
+    <section class="section value-section" aria-labelledby="value-title"><div class="wrap value-grid">
+      <div><p class="section-index">06 / FOR THIS RESEARCH LIBRARY</p><h2 id="value-title">对这个研究仓库，最值得验证什么？</h2><p>把一次新项目研究拆成来源核对、能力归纳、网页制作和最终验收。固定任务与验收标准后，再比较时间、质量、人工介入与成本。</p><p class="value-caveat">这是本研究提出的实验方案；尚无 OmO 在本仓库提升效率的实测结果。</p></div>
+      <div class="value-list"><div><span>01</span><p><strong>让来源可追溯</strong><br>将原仓库、文档、许可证和图片出处纳入交付检查。</p></div><div><span>02</span><p><strong>让质量可比较</strong><br>记录完成率、修复次数、引用准确度与人工介入。</p></div><div><span>03</span><p><strong>让自治有边界</strong><br>给长任务设置预算、停止条件和需要人检查的节点。</p></div></div>
+    </div></section>
+
+    <section class="section wrap sources-section" id="sources" aria-labelledby="sources-title">
+      <div class="section-head"><div><p class="section-index">07 / EVIDENCE &amp; LIMITS</p><h2 id="sources-title">已知、待验证、值得留意。</h2></div><p>本页是研究摘要；详细依据和图片说明保存在对应的研究记录中。</p></div>
+      <div class="evidence-grid"><div class="evidence-card"><span class="evidence-mark verified">已核对</span><h3>公开文档和许可</h3><p>对照项目 README、编排、功能、Team Mode、路线图及许可证整理。</p></div><div class="evidence-card"><span class="evidence-mark pending">待验证</span><h3>实际运行与性能</h3><p>未安装 OmO，也未执行真实编程任务；效率、质量与模型成本没有实测值。</p></div><div class="evidence-card"><span class="evidence-mark caution">使用边界</span><h3>权限、遥测与许可</h3><p>安装器提供自治权限选项；匿名遥测默认开启；原项目许可限制部分使用与分发。</p></div></div>
+      <div class="source-links"><a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/README.md" target="_blank" rel="noopener noreferrer">项目 README ↗</a><a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/guide/overview.md" target="_blank" rel="noopener noreferrer">编排概览 ↗</a><a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/features.md" target="_blank" rel="noopener noreferrer">功能参考 ↗</a><a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/ROADMAP.md" target="_blank" rel="noopener noreferrer">路线图 ↗</a><a href="https://github.com/code-yeongyu/oh-my-openagent/blob/dev/LICENSE.md" target="_blank" rel="noopener noreferrer">许可证 ↗</a><a href="../../projects/008-oh-my-openagent/README.md">本站研究记录 ↗</a></div>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap footer-inner"><span>008 / OH MY OPENAGENT · 独立研究展示</span><p>内容核对日期：2026-09-26。上游项目更新后，请以原仓库当前文档为准。</p><a href="../../README.md">返回研究索引 ↑</a></div></footer>
+</body>
+</html>

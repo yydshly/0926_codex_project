@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Oh My OpenAgent 能力结构图</title>
+  <desc id="desc">左侧目标进入主智能体，主智能体连接探索、实现、核查三个任务，底部规则、工具与反馈环支撑执行。</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0d1932"/><stop offset="1" stop-color="#16264a"/></linearGradient>
+    <linearGradient id="accent" x2="1"><stop stop-color="#f5b65b"/><stop offset="1" stop-color="#f26b4f"/></linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#ffffff" opacity=".12"/></pattern>
+    <filter id="shadow"><feDropShadow dx="0" dy="15" stdDeviation="24" flood-color="#070f24" flood-opacity=".55"/></filter>
+  </defs>
+  <rect width="1200" height="630" rx="28" fill="url(#bg)"/>
+  <rect width="1200" height="630" rx="28" fill="url(#dots)"/>
+  <circle cx="1078" cy="70" r="230" fill="#5360c8" opacity=".09"/>
+  <circle cx="126" cy="550" r="245" fill="#ef9b64" opacity=".06"/>
+  <text x="66" y="80" fill="#f6b566" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4">PROJECT 008  /  RESEARCH MAP</text>
+  <text x="66" y="142" fill="#fffaf2" font-family="Arial, sans-serif" font-size="46" font-weight="800">Oh My OpenAgent</text>
+  <text x="67" y="180" fill="#aebbd6" font-family="Arial, sans-serif" font-size="20">从目标到分工、工具与验证的智能体工作流</text>
+
+  <g fill="none" stroke="#f8bb75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M290 323H391"/><path d="M681 323H742"/><path d="M742 323V251H783"/><path d="M742 323H783"/><path d="M742 323V395H783"/>
+    <path d="M535 373V451" stroke="#8496c0" stroke-dasharray="7 9"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="66" y="269" width="224" height="108" rx="20" fill="#26395d" stroke="#5c729d"/>
+    <rect x="391" y="248" width="290" height="150" rx="24" fill="#293e65" stroke="#f4aa62" stroke-width="2"/>
+    <rect x="783" y="211" width="349" height="80" rx="17" fill="#293e65" stroke="#536a99"/>
+    <rect x="783" y="293" width="349" height="80" rx="17" fill="#293e65" stroke="#536a99"/>
+    <rect x="783" y="375" width="349" height="80" rx="17" fill="#293e65" stroke="#536a99"/>
+    <rect x="391" y="451" width="290" height="83" rx="17" fill="#182b4b" stroke="#526b94"/>
+  </g>
+  <rect x="87" y="290" width="63" height="27" rx="13" fill="url(#accent)"/>
+  <text x="119" y="309" text-anchor="middle" fill="#172342" font-family="Arial, sans-serif" font-size="13" font-weight="800">INPUT</text>
+  <text x="88" y="348" fill="#fffaf2" font-family="Arial, sans-serif" font-size="25" font-weight="700">用户目标</text>
+  <text x="418" y="284" fill="#f6b566" font-family="Arial, sans-serif" font-size="16" font-weight="800" letter-spacing="2">ORCHESTRATOR</text>
+  <text x="418" y="336" fill="#fffaf2" font-family="Arial, sans-serif" font-size="30" font-weight="700">主智能体</text>
+  <text x="418" y="372" fill="#c0cce3" font-family="Arial, sans-serif" font-size="15">规划 · 分派 · 汇总 · 验证</text>
+  <g font-family="Arial, sans-serif">
+    <text x="811" y="244" fill="#f6b566" font-size="13" font-weight="800" letter-spacing="2">01 / EXPLORE</text><text x="811" y="272" fill="#fffaf2" font-size="20" font-weight="700">搜索代码与文档</text>
+    <text x="811" y="326" fill="#f6b566" font-size="13" font-weight="800" letter-spacing="2">02 / BUILD</text><text x="811" y="354" fill="#fffaf2" font-size="20" font-weight="700">按类别分派实现</text>
+    <text x="811" y="408" fill="#f6b566" font-size="13" font-weight="800" letter-spacing="2">03 / VERIFY</text><text x="811" y="436" fill="#fffaf2" font-size="20" font-weight="700">诊断、检查与续跑</text>
+    <text x="418" y="484" fill="#f6b566" font-size="13" font-weight="800" letter-spacing="2">SUPPORT LAYER</text>
+    <text x="418" y="513" fill="#fffaf2" font-size="18" font-weight="700">规则  /  Hooks  /  MCP  /  LSP</text>
+  </g>
+  <text x="66" y="588" fill="#96a9cb" font-family="Arial, sans-serif" font-size="14">本仓库原创研究示意 · 非官方架构图 · 非运行结果</text>
+</svg>
