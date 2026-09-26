@@ -15,7 +15,7 @@
 | 008 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 编程 Agent 的任务编排层：主 Agent 按类别分派工作会话，结合模型路由、工具、规则与续跑完成核查；适合跨模块开发，也为本仓库的研究任务分工提供可验证样本。 | [研究记录](projects/008-oh-my-openagent/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/) · [网页源码](sites/008-oh-my-openagent/index.html) |
 | 009 | [yorukot/superfile](https://github.com/yorukot/superfile) | 终端文件管理器：多面板浏览、当前目录搜索、预览与批量整理；Go/Bubble Tea 管理界面状态，本机文件系统执行操作。适合工程目录、SSH 远端和素材整理，为本仓库提供人工文件管理与终端交互设计参考。 | [研究记录](projects/009-superfile/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/009-superfile/) · [网页源码](sites/009-superfile/index.html) |
 | 010 | [NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra) | 二进制逆向工作台：加载器与 SLEIGH/p-code 把程序或固件变成函数、引用、图和类 C 伪代码；适合无源码审查、固件研究与版本对比，为本仓库提供可复核的证据链方法。 | [研究记录](projects/010-ghidra/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/) · [网页源码](sites/010-ghidra/index.html) |
-| 013 | [filiksyos/gitreverse](https://github.com/filiksyos/gitreverse) | 从公开仓库或网站的可见线索生成合成开发提示词；网站路线另给设计说明。适合初筛和原型需求，复刻效果仍需核对。 | [研究记录](projects/013-gitreverse/README.md) · [能力总览与实测对比](sites/013-gitreverse/index.html#summary) |
+| 013 | [filiksyos/gitreverse](https://github.com/filiksyos/gitreverse) | 从公开仓库或网站的可见线索生成合成开发提示词；网站路线另给设计说明。适合初筛和原型需求，复刻效果仍需核对。 | [研究记录](projects/013-gitreverse/README.md) · [在线总览与实测对比](https://yydshly.github.io/0926_codex_project/sites/013-gitreverse/#summary) · [网页源码](sites/013-gitreverse/index.html) |
 
 ## 子项目速览
 
@@ -122,7 +122,7 @@
 
 <img src="projects/013-gitreverse/assets/research-summary.svg" width="620" alt="GitReverse 总览图：仓库与网站两条路线、提示词和设计说明、网页落地流程、Chippy Tea 实测差异、场景和研究价值">
 
-图片说明：本仓库依据[原项目文档与源码](https://github.com/filiksyos/gitreverse)及 Chippy Tea 的一次实际生成和网页落地原创绘制。图内未嵌入第三方截图，实测结论只针对这一样本。[查看总览与前后对比](sites/013-gitreverse/index.html#summary)。
+图片说明：本仓库依据[原项目文档与源码](https://github.com/filiksyos/gitreverse)及 Chippy Tea 的一次实际生成和网页落地原创绘制。图内未嵌入第三方截图，实测结论只针对这一样本。[在线查看总览与前后对比](https://yydshly.github.io/0926_codex_project/sites/013-gitreverse/#summary)。
 
 - **能力与实现原理：** GitReverse 经 GitHub API 读取公开仓库的元数据、README 前 8,000 字符和根目录一层文件树，交给大模型归纳开发需求；网站路线采集页面文字与品牌线索，先生成 design.md，再生成建站提示词。两种产物都是推断性文字，不是原作者提示词或成品代码。
 - **使用场景与对我们的意义：** 适合候选项目初筛、原型需求和产品介绍页初稿；可加快本研究集形成能力假设，再用源码、截图、交互、来源和许可证逐项验证。

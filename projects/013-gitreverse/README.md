@@ -14,7 +14,7 @@
 | 研究日期 | 2026-09-26 |
 | 原项目许可证 | 研究时根目录未见 `LICENSE`，GitHub 仓库元数据的 `license` 为 `null`；代码再使用范围需向权利人确认。[仓库元数据](https://api.github.com/repos/filiksyos/gitreverse) |
 | 研究状态 | 已核查 README 与关键源码；2026-09-26 已对 Chippy Tea 完成一次网站路线实测、网页落地和同尺寸对比；仓库路线未实测 |
-| 网页展示 | [交互教学页面](../../sites/013-gitreverse/index.html#summary)：扩展总览图、原站与实做首版截图、能力与原理、两种产物及结论；[落地对比](../../sites/013-gitreverse/chippytea-comparison.html) |
+| 网页展示 | [在线总览与实测对比](https://yydshly.github.io/0926_codex_project/sites/013-gitreverse/#summary)：扩展总览图、原站与实做首版截图、能力与原理、两种产物及结论；[网页源码](../../sites/013-gitreverse/index.html) · [落地对比](../../sites/013-gitreverse/chippytea-comparison.html) |
 
 **一句话摘要：** GitReverse 是一个网页应用。它把公开 GitHub 仓库的有限资料，或网站的页面与视觉线索，交给大模型，生成一条供编程助手使用的**合成需求提示词**。输出是对“怎样描述类似产品”的推测，无法恢复作者真实输入过的提示词。[原仓库 README](https://github.com/filiksyos/gitreverse/blob/1a1dbdaa704b985e7a6990ac309ae5222e92090b/README.md)
 
