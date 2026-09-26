@@ -9,6 +9,7 @@
 | 研究日期 | 2026-09-26 |
 | 研究状态 | 官方资料与仓库结构已核对；尚未安装软件连接数据库 |
 | 研究范围 | Community 版公开说明与源码；源码核对基于提交 [`4b20d89`](https://github.com/OtterMind/Chat2DB/tree/4b20d898751e38614d167cf71be9d6b2578ba063)（2026-09-23） |
+| 在线概念展示 | [打开远端静态交互页](https://yydshly.github.io/0926_codex_project/sites/001-chat2db/)（模拟数据，不连接真实数据库） |
 | 本地概念展示 | [打开静态交互页](../../sites/001-chat2db/index.html)（模拟数据，不连接真实数据库） |
 
 ![Chat2DB 官方工作台画面：左侧数据库树、中间 SQL 编辑器与查询结果、右侧 AI 助手和图表](assets/official-workspace.webp)

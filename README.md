@@ -6,7 +6,7 @@
 
 | 编号 | 源库（直达原仓库） | 核心能力 | 研究记录 | 网页展示 |
 | --- | --- | --- | --- | --- |
-| 001 | [OtterMind/Chat2DB](https://github.com/OtterMind/Chat2DB) | 连接数据库，用 AI 辅助生成与理解 SQL，并在同一工作台查看和管理数据 | [Chat2DB 研究](projects/001-chat2db/README.md) | [网页源码](sites/001-chat2db/index.html) |
+| 001 | [OtterMind/Chat2DB](https://github.com/OtterMind/Chat2DB) | 连接数据库，用 AI 辅助生成与理解 SQL，并在同一工作台查看和管理数据 | [Chat2DB 研究](projects/001-chat2db/README.md) | [在线展示](https://yydshly.github.io/0926_codex_project/sites/001-chat2db/) · [网页源码](sites/001-chat2db/index.html) |
 
 ## 001 · Chat2DB 能力与原理速览
 

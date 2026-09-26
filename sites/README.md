@@ -2,6 +2,7 @@
 
 001-chat2db/ 是 Chat2DB 的静态研究展示页。它包含能力总图和模拟订单示例，不连接 Chat2DB、AI 模型或真实数据库。页面资源使用相对路径。
 
+- [在线打开 Chat2DB 展示页](https://yydshly.github.io/0926_codex_project/sites/001-chat2db/)
 - [本地打开 Chat2DB 展示页](001-chat2db/index.html)
 - [查看研究记录与来源](../projects/001-chat2db/README.md)
 
