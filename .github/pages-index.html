@@ -17,6 +17,7 @@
     .feature-card img{display:block;width:100%;height:auto;border-radius:10px}
     .feature-card p{margin:8px 0}.feature-card .feature-links{margin-top:14px}
     @media(max-width:620px){.grid{grid-template-columns:1fr}.wrap{padding:45px 0}.feature-card{grid-template-columns:1fr}}
+    .autoresearch-card{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:center}.autoresearch-card img{display:block;width:100%;height:auto}.autoresearch-card p{margin:9px 0}@media(max-width:620px){.autoresearch-card{grid-template-columns:1fr}}
   </style>
 </head>
 <body><main class="wrap"><p>GITHUB 项目研究集 / 在线展示</p><h1>从能力到原理，逐项看懂。</h1><p>下列网页是研究说明。交互样例会明确标注模拟范围；源码与出处见各项目研究记录。</p>
@@ -25,6 +26,7 @@
     <article><span>002 / AI 与浏览器</span><h2>Browser Use Web UI</h2><p>AI 如何操作浏览器，以及 Web UI 如何配置、展示和控制这一过程。</p><a href="./sites/002-browser-use-web-ui/">打开在线展示 →</a></article>
     <article><span>003 / 本地音乐曲库</span><h2>Antra</h2><p>完整能力图解释音乐链接、统一曲目、音源匹配、下载校验与本地曲库。</p><a href="./sites/003-antra/">打开在线展示 →</a></article>
     <article><span>004 / 六轨音源分离</span><h2>StemDeck</h2><p>用能力引导图理解分轨、练习、混音和导出的工作流。</p><a href="./sites/004-stemdeck/">打开在线展示 →</a></article>
+    <article class="autoresearch-card" id="project-005"><a href="./sites/005-autoresearch/understanding.html#overview" aria-label="放大阅读 Autoresearch 完整理解总览"><img src="./projects/005-autoresearch/assets/autoresearch-overview.png" width="2000" height="3100" alt="Autoresearch 总览图：能力、原理、模块、软件与仿真及硬件扩展和当前进展" loading="lazy"></a><div><span>005 / 由实验反馈驱动的研究</span><h2>Autoresearch</h2><p><strong>能力：</strong>提供单 GPU 小语言模型训练实验，比较模型结构、优化器与训练实现。</p><p><strong>原理：</strong>外部编程代理改代码，内层程序按固定预算运行与评测；记录、保留或回退后继续尝试。</p><p><strong>场景：</strong>直接用于训练研究；软件性能、AI 流程、仿真与硬件协同需要适配任务与评测。</p><p><strong>对我们的意义：</strong>用基线、日志、版本和独立复验建立研究证据，检验改善及投入成本。</p><p>现有网页是手工规则实验，尚未验证模型训练或 AI 自动改进。</p><p><a href="./sites/005-autoresearch/understanding.html#overview">查看完整总览 →</a> · <a href="./sites/005-autoresearch/">能力摘要与演示</a></p></div></article>
     <article><span>006 / Agent 服务框架</span><h2>vercel/eve</h2><p>从引导图和交互场景看懂持久会话、工具循环、人工审批及适用边界。</p><a href="./sites/006-vercel-eve/">打开在线展示 →</a></article>
     <article><span>007 / AI 视频剪辑</span><h2>Palmier Pro</h2><p>一图看懂画面与声音如何定位素材，Agent 如何修改时间线、交付成片，以及适用场景和研究价值。</p><a href="./sites/007-palmier-pro/">打开在线展示 →</a></article>
     <article><span>008 / 编程 Agent 编排</span><h2>Oh My OpenAgent</h2><p>一张图梳理主 Agent 分派、模型路由、工具和续跑的原理，说明跨模块任务场景及对本研究仓库的价值。</p><a href="./sites/008-oh-my-openagent/">打开在线展示 →</a></article>

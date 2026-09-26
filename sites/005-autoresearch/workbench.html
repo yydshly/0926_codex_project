@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark">
+  <title>005 · 空间观察实验台</title>
+  <link rel="stylesheet" href="./workbench.css"><link rel="stylesheet" href="./observer.css"><link rel="stylesheet" href="./guide.css"><link rel="stylesheet" href="./study.css"><link rel="stylesheet" href="./batch.css">
+  <script defer src="./vendor/three.min.js"></script><script defer src="./sim3d.js"></script><script defer src="./lab-core.js"></script><script defer src="./image-observer.js"></script><script defer src="./camera-effects.js"></script><script defer src="./illumination-study.js"></script><script defer src="./batch-study.js"></script><script defer src="./batch-store.js"></script><script defer src="./batch-workbench.js"></script><script defer src="./workbench.js"></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">跳到实验台</a>
+  <header class="top"><a class="brand" href="./index.html"><b>005</b> 空间观察实验台 <span>V0.5</span></a><nav><a href="#batch-lab">批量实验</a><a href="#workspace">单轮运行</a><a href="#evaluation">单轮报告</a><a href="#scenario-guide">运行与感知说明</a><a href="./index.html#lab">旧版演示 ↗</a></nav></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">AUTORESEARCH / SCENARIO WORKBENCH</p><h1>四种条件，三个种子，<span>自动完成十二轮对照。</span></h1><p>共同任务：发现光照切换。汇总两种观察规则的漏报、误报和延迟，每轮结果都能回放。</p></div><div class="version-note"><strong>V0.5 / 批量实验与结果总览</strong><span>固定方案 → 自动运行 → 逐轮核对</span><small>合成场景与手工规则，未连接 AI 搜索或上游训练。</small></div></section>
+    <section class="demo-guide"><div><strong>一键执行固定方案，也可继续单轮观察</strong><p>默认 12 轮，共 288 秒模拟时间，加速计算。批量实验会暂停保留当前单轮；结果来自实际渲染的相机图像。</p></div><div><button id="batch-launch" class="button primary" disabled>开始批量实验 ▶</button><button id="observe-demo" class="button secondary">体验方法对照 ▶</button></div></section>
+    <div class="scene-summary"><p><strong>核心理解：执行、评估、反馈的研究循环</strong>外部代理负责循环，仓库提供训练任务和评测规程。迁移的主要工作是建立可运行任务与可信评估。当前光照实验仍为手工规则对照；<a href="./task.html">小模型训练方案</a>作为尚未执行的可选任务保留。</p><a href="./understanding.html#consensus">阅读最新理解 ↗</a></div>
+    <section class="workspace" id="workspace">
+      <aside class="configuration">
+        <div class="panel-heading"><span>01 / 场景配置</span><span class="tag">本地运行</span></div>
+        <div class="presets" aria-label="快速场景"><button data-preset="open">开阔场地</button><button data-preset="wall" class="chosen">遮挡场景</button><button data-preset="noisy">观测扰动</button><button data-preset="vision">图像观察</button></div>
+        <form id="config-form">
+          <label>场地布局<select name="layout"><option value="wall">中央遮挡墙</option><option value="open">开阔平地</option><option value="blocks">建筑方块</option></select></label>
+          <label>无人机运动<select name="motion"><option value="wander">不规则飞行</option><option value="orbit">空间环绕</option><option value="eight">空间 8 字</option></select></label>
+          <div class="field-row"><label>轨迹种子<input name="seed" type="number" min="0" max="999999" value="42"></label><label>光照<select name="light"><option value="day">白昼恒定</option><option value="dusk">黄昏恒定</option><option value="cycle">明显明暗变化</option><option value="soft-cycle">轻微明暗变化</option></select></label></div>
+          <h3>观察设备</h3>
+          <label>图像噪声 · 灰度级<select name="cameraNoise"><option value="0">关闭</option><option value="8">轻度 ±8</option><option value="24">明显 ±24</option></select></label>
+          <label>采样频率<select name="rate"><option value="5">5 次 / 秒</option><option value="10">10 次 / 秒</option></select></label>
+          <label>测距扰动 · 场景单位<select name="noise"><option value="0.15">± 0.15</option><option value="0">关闭</option><option value="0.5">± 0.50</option></select></label>
+          <div class="field-row"><label>观测延迟<select name="delay"><option value="0.2">0.2 秒</option><option value="0">无延迟</option><option value="0.6">0.6 秒</option></select></label><label>测距丢包<select name="dropout"><option value="0">关闭</option><option value="0.15">15%</option><option value="0.4">40%</option></select></label></div>
+        </form>
+        <button id="config-save" class="button secondary wide">保存配置到浏览器</button>
+        <p class="subtle" id="config-hint">运行后配置会锁定，重置即可修改。运动和合成噪声使用固定种子；图像像素可能随浏览器或 GPU 而不同。</p>
+        <div class="run-actions"><button class="button primary" id="run">开始实验 ▶</button><button class="button secondary" id="reset">重置</button></div>
+        <p class="subtle">一轮 24 秒。全景可以拖动旋转；右侧相机视角始终固定。</p>
+      </aside>
+      <div class="observation">
+        <div class="panel-heading"><span>02 / 世界与观测</span><span id="run-state" role="status" class="tag">等待开始</span></div>
+        <div class="views">
+          <section class="world-card"><div class="view-title"><span>模拟世界 <small>供人观察的全景</small></span><button id="view-reset">复位视角</button></div><div class="world-holder"><canvas id="world-view" aria-label="三维模拟世界，包含无人机、固定观察设备与场景障碍"></canvas><div class="world-legend"><span>● 无人机</span><span>● 相机</span><span>— 固定测距方向</span></div><div id="world-ready" class="ready"><strong>场景已就位</strong><p>相机和测距仪会按设定频率采样，<br>观测数据按设置的延迟送达。</p><button class="button primary" id="quick-run">开始实验 ▶</button></div></div><div class="world-caption"><p id="flight-description">不规则飞行：方向与速度逐渐变化，同时改变高度。</p><p>绿色线显示固定方向的测量路径，遇到场景表面即终止。无人机的橙色尾迹供人查看。</p></div></section>
+          <div class="sensor-column">
+            <section class="camera-card"><div class="view-title"><span>固定相机 <small>实际渲染的观测图像</small></span><span id="camera-clock">未采样</span></div><div class="camera-holder"><canvas id="camera-view" width="360" height="240" aria-label="固定相机所看到的场景画面，遮挡由三维场景渲染产生"></canvas><span id="camera-wait">等待图像送达</span></div><div class="camera-observer"><span id="camera-change">等待图像分析</span><a href="#image-observation">观察事件 <b id="camera-event-count">0</b> ↓</a></div><p>墙可能挡住无人机，重置并切换开阔场地即可对照。图像不含坐标或类别；尚未接入识别模型。</p></section>
+            <section class="range-card"><div class="view-title"><span>固定光学测距 <small>最近表面的距离回波</small></span></div><div class="range-value"><strong id="distance">—</strong><span>场景单位</span><b id="range-state">等待数据</b></div><svg id="range-chart" viewBox="0 0 300 60" role="img" aria-label="最近的测距数据曲线"><path d="M0 15H300 M0 45H300" stroke="#26444c"/><path id="range-path" fill="none" stroke="#89e9cf" stroke-width="2"/></svg><p>测量固定方向上最近表面的距离。墙面也能产生回波，数值本身不能说明测到了哪种物体。</p></section>
+          </div>
+        </div>
+        <div class="data-flow"><span>三维世界</span><i>→</i><span>设备采样</span><i>→</i><span>延迟送达</span><i>→</i><span>数据解释</span><i>→</i><span>记录与回放</span></div>
+        <p id="sensor-description" class="sensor-description">相机与测距按设置采样，观察程序收到数据后再进行判断。</p>
+        <div class="telemetry"><div><small>模拟时间</small><strong id="clock">0.00 / 24 s</strong></div><div><small>观测数据年龄</small><strong id="age">—</strong></div><div><small>有效测距 / 已送达</small><strong id="sample-count">0 / 0</strong></div><div><small>当前阶段</small><strong id="phase">配置</strong></div></div>
+        <div class="interpretation"><div><p class="eyebrow">OBSERVATION ONLY / 数据解释</p><h2 id="observation-title">等待观测送达</h2><p id="observation-detail">这里仅根据送达的测距数据解释设备状态，不接收无人机真实坐标。</p></div><p class="truth-note">世界坐标保留在渲染与回放记录中。数据解释模块只读取观测包；当前没有自主识别或控制模块。</p></div>
+        <section class="vision-panel" id="image-observation" aria-label="独立图像观察"><div class="vision-heading"><div><p class="eyebrow">PIXELS ONLY / 原始画面统计</p><h2 id="vision-state">等待图像送达</h2></div><span id="vision-age">尚无图像统计</span></div><div class="vision-metrics"><div><small>整幅画面亮度</small><strong id="vision-brightness">—</strong></div><div><small>变化像素占比</small><strong id="vision-change">—</strong></div><div><small>通用变化事件</small><strong id="vision-count">0</strong></div></div><p class="vision-boundary">这里保留原有通用变化记录；下方对照报告由两种独立规则判定。统计不说明物体类别或位置。<a href="#evaluation">查看两种方法的评价 ↓</a></p><div id="image-events" class="image-events"><p class="empty">等待图像变化事件。</p></div></section>
+        <div class="replay-bar"><div class="replay-heading"><label for="timeline">实验回放 <span id="replay-note">暂停后可拖动；回放不会重新采样</span></label><span id="replay-time">0.00 s</span></div><input id="timeline" type="range" min="0" max="0" step="1" value="0" disabled><div class="record-actions"><button id="return-live" class="button secondary" hidden>返回当前实验</button><button id="save-run" class="button primary" disabled>保存本轮实验</button><button id="export-run" class="button secondary" disabled>导出实验 JSON</button><button class="button secondary" data-import>导入实验 JSON</button></div></div>
+      </div>
+    </section>
+    <div id="notice" role="status" class="notice">配置只保存在当前浏览器。重要实验请同时导出文件。</div>
+    <section class="study-section" id="evaluation" aria-labelledby="study-title">
+      <div class="section-heading"><div><p class="eyebrow">PAIRED EXPERIMENT / 同一输入，两种方法</p><h2 id="study-title">谁发现了光照变化？</h2></div><p id="study-status" role="status">等待至少两张图像送达。</p></div>
+      <div class="study-presets"><span>运行对照条件</span><button data-study="strong">明显光照变化</button><button data-study="soft">轻微光照变化</button><button data-study="noise">叠加图像噪声</button><button data-study="constant">恒定光照</button><button id="repeat-study">相同配置再运行</button></div>
+      <p class="study-source">点击条件会保留已运行的当前实验，再开始一轮新实验；也可在上方自行修改场地、光照和传感器设置。</p>
+      <p class="study-task" id="study-scenario">本轮光照恒定：没有预设的光照切换。</p>
+      <div class="study-cards">
+        <article><div class="study-method"><span>A</span><div><h3>整体亮度变化</h3><p>关注整幅画面的平均亮度是否明显改变。</p></div></div><div class="study-metrics"><div><small>发现 / 已发生光照事件</small><strong id="brightness-detected">—</strong></div><div><small>漏报</small><strong id="brightness-missed">—</strong></div><div><small>本任务的误报</small><strong id="brightness-false">—</strong></div><div><small>平均发现延迟</small><strong id="brightness-delay">—</strong></div></div><p class="study-pending" id="brightness-pending">等待图像。</p></article>
+        <article><div class="study-method"><span>B</span><div><h3>变化像素比例</h3><p>关注画面中有多少像素发生改变，运动和噪声也可能触发。</p></div></div><div class="study-metrics"><div><small>发现 / 已发生光照事件</small><strong id="pixels-detected">—</strong></div><div><small>漏报</small><strong id="pixels-missed">—</strong></div><div><small>本任务的误报</small><strong id="pixels-false">—</strong></div><div><small>平均发现延迟</small><strong id="pixels-delay">—</strong></div></div><p class="study-pending" id="pixels-pending">等待图像。</p></article>
+      </div>
+      <div class="study-detail"><div class="study-matches"><h3>逐次核对光照事件</h3><table><thead><tr><th scope="col">环境变化</th><th scope="col">方法 A</th><th scope="col">方法 B</th></tr></thead><tbody id="study-outcomes"></tbody></table></div><div class="study-log"><h3>方法报警 · 最近 8 条</h3><div id="study-alarms"><p class="empty">等待图像。</p></div></div></div>
+      <p class="study-caveat">“误报”仅针对本轮的光照任务：像素规则可能正确发现了运动，却不对应光照切换。事件在时间上对应光照变化，也不能证明算法知道变化原因。</p>
+      <details class="study-rules"><summary>怎样保证比较条件一致，分数怎样计算？</summary><div><p>两种规则使用同一帧的亮度和变化像素比例，均不读取无人机坐标或光照时间表。正确答案只交给独立评估器。</p><p>方法 A：相邻画面平均亮度变化至少 8 个百分点。方法 B：亮度差达到 18 灰度级的像素占比至少 0.1%。两者均在从未触发转为触发时报警，最短事件间隔 1.5 秒；第一帧只建立基准。</p><p>匹配以图像采样时间为准：光照切换后 1 秒内的第一条报警对应一次变化，多余或窗口外的报警计为误报。窗口加上观测延迟尚未结束时显示“等待”，结束仍无对应报警才算漏报。平均发现延迟包括采样等待与送达延迟；没有发现事件时显示“—”。</p><p>报告只评价当前记录范围；回放到较早时刻时，报告也回到当时。规则版本为 illumination-comparison/1，阈值为手工设定。图像噪声为固定种子的合成扰动，尚未对应现实相机标定。</p></div></details>
+      <div class="study-actions"><button class="button primary" id="export-report" disabled>导出对照报告 JSON</button><a class="button secondary" href="#workspace">返回场景与时间回放 ↑</a></div><p class="study-source" id="study-source">报告读取保存的图像统计。</p>
+    </section>
+    <section class="batch-section" id="batch-lab" aria-labelledby="batch-title">
+      <div class="section-heading"><div><p class="eyebrow">REPEATABLE SUITE / 固定方案，自动执行</p><h2 id="batch-title">把每一种条件，换几个种子再试。</h2></div><p id="batch-status" role="status">准备批量实验</p></div>
+      <div class="batch-setup"><label>下一批实验方案<select id="batch-profile"><option value="full">完整对照 · 12 轮</option><option value="quick">快速对照 · 4 轮</option></select></label><div><strong id="batch-plan">下一批：4 种条件 × 种子 42、43、44，共 12 轮。</strong><p>固定开阔场地、不规则运动、5 Hz、0.2 秒延迟。依次比较明显变化、轻微变化、图像噪声、恒定光照；两种观察规则保持不变。</p></div></div>
+      <div class="batch-actions"><button id="batch-start" class="button primary" disabled>运行这批实验 ▶</button><button id="batch-pause" class="button secondary" disabled>暂停批量实验</button><button id="batch-stop" class="button secondary" disabled>停止并保留完成轮次</button></div>
+      <div class="batch-progress-area"><div><strong id="batch-count">0 / 12 轮完成</strong><span id="batch-current">每轮固定 24 秒模拟时间，批量加速计算。</span></div><progress id="batch-progress" max="12" value="0" aria-label="批量实验进度"></progress></div>
+      <div class="batch-overview"><div class="batch-preview"><div><strong>批量相机预览</strong><span id="batch-camera-time">运行时显示送达画面</span></div><canvas id="batch-camera" width="360" height="240" aria-label="当前批量轮次的相机观测图像"></canvas><p>按原有步长实际采样与分析。为加快计算，预览只显示部分送达帧；保存的统计包含全部样本。</p></div><div class="batch-totals"><p>发现 / 漏报 / 本光照任务误报</p><div><h3>A · 整体亮度</h3><strong id="batch-brightness-counts">—</strong><small>平均发现延迟 <b id="batch-brightness-delay">—</b></small></div><div><h3>B · 像素比例</h3><strong id="batch-pixels-counts">—</strong><small>平均发现延迟 <b id="batch-pixels-delay">—</b></small></div><p id="batch-scope">等待运行。未完成的轮次不计入汇总。</p><p>已完成模拟时长 <b id="batch-total-time">0 s</b></p></div></div>
+      <div class="batch-breakdown"><h3>按条件查看结果</h3><div class="batch-table" tabindex="0" role="region" aria-label="批量条件对照，窄屏可横向滚动"><table><thead><tr><th scope="col">条件</th><th scope="col">完成轮次</th><th scope="col">A 发现 / 漏报 / 误报</th><th scope="col">B 发现 / 漏报 / 误报</th></tr></thead><tbody id="batch-conditions"></tbody></table></div><p>延迟按实际发现的事件加权汇总。恒定光照没有预设切换；没有发现时，延迟显示“—”。种子只改变这组模拟输入，这些结果不代表现实性能。</p></div>
+      <details class="batch-run-details" open><summary>逐轮结果与回放</summary><div id="batch-runs"><p class="empty">每完成一轮，会在这里留下配置、结果和回放入口。</p></div></details>
+      <div class="batch-files"><label>本浏览器最近 3 批<select id="batch-history"><option>正在读取</option></select></label><div class="batch-actions"><button id="batch-export" class="button primary" disabled>导出完整实验包</button><button id="batch-report-export" class="button secondary" disabled>导出汇总报告</button><button id="batch-import" class="button secondary" disabled>导入批量实验包</button></div></div>
+      <p id="batch-storage" class="batch-footnote">正在检查浏览器存储。</p><p class="batch-footnote">完整实验包含各轮回放数据，支持重新导入；汇总报告只含结果。开始新批次会保留最近 3 批，重要结果请导出。</p><p id="batch-notice" class="notice" role="status">当前单轮、单轮历史和批量记录分别保留。</p><input id="batch-file" type="file" accept=".json,application/json" hidden>
+    </section>
+    <section class="scenario-guide" id="scenario-guide" aria-labelledby="guide-title">
+      <div class="section-heading"><div><p class="eyebrow">READ THE SCENE / 运行与感知说明</p><h2 id="guide-title">无人机在做什么，程序又知道什么？</h2></div><p>先看运动，再看传感器输入，最后看算法给出的结论。下面的“未接入”仅为原理介绍。</p></div>
+      <p class="guide-table-hint">手机上可左右滑动表格，查看完整对照内容。</p>
+      <div class="role-cards">
+        <article><span>01 / 运动物体</span><h3>无人机</h3><p>在三维场地中改变位置。当前按设定轨迹运动，机身转动和旋翼是视觉动画。</p></article>
+        <article><span>02 / 采集数据</span><h3>传感器</h3><p>相机得到一张图，测距仪得到一个距离。设备的位置和朝向在本实验中保持固定。</p></article>
+        <article><span>03 / 解释数据</span><h3>观察算法</h3><p>比较收到的相机画面，记录变化；读取测距包，说明回波是否有效。当前没有物体类别结论。</p></article>
+      </div>
+      <details open><summary>无人机运行描述<span>三种轨迹与真实飞行的区别</span></summary><div class="guide-body">
+        <p>橙色无人机是一个有三维形状的运动物体，既能水平移动，也能改变高度。每轮运行 24 秒；轨迹由“运动方式 + 种子”决定，同一组合可以复现同一路径。当前轨迹不根据相机或测距结果改变。</p>
+        <div class="guide-table" tabindex="0" role="region" aria-label="无人机运动方式对照，可横向滚动"><table><thead><tr><th scope="col">运动方式</th><th scope="col">画面怎样表现</th><th scope="col">目前怎样生成</th></tr></thead><tbody>
+          <tr><th scope="row">不规则飞行</th><td>不断转弯、变速并升降。</td><td>带种子的随机序列改变期望速度，限制加速度；碰到场地边界时做简化反向处理。</td></tr>
+          <tr><th scope="row">空间环绕</th><td>沿环形路线移动，同时起伏。</td><td>预先规定的周期轨迹。</td></tr>
+          <tr><th scope="row">空间 8 字</th><td>水平路线呈 8 字形，同时改变高度。</td><td>预先规定的交叉周期轨迹。</td></tr>
+          <tr><th scope="row">手动飞行</th><td>用户操作方向和升降。</td><td>仅保留在<a href="./index.html#lab">旧版演示</a>；当前实验台未接入。</td></tr>
+        </tbody></table></div>
+        <p class="guide-note">当前运动是简化轨迹模型。没有旋翼受力、飞控、风场、避障或碰撞响应，物体可能穿过障碍；机身朝向也未由飞行动力学计算。具有飞控参与的仿真属于另一层能力，可参考 <a href="https://docs.px4.io/main/en/simulation/">PX4 仿真说明</a>，本页尚未接入。</p>
+      </div></details>
+      <details open><summary>当前感知器怎样获得和解释数据<span>相机、测距、图像变化</span></summary><div class="guide-body">
+        <p><strong>传感器负责提供观测，算法负责解释观测。</strong>在当前场景中，相机和测距仪分别提供两类输入：</p>
+        <div class="guide-sensors"><article><h3>固定相机：得到画面</h3><p>从固定视点渲染一张 360 × 240 的彩色图像。无人机的远近、遮挡和场景光照会影响画面。人工拖动左侧全景不会改变这台相机的视点。</p></article><article><h3>固定测距：得到距离</h3><p>程序求出固定测量方向上最近的表面，再生成距离与有效性数据。它可能测到墙面，也可能没有回波；这里采用几何模型，尚未模拟真实光传播和材质反射。</p></article></div>
+        <ol class="guide-steps"><li><strong>采集</strong><span>每秒 5 或 10 次，得到图像和距离；图像可加入合成噪声。</span></li><li><strong>送达</strong><span>按配置延迟交给观察程序；测距还可加入扰动或丢包。</span></li><li><strong>比较</strong><span>首张图建立基准，后续比较相邻图像的整体亮度和变化像素占比。</span></li><li><strong>记录</strong><span>保存统计，由两种规则独立判断，再核对环境光照事件。</span></li></ol>
+        <p class="guide-note">例：第 4 秒场景变暗，设置 0.2 秒延迟后，程序在 4.20 秒收到图像并记录亮度变化。这说明程序察觉了画面变化，不能证明它识别出了无人机。</p>
+      </div></details>
+      <details><summary>“识别”到底指哪种结论？<span>发现变化、类别、距离和持续关联</span></summary><div class="guide-body">
+        <div class="guide-table" tabindex="0" role="region" aria-label="感知结论区别，可横向滚动"><table><thead><tr><th scope="col">问题</th><th scope="col">对应能力</th><th scope="col">当前状态</th></tr></thead><tbody>
+          <tr><th scope="row">画面有没有变化？</th><td>比较连续图像的统计量。</td><td><span class="tag done">已实现</span> 整幅图像统计</td></tr>
+          <tr><th scope="row">画面里是什么物体？</th><td>分类模型根据图像特征给出类别判断。</td><td><span class="tag planned">未接入</span> 没有“无人机”类别输出</td></tr>
+          <tr><th scope="row">某类物体在图像哪里？</th><td>物体检测给出类别与图像中的区域；这不直接等于三维坐标。</td><td><span class="tag planned">未接入</span></td></tr>
+          <tr><th scope="row">某个方向的表面有多远？</th><td>测距设备给出距离；距离本身不带物体类别。</td><td><span class="tag done">已实现</span> 单束固定方向</td></tr>
+          <tr><th scope="row">前后画面里是否为同一物体？</th><td>跟踪在连续观测之间建立关联。</td><td><span class="tag planned">未接入</span></td></tr>
+        </tbody></table></div>
+        <p>例如，相机画面中的光照改变也会产生事件；即使人眼看到了无人机，当前算法仍只输出“画面变化”。OpenCV 将<a href="https://docs.opencv.org/4.x/d6/d0f/group__dnn.html">图像分类与物体检测</a>列为不同任务，它们需要与任务匹配的模型；本页面没有加载此类模型。</p>
+      </div></details>
+      <details><summary>感知有哪些常见方式？<span>按输入、原理与限制对照</span></summary><div class="guide-body">
+        <p>同一种传感器可以配合不同算法。“相机”“热成像”“测距”说明数据从哪里来；“差分”“分类”“检测”说明怎样解释数据。以下是常见方式的概念对照。</p>
+        <div class="guide-table" tabindex="0" role="region" aria-label="感知方式对照，可横向滚动"><table><thead><tr><th scope="col">方式与输入</th><th scope="col">怎样得到结论</th><th scope="col">能回答与不能回答</th><th scope="col">本页状态</th></tr></thead><tbody>
+          <tr><th scope="row">连续图像差分<br>输入：相机画面</th><td>比较前后图像的像素差异。</td><td>能说明画面是否变化；光照与物体运动都可能影响结果，不能确定类别。</td><td>已实现整幅统计</td></tr>
+          <tr><th scope="row">背景比较<br>输入：相机画面</th><td>建立背景模型，找出当前画面与背景不同的区域。</td><td>可表示前景区域；前景不等于某一物体类别。参见 <a href="https://docs.opencv.org/4.x/d1/dc5/tutorial_background_subtraction.html">OpenCV 背景建模</a>。</td><td>未接入</td></tr>
+          <tr><th scope="row">学习型视觉识别<br>输入：相机画面</th><td>使用事先从样本中学到特征的模型，给出类别或图像区域判断。</td><td>可回答物体类别相关问题；结果依赖数据和模型，需要验证误认与漏认。参见 <a href="https://docs.opencv.org/4.x/d6/d0f/group__dnn.html">OpenCV 模型接口</a>。</td><td>未接入</td></tr>
+          <tr><th scope="row">距离与深度感知<br>输入：距离数据</th><td>单束提供一个方向的距离；深度相机或扫描式设备可提供更多方向的几何信息。</td><td>帮助描述表面远近和形状；几何信息本身不自动给出类别。参见 <a href="https://gazebosim.org/api/sensors/10/annotated.html">Gazebo 传感器类型</a>。</td><td>仅单束几何测距</td></tr>
+          <tr><th scope="row">热成像<br>输入：热图像</th><td>热相机将热辐射差异形成图像，再由算法解释。</td><td>提供与普通彩色相机不同的观测；热差异也不能单独证明物体身份。参见 <a href="https://gazebosim.org/api/sensors/10/classgz_1_1sensors_1_1ThermalCameraSensor.html">Gazebo 热相机模型</a>。</td><td>未接入</td></tr>
+        </tbody></table></div>
+      </div></details>
+      <details><summary>为什么模拟世界知道坐标，观察程序却不知道？<span>世界状态、观测输入、结果验证</span></summary><div class="guide-body">
+        <p>模拟器必须知道物体的位置，才能画出世界、计算遮挡和生成测距数据。当前图像观察模块接收的是相机像素、采样时间与序号，不接收无人机坐标或名称。这样可以区分“世界实际发生了什么”和“程序从画面判断出了什么”。</p>
+        <p>世界位置单独保存在实验记录中，用于重绘回放。若要评价识别能力，需要另用独立评估比较算法结果和正确答案；当前尚无物体识别的准确率、漏认率或现实设备性能结论。</p>
+        <p>Autoresearch 在这个项目中提供的是“固定条件、运行实验、保存结果、比较改动”的方法参考。无人机运动、传感器和图像统计由本演示另行实现，当前没有运行上游模型训练。</p>
+      </div></details>
+      <p class="guide-footnote">依据当前 V0.5 实现整理 · <a href="../../projects/005-autoresearch/SCENARIO.md">完整文字说明与资料来源 ↗</a> · <a href="#workspace">返回场景运行 ↑</a></p>
+    </section>
+    <section class="records-section" id="records"><div class="section-heading"><div><p class="eyebrow">03 / 可复查的实验</p><h2>每次尝试都有一份记录。</h2></div><p>保留最近 6 次实验。点击记录可以回放；最近两次保存的实验会并排显示。</p></div><div class="records-grid"><div class="record-list" id="record-list"><p class="empty">开始并保存一次实验，记录会出现在这里。</p></div><div class="comparison" id="comparison"><h3>最近两次实验对照</h3><p class="empty">保存两次不同配置的实验后，即可查看观测数据的差异。</p></div></div></section>
+    <section class="capabilities" id="capabilities"><div class="section-heading"><div><p class="eyebrow">04 / 平台的边界与扩展</p><h2>先建立可运行的共同基础。</h2></div><p>这是一套观察实验原型。下面区分正在工作的组件和下一阶段需要接入的能力。</p></div><div class="capability-grid">
+      <article><span class="tag done">已运行</span><h3>世界与运动</h3><p>三维场地、遮挡物、三种确定性轨迹、环境光照。障碍参与光学遮挡；当前没有飞行避障、碰撞响应、旋翼空气动力学或风场。</p></article>
+      <article><span class="tag done">已运行</span><h3>设备与观测</h3><p>固定相机渲染图像；单束固定方向测距，测量最近相交表面。支持采样、延迟、距离扰动和测距丢包。</p></article>
+      <article><span class="tag done">已运行</span><h3>实验与回放</h3><p>配置保存、观测记录、事件回放、JSON 导入导出、两次运行对照。历史图像按记录状态重绘，图像统计使用保存值。</p></article>
+      <article><span class="tag done">已运行 / 基础观察</span><h3>独立图像统计</h3><p>模块只读取像素，比较相邻画面的亮度与变化比例，自动记录事件。当前没有物体分类、定位、跟踪或模型训练。</p></article>
+      <article><span class="tag planned">待校准</span><h3>现实一致性</h3><p>需要用实际测量核对尺寸、材质、运动和传感器误差。当前场景单位与数据不能作为现实设备性能结论。</p></article>
+      <article><span class="tag done">已运行 / 批量评测</span><h3>Autoresearch 方法参考</h3><p>按固定条件和多个种子自动运行，汇总两种手工规则的结果，保留逐轮回放。当前没有 AI 自动改代码、规则搜索或上游训练。</p></article>
+    </div></section>
+  </main><input id="import-file" type="file" accept=".json,application/json" hidden><footer><a href="./index.html#lab">打开已保留的旧演示 ↗</a><a href="../../projects/005-autoresearch/README.md">研究记录与版本说明 ↗</a><span>005 · 本地实验原型 · Three.js / MIT</span></footer>
+</body></html>

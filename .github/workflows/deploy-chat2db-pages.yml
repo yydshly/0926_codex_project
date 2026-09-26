@@ -15,6 +15,8 @@ on:
       - "sites/003-antra/**"
       - "projects/004-stemdeck/**"
       - "sites/004-stemdeck/**"
+      - "projects/005-autoresearch/**"
+      - "sites/005-autoresearch/**"
       - "projects/006-vercel-eve/**"
       - "sites/006-vercel-eve/**"
       - "projects/007-palmier-pro/**"
@@ -59,6 +61,8 @@ jobs:
           cp -R projects/003-antra _site/projects/
           cp -R sites/004-stemdeck _site/sites/
           cp -R projects/004-stemdeck _site/projects/
+          cp -R sites/005-autoresearch _site/sites/
+          cp -R projects/005-autoresearch _site/projects/
           cp -R sites/006-vercel-eve _site/sites/
           cp -R projects/006-vercel-eve _site/projects/
           cp -R sites/007-palmier-pro _site/sites/

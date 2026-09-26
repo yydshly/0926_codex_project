@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark">
+  <title>005 · 可选验证任务：小语言模型训练优化</title>
+  <link rel="stylesheet" href="./workbench.css"><link rel="stylesheet" href="./task.css">
+</head>
+<body>
+  <a class="skip" href="#task-main">跳到任务设计</a>
+  <header class="top"><a class="brand" href="./index.html"><b>005</b> Autoresearch 训练研究</a><nav aria-label="页面导航"><a href="./understanding.html">理解与方向</a><a href="#task-plan">模型学什么</a><a href="#research-loop">AI 改什么</a><a href="#acceptance">怎样算有效</a><a href="#environment">本机条件</a></nav></header>
+  <main id="task-main" class="task-main">
+    <section class="task-hero" aria-labelledby="task-title">
+      <p class="eyebrow">OPTIONAL RESEARCH TASK / 源项目训练方法的验证方案</p>
+      <span class="task-status">可选验证任务 · 尚未训练</span>
+      <h1 id="task-title">同样的训练时间，<br><span>小模型能否学得更好？</span></h1>
+      <p class="task-lead">让 AI 修改训练程序，让小模型真实学习文本。以独立评测检查模型结构与训练方法的改动，保存有效版本，也保留失败证据。</p>
+      <div class="task-links"><a class="button primary" href="#task-plan">查看修订后的任务 ↓</a><a class="button secondary" href="../../projects/005-autoresearch/TASK-DESIGN.md">完整研究约定 ↗</a></div>
+      <p class="task-disclosure">已完成设计修订与只读环境核查。训练依赖、数据、真实基线与 AI 实验循环尚未就绪，当前没有训练成绩。</p>
+      <p class="task-note">此方案用于验证原库的训练研究方法，作为可选任务保留。最终产品方向仍待验证。<a href="./understanding.html">阅读我们最新的理解与场景判断 ↗</a></p>
+    </section>
+    <section class="task-section" aria-labelledby="revision-title">
+      <div class="task-heading"><p class="eyebrow">01 / 为什么保留这个方案</p><h2 id="revision-title">直接检验源项目的训练方法。</h2><p>画面质量自检主要调整图像统计、阈值和持续时间，可能产生局部改善，但不足以代表源项目的模型训练研究。此方案直接研究小语言模型的训练效率。</p></div>
+      <p class="task-note">无人机与光照演示保留为历史教学材料；其画面和报警数字不作为模型学习成绩。<a href="./task-quality.html">查看已停止推进的旧提案 ↗</a></p>
+    </section>
+    <section class="task-section" id="task-plan" aria-labelledby="plan-title">
+      <div class="task-heading"><p class="eyebrow">02 / 两层学习与改进</p><h2 id="plan-title">小模型学习权重，AI 研究训练方法。</h2></div>
+      <div class="task-columns">
+        <article class="task-card"><span class="task-number">学习者 · 小语言模型</span><h3>从文本中学习</h3><p>读取文本、预测后续 token，根据预测误差更新权重。评估使用未参与权重训练的文本。</p></article>
+        <article class="task-card"><span class="task-number">研究者 · AI 编程代理</span><h3>修改训练程序</h3><p>提出假设，调整模型结构、优化器或训练实现；查看真实实验反馈，决定保留或撤销。</p></article>
+        <article class="task-card"><span class="task-number">裁判 · 固定评估器</span><h3>检查预测质量</h3><p>采用固定数据与评测，比较 val_bpb；数值越低，表示对这份文本的概率预测质量越好。</p></article>
+      </div>
+      <p class="task-note">每轮计时用于固定计算预算。模型的能力必须来自训练后的权重；输出文本、曲线和分数都需要真实运行产生。</p>
+    </section>
+    <section class="task-section research-section" id="research-loop" aria-labelledby="research-title">
+      <div class="task-heading"><p class="eyebrow">03 / 可以改进的内容</p><h2 id="research-title">研究模型如何学、如何计算。</h2><p>从可解释的改动开始，每轮写下假设与代码差异。没有哪种改动保证有效。</p></div>
+      <div class="task-columns">
+        <article class="task-card"><span class="task-number">训练方法</span><h3>怎样更新权重</h3><p>学习率安排、优化器设置和批次组织，影响有限时间里的训练进展。</p></article>
+        <article class="task-card"><span class="task-number">模型结构</span><h3>怎样组织计算</h3><p>网络深度、宽度、注意力与激活方式，影响表达能力及计算开销。</p></article>
+        <article class="task-card"><span class="task-number">执行效率</span><h3>怎样用好预算</h3><p>检查正确性后优化实现，研究同样时间内能否处理更多有效训练数据。</p></article>
+      </div>
+      <ol class="task-loop"><li>建立真实基线</li><li>AI 提出代码改动</li><li>重新训练候选</li><li>评测并保留或撤销</li><li>复跑与独立检验</li></ol>
+      <p class="task-note">这是源项目允许研究的方向。网页将展示实际实验产物；代理运行器仍需接入。<a href="https://github.com/karpathy/autoresearch#how-it-works">核对上游说明 ↗</a></p>
+    </section>
+    <section class="task-section" id="acceptance" aria-labelledby="acceptance-title">
+      <div class="task-heading"><p class="eyebrow">04 / 实验决定效果</p><h2 id="acceptance-title">先冻结条件，再判断是否进步。</h2><p>下列为实验约定，当前没有任何基线分数、改善幅度或训练曲线。</p></div>
+      <div class="task-goals">
+        <article><strong>300 秒 / 轮</strong><h3>上游的训练预算</h3><p>启动、编译与评估时间另列。本机需先验证可行性；任何适配都记录为独立协议。</p></article>
+        <article><strong>val_bpb 越低越好</strong><h3>用固定文本评分</h3><p>固定数据、分词器与评估代码。续写样例用于观察，不靠挑选好看的输出决定胜负。</p></article>
+        <article><strong>同组种子复跑</strong><h3>检查改善是否稳定</h3><p>基线与入选候选至少各用三次配对种子，报告每次结果、平均值及波动。</p></article>
+        <article><strong>保留独立最终集</strong><h3>检查选优后的泛化</h3><p>本地扩展另留未用于选优的数据。结果不稳定或没有改善时，如实保留基线。</p></article>
+      </div>
+      <p class="task-note">该任务检验当前设备、数据和短时间预算下的训练效率。较低的验证损失不直接证明通用问答或推理能力；少量复跑也不直接证明统计显著性。</p>
+    </section>
+    <section class="task-section" id="environment" aria-labelledby="environment-title">
+      <div class="task-heading"><p class="eyebrow">05 / 本机只读核查 · 2026-09-26</p><h2 id="environment-title">有 GPU，训练环境还需验证。</h2><p>以下是实际检查结果，尚未执行 CUDA 训练或兼容性测试。</p></div>
+      <div class="task-columns">
+        <article class="task-card"><span class="task-number">已查到 · 硬件</span><h3>RTX 4070 Laptop</h3><p>总显存 8188 MiB，约 8 GiB。硬件存在不等于上游默认配置可以直接运行。</p></article>
+        <article class="task-card"><span class="task-number">已查到 · 当前解释器</span><h3>Python 3.10.11</h3><p>当前命令行 Python 未找到 PyTorch；uv 0.11.2 可用。其他 Python 环境未检查。</p></article>
+        <article class="task-card"><span class="task-number">待验证 · 真实训练</span><h3>兼容性与显存</h3><p>核对依赖、GPU 内核与 Windows 兼容性，再运行小规模前向、反向和评估验证。</p></article>
+      </div>
+      <p class="task-note">当前没有安装依赖、下载数据或启动训练。若需要缩小模型或适配实现，先完成并冻结本地基线，保持后续比较条件一致。<a href="../../projects/005-autoresearch/experiments/training-environment.json">查看核查记录 ↗</a></p>
+    </section>
+    <section class="task-section" aria-labelledby="delivery-title">
+      <div class="task-heading"><p class="eyebrow">06 / 下一项最小交付</p><h2 id="delivery-title">先跑完一轮真实基线。</h2></div>
+      <div class="task-two delivery-grid">
+        <article><span class="tag done">本次完成</span><h3>纠正任务与检查条件</h3><p>旧提案归档；新的研究任务明确学习对象、可修改范围、评分和复验方式。硬件核查已保存。</p><a href="../../projects/005-autoresearch/TASK-DESIGN.md">阅读完整研究约定 ↗</a></article>
+        <article><span class="tag planned">下一项实施</span><h3>真实训练与评测日志</h3><p>一轮可复查的本地基线，再做一次真实 AI 代码改动和候选训练，记录保留或撤销的依据。</p><a href="./workbench.html">查看保留的三维实验 ↗</a></article>
+      </div>
+      <p class="task-note">后续看板中的每个实验点都须对应实际代码和日志。没有找到改进、显存不足或运行失败，都可以成为真实的研究结果。</p>
+    </section>
+  </main>
+  <footer><span>005 · 修订任务设计 · 未运行训练</span><a href="../../projects/005-autoresearch/TASK-DESIGN.md">来源与完整约定 ↗</a><a href="./workbench.html">保留的三维实验 ↗</a></footer>
+</body>
+</html>

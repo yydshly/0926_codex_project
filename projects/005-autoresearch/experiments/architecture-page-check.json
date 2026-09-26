@@ -1,0 +1,39 @@
+{
+  "checkedOn": "2026-09-26",
+  "scope": "Source-grounded static architecture figure and page integration, no training execution",
+  "checks": [
+    {
+      "diagram": "1340x970",
+      "textOutsideCanvas": 0
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "imageLoaded": true,
+      "diagramScrolls": false,
+      "visibleCases": 12,
+      "detailsKeyboard": true,
+      "softwareFilterCount": 8
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "imageLoaded": true,
+      "diagramScrolls": true,
+      "visibleCases": 12,
+      "detailsKeyboard": true,
+      "softwareFilterCount": 8
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "imageLoaded": true,
+      "diagramScrolls": true,
+      "visibleCases": 12,
+      "detailsKeyboard": true,
+      "softwareFilterCount": 8
+    }
+  ],
+  "issues": [],
+  "repair": "Moved feedback label inside SVG bounds and rechecked all diagram text; refreshed screenshots."
+}

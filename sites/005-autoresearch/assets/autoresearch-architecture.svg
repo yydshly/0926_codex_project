@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1340" height="970" viewBox="0 0 1340 970" role="img" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">Autoresearch 原生技术架构：外部代理执行循环，仓库提供训练实验与评测</title>
+  <desc id="diagram-desc">人编写 program.md，外部编程代理读取规程、修改 train.py 并运行。prepare.py 提供数据、分词器、预算与固定评测。train.py 在 PyTorch 和 NVIDIA GPU 上训练，再调用 evaluate_bpb 输出指标。代理读取日志，执行 Git 保留或回退并记录 results.tsv，然后继续下一轮。规程约束由代理遵守，不是仓库内独立调度服务。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L9 4.5L0 9Z" fill="#a8c8d2"/></marker>
+    <marker id="feedback-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L9 4.5L0 9Z" fill="#90e7cc"/></marker>
+    <style>
+      text{font-family:'Segoe UI','Microsoft YaHei',sans-serif;fill:#e4f4f2}
+      .heading{font-size:25px;font-weight:600}.group{font-size:16px;fill:#91babf}
+      .title{font-size:22px;font-weight:600}.line{font-size:17px;fill:#bdd3d7}
+      .small{font-size:15px;fill:#a4bcc5}.label{font-size:16px;fill:#d0e4e4}
+      .node{fill:#132c38;stroke:#48616d;stroke-width:1}
+      .core-node{fill:#173b39;stroke:#4e8577;stroke-width:1}
+      .edge{fill:none;stroke:#a8c8d2;stroke-width:2;marker-end:url(#arrow)}
+      .feedback{fill:none;stroke:#90e7cc;stroke-width:2;marker-end:url(#feedback-arrow)}
+    </style>
+  </defs>
+  <rect width="1340" height="970" fill="#08141d"/>
+  <text x="40" y="44" class="heading">Autoresearch · 原生技术架构</text>
+  <text x="40" y="77" class="small">阅读方向：设定规程 → 代理改代码 → 实际训练与评测 → 根据结果继续研究</text>
+
+  <rect x="325" y="104" width="975" height="351" rx="10" fill="#0d252c" stroke="#3c6964"/>
+  <text x="350" y="131" class="group">仓库提供 · 三个核心文件</text>
+  <rect x="325" y="498" width="975" height="242" rx="10" fill="#101f2c" stroke="#3d5268"/>
+  <text x="350" y="530" class="group">执行环境 · train.py 进程内运行（需要本地依赖与 GPU）</text>
+
+  <path d="M290 208H355" class="edge"/>
+  <text x="302" y="189" class="small">编写</text>
+  <path d="M355 250H310V311H165V350" class="edge"/>
+  <text x="180" y="302" class="label">① 读取规程</text>
+  <path d="M290 425H980V285H1005" class="edge"/>
+  <text x="465" y="409" class="label">② 代理修改代码，并通过工具启动实验</text>
+  <path d="M955 236H1005" class="edge"/>
+  <text x="960" y="216" class="small">导入</text>
+  <path d="M1135 350V570" class="edge"/>
+  <rect x="1040" y="466" width="218" height="28" fill="#08141d"/>
+  <text x="1050" y="486" class="label">③ uv run train.py</text>
+  <path d="M975 635H920" class="edge"/>
+  <text x="927" y="615" class="small">训练后</text>
+  <path d="M650 635H595" class="edge"/>
+  <text x="601" y="615" class="small">输出</text>
+  <path d="M355 635H165V520" class="feedback"/>
+  <text x="177" y="600" class="label">⑤ 读取结果</text>
+  <path d="M90 520V785" class="feedback"/>
+  <text x="106" y="721" class="label">⑥ 决策与记录</text>
+  <path d="M40 842H20V433H40" class="feedback"/>
+  <rect x="10" y="608" width="28" height="99" fill="#08141d"/>
+  <text x="33" y="695" class="small" transform="rotate(-90 33 695)">继续下一轮</text>
+
+  <rect x="40" y="157" width="250" height="105" rx="8" class="node"/>
+  <text x="62" y="190" class="title">人 / 研究者</text>
+  <text x="62" y="220" class="line">设定目标、规程和环境</text>
+  <text x="62" y="245" class="small">启动外部代理</text>
+
+  <rect x="40" y="350" width="250" height="170" rx="8" class="node"/>
+  <text x="62" y="381" class="small">仓库之外</text>
+  <text x="62" y="415" class="title">AI 编程代理</text>
+  <text x="62" y="445" class="line">分析、假设、代码编辑</text>
+  <text x="62" y="473" class="line">调用终端、读取日志</text>
+  <text x="62" y="502" class="small">由它持续执行研究循环</text>
+
+  <rect x="355" y="157" width="270" height="125" rx="8" class="core-node"/>
+  <text x="377" y="193" class="title">program.md</text>
+  <text x="377" y="224" class="line">代理遵循的实验规程</text>
+  <text x="377" y="253" class="small">可改范围 · 记录 · 保留 / 回退</text>
+
+  <rect x="675" y="157" width="280" height="193" rx="8" class="core-node"/>
+  <text x="697" y="193" class="title">prepare.py</text>
+  <text x="697" y="225" class="line">准备数据与分词器</text>
+  <text x="697" y="254" class="line">数据加载 · 300 秒预算</text>
+  <text x="697" y="283" class="line">evaluate_bpb 固定评测</text>
+  <text x="697" y="320" class="small">规程约定：实验期间不修改</text>
+
+  <rect x="1005" y="157" width="270" height="193" rx="8" class="core-node"/>
+  <text x="1027" y="193" class="title">train.py</text>
+  <text x="1027" y="225" class="line">GPT 模型与优化器</text>
+  <text x="1027" y="254" class="line">训练循环与评测调用</text>
+  <text x="1027" y="283" class="line">输出运行指标</text>
+  <text x="1027" y="320" class="small">代理实际修改的程序</text>
+
+  <rect x="975" y="570" width="300" height="138" rx="8" class="node"/>
+  <text x="997" y="605" class="title">PyTorch + NVIDIA GPU</text>
+  <text x="997" y="637" class="line">执行候选训练，更新权重</text>
+  <text x="997" y="667" class="small">约 5 分钟训练计时</text>
+  <text x="997" y="690" class="small">启动、编译、最终评估另计</text>
+
+  <rect x="650" y="570" width="270" height="138" rx="8" class="node"/>
+  <text x="672" y="605" class="title">④ 固定验证评测</text>
+  <text x="672" y="637" class="line">调用 prepare.py 中的</text>
+  <text x="672" y="665" class="line">evaluate_bpb 函数</text>
+  <text x="672" y="691" class="small">验证文本 · val_bpb 越低越好</text>
+
+  <rect x="355" y="570" width="240" height="138" rx="8" class="node"/>
+  <text x="377" y="605" class="title">运行输出 / 日志</text>
+  <text x="377" y="637" class="line">val_bpb · 耗时 · 显存</text>
+  <text x="377" y="667" class="line">失败时的错误记录</text>
+  <text x="377" y="691" class="small">提供反馈，由代理读取</text>
+
+  <rect x="40" y="785" width="250" height="118" rx="8" class="node"/>
+  <text x="62" y="819" class="title">代理执行决策</text>
+  <text x="62" y="850" class="line">Git 保留 / 回退代码</text>
+  <text x="62" y="880" class="line">记录 results.tsv</text>
+
+  <text x="355" y="810" class="title">仓库的意义：让代理有一个可执行、可比较、可追溯的研究任务。</text>
+  <text x="355" y="847" class="line">训练程序 + 固定预算与评测 + 实验规程，构成研究反馈循环。</text>
+  <text x="355" y="879" class="small">图中的评测是进程内函数；“不修改评测”是规程约定，并非独立隔离服务。</text>
+  <text x="40" y="945" class="small">依据上游 README、program.md、prepare.py、train.py，2026-09-26 核对。此图为源码关系说明，不是本机训练结果。</text>
+</svg>

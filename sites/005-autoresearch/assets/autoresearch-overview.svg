@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="3100" viewBox="0 0 2000 3100" role="img" aria-labelledby="title desc">
+<title id="title">Autoresearch：从实验循环到软件、仿真与硬件的完整理解总览</title>
+<desc id="desc">原库直接提供小语言模型训练实验。外部编程代理按规程修改训练代码，执行固定预算训练，读取评测，记录并保留或回退。图中展开原库的三个核心文件、软件八种应用、仿真与硬件扩展、感知与动作的数据流、产品化适配、适用条件及本项目真实进展。所有跨领域方向均为待适配和验证的构想。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#88ead0"/></marker></defs>
+<style>text{font-family:'Segoe UI','Microsoft YaHei',Arial,sans-serif}a:focus{outline:3px solid #f5b67e}</style>
+<rect width="2000" height="3100" fill="#08141d"/>
+<text x="48" y="38" font-size="22" fill="#88ead0" font-weight="600" data-max-width="1800">005 / RESEARCH MAP</text>
+<text x="48" y="113" font-size="62" fill="#e4f4f2" font-weight="600" data-max-width="1800">Autoresearch · 我们的完整理解</text>
+<text x="48" y="159" font-size="29" fill="#c3d9df" font-weight="400" data-max-width="1800">用可运行、可比较、可追溯的实验，让 AI 的改法接受验证。</text>
+<rect x="48" y="180" width="276" height="36" rx="18" fill="#123b37" stroke="none"/>
+<text x="64" y="205" font-size="21" fill="#88ead0" font-weight="500" data-max-width="244">原库直接提供 · 已核对</text>
+<rect x="340" y="180" width="316" height="36" rx="18" fill="#1b3047" stroke="none"/>
+<text x="356" y="205" font-size="21" fill="#b7d4ff" font-weight="500" data-max-width="284">跨领域扩展 · 待适配验证</text>
+<rect x="672" y="180" width="296" height="36" rx="18" fill="#3b3025" stroke="none"/>
+<text x="688" y="205" font-size="21" fill="#f5c498" font-weight="500" data-max-width="264">本项目进展 · 如实记录</text>
+<text x="1530" y="206" font-size="23" fill="#9db6bf" font-weight="400" data-max-width="420">整理 / 2026.09.26</text>
+<rect x="48" y="238" width="1904" height="196" rx="14" fill="#102630" stroke="#35515c"/>
+<text x="80" y="281" font-size="25" fill="#88ead0" font-weight="600" data-max-width="52">01</text>
+<text x="138" y="281" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="1775">这个库的能力与意义</text>
+<text x="80" y="324" font-size="30" fill="#88ead0" font-weight="600" data-max-width="586">直接能力：小语言模型训练研究</text>
+<text x="80" y="361" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="586">比较模型结构、优化器与训练实现。</text>
+<text x="80" y="395" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="586">同一设备、固定预算，寻找更好的方案。</text>
+<text x="720" y="324" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="574">核心价值：让改进有实验依据</text>
+<text x="720" y="361" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="574">约定改什么、怎么运行和怎样比较。</text>
+<text x="720" y="395" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="574">保存改动、指标与失败，积累研究记录。</text>
+<text x="1360" y="324" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="554">职责边界：循环由外部代理执行</text>
+<text x="1360" y="361" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="554">仓库提供训练任务、评测与实验规程。</text>
+<text x="1360" y="395" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="554">通用调度、网页和领域接口需另外建设。</text>
+<rect x="48" y="458" width="1904" height="342" rx="14" fill="#102630" stroke="#35515c"/>
+<text x="80" y="501" font-size="25" fill="#88ead0" font-weight="600" data-max-width="52">02</text>
+<text x="138" y="501" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="1775">本质原理：外层分析改代码，内层执行，结果驱动下一轮</text>
+<rect x="80" y="532" width="328" height="150" rx="10" fill="#112e38" stroke="#41656b"/>
+<text x="98" y="560" font-size="21" fill="#88ead0" font-weight="500" data-max-width="292">人先定义</text>
+<text x="98" y="599" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="292">建立基线与约束</text>
+<text x="98" y="633" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">目标 / 数据 / 预算</text>
+<text x="98" y="663" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">可改范围 / 成功标准</text>
+<path d="M409 607h38" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="454" y="532" width="328" height="150" rx="10" fill="#112e38" stroke="#41656b"/>
+<text x="472" y="560" font-size="21" fill="#88ead0" font-weight="500" data-max-width="292">外部编程代理</text>
+<text x="472" y="599" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="292">提出假设并改代码</text>
+<text x="472" y="633" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">分析代码、日志与失败</text>
+<text x="472" y="663" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">选择下一种可检验改法</text>
+<path d="M783 607h38" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="828" y="532" width="328" height="150" rx="10" fill="#153d38" stroke="#41656b"/>
+<text x="846" y="560" font-size="21" fill="#88ead0" font-weight="500" data-max-width="292">被研究的程序</text>
+<text x="846" y="599" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="292">实际运行实验</text>
+<text x="846" y="633" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">原库：训练小语言模型</text>
+<text x="846" y="663" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">扩展：也可执行普通算法</text>
+<path d="M1157 607h38" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1202" y="532" width="328" height="150" rx="10" fill="#112e38" stroke="#41656b"/>
+<text x="1220" y="560" font-size="21" fill="#88ead0" font-weight="500" data-max-width="292">固定规则评分</text>
+<text x="1220" y="599" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="292">检验实际结果</text>
+<text x="1220" y="633" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">原库：val_bpb 越低越好</text>
+<text x="1220" y="663" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">同时记录资源与运行异常</text>
+<path d="M1531 607h38" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1576" y="532" width="328" height="150" rx="10" fill="#112e38" stroke="#41656b"/>
+<text x="1594" y="560" font-size="21" fill="#88ead0" font-weight="500" data-max-width="292">外部编程代理</text>
+<text x="1594" y="599" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="292">保留、回退与记录</text>
+<text x="1594" y="633" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">Git 关联代码版本</text>
+<text x="1594" y="663" font-size="22" fill="#c3d9df" font-weight="400" data-max-width="292">results.tsv 记录实验</text>
+<path d="M1740 683V720H617V685" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="913" y="703" width="596" height="34" rx="0" fill="#102630" stroke="none"/>
+<text x="931" y="727" font-size="24" fill="#88ead0" font-weight="500" data-max-width="560">反馈与历史记录 → 代理选择下一次尝试</text>
+<text x="80" y="771" font-size="24" fill="#b3cbd3" font-weight="400" data-max-width="1840">外层大模型通常不重新训练；内层按任务决定是否学习权重。“小模型”描述规模，是否专用是另一个维度。</text>
+<rect x="48" y="824" width="1904" height="346" rx="14" fill="#102630" stroke="#35515c"/>
+<text x="80" y="867" font-size="25" fill="#88ead0" font-weight="600" data-max-width="52">03</text>
+<text x="138" y="867" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="1775">内部模块与外部依赖：三个核心文件构成原生实验</text>
+<rect x="80" y="900" width="442" height="190" rx="10" fill="#0c212c" stroke="#35515c"/>
+<text x="100" y="940" font-size="32" fill="#e4f4f2" font-weight="600" data-max-width="402">program.md</text>
+<text x="100" y="975" font-size="23" fill="#88ead0" font-weight="500" data-max-width="402">实验规程 · 人定义</text>
+<text x="100" y="1010" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">设基线、改动范围、运行步骤</text>
+<text x="100" y="1040" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">约定记录、保留与回退</text>
+<text x="100" y="1070" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">由外部代理读取并执行</text>
+<rect x="546" y="900" width="442" height="190" rx="10" fill="#0c212c" stroke="#35515c"/>
+<text x="566" y="940" font-size="32" fill="#e4f4f2" font-weight="600" data-max-width="402">prepare.py</text>
+<text x="566" y="975" font-size="23" fill="#88ead0" font-weight="500" data-max-width="402">数据与评测 · 按规程固定</text>
+<text x="566" y="1010" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">数据准备、分词器、数据加载</text>
+<text x="566" y="1040" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">训练预算与 evaluate_bpb</text>
+<text x="566" y="1070" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">提供统一验证条件</text>
+<rect x="1012" y="900" width="442" height="190" rx="10" fill="#0c212c" stroke="#35515c"/>
+<text x="1032" y="940" font-size="32" fill="#e4f4f2" font-weight="600" data-max-width="402">train.py</text>
+<text x="1032" y="975" font-size="23" fill="#88ead0" font-weight="500" data-max-width="402">研究对象 · 代理可修改</text>
+<text x="1032" y="1010" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">GPT 模型、优化器与训练循环</text>
+<text x="1032" y="1040" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">在 GPU 上实际更新模型权重</text>
+<text x="1032" y="1070" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">调用评测并打印指标</text>
+<rect x="1478" y="900" width="442" height="190" rx="10" fill="#0c212c" stroke="#35515c"/>
+<text x="1498" y="940" font-size="32" fill="#e4f4f2" font-weight="600" data-max-width="402">外部执行环境</text>
+<text x="1498" y="975" font-size="23" fill="#88ead0" font-weight="500" data-max-width="402">必须另行准备</text>
+<text x="1498" y="1010" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">编程代理 + Python / PyTorch</text>
+<text x="1498" y="1040" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">单块 NVIDIA GPU + uv</text>
+<text x="1498" y="1070" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="402">Git 版本管理与实验日志</text>
+<text x="80" y="1120" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="1840">每轮训练计时约 300 秒；启动、编译与最终评估另计。上游在 H100 测试，本机兼容性与训练效果仍待验证。</text>
+<text x="80" y="1152" font-size="23" fill="#9db6bf" font-weight="400" data-max-width="1840">评测由训练进程调用；禁止改评测是规程约定。默认保存代码与指标，train.py 没有自动保存模型权重的步骤。</text>
+<text x="48" y="1216" font-size="25" fill="#88ead0" font-weight="600" data-max-width="52">04</text>
+<text x="106" y="1216" font-size="32" fill="#e4f4f2" font-weight="600" data-max-width="1800">使用场景与可扩展方向</text>
+<text x="1040" y="1216" font-size="25" fill="#b7d4ff" font-weight="400" data-max-width="910">以下是迁移构想，需要领域任务、接口和独立验证。</text>
+<rect x="48" y="1244" width="616" height="738" rx="14" fill="#102630" stroke="#426281"/>
+<rect x="76" y="1267" width="198" height="36" rx="18" fill="#1b3047" stroke="none"/>
+<text x="92" y="1292" font-size="21" fill="#b7d4ff" font-weight="500" data-max-width="166">扩展构想 · 待验证</text>
+<text x="76" y="1350" font-size="42" fill="#e4f4f2" font-weight="600" data-max-width="560">软件方向</text>
+<text x="76" y="1390" font-size="24" fill="#b7d4ff" font-weight="400" data-max-width="560">已有代码 / 数据 → 自动执行与评分</text>
+<path d="M76 1413h560" stroke="#35515c" fill="none"/>
+<rect x="692" y="1244" width="616" height="738" rx="14" fill="#102630" stroke="#426281"/>
+<rect x="720" y="1267" width="198" height="36" rx="18" fill="#1b3047" stroke="none"/>
+<text x="736" y="1292" font-size="21" fill="#b7d4ff" font-weight="500" data-max-width="166">扩展构想 · 待验证</text>
+<text x="720" y="1350" font-size="42" fill="#e4f4f2" font-weight="600" data-max-width="560">仿真与 3D 方向</text>
+<text x="720" y="1390" font-size="24" fill="#b7d4ff" font-weight="400" data-max-width="560">模拟环境 → 反复执行 → 比较方案</text>
+<path d="M720 1413h560" stroke="#35515c" fill="none"/>
+<rect x="1336" y="1244" width="616" height="738" rx="14" fill="#102630" stroke="#426281"/>
+<rect x="1364" y="1267" width="198" height="36" rx="18" fill="#1b3047" stroke="none"/>
+<text x="1380" y="1292" font-size="21" fill="#b7d4ff" font-weight="500" data-max-width="166">扩展构想 · 待验证</text>
+<text x="1364" y="1350" font-size="42" fill="#e4f4f2" font-weight="600" data-max-width="560">硬件协同方向</text>
+<text x="1364" y="1390" font-size="24" fill="#b7d4ff" font-weight="400" data-max-width="560">真实数据 / 设备 → 测试 → 校准验证</text>
+<path d="M1364 1413h560" stroke="#35515c" fill="none"/>
+<text x="76" y="1450" font-size="25" fill="#e4f4f2" font-weight="600" data-max-width="560">网页性能</text>
+<text x="76" y="1478" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="560">改组件、加载与缓存；测交互和资源开销</text>
+<text x="76" y="1514" font-size="25" fill="#e4f4f2" font-weight="600" data-max-width="560">数据库查询</text>
+<text x="76" y="1542" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="560">改查询与索引方案；测正确性和延迟</text>
+<text x="76" y="1578" font-size="25" fill="#e4f4f2" font-weight="600" data-max-width="560">程序加速</text>
+<text x="76" y="1606" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="560">改算法与数据结构；测结果一致性和耗时</text>
+<text x="76" y="1642" font-size="25" fill="#e4f4f2" font-weight="600" data-max-width="560">图片 / 音频压缩</text>
+<text x="76" y="1670" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="560">改编码与配置；测体积、保真度和成本</text>
+<text x="76" y="1706" font-size="25" fill="#e4f4f2" font-weight="600" data-max-width="560">文档信息提取</text>
+<text x="76" y="1734" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="560">改处理流程；按真实标注检查逐字段结果</text>
+<text x="76" y="1770" font-size="25" fill="#e4f4f2" font-weight="600" data-max-width="560">知识库问答</text>
+<text x="76" y="1798" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="560">改检索与提示流程；测答案证据和成本</text>
+<text x="76" y="1834" font-size="25" fill="#e4f4f2" font-weight="600" data-max-width="560">搜索与推荐</text>
+<text x="76" y="1862" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="560">改召回与排序；离线评测后再做线上验证</text>
+<text x="76" y="1898" font-size="25" fill="#e4f4f2" font-weight="600" data-max-width="560">排班与资源调度</text>
+<text x="76" y="1926" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="560">改求解方法；测约束满足、效率和成本</text>
+<text x="76" y="1962" font-size="24" fill="#88ead0" font-weight="500" data-max-width="560">多数任务可优化代码，无需训练新模型。</text>
+<text x="720" y="1454" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">游戏角色行为学习</text>
+<text x="720" y="1486" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">尝试策略或训练方法；在新关卡中评测。</text>
+<text x="720" y="1516" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">可包含强化学习，需明确观测与动作。</text>
+<text x="720" y="1566" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">3D 渲染与画面性能</text>
+<text x="720" y="1598" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">尝试渲染代码与配置；比较画质和帧时间。</text>
+<text x="720" y="1628" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">训练、画面渲染与物理模拟各有职责。</text>
+<text x="720" y="1678" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">导航、自动驾驶与多机避碰</text>
+<text x="720" y="1710" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">研究路径、协作与避障；检查碰撞和完成率。</text>
+<text x="720" y="1740" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">需可信物理、传感器、约束和未见场景。</text>
+<text x="720" y="1790" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">仓储 / 产线 / 工程设计仿真</text>
+<text x="720" y="1822" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">尝试调度或设计变量；比较资源与目标指标。</text>
+<text x="720" y="1852" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">离散事件、物理与工程求解器按任务选择。</text>
+<path d="M720 1888h560" stroke="#35515c" fill="none"/>
+<text x="720" y="1920" font-size="23" fill="#88ead0" font-weight="400" data-max-width="560">接入候选：Gazebo / Isaac Lab / CARLA 等。</text>
+<text x="720" y="1953" font-size="23" fill="#88ead0" font-weight="400" data-max-width="560">可先纯软件研究；真实落地需另外复验。</text>
+<text x="1364" y="1454" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">相机与视觉检测</text>
+<text x="1364" y="1486" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">比较识别流程、光照适应和误漏检。</text>
+<text x="1364" y="1515" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">需要代表性录像、标注与独立实景测试。</text>
+<text x="1364" y="1551" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">多传感器融合与校准</text>
+<text x="1364" y="1583" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">相机 / 测距 / IMU 等输入的一致性研究。</text>
+<text x="1364" y="1612" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">检验误差、时序、遮挡与数据丢失。</text>
+<text x="1364" y="1648" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">移动机器人与协作</text>
+<text x="1364" y="1680" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">在设备约束下验证导航、避障与协同。</text>
+<text x="1364" y="1709" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">先回放或仿真，再在受控场地实测。</text>
+<text x="1364" y="1745" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">边缘端模型部署</text>
+<text x="1364" y="1777" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">比较模型压缩、推理配置和执行效率。</text>
+<text x="1364" y="1806" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">同时测任务质量、延迟、功耗与内存。</text>
+<text x="1364" y="1842" font-size="27" fill="#e4f4f2" font-weight="600" data-max-width="560">设备测试与环境控制</text>
+<text x="1364" y="1874" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">比较测试配置、诊断方法或控制策略。</text>
+<text x="1364" y="1903" font-size="22" fill="#b3cbd3" font-weight="400" data-max-width="560">依赖设备接口、校准数据与明确运行边界。</text>
+<text x="1364" y="1954" font-size="23" fill="#88ead0" font-weight="500" data-max-width="560">价值：针对具体设备条件，用实验验证改善。</text>
+<rect x="48" y="2006" width="1904" height="254" rx="14" fill="#102630" stroke="#35515c"/>
+<text x="80" y="2049" font-size="25" fill="#88ead0" font-weight="600" data-max-width="52">05</text>
+<text x="138" y="2049" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="1775">仿真如何接入？内层运行环境，外层 AI 根据多轮结果改方法</text>
+<rect x="80" y="2080" width="280" height="83" rx="10" fill="#15332f" stroke="#3e6660"/>
+<text x="97" y="2114" font-size="26" fill="#e4f4f2" font-weight="600" data-max-width="246">物理环境</text>
+<text x="97" y="2146" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="246">运动 / 碰撞 / 扰动</text>
+<path d="M361 2121h24" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="391" y="2080" width="280" height="83" rx="10" fill="#15332f" stroke="#3e6660"/>
+<text x="408" y="2114" font-size="26" fill="#e4f4f2" font-weight="600" data-max-width="246">传感器模型</text>
+<text x="408" y="2146" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="246">图像 / 测距 / 噪声</text>
+<path d="M672 2121h24" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="702" y="2080" width="280" height="83" rx="10" fill="#15332f" stroke="#3e6660"/>
+<text x="719" y="2114" font-size="26" fill="#e4f4f2" font-weight="600" data-max-width="246">感知</text>
+<text x="719" y="2146" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="246">检测 / 估计 / 定位</text>
+<path d="M983 2121h24" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1013" y="2080" width="280" height="83" rx="10" fill="#15332f" stroke="#3e6660"/>
+<text x="1030" y="2114" font-size="26" fill="#e4f4f2" font-weight="600" data-max-width="246">决策策略</text>
+<text x="1030" y="2146" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="246">规则 / 规划 / 学习</text>
+<path d="M1294 2121h24" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1324" y="2080" width="280" height="83" rx="10" fill="#15332f" stroke="#3e6660"/>
+<text x="1341" y="2114" font-size="26" fill="#e4f4f2" font-weight="600" data-max-width="246">动作执行</text>
+<text x="1341" y="2146" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="246">执行器与设备约束</text>
+<path d="M1605 2121h24" fill="none" stroke="#88ead0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1635" y="2080" width="280" height="83" rx="10" fill="#15332f" stroke="#3e6660"/>
+<text x="1652" y="2114" font-size="26" fill="#e4f4f2" font-weight="600" data-max-width="246">新状态与记录</text>
+<text x="1652" y="2146" font-size="21" fill="#b3cbd3" font-weight="400" data-max-width="246">反馈给下一时刻</text>
+<text x="80" y="2198" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="1840">真值用于物理、渲染与评估；感知策略读取规定的传感器观测。直接读取坐标可作理想基线，不能验证真实感知。</text>
+<text x="80" y="2234" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="1840">网页承载展示与操作；可信仿真需动力学、观测误差、延迟和校准。迁移路径：软件仿真 → 硬件在环 → 受控实测。</text>
+<rect x="48" y="2284" width="1904" height="236" rx="14" fill="#102630" stroke="#35515c"/>
+<text x="80" y="2327" font-size="25" fill="#88ead0" font-weight="600" data-max-width="52">06</text>
+<text x="138" y="2327" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="1775">怎样变成可扩展产品？复用实验流程，为每个领域补齐任务与评测</text>
+<text x="80" y="2374" font-size="29" fill="#88ead0" font-weight="600" data-max-width="562">可复用的实验基础</text>
+<text x="80" y="2414" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="562">代理改动 → 执行 → 指标 → 版本与回退</text>
+<text x="80" y="2448" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="562">可扩展：任务队列、总预算、并行实验</text>
+<text x="80" y="2482" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="562">再补：评测隔离、数据版本、回放与审阅</text>
+<text x="724" y="2374" font-size="29" fill="#e4f4f2" font-weight="600" data-max-width="560">每个领域都要重新适配</text>
+<text x="724" y="2414" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="560">真实问题 + 数据 / 模拟器 / 设备接口</text>
+<text x="724" y="2448" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="560">允许改动的算法、配置或训练程序</text>
+<text x="724" y="2482" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="560">正确性、约束、指标与独立验收场景</text>
+<text x="1368" y="2374" font-size="29" fill="#e4f4f2" font-weight="600" data-max-width="554">候选产品与交付物</text>
+<text x="1368" y="2414" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="554">软件性能 / AI 流程 / 仿真 / 设备实验台</text>
+<text x="1368" y="2448" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="554">交付：方案、代码或权重、复验报告</text>
+<text x="1368" y="2482" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="554">价值需用净收益与实际用户需求检验</text>
+<rect x="48" y="2544" width="1904" height="204" rx="14" fill="#102630" stroke="#35515c"/>
+<text x="80" y="2587" font-size="25" fill="#88ead0" font-weight="600" data-max-width="52">07</text>
+<text x="138" y="2587" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="1775">什么任务值得用？有足够的改进空间，也有可信的检验方法</text>
+<text x="80" y="2632" font-size="28" fill="#88ead0" font-weight="600" data-max-width="280">适用前提</text>
+<text x="310" y="2632" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="636">有代码、日志、数据和可重复运行的任务；</text>
+<text x="310" y="2666" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="636">可尝试多种改法；评分客观，实验成本可控。</text>
+<text x="1030" y="2632" font-size="28" fill="#e4f4f2" font-weight="600" data-max-width="250">证明改进</text>
+<text x="1260" y="2632" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="652">与成熟方案、普通搜索做同预算比较；</text>
+<text x="1260" y="2666" font-size="24" fill="#c3d9df" font-weight="400" data-max-width="652">重复实验 + 未参与选优的独立测试。</text>
+<text x="80" y="2720" font-size="24" fill="#f5c498" font-weight="400" data-max-width="1840">少量阈值可先枚举或调参；主观目标、失真的环境与评分、只有动画的演示，都不足以证明 AI 带来了改善。</text>
+<rect x="48" y="2772" width="1904" height="218" rx="14" fill="#102630" stroke="#35515c"/>
+<text x="80" y="2815" font-size="25" fill="#88ead0" font-weight="600" data-max-width="52">08</text>
+<text x="138" y="2815" font-size="30" fill="#e4f4f2" font-weight="600" data-max-width="1775">我们的项目到哪里了？先认清证据，再选择下一步</text>
+<text x="80" y="2862" font-size="28" fill="#f5c498" font-weight="600" data-max-width="560">已实现 · 教学与规则实验</text>
+<text x="80" y="2899" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="560">V1：三维运动、坐标规则与光学标记。</text>
+<text x="80" y="2932" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="560">V0.5：相机画面变化检测、批量比较、回放。</text>
+<text x="80" y="2965" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="560">已有真实运行记录，规则由人工编写。</text>
+<text x="724" y="2862" font-size="28" fill="#e4f4f2" font-weight="600" data-max-width="560">尚未验证 · 能力与收益</text>
+<text x="724" y="2899" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="560">未完成物体识别、定位与真实硬件校准。</text>
+<text x="724" y="2932" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="560">未运行原库训练或 AI 自动改进循环。</text>
+<text x="724" y="2965" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="560">扩展方向与产品收益仍是待验证构想。</text>
+<text x="1368" y="2862" font-size="28" fill="#e4f4f2" font-weight="600" data-max-width="554">建议下一步 · 做一项可复验任务</text>
+<text x="1368" y="2899" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="554">选现有代码 / 数据 → 跑出可靠基线。</text>
+<text x="1368" y="2932" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="554">限定改动与预算 → 让代理试验。</text>
+<text x="1368" y="2965" font-size="23" fill="#c3d9df" font-weight="400" data-max-width="554">独立复测 → 看改进是否超过投入成本。</text>
+<text x="48" y="3034" font-size="21" fill="#9db6bf" font-weight="400" data-max-width="1904">原库事实：[1] README · [2] program.md · [3] prepare.py · [4] train.py；仿真接入参考：[5] Gazebo · [6] PX4。</text>
+<text x="48" y="3067" font-size="21" fill="#9db6bf" font-weight="400" data-max-width="1904">由本研究项目整理绘制，原库作者 Andrej Karpathy 及贡献者 / MIT。扩展适用性是研究判断；来源与文字版见网页综合总览。</text>
+</svg>

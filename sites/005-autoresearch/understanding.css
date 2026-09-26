@@ -1,0 +1,140 @@
+.understanding-page { font-size: 15px; }
+.understanding-page .top nav { flex-wrap: wrap; }
+.understanding-page .task-main { max-width: 1160px; }
+.understanding-page .task-hero { padding-top: 48px; }
+.understanding-page #consensus { scroll-margin-top: 18px; }
+.understanding-page .consensus-loop { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.understanding-page .consensus-points { margin: 24px 0; border-top: 1px solid var(--line); }
+.understanding-page .consensus-points > div { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 24px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+.understanding-page .consensus-points dt { color: #d8eee7; font-weight: 600; font-size: 15px; }
+.understanding-page .consensus-points dd { color: #b4ccd2; font-size: 14px; line-height: 1.9; margin: 0; }
+.understanding-page .consensus-points strong { color: #d8eee7; }
+.understanding-page .task-heading a,
+.understanding-page details a,
+.understanding-page .direction-list a,
+.understanding-page .progress-cards a,
+.understanding-page .sources-section a:not(.button) { color: var(--mint); text-decoration: underline; text-underline-offset: 4px; }
+.understanding-page .reading-map { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.understanding-page .reading-map a { padding: 18px 12px; font-size: 13px; border-right: 1px solid var(--line); }
+.understanding-page .reading-map a:last-child { border: 0; }
+.understanding-page .reading-map span { display: block; color: var(--mint); font: 12px Consolas, monospace; margin-bottom: 7px; }
+.understanding-page .reading-map a:hover { background: #14333b; }
+.understanding-page code { color: #dcf6eb; overflow-wrap: anywhere; }
+.understanding-page .task-section { scroll-margin-top: 18px; }
+.understanding-page .understanding-detail { margin-top: 14px; border: 1px solid var(--line); background: #0e232c; }
+.understanding-page summary { cursor: pointer; }
+.understanding-page summary:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.understanding-page .understanding-detail > summary { padding: 16px 18px; color: #c5e6e0; font-size: 14px; }
+.understanding-page .understanding-detail > div { padding: 0 20px 20px; color: #b3ccd1; font-size: 14px; line-height: 1.9; }
+.understanding-page .understanding-detail p + p { margin-top: 10px; }
+.understanding-page .fit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.understanding-page .fit-card { border: 1px solid var(--line); background: #102730; }
+.understanding-page .fit-card summary { padding: 20px; list-style: none; position: relative; }
+.understanding-page .fit-card summary::-webkit-details-marker { display: none; }
+.understanding-page .fit-card summary::after { content: "+"; position: absolute; top: 20px; right: 20px; color: var(--mint); font-size: 21px; }
+.understanding-page .fit-card[open] summary::after { content: "−"; }
+.understanding-page .fit-card h3 { font-size: 20px; margin-top: 12px; }
+.understanding-page .detail-hint { display: block; color: #9db6bf; font-size: 12px; margin-top: 6px; }
+.understanding-page .fit-card > div { padding: 0 20px 20px; color: #b3ccd1; font-size: 14px; line-height: 1.9; }
+.understanding-page .fit-card p + p { margin-top: 9px; }
+.understanding-page .fit-card > div > a { display: inline-block; margin-top: 10px; }
+.understanding-page .fit-label { display: inline-block; padding: 3px 8px; font-size: 11px; border: 1px solid #436359; }
+.understanding-page .native { color: #a9eed1; background: #12382f; border-color: #3f7462; }
+.understanding-page .conditional { color: #c2d5fb; background: #1c2d40; border-color: #496080; }
+.understanding-page .limited { color: #f3c9a0; background: #332c26; border-color: #766047; }
+.understanding-page .fit-check { margin-top: 22px; padding: 23px; background: #112b31; border-left: 2px solid var(--mint); }
+.understanding-page .fit-check h3 { font-size: 20px; }
+.understanding-page .fit-check ol { padding-left: 22px; margin: 12px 0 0; color: #b3ccd1; line-height: 1.9; }
+.understanding-page .fit-check li + li { margin-top: 6px; }
+.understanding-page .simulation-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 0; margin: 24px 0; list-style: none; gap: 14px; }
+.understanding-page .simulation-flow li { position: relative; padding: 18px 14px; background: #143532; border: 1px solid #3c6960; }
+.understanding-page .simulation-flow li + li::before { content: "→"; position: absolute; left: -14px; top: 42%; color: #96cabb; }
+.understanding-page .simulation-flow span { display: block; font-size: 11px; color: #8cc2b1; }
+.understanding-page .simulation-flow strong { display: block; font-size: 15px; margin: 6px 0; }
+.understanding-page .simulation-flow p { font-size: 12px; color: #b1d0c9; }
+.understanding-page .explanation-card { border: 1px solid var(--line); padding: 22px; background: #10252e; }
+.understanding-page .explanation-card p + p { margin-top: 12px; }
+.understanding-page .direction-list article { display: grid; grid-template-columns: 42px 1fr; gap: 15px; border-top: 1px solid var(--line); padding: 20px 0; }
+.understanding-page .direction-list article > span { font: 14px Consolas, monospace; color: var(--mint); padding-top: 4px; }
+.understanding-page .direction-list h3 { font-size: 19px; margin-bottom: 7px; }
+.understanding-page .direction-list p { color: #b3ccd1; line-height: 1.9; font-size: 14px; }
+.understanding-page .progress-cards p + p { margin-top: 12px; }
+.understanding-page .progress-cards a { display: inline-block; font-size: 13px; margin-top: 18px; }
+.understanding-page .sources-section ul { padding-left: 20px; color: #b3ccd1; line-height: 2; }
+.understanding-page .sources-section > p { color: var(--muted); font-size: 12px; }
+.understanding-page .case-filters { display: flex; flex-wrap: wrap; gap: 9px; margin: 22px 0 12px; }
+.understanding-page .case-filters button { border: 1px solid #496871; color: #c4dedb; background: #142c36; min-height: 44px; padding: 10px 16px; font-size: 13px; }
+.understanding-page .case-filters button:hover { border-color: var(--mint); }
+.understanding-page .case-filters button[aria-pressed="true"] { background: var(--mint); color: #0a252b; border-color: var(--mint); }
+.understanding-page .case-count { color: #a6c1c8; font-size: 12px; margin-bottom: 20px; min-height: 20px; }
+.understanding-page .use-case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.understanding-page .use-case-card { min-width: 0; padding: 24px; border: 1px solid var(--line); background: #102630; scroll-margin-top: 20px; }
+.understanding-page .case-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.understanding-page .case-number { color: var(--mint); font-size: 12px; }
+.understanding-page .use-case-card h3 { font-size: 23px; margin: 17px 0 9px; }
+.understanding-page .case-problem { font-size: 14px; color: #c4dcd9; line-height: 1.85; }
+.understanding-page .case-training { color: #c2cbe9; font-size: 12px; margin-top: 13px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.understanding-page .use-case-card dl { margin: 16px 0 0; }
+.understanding-page .use-case-card dl > div { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 12px; margin-top: 13px; }
+.understanding-page .use-case-card dt { color: #d1e7e3; font-size: 13px; }
+.understanding-page .use-case-card dd { color: #a9c2ca; font-size: 13px; line-height: 1.85; margin: 0; }
+.understanding-page .case-source { display: inline-block; font-size: 12px; margin-top: 19px; }
+.understanding-page .case-source,
+.understanding-page .case-delivery a { color: var(--mint); text-decoration: underline; text-underline-offset: 4px; }
+.understanding-page .case-delivery { margin-top: 20px; border-left: 2px solid var(--mint); background: #122d31; padding: 22px 24px; }
+.understanding-page .case-delivery h3 { font-size: 20px; margin-bottom: 12px; }
+.understanding-page .case-delivery p { font-size: 14px; line-height: 1.9; color: #b2cdcd; }
+.understanding-page .case-delivery p + p { margin-top: 10px; }
+.understanding-page [hidden] { display: none !important; }
+.understanding-page .architecture-figure { margin: 24px 0 0; }
+.understanding-page .architecture-scroll { max-width: 100%; overflow-x: auto; background: #08141d; border: 1px solid var(--line); }
+.understanding-page .architecture-scroll:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.understanding-page .architecture-scroll img { display: block; width: 100%; min-width: 1080px; height: auto; }
+.understanding-page .architecture-figure figcaption { color: #a9c2ca; line-height: 1.8; font-size: 12px; margin: 12px 0; }
+.understanding-page .architecture-actions { margin-top: 15px; margin-bottom: 24px; }
+.understanding-page .architecture-source { color: var(--muted); font-size: 12px; line-height: 1.9; margin-top: 16px; }
+.understanding-page .architecture-source a { color: var(--mint); text-decoration: underline; text-underline-offset: 3px; }
+.understanding-page .overview-figure { margin: 24px 0 0; }
+.understanding-page .overview-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 22px; padding: 14px; border: 1px solid var(--line); background: #102630; }
+.understanding-page .overview-zoom { display: flex; flex-wrap: wrap; gap: 6px; }
+.understanding-page .overview-toolbar button { min-height: 44px; padding: 10px 14px; border: 1px solid #496871; background: #142c36; color: #c4dedb; font-size: 13px; }
+.understanding-page .overview-toolbar button[aria-pressed="true"] { background: var(--mint); border-color: var(--mint); color: #0a252b; }
+.understanding-page .overview-toolbar label { display: flex; gap: 10px; align-items: center; color: #b3cbd3; font-size: 13px; }
+.understanding-page .overview-toolbar select { min-width: 0; min-height: 44px; max-width: 100%; font-size: 16px; padding: 7px; color: #e4f4f2; background: #142c36; border: 1px solid #496871; }
+.understanding-page #overview-read-state { font-size: 12px; line-height: 1.6; color: #b3cbd3; }
+.understanding-page .overview-viewport { width: 100%; overflow: auto; border: 1px solid var(--line); background: #08141d; overscroll-behavior: contain; }
+.understanding-page .overview-viewport.is-zoomed { max-height: 78vh; min-height: 330px; }
+.understanding-page .overview-viewport img { display: block; width: 100%; max-width: none; height: auto; }
+.understanding-page .overview-viewport:focus-visible,
+.understanding-page .overview-toolbar :focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.understanding-page .overview-figure figcaption { margin: 14px 0; color: #a9c2ca; line-height: 1.8; font-size: 13px; }
+.understanding-page .overview-actions { margin: 18px 0; }
+@media (max-width: 900px) {
+  .understanding-page .consensus-loop { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .understanding-page .reading-map { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .understanding-page .reading-map a { border-bottom: 1px solid var(--line); }
+  .understanding-page .simulation-flow { grid-template-columns: 1fr; gap: 16px; }
+  .understanding-page .simulation-flow li { padding: 14px 20px; }
+  .understanding-page .simulation-flow li + li::before { content: "↓"; top: -19px; left: 50%; }
+}
+@media (max-width: 640px) {
+  .understanding-page .consensus-loop { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .understanding-page .consensus-points > div { grid-template-columns: 1fr; gap: 7px; padding: 16px 0; }
+  .understanding-page .task-hero { padding-top: 28px; }
+  .understanding-page .top { padding: 16px 4%; gap: 14px; }
+  .understanding-page .top nav { gap: 14px; font-size: 12px; }
+  .understanding-page .task-status { font-size: 11px; }
+  .understanding-page .fit-grid { grid-template-columns: 1fr; }
+  .understanding-page .use-case-grid { grid-template-columns: 1fr; }
+  .understanding-page .use-case-card { padding: 19px; }
+  .understanding-page .use-case-card h3 { font-size: 21px; }
+  .understanding-page .use-case-card dl > div { grid-template-columns: 1fr; gap: 3px; }
+  .understanding-page .case-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .understanding-page .case-filters button { padding: 10px 8px; }
+  .understanding-page .case-delivery { padding: 18px; }
+  .understanding-page .fit-check { padding: 18px; }
+  .understanding-page .reading-map { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .understanding-page .reading-map a { padding: 13px 7px; font-size: 12px; }
+  .understanding-page .direction-list article { grid-template-columns: 28px 1fr; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

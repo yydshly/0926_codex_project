@@ -1,0 +1,20 @@
+{
+  "schema": "training-environment-inventory/1",
+  "checkedOn": "2026-09-26",
+  "scope": "Read-only inventory of the GPU reported by nvidia-smi and the current command-line Python. Other Python environments were not inspected.",
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "memoryTotalMiB": 8188,
+    "driverVersion": "576.28"
+  },
+  "python": {
+    "version": "3.10.11",
+    "torchModuleFound": false,
+    "datasetsModuleFound": false
+  },
+  "uvVersion": "0.11.2",
+  "trainingAttempted": false,
+  "dependenciesInstalledByThisCheck": false,
+  "compatibilityVerified": false,
+  "note": "GPU presence does not establish upstream kernel, operating-system, memory, or runtime compatibility. No model result is implied."
+}

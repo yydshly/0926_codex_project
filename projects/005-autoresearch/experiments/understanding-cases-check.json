@@ -1,0 +1,68 @@
+{
+  "checkedOn": "2026-09-26",
+  "scope": "Expanded scenario documentation, filtering, navigation, responsive layout and no-JavaScript fallback. No algorithm or training experiment.",
+  "checks": [
+    {
+      "width": 1440,
+      "defaultVisibleCases": 12,
+      "completeFields": true,
+      "filters": [
+        12,
+        8,
+        3,
+        1
+      ],
+      "keyboardFilter": true,
+      "hashRevealsCase": true,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "defaultVisibleCases": 12,
+      "completeFields": true,
+      "filters": [
+        12,
+        8,
+        3,
+        1
+      ],
+      "keyboardFilter": true,
+      "hashRevealsCase": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "defaultVisibleCases": 12,
+      "completeFields": true,
+      "filters": [
+        12,
+        8,
+        3,
+        1
+      ],
+      "keyboardFilter": true,
+      "hashRevealsCase": true,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "defaultVisibleCases": 12,
+      "completeFields": true,
+      "filters": [
+        12,
+        8,
+        3,
+        1
+      ],
+      "keyboardFilter": true,
+      "hashRevealsCase": true,
+      "overflow": false
+    },
+    {
+      "javaScriptEnabled": false,
+      "visibleCases": 12,
+      "filtersHidden": true
+    }
+  ],
+  "issues": []
+}

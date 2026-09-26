@@ -1,0 +1,145 @@
+{
+  "schema": "illumination-report/1",
+  "protocol": "illumination-comparison/1",
+  "run": {
+    "id": "run-1790408240660-yc3sct",
+    "name": "开阔平地 · 不规则飞行",
+    "createdAt": "2026-09-26T07:37:20.660Z",
+    "config": {
+      "layout": "open",
+      "motion": "wander",
+      "light": "cycle",
+      "seed": 42,
+      "rate": 5,
+      "noise": 0,
+      "delay": 0.2,
+      "dropout": 0,
+      "cameraNoise": 24
+    },
+    "duration": 24
+  },
+  "task": "发现环境光照切换",
+  "windowSeconds": 1,
+  "cooldownSeconds": 1.5,
+  "source": "对保存的图像统计按固定规则重新评估；未重算像素",
+  "available": true,
+  "reason": "",
+  "complete": true,
+  "samples": 120,
+  "expected": [
+    {
+      "time": 4,
+      "label": "环境变暗"
+    },
+    {
+      "time": 8,
+      "label": "环境恢复"
+    }
+  ],
+  "methods": [
+    {
+      "id": "brightness",
+      "name": "整体亮度变化",
+      "threshold": 8,
+      "unit": "个百分点",
+      "latest": {
+        "value": 0.01630999999999716,
+        "active": false,
+        "event": false
+      },
+      "outcomes": [
+        {
+          "time": 4,
+          "label": "环境变暗",
+          "deadline": 5.2,
+          "state": "detected",
+          "observedAt": 4.2,
+          "sampledAt": 4,
+          "delay": 0.20000000000000018
+        },
+        {
+          "time": 8,
+          "label": "环境恢复",
+          "deadline": 9.2,
+          "state": "detected",
+          "observedAt": 8.200000000000001,
+          "sampledAt": 8,
+          "delay": 0.20000000000000107
+        }
+      ],
+      "detected": 2,
+      "missed": 0,
+      "pending": 0,
+      "falseAlarms": 0,
+      "averageDelay": 0.20000000000000062
+    },
+    {
+      "id": "pixels",
+      "name": "变化像素比例",
+      "threshold": 0.1,
+      "unit": "%",
+      "latest": {
+        "value": 38.979167,
+        "active": true,
+        "event": false
+      },
+      "outcomes": [
+        {
+          "time": 4,
+          "label": "环境变暗",
+          "deadline": 5.2,
+          "state": "missed",
+          "observedAt": null,
+          "sampledAt": null,
+          "delay": null
+        },
+        {
+          "time": 8,
+          "label": "环境恢复",
+          "deadline": 9.2,
+          "state": "missed",
+          "observedAt": null,
+          "sampledAt": null,
+          "delay": null
+        }
+      ],
+      "detected": 0,
+      "missed": 2,
+      "pending": 0,
+      "falseAlarms": 1,
+      "averageDelay": null
+    }
+  ],
+  "alarms": [
+    {
+      "method": "pixels",
+      "frameIndex": 8,
+      "sequence": 1,
+      "sampledAt": 0.2,
+      "observedAt": 0.4,
+      "value": 38.869213,
+      "outcome": "false-alarm",
+      "expectedAt": null
+    },
+    {
+      "method": "brightness",
+      "frameIndex": 84,
+      "sequence": 20,
+      "sampledAt": 4,
+      "observedAt": 4.2,
+      "value": 9.593529999999998,
+      "outcome": "matched",
+      "expectedAt": 4
+    },
+    {
+      "method": "brightness",
+      "frameIndex": 164,
+      "sequence": 40,
+      "sampledAt": 8,
+      "observedAt": 8.200000000000001,
+      "value": 9.639368999999999,
+      "outcome": "matched",
+      "expectedAt": 8
+    }
+  ]
+}

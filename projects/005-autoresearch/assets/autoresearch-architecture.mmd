@@ -1,0 +1,29 @@
+flowchart TB
+  H["人：设定目标与研究规程"]
+  A["外部编程代理<br/>提出假设、改代码、运行命令"]
+
+  subgraph REPO["Autoresearch 仓库提供"]
+    P["program.md<br/>实验规程与可修改范围"]
+    F["prepare.py<br/>数据、分词器、预算、固定评测"]
+    T["train.py<br/>GPT、优化器、训练循环<br/>代理修改的文件"]
+  end
+
+  subgraph RUN["本地执行环境"]
+    G["PyTorch + NVIDIA GPU<br/>执行候选训练"]
+    E["调用 evaluate_bpb<br/>固定验证数据评分"]
+    O["运行输出<br/>val_bpb、耗时、显存或错误"]
+  end
+
+  D["代理执行决策<br/>Git 保留 / 回退<br/>记录 results.tsv"]
+
+  H -->|"编写"| P
+  P -->|"代理读取"| A
+  A -->|"修改并启动"| T
+  F -->|"导入数据工具与常量"| T
+  T -->|"执行"| G
+  G -->|"训练后"| E
+  F -.->|"提供评测函数与验证数据"| E
+  E --> O
+  O -->|"代理读取结果"| A
+  A --> D
+  D -->|"下一轮"| A

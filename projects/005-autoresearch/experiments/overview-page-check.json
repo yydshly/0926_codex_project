@@ -1,0 +1,304 @@
+{
+  "checkedAt": "2026-09-26T12:25:28.479Z",
+  "purpose": "Static overview diagram and website reading controls; no training or algorithm experiment",
+  "svg": {
+    "labels": 180,
+    "clipping": [],
+    "overlaps": []
+  },
+  "png": {
+    "path": "assets/autoresearch-overview.png",
+    "width": 2000,
+    "height": 3100,
+    "source": "same SVG rendered in Chromium"
+  },
+  "checks": [
+    {
+      "message": "All diagram labels fit assigned widths and image edges",
+      "passed": true
+    },
+    {
+      "message": "No text bounding boxes overlap",
+      "passed": true
+    },
+    {
+      "message": "1440px: no document overflow in full-image mode",
+      "passed": true
+    },
+    {
+      "message": "1440px: reading controls visible",
+      "passed": true
+    },
+    {
+      "message": "1440px: reading zoom changes image size",
+      "passed": true
+    },
+    {
+      "message": "1440px: hardware topic positions both axes",
+      "passed": true
+    },
+    {
+      "message": "1440px: zoom contained within viewer",
+      "passed": true
+    },
+    {
+      "message": "1440px: large text zoom works",
+      "passed": true
+    },
+    {
+      "message": "1440px: current progress reachable",
+      "passed": true
+    },
+    {
+      "message": "1440px: full-image mode restored",
+      "passed": true
+    },
+    {
+      "message": "1440px: software filter shows 8",
+      "passed": true
+    },
+    {
+      "message": "1440px: all filter shows 12",
+      "passed": true
+    },
+    {
+      "message": "768px: no document overflow in full-image mode",
+      "passed": true
+    },
+    {
+      "message": "768px: reading controls visible",
+      "passed": true
+    },
+    {
+      "message": "768px: reading zoom changes image size",
+      "passed": true
+    },
+    {
+      "message": "768px: hardware topic positions both axes",
+      "passed": true
+    },
+    {
+      "message": "768px: zoom contained within viewer",
+      "passed": true
+    },
+    {
+      "message": "768px: large text zoom works",
+      "passed": true
+    },
+    {
+      "message": "768px: current progress reachable",
+      "passed": true
+    },
+    {
+      "message": "768px: full-image mode restored",
+      "passed": true
+    },
+    {
+      "message": "768px: software filter shows 8",
+      "passed": true
+    },
+    {
+      "message": "768px: all filter shows 12",
+      "passed": true
+    },
+    {
+      "message": "390px: no document overflow in full-image mode",
+      "passed": true
+    },
+    {
+      "message": "390px: reading controls visible",
+      "passed": true
+    },
+    {
+      "message": "390px: reading zoom changes image size",
+      "passed": true
+    },
+    {
+      "message": "390px: hardware topic positions both axes",
+      "passed": true
+    },
+    {
+      "message": "390px: zoom contained within viewer",
+      "passed": true
+    },
+    {
+      "message": "390px: large text zoom works",
+      "passed": true
+    },
+    {
+      "message": "390px: current progress reachable",
+      "passed": true
+    },
+    {
+      "message": "390px: full-image mode restored",
+      "passed": true
+    },
+    {
+      "message": "390px: software filter shows 8",
+      "passed": true
+    },
+    {
+      "message": "390px: all filter shows 12",
+      "passed": true
+    },
+    {
+      "message": "320px: no document overflow in full-image mode",
+      "passed": true
+    },
+    {
+      "message": "320px: reading controls visible",
+      "passed": true
+    },
+    {
+      "message": "320px: reading zoom changes image size",
+      "passed": true
+    },
+    {
+      "message": "320px: hardware topic positions both axes",
+      "passed": true
+    },
+    {
+      "message": "320px: zoom contained within viewer",
+      "passed": true
+    },
+    {
+      "message": "320px: large text zoom works",
+      "passed": true
+    },
+    {
+      "message": "320px: current progress reachable",
+      "passed": true
+    },
+    {
+      "message": "320px: full-image mode restored",
+      "passed": true
+    },
+    {
+      "message": "320px: software filter shows 8",
+      "passed": true
+    },
+    {
+      "message": "320px: all filter shows 12",
+      "passed": true
+    },
+    {
+      "message": "Keyboard arrows scroll image",
+      "passed": true
+    },
+    {
+      "message": "Local file exists: understanding.html",
+      "passed": true
+    },
+    {
+      "message": "Section exists: #overview",
+      "passed": true
+    },
+    {
+      "message": "Local file exists: autoresearch-overview.svg",
+      "passed": true
+    },
+    {
+      "message": "Local file exists: autoresearch-overview.png",
+      "passed": true
+    },
+    {
+      "message": "Local file exists: OVERVIEW.md",
+      "passed": true
+    },
+    {
+      "message": "Local file exists: understanding.html",
+      "passed": true
+    },
+    {
+      "message": "Section exists: #architecture",
+      "passed": true
+    },
+    {
+      "message": "Local file exists: understanding.html",
+      "passed": true
+    },
+    {
+      "message": "Section exists: #use-cases",
+      "passed": true
+    },
+    {
+      "message": "Local file exists: understanding.html",
+      "passed": true
+    },
+    {
+      "message": "Section exists: #simulation",
+      "passed": true
+    },
+    {
+      "message": "Local file exists: understanding.html",
+      "passed": true
+    },
+    {
+      "message": "Section exists: #progress",
+      "passed": true
+    },
+    {
+      "message": "Page IDs are unique",
+      "passed": true
+    },
+    {
+      "message": "Diagram visible without JavaScript",
+      "passed": true
+    },
+    {
+      "message": "Downloads and text alternative available without JavaScript",
+      "passed": true
+    },
+    {
+      "message": "All 12 scenes visible without JavaScript",
+      "passed": true
+    },
+    {
+      "message": "Full-image mode resets topic; same topic can be selected again",
+      "passed": true
+    }
+  ],
+  "widths": [
+    {
+      "width": 1440,
+      "fitOverflow": false,
+      "hardwareTopicPosition": {
+        "left": 442,
+        "top": 995,
+        "maxLeft": 442,
+        "width": 1158
+      }
+    },
+    {
+      "width": 768,
+      "fitOverflow": false,
+      "hardwareTopicPosition": {
+        "left": 888,
+        "top": 995,
+        "maxLeft": 888,
+        "width": 712
+      }
+    },
+    {
+      "width": 390,
+      "fitOverflow": false,
+      "hardwareTopicPosition": {
+        "left": 1053,
+        "top": 995,
+        "maxLeft": 1240,
+        "width": 360
+      }
+    },
+    {
+      "width": 320,
+      "fitOverflow": false,
+      "hardwareTopicPosition": {
+        "left": 1053,
+        "top": 995,
+        "maxLeft": 1310,
+        "width": 290
+      }
+    }
+  ],
+  "issues": []
+}

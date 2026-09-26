@@ -1,0 +1,55 @@
+{
+  "checkedOn": "2026-09-26",
+  "scope": "Updated shared understanding, documentation and navigation; no training or algorithm experiments.",
+  "checks": [
+    {
+      "page": "understanding.html",
+      "width": 1440,
+      "overflow": false,
+      "navigation": true,
+      "softwareCases": 8,
+      "totalCases": 12,
+      "architectureImageLoaded": true
+    },
+    {
+      "page": "understanding.html",
+      "width": 768,
+      "overflow": false,
+      "navigation": true,
+      "softwareCases": 8,
+      "totalCases": 12,
+      "architectureImageLoaded": true
+    },
+    {
+      "page": "understanding.html",
+      "width": 390,
+      "overflow": false,
+      "navigation": true,
+      "softwareCases": 8,
+      "totalCases": 12,
+      "architectureImageLoaded": true
+    },
+    {
+      "page": "understanding.html",
+      "width": 320,
+      "overflow": false,
+      "navigation": true,
+      "softwareCases": 8,
+      "totalCases": 12,
+      "architectureImageLoaded": true
+    },
+    {
+      "entry": "index.html",
+      "width": 390,
+      "overflow": false,
+      "target": "understanding.html#consensus"
+    },
+    {
+      "entry": "workbench.html",
+      "width": 390,
+      "overflow": false,
+      "target": "understanding.html#consensus"
+    }
+  ],
+  "issues": []
+}

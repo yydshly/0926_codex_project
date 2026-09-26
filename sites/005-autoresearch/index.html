@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Autoresearch 用外部编程代理修改训练代码，经固定预算运行、评估与反馈迭代小语言模型训练方案。一张总览图解释能力、原理、软件与仿真及硬件扩展，以及可复验研究对我们的意义。">
+  <title>Autoresearch · 005 研究与仿真展示</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./vendor/three.min.js"></script>
+  <script defer src="./sim3d.js"></script>
+  <script defer src="./app3d.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="../../README.md"><span class="brand-mark">005<span class="mark-dot"></span></span><span>GitHub 项目研究集</span></a>
+      <nav class="top-links" aria-label="页面导航">
+        <a href="./understanding.html#overview">完整总览图</a><a href="#mechanism">原库原理</a><a href="#lab">虚拟实验</a><a href="./workbench.html">新版实验台 ↗</a>
+      </nav>
+      <a class="top-record" href="../../projects/005-autoresearch/README.md">完整研究记录 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> PROJECT 005 / AUTORESEARCH</p>
+        <h1>把想法交给实验，<br><span>让结果决定下一步。</span></h1>
+        <p class="hero-lead">Autoresearch 将小语言模型训练整理为代理可操作的实验：外部 AI 改代码，内层程序实际运行，评测结果驱动保留、回退与下一次尝试。</p>
+        <dl class="hero-summary">
+          <div><dt>库的能力</dt><dd>在单 GPU、固定训练预算和统一评测下，比较模型结构、优化器与训练实现。</dd></div>
+          <div><dt>实现原理</dt><dd><code>program.md</code> 定义规程，<code>train.py</code> 执行训练，<code>prepare.py</code> 提供数据与评测；循环由外部编程代理执行。</dd></div>
+          <div><dt>使用场景</dt><dd>直接用于小模型训练研究；软件性能、AI 处理流程、仿真与硬件协同需要另行适配任务和指标。</dd></div>
+          <div><dt>对我们的意义</dt><dd>借鉴基线、版本、日志与复验方法，建立可追溯的研究流程，用实测判断改动是否有效、成本是否值得。</dd></div>
+        </dl>
+        <div class="hero-actions"><a class="button button-primary" href="./understanding.html#overview">放大阅读完整总览 <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="#lab">进入虚拟实验 ↘</a><a class="button button-ghost" href="https://github.com/karpathy/autoresearch">查看原仓库 ↗</a></div>
+        <p class="hero-disclaimer">本站为独立研究与教学仿真。无人机示例由本项目制作，尚未接入 AI 自动修改、模型训练或真实物理验证。</p>
+      </div>
+      <figure class="hero-figure overview-cover">
+        <div class="figure-top"><span>COMPLETE RESEARCH MAP</span><span class="figure-tag">能力 · 原理 · 场景 · 意义</span></div>
+        <a href="./understanding.html#overview" aria-label="放大阅读 Autoresearch 完整理解总览图"><img src="./assets/autoresearch-overview.svg" alt="Autoresearch 完整理解总览图：能力与价值、实验循环、三个核心文件、软件和仿真及硬件扩展、验证条件与当前进展" width="2000" height="3100"></a>
+        <figcaption>本项目依据原库源码与讨论绘制的引导图，分别标明原库能力、待验证扩展和已有进展。<a href="./understanding.html#overview">放大、定位与下载 ↗</a> · <a href="../../projects/005-autoresearch/OVERVIEW.md">文字版与来源 ↗</a></figcaption>
+      </figure>
+    </section>
+
+    <section class="facts-band" aria-label="原库的三个固定条件"><div class="wrap facts-grid">
+      <div><strong>01</strong><span>允许修改一个训练文件</span><b>train.py</b></div>
+      <div><strong>02</strong><span>每轮固定训练预算</span><b>5 分钟</b></div>
+      <div><strong>03</strong><span>用同一指标比较</span><b>val_bpb ↓</b></div>
+    </div></section>
+
+    <section class="section mechanism" id="mechanism">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="kicker">01 / 原库在做什么</p><h2>一个清晰的自动试错循环</h2></div><p>代理负责提出和执行改动；固定数据与评测负责给出可比较的结果。</p></div>
+        <div class="mechanism-grid">
+          <article class="mechanism-card"><span class="card-index">A / MODIFY</span><div class="card-icon">⌘</div><h3>改动训练方案</h3><p>代理按 <code>program.md</code> 的指令，只修改 <code>train.py</code> 中的模型、优化器或超参数。</p><a href="https://github.com/karpathy/autoresearch/blob/master/program.md">查看代理指令 ↗</a></article>
+          <article class="mechanism-card"><span class="card-index">B / MEASURE</span><div class="card-icon">◷</div><h3>运行固定预算</h3><p>每轮训练计时约 5 分钟，再使用固定验证数据计算每字节比特数，值越低越好。</p><a href="https://github.com/karpathy/autoresearch/blob/master/prepare.py">查看评测代码 ↗</a></article>
+          <article class="mechanism-card"><span class="card-index">C / DECIDE</span><div class="card-icon">↗</div><h3>保留或回退</h3><p>记录每次尝试及结果。指标改善便保留提交，否则回到原版本继续探索。</p><a href="https://github.com/karpathy/autoresearch/blob/master/program.md#the-experiment-loop">查看实验循环 ↗</a></article>
+        </div>
+        <div class="scope-note"><span class="scope-icon">i</span><p><strong>能力边界</strong> 该仓库提供单 GPU 语言模型训练实验与代理指令。它不是现成的无人机仿真器；下方是我们用网页独立制作的迁移演示。</p></div>
+      </div>
+    </section>
+
+    <section class="section lab-section" id="lab">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="kicker">02 / 看懂场景</p><h2>它在飞，站点在观察，<br>条件满足后自动标记。</h2></div><p>橙色无人机在三维空间移动，青色站点固定在地面。站点头部随目标转动，一条定向光线把触发动作显示出来。</p></div>
+        <div class="scope-note"><span class="scope-icon">i</span><p><strong>先看当前理解</strong> 本演示直接读取场景坐标，光线表示教学标记；尚无图像识别、模型训练或真实命中模型。<a href="./understanding.html#progress" style="color:var(--cyan);text-decoration:underline">查看原库能力、适用场景与实际进展 →</a></p></div>
+        <div class="scope-note"><span class="scope-icon">↗</span><p><strong>此演示已保存为 V1</strong> 新版可自动运行十二轮光照对照，汇总两种观察规则的漏报、误报与延迟，并逐轮回放。<a href="./workbench.html#batch-lab" style="color:var(--cyan);text-decoration:underline">打开 V0.5 空间观察实验台 →</a></p></div>
+        <div class="scenario-brief"><div><strong>本轮要看什么？</strong><p>点击开始，看无人机不规则飞行，以及「发现 → 跟踪 → 条件满足 → 光学标记」的完整过程。标记后，无人机继续飞行。</p></div><button class="button button-primary" id="demo-button" type="button">开始完整演示 <span aria-hidden="true">▶</span></button></div>
+        <ol class="process-strip" aria-label="站点的判断过程">
+          <li data-phase="search" class="active"><span>01</span><div><strong>发现目标</strong><small>目标进入观察区</small></div></li>
+          <li data-phase="track"><span>02</span><div><strong>持续跟踪</strong><small>站点头部随目标转动</small></div></li>
+          <li data-phase="ready"><span>03</span><div><strong>条件满足</strong><small>连续观察达到要求</small></div></li>
+          <li data-phase="marked"><span>04</span><div><strong>光学标记</strong><small>显示定向光线，记录位置</small></div></li>
+        </ol>
+        <div class="lab-shell">
+          <aside class="control-panel">
+            <div class="panel-eyebrow"><span>SIMULATION CONTROL</span><span class="panel-led"></span></div>
+            <fieldset><legend>三维飞行方式</legend><div class="segmented" id="flight-mode">
+              <button type="button" data-mode="orbit" aria-pressed="false">空间环绕</button>
+              <button type="button" data-mode="eight" aria-pressed="false">空间 8 字</button>
+              <button type="button" data-mode="wander" aria-pressed="true">不规则</button>
+              <button type="button" data-mode="manual" aria-pressed="false">手动</button>
+            </div></fieldset>
+            <label class="field-label" for="seed-input">轨迹种子 <span>同一数字可重复轨迹</span></label>
+            <input class="text-input" id="seed-input" type="number" min="0" max="999999" step="1" value="42">
+            <label class="field-label" for="speed-input">播放速度 <output id="speed-value" for="speed-input">1.0×</output></label>
+            <input id="speed-input" type="range" min="0.5" max="2" step="0.25" value="1">
+            <label class="field-label" for="live-policy">选择观察算法</label>
+            <select id="live-policy" class="text-input"><option value="steady">稳定观察后记录（推荐）</option><option value="entry">发现后立即记录</option><option value="periodic">固定间隔记录</option><option value="manual">手动标记</option></select>
+            <p class="policy-description" id="policy-description">连续观察达到要求，再显示一次光学标记。</p>
+            <button class="button button-launch" id="launch-button" type="button" hidden>手动光学标记 <span aria-hidden="true">◉</span></button>
+            <div class="control-actions"><button class="button button-primary" id="play-button" type="button">开始演示</button><button class="button button-secondary" id="reset-button" type="button">重置</button></div>
+            <p class="control-hint" id="mode-hint">开始前可以选飞行方式和观察算法。拖动三维画面旋转视角，滚轮缩放；每轮飞行 24 秒。</p>
+            <p class="control-hint manual-hint" id="manual-hint" hidden>手动飞行：WASD 或方向键控制水平移动，Q/E 控制下降/上升。下方按钮也可触控操作。</p>
+            <div class="manual-pad" id="manual-pad" hidden aria-label="手动飞行方向控制">
+              <button type="button" data-key="w">前</button><button type="button" data-key="s">后</button><button type="button" data-key="a">左</button><button type="button" data-key="d">右</button><button type="button" data-key="q">下降</button><button type="button" data-key="e">上升</button>
+            </div>
+          </aside>
+          <div class="stage-panel">
+            <div class="stage-toolbar"><span><span class="stage-dot"></span> 3D / 光学标记演示</span><span id="stage-status" role="status">等待开始</span></div>
+            <div class="canvas-holder"><canvas id="sim-canvas" width="960" height="540" aria-label="可旋转的三维场景：橙色无人机在空中移动，青色地面光学站点转动头部观察，满足教学条件后显示定向标记光线。"></canvas><div class="scene-label" id="drone-label">空中无人机</div><div class="scene-label station-label" id="station-label">固定光学站点</div><div class="scene-label record-label" id="record-label" hidden>已记录的位置</div><div class="scene-note">拖动旋转 · 滚轮缩放</div><div class="view-controls" aria-label="选择观察视角"><button type="button" data-view="overview" aria-pressed="true">全景</button><button type="button" data-view="side" aria-pressed="false">站点侧面</button><button type="button" data-view="top" aria-pressed="false">俯视</button></div><div class="start-overlay" id="start-overlay"><strong>无人机和站点已就位</strong><span>点击开始，观察完整过程</span><button class="button button-primary" id="canvas-start" type="button">开始演示 ▶</button></div></div>
+            <div class="scene-legend"><span><i class="legend-drone"></i>无人机与已飞轨迹</span><span><i class="legend-track"></i>虚线：观察关系</span><span><i class="legend-mark"></i>亮线：标记动作</span></div>
+            <div class="decision-live"><div><span class="micro-label">站点当前判断</span><strong id="reason-title">等待你开始</strong><p id="reason-detail">默认是不规则飞行与自动观察，无需手动瞄准或点击标记。</p></div><div class="observation-meter"><span>连续观察 <b id="observe-time">0.0 s</b></span><progress id="observe-progress" max="1.8" value="0" aria-label="连续观察进度"></progress><small id="observe-hint">目标离开观察区后重新计时</small></div></div>
+            <div class="stage-footer"><div><small>飞行时间</small><strong id="time-readout">0.0 s</strong></div><div><small>记录尝试</small><strong id="attempt-readout">0</strong></div><div><small>高度 / 距站点 · 场景单位</small><strong id="position-readout">— / —</strong></div><div><small>记录结果</small><strong id="result-readout">等待开始</strong></div></div>
+          </div>
+        </div>
+        <div class="explanation-grid"><section class="event-panel"><h3>刚才发生了什么</h3><ol id="event-log" aria-live="polite"><li><time>0.0 s</time><span>等待开始。青色站点固定，橙色无人机将开始飞行。</span></li></ol></section><section class="meaning-panel"><h3>这和你提出的场景怎样对应？</h3><p><strong>移动物体</strong> → 无人机的三轴位置变化。<br><strong>固定端观察</strong> → 读取场景位置，转动站点头部。<br><strong>判断后执行</strong> → 观察规则通过，显示一条定向光线。</p><p>本页用无伤害的光学标记表达执行动作；「记录成功」表示留下观察记录，无人机仍会继续飞行。</p></section></div>
+        <p class="simulation-boundary">识别方式：直接读取模拟场景中的无人机位置。头部转动和光线是说明过程的动画；当前没有图像识别、真实瞄准角度计算或设备发射控制。</p>
+        <details class="scene-assumptions"><summary>“识别”“方向”“成功”在这页具体指什么？</summary><p>地面浅青色矩形标出观察区的投影，高度范围为 3–15 个场景单位。目标进入区内后，程序开始累计连续观察时间；1.8 秒后视为可记录，默认算法再等待 0.4 秒以便看清阶段变化。头部转向只是三维动画，不参与评分。亮线连接站点与本次记录位置，停留 1.2 秒后消失，留下绿色记录框。空间尺度、时间和规则均为教学设定；弹弓的弹道与激光的实际作用需要不同的物理模型，本页没有实现这些能力。</p></details>
+      </div>
+    </section>
+
+    <section class="section compare-section" id="compare">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="kicker">03 / 迁移实验循环</p><h2>同一批三维轨迹，比较观察算法</h2></div><p>目标：在每条轨迹中获得一次有效记录。用这一小实验理解 autoresearch 的比较方法；候选规则由本页预设。</p></div>
+        <div class="compare-layout">
+          <div class="compare-settings"><span class="micro-label">EXPERIMENT SETUP</span><h3>让条件保持一致</h3><p>两组规则面对完全相同的 24 条三维轨迹：环绕、8 字和不规则飞行各 8 条。观察区、连续观察要求和 24 秒时限保持一致，每条轨迹记录成功即结束计分。</p>
+            <label class="field-label" for="candidate-select">选择候选改动</label>
+            <select id="candidate-select" class="text-input"><option value="steady">稳定观察后记录</option><option value="entry">发现后立即记录</option><option value="patient">长时间观察后记录</option></select>
+            <button class="button button-primary run-button" id="run-button" type="button">运行 24 次配对实验 <span aria-hidden="true">→</span></button>
+            <p class="formula">比较指标（越低越好）<br><code>未获记录比例 × 100 ＋ 平均尝试次数 × 2</code></p>
+          </div>
+          <div class="results-panel" id="results-panel" aria-live="polite">
+            <div class="results-head"><span>EXPERIMENT RESULTS</span><span class="result-tag" id="result-tag">等待运行</span></div>
+            <p class="results-intro" id="results-intro">点击左侧按钮，观察“基线 → 候选 → 保留或回退”的完整流程。</p>
+            <div class="score-grid"><article><span>BASELINE / 固定间隔记录</span><strong id="baseline-loss">—</strong><small id="baseline-detail">尚未测试</small></article><article class="candidate-score"><span id="candidate-label">CANDIDATE / 稳定观察后记录</span><strong id="candidate-loss">—</strong><small id="candidate-detail">尚未测试</small></article></div>
+            <div class="decision-box"><span>实验决策</span><strong id="decision-text">等待数据</strong><p id="decision-explain">同一条件下指标更低，才保留候选策略。</p></div>
+            <div class="results-caption" id="results-caption">评分只衡量本页合成场景中的观察记录，不衡量真实设备的捕获或命中效果。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section takeaways"><div class="wrap takeaways-grid">
+      <div><p class="kicker">04 / 研究判断</p><h2>真正可以带走的，<br>是实验方法。</h2></div>
+      <div class="takeaway-list">
+        <article><span>01</span><div><h3>什么时候值得尝试？</h3><p>需要足够的分析材料、改进空间、可信评测与独立复验，再检查收益是否值得投入。能套用循环，并不保证大模型能带来改进。<a href="./understanding.html#fit">查看收紧后的场景判断 ↗</a></p></div></article>
+        <article><span>02</span><div><h3>什么需要额外建设？</h3><p>真实物理模型、传感器误差、不同环境数据及独立复测，都要另行设计。单次分数提升不等于现实有效。</p></div></article>
+        <article><span>03</span><div><h3>对本研究集的价值</h3><p>把“读懂一个开源库”延伸到“建立基线、记录每轮改动、保留证据并复测”，让结论可以追溯。</p></div></article>
+      </div>
+    </div></section>
+  </main>
+  <footer class="footer"><div class="wrap footer-inner"><p>005 · Autoresearch 研究展示。上游项目与进展图归原作者；网页仿真由本研究仓库独立制作。</p><div><a href="../../projects/005-autoresearch/README.md">来源与完整研究 ↗</a><a href="../../README.md">返回索引 ↑</a></div></div></footer>
+</body>
+</html>

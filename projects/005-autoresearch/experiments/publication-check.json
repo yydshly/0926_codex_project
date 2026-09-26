@@ -1,0 +1,233 @@
+{
+  "checkedAt": "2026-09-26T12:35:31.353Z",
+  "scope": "HTTP preview of publication checkout; no new model-training experiment",
+  "existingUnitTests": {
+    "passed": 39,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "what": "1440px: four-part capability summary",
+      "passed": true
+    },
+    {
+      "what": "1440px: overview is the introduction image",
+      "passed": true
+    },
+    {
+      "what": "1440px: no page overflow",
+      "passed": true
+    },
+    {
+      "what": "390px: four-part capability summary",
+      "passed": true
+    },
+    {
+      "what": "390px: overview is the introduction image",
+      "passed": true
+    },
+    {
+      "what": "390px: no page overflow",
+      "passed": true
+    },
+    {
+      "what": "320px: four-part capability summary",
+      "passed": true
+    },
+    {
+      "what": "320px: overview is the introduction image",
+      "passed": true
+    },
+    {
+      "what": "320px: no page overflow",
+      "passed": true
+    },
+    {
+      "what": "V1 demo advances over HTTP",
+      "passed": true
+    },
+    {
+      "what": "V0.5 workbench advances over HTTP",
+      "passed": true
+    },
+    {
+      "what": "Overview zoom and hardware positioning work over HTTP",
+      "passed": true
+    },
+    {
+      "what": "Software scene filter remains functional",
+      "passed": true
+    },
+    {
+      "what": "All 38 local page, source, image and download targets respond",
+      "passed": true
+    },
+    {
+      "what": "Published directory contains 005 guide card",
+      "passed": true
+    },
+    {
+      "what": "Published directory overview image loads",
+      "passed": true
+    },
+    {
+      "what": "Published cards remain in numeric order",
+      "passed": true
+    }
+  ],
+  "issues": [],
+  "linkTargets": [
+    {
+      "path": "/sites/005-autoresearch/style.css",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/vendor/three.min.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/sim3d.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/app3d.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/index.html",
+      "status": 200
+    },
+    {
+      "path": "/README.md",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/understanding.html",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/workbench.html",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/README.md",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/assets/autoresearch-overview.svg",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/OVERVIEW.md",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/workbench.css",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/task.css",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/understanding.css",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/understanding.js",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/assets/autoresearch-overview.png",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/assets/autoresearch-architecture.svg",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/ARCHITECTURE.md",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/task.html",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/experiments/README.md",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/UNDERSTANDING.md",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/observer.css",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/guide.css",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/study.css",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/batch.css",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/lab-core.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/image-observer.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/camera-effects.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/illumination-study.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/batch-study.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/batch-store.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/batch-workbench.js",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/workbench.js",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/SCENARIO.md",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/TASK-DESIGN.md",
+      "status": 200
+    },
+    {
+      "path": "/sites/005-autoresearch/task-quality.html",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/experiments/training-environment.json",
+      "status": 200
+    },
+    {
+      "path": "/projects/005-autoresearch/TASK-DESIGN-QUALITY.md",
+      "status": 200
+    }
+  ]
+}

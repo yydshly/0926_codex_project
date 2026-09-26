@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="用一张完整总览图梳理 Autoresearch 的能力、原理、内部模块、软件与仿真场景、硬件扩展、产品化条件和当前进展。附原生架构与 12 种场景详解。">
+  <title>005 · 理解与方向 · Autoresearch</title>
+  <link rel="stylesheet" href="./workbench.css">
+  <link rel="stylesheet" href="./task.css">
+  <link rel="stylesheet" href="./understanding.css">
+  <script defer src="./understanding.js"></script>
+</head>
+<body class="understanding-page">
+  <a class="skip" href="#understanding-main">跳到理解汇总</a>
+  <header class="top">
+    <a class="brand" href="./index.html"><b>005</b> Autoresearch 研究</a>
+    <nav aria-label="页面导航"><a href="#overview">完整总览图</a><a href="#consensus">核心理解</a><a href="#architecture">技术架构图</a><a href="#use-cases">具体使用场景</a><a href="#fit">适用判断</a><a href="#simulation">仿真接入</a><a href="./workbench.html">实验台 ↗</a></nav>
+  </header>
+  <main id="understanding-main" class="task-main">
+    <section class="task-hero" id="consensus" aria-labelledby="understanding-title">
+      <p class="eyebrow">UNDERSTANDING / 我们目前达成的理解</p>
+      <span class="task-status">讨论汇总 · 2026.09.26 · 扩展方向待验证</span>
+      <h1 id="understanding-title">执行、评估、反馈，<br><span>循环验证每次改动。</span></h1>
+      <p class="task-lead">我们现在的理解：<strong>它的工作方式，本质上是由实验反馈驱动的迭代循环。</strong>外部 AI 代理负责持续执行，仓库提供小语言模型训练程序、固定评测和实验规程。</p>
+      <div class="task-links"><a class="button primary" href="#overview">一张图看懂全部理解 ↓</a><a class="button secondary" href="#use-cases">查看 12 种具体使用场景 ↓</a><a class="button secondary" href="./index.html#lab">回到三维演示 ↗</a></div>
+      <ol class="task-loop consensus-loop" aria-label="核心工作流程"><li>提出改法</li><li>修改程序</li><li>实际运行</li><li>评估结果</li><li>保留或回退</li><li>进入下一轮</li></ol>
+      <dl class="consensus-points">
+        <div><dt>“模型执行”有两层</dt><dd>外层大模型分析并修改代码；内层程序实际完成任务。源库的内层程序会训练小模型、更新权重；其他软件任务可能只需要执行普通算法。</dd></div>
+        <div><dt>这个库提供的价值</dt><dd>把改什么、怎么运行、怎么比较、怎么记录约定清楚，让一次次实验能够执行、比较和追溯。循环与工具调用由外部代理承担。</dd></div>
+        <div><dt>迁移时的主要工作</dt><dd>循环本身相对容易搭建；更需要投入的是<strong>可运行的任务、明确的改动范围和可信的评估标准</strong>。还要用独立测试与同预算基线，确认改进是否真实、成本是否值得。</dd></div>
+      </dl>
+      <p class="task-disclosure">本页汇总已核对的事实与我们的研究判断。当前网页运行的是手工规则实验；模型训练、AI 自动改进与产品收益均尚未验证。</p>
+    </section>
+
+    <nav class="reading-map" aria-label="阅读路线">
+      <a href="#overview"><span>完整总览</span> 一图看全部理解</a><a href="#use-cases"><span>场景目录</span> 12 种具体任务</a><a href="#essence"><span>01 · 原库</span> 实际能力</a><a href="#roles"><span>02 · 模型</span> 分析与训练</a><a href="#fit"><span>03 · 判断</span> 什么任务适合</a><a href="#simulation"><span>04 · 仿真</span> 环境怎么接</a><a href="#directions"><span>05 · 产品</span> 可扩展方向</a><a href="#progress"><span>06 · 进展</span> 已经做到什么</a>
+    </nav>
+
+    <section class="task-section overview-section" id="overview" aria-labelledby="overview-title">
+      <div class="task-heading"><p class="eyebrow">完整总览 / 从原库到软件、仿真与硬件</p><h2 id="overview-title">把我们的理解，放进同一张图。</h2><p>从上往下看：原库能力与实验循环 → 三个核心文件 → 软件、仿真、硬件三条扩展方向 → 产品化与验证条件 → 当前进展。原库事实与待验证构想在图中分别标注。</p></div>
+      <figure class="overview-figure">
+        <div class="overview-toolbar" aria-label="总览图阅读控制" hidden>
+          <div class="overview-zoom" role="group" aria-label="总览图缩放"><button type="button" data-overview-scale="fit" aria-pressed="true">查看全图</button><button type="button" data-overview-scale="read" aria-pressed="false">放大阅读</button><button type="button" data-overview-scale="large" aria-pressed="false">更大文字</button></div>
+          <label for="overview-part">定位内容<select id="overview-part"><option value="0">图的开头</option><option value="238">01 能力与意义</option><option value="458">02 运行原理</option><option value="824">03 内部模块</option><option value="1244" data-x="48">04 软件方向</option><option value="1244" data-x="692">04 仿真与 3D</option><option value="1244" data-x="1336">04 硬件方向</option><option value="2006">05 仿真接入</option><option value="2284">06 产品扩展</option><option value="2544">07 适用判断</option><option value="2772">08 当前进展</option></select></label>
+          <span id="overview-read-state" role="status" aria-live="polite">全图模式；放大后可上下左右滚动。</span>
+        </div>
+        <div class="overview-viewport" id="overview-viewport" tabindex="0" role="region" aria-label="完整理解总览图，放大后可使用方向键滚动" aria-describedby="overview-caption"><img id="overview-image" src="./assets/autoresearch-overview.svg" width="2000" height="3100" alt="Autoresearch 完整理解总览。外部编程代理运行改动、执行、评估与反馈循环；原库提供 program.md、prepare.py、train.py。图列出软件八种任务、仿真四类应用、硬件五类研究方向，以及感知和动作的数据流、产品扩展、验证条件与本项目已做和未做的部分。完整文字内容可从图下链接阅读。"></div>
+        <figcaption id="overview-caption">一张完整图，包含 8 个主题。小屏可选择“放大阅读”，再用“定位内容”跳到对应区域；放大状态可滚动查看。图由本项目依据源码与讨论绘制，扩展方向均尚待适配和验证。</figcaption>
+      </figure>
+      <div class="task-links overview-actions"><a class="button primary" href="./assets/autoresearch-overview.svg">打开完整矢量图 ↗</a><a class="button secondary" href="./assets/autoresearch-overview.svg" download="autoresearch-overview.svg">下载 SVG</a><a class="button secondary" href="../../projects/005-autoresearch/assets/autoresearch-overview.png" download="autoresearch-overview.png">下载高清 PNG</a><a class="button secondary" href="../../projects/005-autoresearch/OVERVIEW.md">完整文字与来源 ↗</a></div>
+      <p class="architecture-source">原库依据：<a href="https://github.com/karpathy/autoresearch">README</a> · <a href="https://github.com/karpathy/autoresearch/blob/master/program.md">program.md</a> · <a href="https://github.com/karpathy/autoresearch/blob/master/prepare.py">prepare.py</a> · <a href="https://github.com/karpathy/autoresearch/blob/master/train.py">train.py</a>。仿真接口参考：<a href="https://gazebosim.org/libs/sim/">Gazebo</a> · <a href="https://docs.px4.io/main/en/simulation/">PX4 的软件仿真与硬件在环说明</a>。源码事实核对日期：2026-09-26；场景适用性为本项目研究判断。</p>
+      <p class="task-note">继续展开：<a href="#architecture">原库内部架构</a> · <a href="#use-cases">12 种场景的分析与验收方式</a> · <a href="#simulation">仿真与感知说明</a> · <a href="#progress">已有实验记录</a></p>
+    </section>
+
+    <section class="task-section" id="architecture" aria-labelledby="architecture-title">
+      <div class="task-heading"><p class="eyebrow">技术架构 / 这个库的意义是什么</p><h2 id="architecture-title">循环由代理执行，研究条件由仓库定义。</h2><p>可以把它理解为围绕实验反馈持续执行的 AI 研究循环。源库把一个具体训练任务整理为代理可操作的实验环境，循环执行依赖外部编程代理。</p></div>
+      <p class="task-note"><strong>核心逻辑：实际执行 → 结果评估 → 反馈给代理 → 下一次改动。</strong>外层大模型分析与内层程序运行分别承担不同职责。<a href="#consensus">阅读最新的共同理解 ↑</a></p>
+      <figure class="architecture-figure">
+        <div class="architecture-scroll" tabindex="0" role="region" aria-label="Autoresearch 原生架构图，窄屏可横向滚动" aria-describedby="architecture-caption"><img src="./assets/autoresearch-architecture.svg" width="1340" height="970" alt="人设定 program.md，外部 AI 代理读取规程并修改 train.py。prepare.py 提供数据、预算与固定评测；train.py 在 GPU 上训练并调用评测。代理读取指标，执行 Git 保留或回退、记录 results.tsv，并继续下一轮。"></div>
+        <figcaption id="architecture-caption">图中区分了外部代理、仓库核心文件与执行环境。窄屏可横向滚动或打开原图。图为源码关系说明，当前没有启动上游训练。</figcaption>
+      </figure>
+      <div class="task-links architecture-actions"><a class="button secondary" href="./assets/autoresearch-architecture.svg">打开完整架构图 ↗</a><a class="button secondary" href="./assets/autoresearch-architecture.svg" download="autoresearch-architecture.svg">下载架构图</a><a class="button secondary" href="../../projects/005-autoresearch/ARCHITECTURE.md">技术说明与图源 ↗</a></div>
+      <div class="task-columns">
+        <article class="task-card"><span class="task-number">可执行</span><h3>有真实的实验对象</h3><p>提供 GPT 模型、优化器与训练循环，代理的改动可以立即进入训练验证。</p></article>
+        <article class="task-card"><span class="task-number">可比较</span><h3>有共同的研究条件</h3><p>固定预算、数据与验证指标，让不同改法在一致条件下比较，减少凭描述判断好坏。</p></article>
+        <article class="task-card"><span class="task-number">可追溯</span><h3>有积累与撤销的规程</h3><p>代理按规则记录实验、关联代码版本、保留改善并撤销退步，再提出下一次尝试。</p></article>
+      </div>
+      <p class="task-note"><strong>调度能力实际来自哪里？</strong>外部代理负责思考、工具调用和持续执行；仓库通过 <code>program.md</code>规定流程，通过 <code>train.py</code> 与 <code>prepare.py</code>提供实验。它没有独立的通用任务队列、模型 API 调度服务或网页控制台。</p>
+      <details class="understanding-detail"><summary>“固定评测”和“保留结果”在源码里具体是什么？</summary><div><p><code>train.py</code> 导入 <code>prepare.py</code> 的数据工具与评测函数，训练后在同一进程里调用 <code>evaluate_bpb</code>。指令要求代理不修改评测；这一约定并不是独立进程隔离或权限强制机制。</p><p>代理按 <code>program.md</code> 操作 Git、写入 <code>results.tsv</code>，记录代码版本、指标和保留／撤销状态。本次核对的默认 <code>train.py</code> 打印指标，没有自动保存模型检查点的步骤；若要交付训练后的权重，需要另行增加保存和复验流程。</p><p>跨领域迁移时，需要重新提供可运行任务与评测；独立最终测试、预算治理及网页管理等也要另行建设。当前说明页是本研究项目的展示层。</p></div></details>
+      <p class="architecture-source">依据 <a href="https://github.com/karpathy/autoresearch">上游 README</a>、<a href="https://github.com/karpathy/autoresearch/blob/master/program.md">program.md</a>、<a href="https://github.com/karpathy/autoresearch/blob/master/prepare.py">prepare.py</a> 与 <a href="https://github.com/karpathy/autoresearch/blob/master/train.py">train.py</a>，2026-09-26 核对。架构图由本项目绘制。</p>
+    </section>
+
+    <section class="task-section use-cases-section" id="use-cases" aria-labelledby="use-cases-title">
+      <div class="task-heading"><p class="eyebrow">使用场景 / 把后半段讨论具体展开</p><h2 id="use-cases-title">这些任务，AI 具体能分析和改进什么？</h2><p>8 个纯软件场景、3 个仿真与 3D 场景，以及原库的小模型训练任务。每项都列出问题、分析材料、可修改内容和验收方式；扩展方向尚未接入或实测。</p></div>
+      <div class="case-filters" role="group" aria-label="按场景类型筛选" hidden><button type="button" data-case-filter="all" aria-pressed="true">全部 · 12</button><button type="button" data-case-filter="software" aria-pressed="false">纯软件 · 8</button><button type="button" data-case-filter="simulation" aria-pressed="false">仿真与 3D · 3</button><button type="button" data-case-filter="native" aria-pressed="false">原库任务 · 1</button></div>
+      <p class="case-count" id="case-count" role="status" aria-live="polite">当前展示全部 12 个场景。扩展构想需要另外适配和验证。</p>
+      <div class="use-case-grid">
+        <article class="use-case-card" id="case-web-performance" data-case-group="software">
+          <div class="case-heading"><span class="case-number">01 / 纯软件</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>网页性能优化</h3><p class="case-problem">页面加载慢、列表滚动卡顿，想在功能和画面保持完整的情况下提速。</p><p class="case-training">代码优化 · 通常无需训练模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>组件代码、加载记录、性能分析、功能用例与页面截图。</dd></div><div><dt>AI 尝试改什么</dt><dd>找出重复渲染或资源瓶颈，尝试调整组件、加载顺序和缓存方式。</dd></div><div><dt>如何检验改进</dt><dd>在相同设备与网络条件下复测加载、交互、内存，并核对功能与画面。</dd></div><div><dt>适用判断</dt><dd>有复杂瓶颈和完整测试时值得试；常见问题可先用性能工具解决。</dd></div></dl>
+          <a class="case-source" href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">Lighthouse 测量参考 ↗</a>
+        </article>
+        <article class="use-case-card" id="case-database" data-case-group="software">
+          <div class="case-heading"><span class="case-number">02 / 纯软件</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>数据库查询优化</h3><p class="case-problem">报表生成慢、查询资源占用高，希望保持结果一致并减少等待。</p><p class="case-training">查询与索引 · 无需训练模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>查询语句、表结构、执行计划、代表性数据与读写负载。</dd></div><div><dt>AI 尝试改什么</dt><dd>分析多余扫描和关联，尝试查询改写与索引候选。</dd></div><div><dt>如何检验改进</dt><dd>对照结果一致性，复测不同数据量下的耗时、内存、写入开销和索引空间。</dd></div><div><dt>适用判断</dt><dd>需要真实负载与隔离测试环境。数据库自身优化器和现有方案必须作为基线。</dd></div></dl>
+
+        </article>
+        <article class="use-case-card" id="case-program-speed" data-case-group="software">
+          <div class="case-heading"><span class="case-number">03 / 纯软件</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>程序自动加速</h3><p class="case-problem">大量文件解析、图像处理或批量计算耗时太长。</p><p class="case-training">算法与实现 · 无需训练模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>源代码、性能剖析、典型输入、正确输出与完整测试。</dd></div><div><dt>AI 尝试改什么</dt><dd>定位瓶颈，尝试算法、数据结构、缓存或并行实现的改动。</dd></div><div><dt>如何检验改进</dt><dd>先检查正确性，再复测耗时与内存；使用未参与优化的输入检查稳定性。</dd></div><div><dt>适用判断</dt><dd>适合边界清晰、可重复运行的计算任务。复杂系统须先缩小可修改范围。</dd></div></dl>
+          <a class="case-source" href="https://google.github.io/benchmark/">Google Benchmark 测量参考 ↗</a>
+        </article>
+        <article class="use-case-card" id="case-compression" data-case-group="software">
+          <div class="case-heading"><span class="case-number">04 / 纯软件</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>图片、音频压缩优化</h3><p class="case-problem">文件太大，希望在约定质量下减小体积，或加快处理。</p><p class="case-training">配置与流程 · 通常无需训练模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>代表性素材、编码配置、大小和速度记录、质量评价或人工反馈。</dd></div><div><dt>AI 尝试改什么</dt><dd>尝试预处理、编码参数组合与处理流程，分析体积和质量的取舍。</dd></div><div><dt>如何检验改进</dt><dd>在独立素材上检查大小、处理时间与质量损失，并保留必要的人工复核。</dd></div><div><dt>适用判断</dt><dd>参数少时先用普通搜索；仅靠单一质量分数不能保证用户满意。</dd></div></dl>
+
+        </article>
+        <article class="use-case-card" id="case-document-extraction" data-case-group="software">
+          <div class="case-heading"><span class="case-number">05 / 纯软件</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>文档信息提取</h3><p class="case-problem">不同格式的订单、表格、扫描件中，商品、金额或日期经常提取错误。</p><p class="case-training">AI 流程 · 可先使用现有模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>文档样本、人工确认的字段答案、版面解析结果与失败案例。</dd></div><div><dt>AI 尝试改什么</dt><dd>调整页面切分、表格处理、抽取程序、模型调用和字段校验。</dd></div><div><dt>如何检验改进</dt><dd>使用独立文档检查字段准确率、漏填率、耗时和调用成本。</dd></div><div><dt>适用判断</dt><dd>需要可靠标注及代表性格式；缺少答案时，模型自评分不足以验收。</dd></div></dl>
+
+        </article>
+        <article class="use-case-card" id="case-knowledge-qa" data-case-group="software">
+          <div class="case-heading"><span class="case-number">06 / 纯软件</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>知识库问答流程优化</h3><p class="case-problem">知识库里明明有资料，回答仍找错出处、遗漏信息或调用成本过高。</p><p class="case-training">检索与回答 · 不必重新训练大模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>问题、参考答案及依据文档，检索结果、调用记录与已确认的错误。</dd></div><div><dt>AI 尝试改什么</dt><dd>分析检索和回答环节，尝试文档切分、召回、排序、提示词与模型选择。</dd></div><div><dt>如何检验改进</dt><dd>对独立问题检查答案正确性、引用依据、无答案时的处理、延迟与成本。</dd></div><div><dt>适用判断</dt><dd>先建立可信测试集；必要时人工核对，不能只让同一模型判断自己的答案。</dd></div></dl>
+          <a class="case-source" href="https://github.com/stanfordnlp/dspy">DSPy 流程优化参考 ↗</a>
+        </article>
+        <article class="use-case-card" id="case-search-ranking" data-case-group="software">
+          <div class="case-heading"><span class="case-number">07 / 纯软件</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>搜索与推荐优化</h3><p class="case-problem">用户输入商品或内容需求后，相关结果排得太后，或推荐缺乏相关性。</p><p class="case-training">排序策略 · 可包含模型训练</p>
+          <dl><div><dt>模型分析什么</dt><dd>查询与候选结果、相关性标注、经授权的历史反馈及当前排序逻辑。</dd></div><div><dt>AI 尝试改什么</dt><dd>尝试召回、特征组合、排序规则，或调整小型排序模型的训练方法。</dd></div><div><dt>如何检验改进</dt><dd>先测独立案例的相关性、覆盖和延迟；实际业务效果仍需后续验证。</dd></div><div><dt>适用判断</dt><dd>需控制历史数据偏差；离线分数提高不能直接推出线上收益。</dd></div></dl>
+
+        </article>
+        <article class="use-case-card" id="case-scheduling" data-case-group="software">
+          <div class="case-heading"><span class="case-number">08 / 纯软件</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>排班与资源调度</h3><p class="case-problem">员工排班、订单分配或计算任务排队，存在冲突、等待或资源闲置。</p><p class="case-training">约束与算法 · 通常无需训练模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>订单或任务、资源容量、不可违反的业务约束与历史排程。</dd></div><div><dt>AI 尝试改什么</dt><dd>分析等待和冲突来源，尝试任务优先级、分配规则及调度算法。</dd></div><div><dt>如何检验改进</dt><dd>先验证全部硬约束，再比较完成时间、等待、资源利用和成本。</dd></div><div><dt>适用判断</dt><dd>需要真实约束和代表性负载，先与现有调度器或成熟算法比较。</dd></div></dl>
+
+        </article>
+        <article class="use-case-card" id="case-game-policy" data-case-group="simulation">
+          <div class="case-heading"><span class="case-number">09 / 仿真与 3D</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>游戏角色行为学习</h3><p class="case-problem">角色需要在解谜、协作或经营任务中学习行动与资源分配。</p><p class="case-training">策略优化 · 可训练小型策略模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>任务规则、观测与动作接口、失败回放、策略代码和训练记录。</dd></div><div><dt>AI 尝试改什么</dt><dd>提出策略或训练方法改动；内层模型可通过试验反馈学习行为。</dd></div><div><dt>如何检验改进</dt><dd>在新关卡和不同种子下比较完成率、资源消耗与规则违规情况。</dd></div><div><dt>适用判断</dt><dd>必须能重复运行并评价任务；只播放预设动画不能证明学会了行为。</dd></div></dl>
+
+        </article>
+        <article class="use-case-card" id="case-rendering" data-case-group="simulation">
+          <div class="case-heading"><span class="case-number">10 / 仿真与 3D</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>3D 画面与渲染优化</h3><p class="case-problem">场景帧率低、光照或阴影开销大，希望在约定画质下提高效率。</p><p class="case-training">渲染代码与配置 · 不一定训练模型</p>
+          <dl><div><dt>模型分析什么</dt><dd>渲染代码、代表性场景、性能记录、参考画面与质量约束。</dd></div><div><dt>AI 尝试改什么</dt><dd>分析开销，尝试资源组织、渲染配置、着色实现或模型简化方案。</dd></div><div><dt>如何检验改进</dt><dd>在相同硬件与视角下检查帧时间、内存、画面误差和人工质量评价。</dd></div><div><dt>适用判断</dt><dd>“更好看”需先定义标准；能降低计算量也要验证画质与功能。</dd></div></dl>
+
+        </article>
+        <article class="use-case-card" id="case-robot-navigation" data-case-group="simulation">
+          <div class="case-heading"><span class="case-number">11 / 仿真与 3D</span><span class="fit-label conditional">扩展构想 · 待验证</span></div>
+          <h3>机器人导航与协作避障</h3><p class="case-problem">机器人在障碍或多车通行场景中，出现碰撞、互相等待或任务超时。</p><p class="case-training">仿真策略 · 可包含强化学习</p>
+          <dl><div><dt>模型分析什么</dt><dd>可信模拟环境、传感器观测、约束、策略实现和失败场景记录。</dd></div><div><dt>AI 尝试改什么</dt><dd>研究导航、通行协调或训练方法；每轮让模拟器实际执行并反馈。</dd></div><div><dt>如何检验改进</dt><dd>在未参与选优的场景中检查碰撞、任务完成率、耗时和资源使用。</dd></div><div><dt>适用判断</dt><dd>必须先建立物理、观测与评测；仿真结果仍需现实校准和验证。</dd></div></dl>
+          <a class="case-source" href="https://isaac-sim.github.io/IsaacLab/main/index.html">Isaac Lab 仿真学习参考 ↗</a>
+        </article>
+        <article class="use-case-card" id="case-small-model-training" data-case-group="native">
+          <div class="case-heading"><span class="case-number">12 / 原库任务</span><span class="fit-label native">原库已提供任务</span></div>
+          <h3>小语言模型训练研究</h3><p class="case-problem">固定设备和训练预算，寻找预测验证文本更准确的训练方案。</p><p class="case-training">原库任务 · 真实更新模型权重</p>
+          <dl><div><dt>模型分析什么</dt><dd>训练程序、训练与验证日志、显存、耗时及历史改动。</dd></div><div><dt>AI 尝试改什么</dt><dd>修改模型结构、优化器、批次或训练实现，然后重新运行候选训练。</dd></div><div><dt>如何检验改进</dt><dd>冻结数据和预算，比较 val_bpb，并复跑、在独立数据上复验。</dd></div><div><dt>适用判断</dt><dd>与原库直接对应；本机仍需跑通环境与基线，当前没有训练结果。</dd></div></dl>
+          <a class="case-source" href="https://github.com/karpathy/autoresearch">原库实现与运行条件 ↗</a>
+        </article>
+      </div>
+      <div class="case-delivery"><h3>把场景做成产品，最后交付什么？</h3><p>程序加速可以交付<strong>通过正确性测试的代码改动、性能对比与回退版本</strong>；文档抽取可以交付<strong>处理流程、独立样本的逐字段结果与成本报告</strong>。其他场景也应交付实际方案和可复查证据。</p><p>选择任务时，先确认手上已有的代码、数据与客户问题。若只需要试几个参数，普通搜索可能更合适。<a href="#fit">继续看适用条件与判断依据 ↓</a></p></div>
+    </section>
+
+    <section class="task-section" id="essence" aria-labelledby="essence-title">
+      <div class="task-heading"><p class="eyebrow">01 / 源项目的实际能力</p><h2 id="essence-title">一个范围明确的训练实验。</h2><p>固定数据与评估，允许代理修改训练程序，让不同方案在同一设备、同样预算下接受比较。<a href="https://github.com/karpathy/autoresearch#how-it-works">上游说明 ↗</a></p></div>
+      <div class="task-columns">
+        <article class="task-card"><span class="task-number">改动对象</span><h3>训练代码</h3><p>模型结构、优化器、批量大小与训练实现，集中在 <code>train.py</code>。外部代理执行修改与实验。</p></article>
+        <article class="task-card"><span class="task-number">计算预算</span><h3>每轮约 5 分钟</h3><p>固定训练计时；启动、编译和最终评估另计。跨设备的分数不宜直接排名。</p></article>
+        <article class="task-card"><span class="task-number">评估依据</span><h3>验证 BPB</h3><p>检查模型对验证文本的概率预测质量，越低越好。单次改善仍需复跑和独立验证。</p></article>
+      </div>
+      <p class="task-note">先运行原始基线，再进入前述改动、执行、评估与反馈循环。每次尝试都应关联实际代码和运行记录。</p>
+      <p class="task-note"><strong>直接使用与迁移方法需要区分。</strong>原仓库直接支持小语言模型训练实验。通用软件优化、机器人训练、物理仿真和硬件接入，需要另行建设适配；原库没有现成的通用调度平台或三维引擎。</p>
+    </section>
+
+    <section class="task-section" id="roles" aria-labelledby="roles-title">
+      <div class="task-heading"><p class="eyebrow">02 / 分清三个角色</p><h2 id="roles-title">分析问题、学习能力、检验结果。</h2></div>
+      <div class="task-columns">
+        <article class="task-card"><span class="task-number">外层 · 编程大模型</span><h3>提出待验证的改法</h3><p>读代码、日志与失败案例，提出原因假设，修改程序。每轮研究通常无需重新训练这个大模型。</p></article>
+        <article class="task-card"><span class="task-number">内层 · 被研究的程序</span><h3>执行任务或学习</h3><p>可以是更新权重的小模型，也可以是路径规划、文档处理等普通算法。优化代码的任务可能完全不涉及模型训练。</p></article>
+        <article class="task-card"><span class="task-number">检验 · 独立评估器</span><h3>给出可复查证据</h3><p>实际运行，在固定条件下评分。代理的解释和自评分不足以证明有效；评估规则与最终测试应独立管理。</p></article>
+      </div>
+      <details class="understanding-detail"><summary>“小语言模型”是专门为某个场合做的模型吗？</summary><div><p>“小”主要描述参数量与计算规模；“专用”描述用途。小模型可以通用，大模型也可以专用。是否适合某个任务，需要检查数据、能力、延迟和成本，不能仅凭大小判断。</p></div></details>
+      <details class="understanding-detail"><summary>大模型能理解原因，为什么还必须做实验？</summary><div><p>日志可以支持一种解释，也可能同时存在其他原因。模型提出改法后，仍需对照实验、重复运行和未参与选优的测试，排查随机波动、错误评分与过拟合。没有获得改善，也是一种有效研究结果。</p></div></details>
+    </section>
+
+    <section class="task-section" id="fit" aria-labelledby="fit-title">
+      <div class="task-heading"><p class="eyebrow">03 / 修正过宽的场景推荐</p><h2 id="fit-title">能套用循环，还要判断值不值得。</h2><p>前面的讨论曾把“可以扩展”说成“适合做产品”。这里收紧判断：以下为适配分析，尚无跨场景实测或商业验证。</p></div>
+      <div class="fit-grid">
+        <details class="fit-card" open><summary><span class="fit-label native">原库直接对应</span><h3>小语言模型训练研究</h3><span class="detail-hint">查看依据与条件</span></summary><div><p><strong>研究空间：</strong>模型结构、训练方法、实现效率。</p><p><strong>已有条件：</strong>上游提供训练与固定评估；本机仍需验证环境并运行基线。</p><a href="./task.html">查看尚未执行的训练方案 ↗</a></div></details>
+        <details class="fit-card" open><summary><span class="fit-label conditional">满足条件后再验证</span><h3>程序与 AI 流程优化</h3><span class="detail-hint">查看依据与条件</span></summary><div><p><strong>研究空间：</strong>算法、数据结构、检索或文档处理流程。</p><p><strong>前提：</strong>正确性测试、真实性能数据或有可靠答案的案例；需要和普通搜索及成熟方案比较。</p><p>原库没有现成适配器。</p></div></details>
+        <details class="fit-card"><summary><span class="fit-label conditional">先建可信实验环境</span><h3>机器人仿真与行为学习</h3><span class="detail-hint">展开适用条件</span></summary><div><p><strong>研究空间：</strong>导航、避障、协作与训练方法。</p><p><strong>前提：</strong>可信的物理和观测模型、可运行策略、任务完成评价、未参与选优的场景。</p><p>动作可以由传统算法或小型策略模型决定；仿真收益需要后续现实验证。</p></div></details>
+        <details class="fit-card"><summary><span class="fit-label limited">大模型必要性较弱</span><h3>几个阈值与定时器</h3><span class="detail-hint">展开判断理由</span></summary><div><p>如果只有少量参数组合，直接枚举或使用参数搜索可能更经济。现有光照演示属于这一类，适合说明评测方法，尚不足以证明 AI 研究价值。</p><p>可与 <a href="https://optuna.org/">Optuna 等搜索工具</a>比较，再决定是否引入大模型。</p></div></details>
+        <details class="fit-card"><summary><span class="fit-label limited">先明确评价标准</span><h3>让 3D 效果更好看</h3><span class="detail-hint">展开两种目标</span></summary><div><p>“画面更漂亮”需要参考图、感知评价或人工判断。明确为“保持质量下提高帧率”，才更容易组织可比较的实验。</p><p>角色行为学习研究的是任务完成能力，与渲染画质是两个不同目标。</p></div></details>
+        <details class="fit-card"><summary><span class="fit-label conditional">先验证数据与约束</span><h3>数据库、调度与业务优化</h3><span class="detail-hint">展开适用条件</span></summary><div><p>可尝试查询实现、资源分配、排程等变化，但要先保留正确结果和真实业务约束。</p><p>已有优化器、领域算法和人工方案都应作为基线。引入大模型后的收益尚待验证。</p></div></details>
+      </div>
+      <div class="fit-check"><h3>选题前，先确认这五项。</h3><ol><li><strong>材料足够：</strong>代码、数据、日志与失败案例可以检查。</li><li><strong>空间足够：</strong>存在多种值得比较的算法或流程改动。</li><li><strong>反馈可信：</strong>能自动运行，能判断正确性和效果。</li><li><strong>复验独立：</strong>另留未参与选优的输入或场景。</li><li><strong>投入值得：</strong>相同总预算下，与成熟方案或普通搜索比较；计入模型调用、计算与人工成本。</li></ol></div>
+      <p class="task-note">最小验证问题：<strong>AI 提出的改动，能否在同样总预算、未参与选优的测试中超过基线？</strong>自动化节省人工的价值也可以单独测量。当前没有证据证明以上每个方向都能获得收益。</p>
+      <p class="task-note">具体任务已在前面的<a href="#use-cases">使用场景目录</a>默认展开，可按纯软件、仿真与 3D、原库任务筛选。</p>
+    </section>
+
+    <section class="task-section" id="simulation" aria-labelledby="simulation-title">
+      <div class="task-heading"><p class="eyebrow">04 / 三维、感知、算法如何关联</p><h2 id="simulation-title">让仿真成为可重复的实验环境。</h2><p>以导航与协作避障为例。下图为拟议结构；当前网页只实现了部分观察和评测能力。</p></div>
+      <ol class="simulation-flow" aria-label="拟议的机器人仿真交互流程"><li><span>环境</span><strong>物理与场景</strong><p>运动、碰撞、遮挡</p></li><li><span>输入</span><strong>模拟传感器</strong><p>图像、测距、延迟</p></li><li><span>解释</span><strong>感知与状态估计</strong><p>从观测推断环境</p></li><li><span>决策</span><strong>算法或策略模型</strong><p>选择导航动作</p></li><li><span>反馈</span><strong>动作改变环境</strong><p>再观测、再评价</p></li></ol>
+      <div class="task-two">
+        <article class="explanation-card"><h3>真实坐标放在哪里？</h3><p>模拟器需要真实状态来计算物理和生成观测；独立评估器可以用它计分。若研究感知，算法应接收模拟传感器输入。</p><p>直接给算法真实坐标可以建立理想条件基线，但必须明确标注；这不能验证感知能力或现实可用性。</p></article>
+        <article class="explanation-card"><h3>外层 AI 在哪里？</h3><p>读取实验记录，提出策略或训练程序的改动，再启动下一轮仿真。网页负责配置、结果比较与回放。</p><p>需要学习行为时，可另接强化学习或模仿学习框架；大模型无需参与每一步实时控制。</p></article>
+      </div>
+      <details class="understanding-detail"><summary>一定要硬件、摄像头或自己开发 3D 引擎吗？</summary><div><p>纯软件仿真也可以开展研究。可评估接入 <a href="https://gazebosim.org/libs/sim/">Gazebo</a> 的物理与传感器能力，或 <a href="https://isaac-sim.github.io/IsaacLab/main/index.html">Isaac Lab</a> 的机器人学习环境；尚未验证它们在本机的兼容性。</p><p>接入摄像头可以增加真实观测，但单独的视频识别界面增量价值有限；仍需找到具体错误、可改进对象与验收标准。硬件验证、参数校准和仿真到现实的差异，是后续独立工作。</p></div></details>
+      <p class="task-note">“3D 画面”“物理仿真”“传感器感知”“策略训练”需要分别实现和验证。动画中的光线与标记，仅表达过程；当前演示没有真实设备发射、命中或捕获模型。</p>
+    </section>
+
+    <section class="task-section" id="directions" aria-labelledby="directions-title">
+      <div class="task-heading"><p class="eyebrow">05 / 可扩展的产品构想</p><h2 id="directions-title">先服务一个具体任务，再沉淀共用能力。</h2><p>下面是候选方向，尚未选定最终产品，也未验证客户付费需求。优先级应由真实用户、数据与实验条件决定。</p></div>
+      <div class="direction-list">
+        <article><span>01</span><div><h3>机器人仿真验证与策略优化</h3><p><strong>用户：</strong>机器人研发团队。<strong>交付：</strong>失败场景、版本对照与经测试的候选策略。最贴近此前的空间交互兴趣；先建立可信环境与现有算法基线。</p></div></article>
+        <article><span>02</span><div><h3>仓储与生产调度优化</h3><p><strong>用户：</strong>有真实订单和资源数据的业务团队。<strong>交付：</strong>满足约束的调度方案及仿真比较。关键是业务建模与数据校准。</p></div></article>
+        <article><span>03</span><div><h3>AI 应用评测与流程改进</h3><p><strong>用户：</strong>已有文档处理或知识库产品的团队。<strong>交付：</strong>错误案例集、流程版本与独立评测。需要可靠答案，可参考 <a href="https://github.com/stanfordnlp/dspy">DSPy</a>。</p></div></article>
+        <article><span>04</span><div><h3>工程仿真设计优化</h3><p><strong>用户：</strong>具备领域知识与求解器的工程团队。<strong>交付：</strong>散热、能耗等目标下的候选设计与分析。可参考 <a href="https://openmdao.org/">OpenMDAO</a>；物理模型和工程验证需专业合作。</p></div></article>
+        <article><span>05</span><div><h3>模型训练效率工作台</h3><p><strong>用户：</strong>模型研发团队。<strong>交付：</strong>固定预算下的训练代码、权重与独立评测。与源项目直接对应，当前仅有本地任务设计。</p></div></article>
+      </div>
+      <p class="task-note"><strong>可以复用：</strong>实验配置、执行、预算、版本、记录、比较与回放。<strong>每个领域要重建：</strong>任务、约束、运行环境和评价标准。已有 <a href="https://optuna.org/">参数搜索</a>与 <a href="https://mlflow.org/docs/latest/ml/tracking/">实验记录工具</a>；产品需要证明具体的时间节省或结果改善。</p>
+    </section>
+
+    <section class="task-section" id="progress" aria-labelledby="progress-title">
+      <div class="task-heading"><p class="eyebrow">06 / 本项目实际进展</p><h2 id="progress-title">保留演示，也保留能力边界。</h2></div>
+      <div class="task-columns progress-cards">
+        <article class="task-card"><span class="fit-label native">已实现 · 教学动画</span><h3>V1 三维标记</h3><p>直接读取场景坐标，按预设观察规则显示光线与标记。可以手动飞行和比较预设规则。</p><p>尚无基于图像的识别、策略训练或真实物理命中。</p><a href="./index.html#lab">回到 V1 演示 ↗</a></article>
+        <article class="task-card"><span class="fit-label native">已实跑 · 固定规则</span><h3>V0.5 光照实验</h3><p>两种手工规则读取渲染图像的统计量，自动运行十二轮、统计误报漏报并回放。</p><p>尚无物体识别、定位、策略学习或 AI 自动修改。</p><a href="./workbench.html#batch-lab">打开实验台 ↗</a></article>
+        <article class="task-card"><span class="fit-label conditional">仅设计 · 未训练</span><h3>小模型训练方案</h3><p>已保存任务设计与硬件环境检查记录；尚未安装训练依赖、执行训练或获得改进结果。</p><p>这是保留的可选验证任务，不代表最终产品方向。</p><a href="./task.html">查看设计与条件 ↗</a></article>
+      </div>
+      <p class="task-note">后续值得交付的证据：<strong>基线、明确改动、真实运行记录、同预算比较、独立复验。</strong>预设动画、随机曲线与单次分数，均不能证明 AI 学会了能力。现有实验的数字只对应其合成条件，详见 <a href="../../projects/005-autoresearch/experiments/README.md">实测记录</a>。</p>
+    </section>
+
+    <section class="task-section sources-section" id="sources" aria-labelledby="sources-title">
+      <div class="task-heading"><p class="eyebrow">来源与继续阅读</p><h2 id="sources-title">事实有出处，建议待验证。</h2></div>
+      <ul><li><a href="https://github.com/karpathy/autoresearch">Karpathy / Autoresearch</a>：原库、训练范围与运行条件；上游声明 MIT。</li><li><a href="https://github.com/karpathy/autoresearch/blob/master/program.md">program.md</a>：可修改范围、固定评测与实验循环。</li><li><a href="https://gazebosim.org/libs/sim/">Gazebo</a> · <a href="https://isaac-sim.github.io/IsaacLab/main/index.html">Isaac Lab</a>：仿真与机器人学习参考。</li><li><a href="https://optuna.org/">Optuna</a> · <a href="https://mlflow.org/docs/latest/ml/tracking/">MLflow</a> · <a href="https://github.com/stanfordnlp/dspy">DSPy</a> · <a href="https://openmdao.org/">OpenMDAO</a>：已有工具能力参考，当前未接入。</li></ul>
+      <p>2026-09-26 核对。页面文字与流程示意由本研究项目整理；没有使用外部图片。适用性与产品排序属于本项目判断。</p>
+      <div class="task-links"><a class="button primary" href="../../projects/005-autoresearch/UNDERSTANDING.md">阅读文字汇总 ↗</a><a class="button secondary" href="../../projects/005-autoresearch/README.md">完整研究记录 ↗</a><a class="button secondary" href="#understanding-main">回到开头 ↑</a></div>
+    </section>
+  </main>
+  <footer><span>005 · 理解与方向 · 讨论汇总</span><a href="./index.html#lab">三维演示 ↗</a><a href="./workbench.html">观察实验台 ↗</a></footer>
+</body>
+</html>

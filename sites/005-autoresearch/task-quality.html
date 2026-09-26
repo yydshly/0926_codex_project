@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark">
+  <title>005 · 任务设计：摄像头画面质量自检</title>
+  <link rel="stylesheet" href="./workbench.css"><link rel="stylesheet" href="./task.css">
+</head>
+<body>
+  <a class="skip" href="#task-main">跳到任务设计</a>
+  <header class="top"><a class="brand" href="./workbench.html"><b>005</b> Autoresearch 场景研究</a><nav aria-label="页面导航"><a href="#task-plan">任务与输入</a><a href="#research-loop">AI 如何实验</a><a href="#acceptance">怎样算有效</a><a href="./workbench.html">现有实验台 ↗</a></nav></header>
+  <main id="task-main" class="task-main">
+    <section class="task-hero" aria-labelledby="task-title">
+      <p class="eyebrow">NEXT RESEARCH TASK / 下一项研究任务</p>
+      <span class="task-status">历史提案 · 已调整方向</span>
+      <h1 id="task-title">画面出了问题，<br><span>能否及时发现？</span></h1>
+      <p class="task-lead">摄像头画面质量自检：发现持续过暗、细节明显丢失，记录异常与恢复。让 AI 通过真实实验寻找更少漏报、更少误报的观察规则。</p>
+      <div class="task-links"><a class="button primary" href="#task-plan">查看历史设计 ↓</a><a class="button secondary" href="../../projects/005-autoresearch/TASK-DESIGN-QUALITY.md">历史任务说明 ↗</a></div>
+      <p class="task-disclosure">本提案主要优化统计阈值和持续时间，对模型训练研究的代表性不足，已停止作为推荐主任务。<a href="./task.html">查看修订后的任务设计 ↗</a>。本页保留设计过程，未实现。</p>
+    </section>
+
+    <section class="task-section" id="task-plan" aria-labelledby="plan-title">
+      <div class="task-heading"><p class="eyebrow">01 / 一个明确的问题</p><h2 id="plan-title">相机画面，是否满足约定的质量标准？</h2></div>
+      <div class="task-columns">
+        <article class="task-card"><span class="task-number">输入</span><h3>同一段相机画面</h3><p>三维场景照常运动。算法只收到相机图像、样本间隔和序号；不知道世界坐标或扰动安排。</p></article>
+        <article class="task-card"><span class="task-number">判断</span><h3>两种可见问题</h3><p>持续严重过暗、持续明显细节丢失。正常运动和短时光照变化不应反复产生质量告警。</p></article>
+        <article class="task-card"><span class="task-number">输出</span><h3>状态、事件与依据</h3><p>正常、质量异常或证据不足；显示判断依据、异常与恢复时间，点击即可回看对应片段。</p></article>
+      </div>
+      <p class="task-note">无人机仅作为正常运动的场景内容。观察结果描述整幅画面的症状，不输出物体类别、位置、跟踪结果或设备控制指令；过暗、细节少也不能直接确诊设备故障。</p>
+    </section>
+
+    <section class="task-section" aria-labelledby="experience-title">
+      <div class="task-heading"><p class="eyebrow">02 / 拟定的演示过程</p><h2 id="experience-title">异常发生、被发现、再恢复。</h2><p>以下为待实现的过程设计，未使用虚构成绩展示效果。</p></div>
+      <ol class="task-story">
+        <li><span>01</span><h3>正常观察</h3><p>场景运动，相机画面清楚。展示原始图像与质量统计。</p></li>
+        <li><span>02</span><h3>加入问题</h3><p>一段相机画面持续变暗或模糊。独立评估器保存正确答案。</p></li>
+        <li><span>03</span><h3>提示与回看</h3><p>算法自行报告画面异常。用户检查是否漏报、误报或发现过晚。</p></li>
+        <li><span>04</span><h3>恢复与核对</h3><p>画面恢复后，算法结束提示。持续误报同样影响成绩。</p></li>
+      </ol>
+    </section>
+
+    <section class="task-section research-section" id="research-loop" aria-labelledby="research-title">
+      <div class="task-heading"><p class="eyebrow">03 / 回到 AUTORESEARCH 的研究方式</p><h2 id="research-title">AI 提出修改，实验决定是否保留。</h2><p>首版用图像统计和时间规则建立合理基线。AI 在实验外层修改规则，当前不需要训练大语言模型。</p></div>
+      <ol class="task-loop"><li>阅读开发反馈</li><li>修改候选规则</li><li>运行固定测试</li><li>保留或撤销</li><li>冻结后独立检验</li></ol>
+      <div class="task-two">
+        <article><h3>每个候选留下证据</h3><p>修改了什么、输入是否相同、得分和耗时怎样变化、为什么保留或撤销。日志来自实际运行产物。</p></article>
+        <article><h3>没有改善也有结果</h3><p>若没有候选胜过基线，展示“本次未找到有效改进”。最终检验失败时，保留失败报告。</p></article>
+      </div>
+      <p class="task-note">上游 Autoresearch 研究语言模型训练。本任务迁移其“改动—实验—评测”的方式；相机任务和代理运行器仍需独立开发。<a href="https://github.com/karpathy/autoresearch#how-it-works">查看源项目 ↗</a></p>
+    </section>
+
+    <section class="task-section" aria-labelledby="data-title">
+      <div class="task-heading"><p class="eyebrow">04 / 相同输入，独立答案</p><h2 id="data-title">三组数据，各有用途。</h2><p>计划 72 段、每段 24 秒。正常、短时变化、持续过暗、细节丢失、噪声和歧义片段均覆盖；样本尚未生成。</p></div>
+      <div class="task-columns">
+        <article class="task-card"><span class="task-number">24 段 · 开发</span><h3>用于尝试改法</h3><p>代理可以读取这组失败案例与反馈，完善候选规则。</p></article>
+        <article class="task-card"><span class="task-number">24 段 · 选优</span><h3>固定规则选版本</h3><p>尝试结束后，由独立运行器比较候选；反馈不再用于修改本轮算法。</p></article>
+        <article class="task-card"><span class="task-number">24 段 · 最终检验</span><h3>检查是否适用新输入</h3><p>只检验冻结版本与基线。使用不同场景与扰动安排，防止记住固定事件时刻。</p></article>
+      </div>
+      <p class="task-note">标签由独立生成与人工检查确定。画面统计不能同时充当算法和评分答案。低纹理画面可能与模糊混淆，必须允许表达证据不足。</p>
+    </section>
+
+    <section class="task-section" id="acceptance" aria-labelledby="acceptance-title">
+      <div class="task-heading"><p class="eyebrow">05 / 先定规则，再看结果</p><h2 id="acceptance-title">“更好”需要同时满足这些条件。</h2><p>以下是拟定的首轮验收目标，尚未测量，也不代表现实设备性能。</p></div>
+      <div class="task-goals">
+        <article><strong>≥ 90%</strong><h3>各类异常发现率</h3><p>持续过暗与细节丢失分别统计，不能只改善容易的一类。</p></article>
+        <article><strong>≤ 0.2 次 / 分</strong><h3>正常片段误报</h3><p>同时限制正常时长被标成异常的比例不超过 5%。</p></article>
+        <article><strong>≤ 1 秒</strong><h3>发现与恢复延迟 P95</h3><p>发现延迟从异常达到约定的 1 秒持续条件起算；另列原始延迟。</p></article>
+        <article><strong>新数据验证</strong><h3>比冻结基线更好</h3><p>满足约束后比较事件 F1；没有严格改善就保留基线。</p></article>
+      </div>
+      <p class="task-note">还需限制不确定时长和计算耗时，完整规则见任务说明。报告必须列明样本数；小规模试验不能证明部署可靠性。最终检验不能用于反复调到通过。</p>
+    </section>
+
+    <section class="task-section" aria-labelledby="delivery-title">
+      <div class="task-heading"><p class="eyebrow">06 / 当前与下一步</p><h2 id="delivery-title">先建立一个能验证的质量观察基线。</h2></div>
+      <div class="task-two delivery-grid">
+        <article><span class="tag done">可以复用</span><h3>已有实验基础</h3><p>三维场景、固定相机、噪声、时间轴、记录与回放。V0.5 的十二轮光照实测保留为原任务记录。</p><a href="./workbench.html#batch-lab">查看现有实验台 ↗</a></article>
+        <article><span class="tag planned">未实现</span><h3>历史计划</h3><p>固定图像数据与答案 → 质量基线与评分 → 真实 AI 改动 → 独立选优和最终检验。该方案未启动。</p><a href="../../projects/005-autoresearch/TASK-DESIGN-QUALITY.md">阅读历史任务约定 ↗</a></article>
+      </div>
+      <p class="task-note">研究价值需要由真实改进证明。目前没有证明该任务方案优于成熟摄像头产品，也没有实际连接摄像头或调用模型。</p>
+    </section>
+  </main>
+  <footer><span>005 · 本项目独立设计 · 2026-09-26 · 历史提案</span><a href="../../projects/005-autoresearch/TASK-DESIGN-QUALITY.md">历史约定与来源 ↗</a><a href="./task.html">查看修订后的任务 ↗</a></footer>
+</body>
+</html>

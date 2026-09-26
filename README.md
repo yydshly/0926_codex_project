@@ -10,6 +10,7 @@
 | 002 | [browser-use/web-ui](https://github.com/browser-use/web-ui) | 配置、运行并观察浏览器代理，展示读取、决策、执行与核对循环。 | [研究记录](projects/002-browser-use-web-ui/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/) · [网页源码](sites/002-browser-use-web-ui/index.html) |
 | 003 | [anandprtp/Antra](https://github.com/anandprtp/Antra) | 匹配多来源音源，下载、校验、打标并整理本地曲库。 | [研究记录](projects/003-antra/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/003-antra/) · [网页源码](sites/003-antra/index.html) |
 | 004 | [stemdeckapp/stemdeck](https://github.com/stemdeckapp/stemdeck) | Demucs 估计六类音轨，支持试听、循环练习、混音与导出。 | [研究记录](projects/004-stemdeck/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/) · [网页源码](sites/004-stemdeck/index.html) |
+| 005 | [Autoresearch](projects/005-autoresearch/README.md) · [原仓库](https://github.com/karpathy/autoresearch) | 外部代理修改训练代码，经固定预算运行、评估与反馈迭代小模型训练方案；为软件与仿真研究提供可复验的实验方法。 | [研究记录](projects/005-autoresearch/README.md) · [在线总览图](https://yydshly.github.io/0926_codex_project/sites/005-autoresearch/understanding.html#overview) · [观察实验台](https://yydshly.github.io/0926_codex_project/sites/005-autoresearch/workbench.html) |
 | 006 | [vercel/eve](https://github.com/vercel/eve) | 把模型、工具、持久会话和人工审批组合成可部署的 Agent 服务。 | [研究记录](projects/006-vercel-eve/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/) · [网页源码](sites/006-vercel-eve/index.html) |
 | 007 | [palmier-io/palmier-pro](https://github.com/palmier-io/palmier-pro) | macOS AI 剪辑器：按画面与语音找素材，Agent 经 MCP 修改帧级时间线，交付成片或可编辑工程；适合重复初剪与人工复核。 | [研究记录](projects/007-palmier-pro/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/007-palmier-pro/) · [网页源码](sites/007-palmier-pro/index.html) |
 | 008 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 编程 Agent 的任务编排层：主 Agent 按类别分派工作会话，结合模型路由、工具、规则与续跑完成核查；适合跨模块开发，也为本仓库的研究任务分工提供可验证样本。 | [研究记录](projects/008-oh-my-openagent/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/) · [网页源码](sites/008-oh-my-openagent/index.html) |
@@ -62,6 +63,17 @@
 - **能力与原理：** 本地音频经 FFmpeg 预处理，由 Demucs 估计固定六类音轨，再进入分析、波形播放、循环练习与导出流程。
 - **效果与场景：** 可把歌曲变成可静音、独奏和重混的练习素材，适合乐器跟练、歌唱、扒谱和创作准备。
 - **对音频创作产品的价值：** 它示范了从分离模型到可用工作台的路径；新音色识别、时间线编排等仍需另行设计。输出并非录音室原始分轨，质量尚待实测。[研究记录](projects/004-stemdeck/README.md) · [在线能力展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/)。
+
+### 005 · Autoresearch
+
+<img src="projects/005-autoresearch/assets/autoresearch-overview.png" width="680" alt="Autoresearch 完整理解总览：库的能力、实验循环、内部模块、软件与仿真及硬件扩展、适用条件与当前进展">
+
+图片说明：本仓库依据[原库源码](https://github.com/karpathy/autoresearch)和研究讨论原创绘制的引导图，分别标明原库事实、扩展构想和本项目进展；不是新的训练结果。[在线放大阅读](https://yydshly.github.io/0926_codex_project/sites/005-autoresearch/understanding.html#overview) · [SVG 原图](sites/005-autoresearch/assets/autoresearch-overview.svg)。
+
+- **能力：** 提供单 GPU 小语言模型训练实验，让外部编程代理比较模型结构、优化器与训练实现。
+- **实现原理：** 实验规程限定改动范围；代理改代码，程序按固定预算训练并评测，代理记录结果、保留或回退，再进入下一轮。
+- **使用场景：** 直接用于训练研究；软件性能、AI 流程、仿真与硬件协同需另行适配任务、接口和评测。
+- **对我们的意义：** 借鉴基线、版本、日志与独立复验，建立可追溯的研究流程，用实测判断改善与成本。当前网页运行手工规则对照，尚未验证模型训练或 AI 自动改进。[详细研究](projects/005-autoresearch/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/005-autoresearch/)。
 
 ### 006 · vercel/eve
 
