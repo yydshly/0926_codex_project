@@ -1,6 +1,6 @@
 # 010 · Ghidra：从二进制线索到程序行为
 
-> 研究对象：[NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra)。本文于 2026-09-26 核对官方仓库、语言文档和导入器说明，并在 Windows 上编译、检查了本仓库自制的 x64 COFF 教学样本，运行四例校验程序。本次**未安装或运行 Ghidra**；网页是基于实际样本证据制作的交互教学展示，不是 Ghidra 实机画面。
+> 研究对象：[NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra)。本文于 2026-09-26 核对官方资料，编译并运行两个自制样本。其中游戏存档案例把真实 Windows EXE 导入 Ghidra 12.1.4，保存了无界面反编译结果；网页交互是对本机结果的展示，不在浏览器内运行 EXE 或 Ghidra。
 
 | 项目 | 内容 |
 | --- | --- |
@@ -8,16 +8,16 @@
 | 作者与维护 | 美国国家安全局（NSA）Research Directorate 与 Ghidra 贡献者 |
 | 原项目许可证 | 主体 [Apache License 2.0](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)；部分第三方组件及顶层 `GPL/` 独立支持程序有各自许可证，见 [NOTICE](https://github.com/NationalSecurityAgency/ghidra/blob/master/NOTICE) |
 | 研究日期 | 2026-09-26 |
-| 研究状态 | 已核对官方能力和原理；已编译、检查并验证自制样本的四例输入；未运行 Ghidra 本体 |
+| 研究状态 | 已核对官方能力和原理；已验证 COFF 样本四例输入；已运行自制游戏 EXE 的三例存档，并用 Ghidra 12.1.4 实际反编译其校验函数 |
 | 网页展示 | [在线能力总图与交互实验台](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/) · [网页源码](../../sites/010-ghidra/index.html) |
 
-**摘要：**Ghidra 接收程序、固件、批量文件或调试目标，把机器指令变成可核对的函数、引用、关系图和类 C 伪代码。加载器建立地址空间，SLEIGH 将不同处理器的指令译成汇编与 p-code，分析器和反编译器再恢复控制流与数据流；脚本、无界面模式、插件与处理器定义可扩展流程。它适合无源码程序审查、固件研究和版本对比。对本仓库而言，价值是把“可能做什么”整理成带输入、地址和人工核对记录的证据链。
+**摘要：**Ghidra 接收程序、固件、批量文件或调试目标，把机器指令变成可核对的函数、引用、关系图和类 C 伪代码。加载器建立地址空间，SLEIGH 将不同处理器的指令译成汇编与 p-code，分析器和反编译器再恢复控制流与数据流；脚本、无界面模式、插件与处理器定义可扩展流程。它适合无源码程序审查、固件研究和版本对比。本项目用一个游戏存档失败案例，实际从 EXE 反编译出校验函数，并将返回值与三次运行结果对照。对本仓库而言，价值是把“可能做什么”整理成带输入、地址和运行证据的可复核记录。
 
 ## 一张图看懂 Ghidra
 
 ![Ghidra 能力总图：输入方式、加载与指令分析原理、输出、扩展入口，以及对本研究仓库的意义](assets/capability-map.svg)
 
-图片说明：[`assets/capability-map.svg`](assets/capability-map.svg) 是本研究仓库原创绘制的概念图，无外部图片素材。它根据 [Ghidra 官方仓库](https://github.com/NationalSecurityAgency/ghidra)、[导入器说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm)、[SLEIGH 手册](https://ghidra.re/ghidra_docs/languages/html/sleigh.html)、[无界面分析说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/RuntimeScripts/support/analyzeHeadlessREADME.md)和 [BSim 教程](https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md)汇总官方能力与原理。图中输入、输出和扩展是软件能力示意；本项目实际完成的仅是自制 COFF 样本编译、检查和四例执行验证，尚未运行 Ghidra。
+图片说明：[`assets/capability-map.svg`](assets/capability-map.svg) 是本研究仓库原创绘制的概念图，无外部图片素材。它根据 [Ghidra 官方仓库](https://github.com/NationalSecurityAgency/ghidra)、[导入器说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm)、[SLEIGH 手册](https://ghidra.re/ghidra_docs/languages/html/sleigh.html)、[无界面分析说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/RuntimeScripts/support/analyzeHeadlessREADME.md)和 [BSim 教程](https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md)汇总官方能力与原理。图中输入、输出和扩展是软件能力示意；实际完成范围见下方游戏 EXE 实测与 COFF 样本验证。
 
 ## 为什么研究
 
@@ -44,7 +44,25 @@ Ghidra 提供从编译产物到可理解逻辑的完整工作台：加载文件�
 
 **输入边界：**网页链接与自然语言问题可以作为研究线索，却不是 Ghidra 的主要二进制输入。网页下方的十六进制输入只为解释本项目样本的校验规则；页面新加的“本地文件预检”仅在浏览器读取前 4 KB，按文件头给出启发式格式提示，不等于 Ghidra 导入或反编译。
 
-## 实际场景：分析一个未知的帧解析模块
+## 实测场景：游戏存档为什么被拒绝
+
+假设你只有一个游戏客户端 EXE 和一份无法加载的存档，想知道问题出在版本、文件头、字段范围还是校验字节。为了给出可公开复现的结果，本项目自制了一个最小 Windows x64 客户端 [`game_save.exe`](game-save-demo/game_save.exe)。它不是第三方商业游戏；[`game_save.c`](game-save-demo/game_save.c) 仅用于让读者核查，Ghidra 实际导入的是编译后的 EXE。
+
+客户端读取 12 字节 `.sav`：`GSV1` 文件头、版本 `01`、载荷长度 `05`、关卡、四字节小端分数和末尾校验字节。校验值从 `5A` 开始，与偏移 6–10 的字节逐个异或。我们运行了三份实际文件：
+
+| 输入存档 | 相对正常文件的变化 | 客户端实际输出 | 退出码 |
+| --- | --- | --- | --- |
+| [`valid.sav`](game-save-demo/valid.sav) | `47 53 56 31 01 05 07 10 27 00 00 6A` | `SAVE OK: level=7 score=10000` | `0` |
+| [`bad-checksum.sav`](game-save-demo/bad-checksum.sav) | 末字节 `6A → 00` | `SAVE REJECTED: checksum mismatch` | `6` |
+| [`bad-version.sav`](game-save-demo/bad-version.sav) | 版本字节 `01 → 02` | `SAVE REJECTED: unsupported version or payload` | `5` |
+
+这些输出和退出码保存在 [`run-report.txt`](game-save-demo/run-report.txt)。随后用官方 **Ghidra 12.1.4 PUBLIC** 无界面分析导入相同 EXE，通过 [`ExportGameSave.java`](game-save-demo/ExportGameSave.java) 导出 [`ghidra-report.txt`](game-save-demo/ghidra-report.txt)。Ghidra 识别为 `x86:LE:64:default`、`windows` 编译器规范，并在地址 `1400014a4` 找到 `inspect_save`。报告中的反编译结果显示从 `0x5a` 开始逐字节异或、与偏移 `0xb` 比较；不相等时返回 `6`，版本条件失败时返回 `5`。这与客户端的三次实际运行相互印证。另存的 [`binary-inspection.txt`](game-save-demo/binary-inspection.txt) 提供编译器级符号和指令摘录。
+
+复现方式：在有 MinGW-w64 GCC 的 Windows 上运行 [`build.ps1`](game-save-demo/build.ps1) 生成 EXE 与三份存档；在有 Java 21 和 Ghidra 12.1.4 的环境中用 `analyzeHeadless <临时工程目录> <工程名> -import <game_save.exe 路径> -scriptPath <game-save-demo 目录> -postScript ExportGameSave.java <报告路径>` 导出反编译文本。重新编译会改变 EXE 哈希和地址，需重新运行 Ghidra 并更新证据。本次发布的 EXE SHA-256 为 `fe7caccd3d193f46b4eded4276d279cfd91004f6a2f219b7a8388e1468a3fbd5`。
+
+[网页交互查看三例结果](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#game-demo)：按钮切换已保存的真实输出；你也可选择本地 12 字节 `.sav`，由浏览器按已核对规则计算结果。浏览器不会执行 EXE，也不会启动 Ghidra。这个演示说明 Ghidra 如何帮助定位存档加载失败的**具体分支**；它不能凭 EXE 恢复原项目源码、服务器逻辑或所有游戏行为。
+
+## 补充教学场景：分析一个帧解析模块
 
 假设只收到一个编译好的输入校验模块，需要判断它接受什么格式、错误输入如何返回。为避免虚构第三方软件结果，本项目编写了一个最小、无害的 [`frame_gate.c`](fixture/frame_gate.c)：头部为 `FRM1`、两个大端字节表示载荷长度，后面是载荷。函数 `inspect_frame` 依次检查最短头部、标识和声明长度，分别返回 `-1`、`-2`、`-3`；成功时返回载荷长度。这些规则由本项目源码直接定义，并非对未知商业程序的推测。
 
@@ -62,9 +80,9 @@ Ghidra 提供从编译产物到可理解逻辑的完整工作台：加载文件�
 | 函数线索 | COFF 符号表含 `frame_format_name` 与 `inspect_frame` | `dumpbin /symbols` |
 | 条件分支 | `001D`、`0025` 检查指针与最短长度；`0048` 起比较 `F/R/M/1`；`00CC`、`00CF` 比较声明长度与剩余字节 | `dumpbin /disasm` 中 `.text$mn` 节内偏移 |
 | 四例执行 | 正常帧返回 `3`，截断头部返回 `-1`，错误标识返回 `-2`，声明长度超过剩余字节返回 `-3` | `verify.c` 与编译后程序的退出码 `0`，记录于检查报告末尾 |
-| 本次未验证 | Ghidra 导入后的具体反编译排版、p-code 输出、自动分析质量、真实恶意样本或固件分析 | 尚未运行 Ghidra |
+| 此样本未验证 | `frame_gate.obj` 在 Ghidra 中的具体反编译排版与 p-code 输出；未分析真实恶意样本或固件 | 本节只使用编译器检查与运行证据；Ghidra 实测仅针对上方游戏 EXE |
 
-在已有 Ghidra 安装的环境中，可将 [`frame_gate.obj`](fixture/frame_gate.obj) 通过 **File → Import File** 导入并运行自动分析，再打开 `inspect_frame`，把 Listing、Decompiler 与本项目检查记录逐项对照。官方导入器文档列有 COFF 支持；本研究尚未执行这一步，因此不报告其具体界面或输出。[官方导入器说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm)
+如需继续核对这个 COFF 教学样本，可将 [`frame_gate.obj`](fixture/frame_gate.obj) 通过 **File → Import File** 导入并运行自动分析，再打开 `inspect_frame`，把 Listing、Decompiler 与本项目检查记录逐项对照。官方导入器文档列有 COFF 支持；本研究未对这个对象文件执行 Ghidra 分析，因此不报告它的具体 Ghidra 输出。[官方导入器说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm)
 
 ## 网页展示的证据层次
 
@@ -72,6 +90,7 @@ Ghidra 提供从编译产物到可理解逻辑的完整工作台：加载文件�
 
 | 页面区域 | 属性与边界 |
 | --- | --- |
+| 游戏存档案例 | 展示真实运行的三份 `.sav` 输出与实际 Ghidra 12.1.4 反编译摘录；按钮切换保存的结果，文件选择器只做本地规则复核 |
 | 文件线索 | 来自本地 `dumpbin` 检查的实际 COFF 文件头、节区和字符串摘录 |
 | 机器指令 | 来自本地 `dumpbin /disasm` 的节内偏移摘录，随所选输入切换重点片段 |
 | p-code 原理 | 根据官方文档绘制的等价关系示意；不是本样本在 Ghidra 中产生的实测 p-code |
@@ -98,4 +117,4 @@ Ghidra 提供从编译产物到可理解逻辑的完整工作台：加载文件�
 - Ghidra 名称、软件能力和原理资料归 [NSA 与 Ghidra 贡献者](https://github.com/NationalSecurityAgency/ghidra)所有。本项目没有复制上游界面图片或代码。主体许可证为 [Apache 2.0](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)；第三方组件与顶层 `GPL/` 程序按 [NOTICE](https://github.com/NationalSecurityAgency/ghidra/blob/master/NOTICE) 分别核对。
 - [`assets/cover.svg`](assets/cover.svg) 为本研究仓库依据自制样本与公开原理原创绘制，无外部图片素材。它是研究引导图，不是实际 Ghidra 画面。
 - [`assets/capability-map.svg`](assets/capability-map.svg) 为本研究仓库依据上述官方资料原创绘制的能力总图，无外部图片素材；[`assets/capability-map.png`](assets/capability-map.png) 是同一张图的网页渲染版。它们说明产品能力和分析路径，不代表本次 Ghidra 实测输出。
-- [`fixture/frame_gate.c`](fixture/frame_gate.c)、构建脚本、编译样本、检查记录及网页交互均为本研究仓库制作。它们只用于解释 Ghidra 能力，不属于上游 Ghidra 项目。
+- [`fixture/frame_gate.c`](fixture/frame_gate.c)、[`game-save-demo/game_save.c`](game-save-demo/game_save.c)、构建脚本、编译样本、检查记录及网页交互均为本研究仓库制作，不属于上游 Ghidra 项目。Ghidra 原始反编译输出另见 [`game-save-demo/ghidra-report.txt`](game-save-demo/ghidra-report.txt)。

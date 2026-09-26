@@ -288,5 +288,65 @@
     fileDrop.classList.remove('drag-active');
     if (event.dataTransfer?.files?.[0]) inspectLocalFile(event.dataTransfer.files[0]);
   });
+
+  const saveBytes = [0x47, 0x53, 0x56, 0x31, 0x01, 0x05, 0x07, 0x10, 0x27, 0x00, 0x00, 0x6a];
+  const saveCases = {
+    valid: { bytes: saveBytes, changed: 11, label: '末字节 6A · 校验通过', stdout: 'SAVE OK: level=7 score=10000', exit: '0', note: '关卡和分数被读取，校验通过。', conclusion: '前面 5 个载荷字节与常量 5A 做异或，得到 6A，正好等于末字节；函数返回 0。' },
+    checksum: { bytes: [...saveBytes.slice(0, 11), 0x00], changed: 11, label: '末字节 00 · 与计算值 6A 不同', stdout: 'SAVE REJECTED: checksum mismatch', exit: '6', note: '只改了最后 1 字节；程序在校验分支返回 6。', conclusion: '第 12 字节与前面载荷字节算出的校验值不一致时，函数返回 6；主程序显示 “checksum mismatch”。' },
+    version: { bytes: [...saveBytes.slice(0, 4), 0x02, ...saveBytes.slice(5)], changed: 4, label: '第 5 字节 02 · 版本不支持', stdout: 'SAVE REJECTED: unsupported version or payload', exit: '5', note: '只改了版本字节；程序先于校验分支返回 5。', conclusion: '版本字节不是 01 时，函数先返回 5，后面的异或校验不会执行。' }
+  };
+  const saveButtons = [...document.querySelectorAll('[data-save-case]')];
+  const saveByteGrid = document.getElementById('save-bytes');
+
+  function showSaveCase(name) {
+    const entry = saveCases[name];
+    saveButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.saveCase === name)));
+    saveByteGrid.replaceChildren(...entry.bytes.map((byte, index) => {
+      const cell = document.createElement('span');
+      cell.className = `save-byte${index === entry.changed ? ' changed' : ''}`;
+      const offset = document.createElement('small');
+      offset.textContent = index.toString(16).toUpperCase().padStart(2, '0');
+      const value = document.createElement('strong');
+      value.textContent = byte.toString(16).toUpperCase().padStart(2, '0');
+      cell.append(offset, value);
+      return cell;
+    }));
+    setText('save-diff-label', entry.label);
+    setText('save-stdout', entry.stdout);
+    setText('save-exit', entry.exit);
+    setText('save-case-note', entry.note);
+    setText('save-conclusion', entry.conclusion);
+  }
+  saveButtons.forEach(button => button.addEventListener('click', () => showSaveCase(button.dataset.saveCase)));
+  showSaveCase('valid');
+
+  document.getElementById('save-file').addEventListener('change', async event => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const result = document.getElementById('save-local-result');
+    if (file.size !== 12) {
+      result.textContent = `浏览器复核：文件为 ${file.size} 字节；此示例格式要求恰好 12 字节（对应程序退出码 3）。`;
+      return;
+    }
+    try {
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      let message;
+      if (![0x47, 0x53, 0x56, 0x31].every((byte, index) => bytes[index] === byte)) message = '标识不是 GSV1（对应退出码 4）';
+      else if (bytes[4] !== 1 || bytes[5] !== 5) message = '版本或载荷长度不支持（对应退出码 5）';
+      else {
+        let checksum = 0x5a;
+        for (let index = 6; index <= 10; index++) checksum ^= bytes[index];
+        if (checksum !== bytes[11]) message = `校验值应为 ${checksum.toString(16).toUpperCase().padStart(2, '0')}，文件末字节是 ${bytes[11].toString(16).toUpperCase().padStart(2, '0')}（对应退出码 6）`;
+        else if (bytes[6] < 1 || bytes[6] > 50) message = '关卡不在 1–50 范围内（对应退出码 7）';
+        else {
+          const score = (bytes[7] | (bytes[8] << 8) | (bytes[9] << 16) | (bytes[10] << 24)) >>> 0;
+          message = `可读取：关卡 ${bytes[6]}，分数 ${score}（对应退出码 0）`;
+        }
+      }
+      result.textContent = `浏览器复核 ${file.name}：${message}。这一步不会运行 EXE。`;
+    } catch {
+      result.textContent = '浏览器读取该存档失败，请重新选择。';
+    }
+  });
   analyze();
 })();

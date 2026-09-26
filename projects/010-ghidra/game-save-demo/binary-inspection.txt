@@ -1,0 +1,108 @@
+GAME SAVE DEMO / compiler-level binary evidence
+EXE SHA-256: fe7caccd3d193f46b4eded4276d279cfd91004f6a2f219b7a8388e1468a3fbd5
+=== PE FORMAT AND SYMBOLS ===
+[118](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000000004a4 inspect_save
+[119](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000000005ec main
+=== inspect_save DISASSEMBLY ===
+
+game_save.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000001400014a4 <inspect_save>:
+   1400014a4:	55                   	push   %rbp
+   1400014a5:	48 89 e5             	mov    %rsp,%rbp
+   1400014a8:	48 83 ec 30          	sub    $0x30,%rsp
+   1400014ac:	48 89 4d 10          	mov    %rcx,0x10(%rbp)
+   1400014b0:	48 89 55 18          	mov    %rdx,0x18(%rbp)
+   1400014b4:	4c 89 45 20          	mov    %r8,0x20(%rbp)
+   1400014b8:	48 83 7d 18 0c       	cmpq   $0xc,0x18(%rbp)
+   1400014bd:	74 0a                	je     1400014c9 <inspect_save+0x25>
+   1400014bf:	b8 03 00 00 00       	mov    $0x3,%eax
+   1400014c4:	e9 1d 01 00 00       	jmp    1400015e6 <inspect_save+0x142>
+   1400014c9:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   1400014cd:	41 b8 04 00 00 00    	mov    $0x4,%r8d
+   1400014d3:	48 8d 15 26 7b 00 00 	lea    0x7b26(%rip),%rdx        # 140009000 <.rdata>
+   1400014da:	48 89 c1             	mov    %rax,%rcx
+   1400014dd:	e8 be 68 00 00       	call   140007da0 <memcmp>
+   1400014e2:	85 c0                	test   %eax,%eax
+   1400014e4:	74 0a                	je     1400014f0 <inspect_save+0x4c>
+   1400014e6:	b8 04 00 00 00       	mov    $0x4,%eax
+   1400014eb:	e9 f6 00 00 00       	jmp    1400015e6 <inspect_save+0x142>
+   1400014f0:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   1400014f4:	48 83 c0 04          	add    $0x4,%rax
+   1400014f8:	0f b6 00             	movzbl (%rax),%eax
+   1400014fb:	3c 01                	cmp    $0x1,%al
+   1400014fd:	75 0f                	jne    14000150e <inspect_save+0x6a>
+   1400014ff:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   140001503:	48 83 c0 05          	add    $0x5,%rax
+   140001507:	0f b6 00             	movzbl (%rax),%eax
+   14000150a:	3c 05                	cmp    $0x5,%al
+   14000150c:	74 0a                	je     140001518 <inspect_save+0x74>
+   14000150e:	b8 05 00 00 00       	mov    $0x5,%eax
+   140001513:	e9 ce 00 00 00       	jmp    1400015e6 <inspect_save+0x142>
+   140001518:	c6 45 ff 5a          	movb   $0x5a,-0x1(%rbp)
+   14000151c:	48 c7 45 f0 06 00 00 	movq   $0x6,-0x10(%rbp)
+   140001523:	00
+   140001524:	eb 16                	jmp    14000153c <inspect_save+0x98>
+   140001526:	48 8b 55 10          	mov    0x10(%rbp),%rdx
+   14000152a:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+   14000152e:	48 01 d0             	add    %rdx,%rax
+   140001531:	0f b6 00             	movzbl (%rax),%eax
+   140001534:	30 45 ff             	xor    %al,-0x1(%rbp)
+   140001537:	48 83 45 f0 01       	addq   $0x1,-0x10(%rbp)
+   14000153c:	48 83 7d f0 0a       	cmpq   $0xa,-0x10(%rbp)
+   140001541:	76 e3                	jbe    140001526 <inspect_save+0x82>
+   140001543:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   140001547:	48 83 c0 0b          	add    $0xb,%rax
+   14000154b:	0f b6 00             	movzbl (%rax),%eax
+   14000154e:	38 45 ff             	cmp    %al,-0x1(%rbp)
+   140001551:	74 0a                	je     14000155d <inspect_save+0xb9>
+   140001553:	b8 06 00 00 00       	mov    $0x6,%eax
+   140001558:	e9 89 00 00 00       	jmp    1400015e6 <inspect_save+0x142>
+   14000155d:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   140001561:	48 83 c0 06          	add    $0x6,%rax
+   140001565:	0f b6 00             	movzbl (%rax),%eax
+   140001568:	84 c0                	test   %al,%al
+   14000156a:	74 0f                	je     14000157b <inspect_save+0xd7>
+   14000156c:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   140001570:	48 83 c0 06          	add    $0x6,%rax
+   140001574:	0f b6 00             	movzbl (%rax),%eax
+   140001577:	3c 32                	cmp    $0x32,%al
+   140001579:	76 07                	jbe    140001582 <inspect_save+0xde>
+   14000157b:	b8 07 00 00 00       	mov    $0x7,%eax
+   140001580:	eb 64                	jmp    1400015e6 <inspect_save+0x142>
+   140001582:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   140001586:	48 83 c0 06          	add    $0x6,%rax
+   14000158a:	0f b6 10             	movzbl (%rax),%edx
+   14000158d:	48 8b 45 20          	mov    0x20(%rbp),%rax
+   140001591:	88 10                	mov    %dl,(%rax)
+   140001593:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   140001597:	48 83 c0 07          	add    $0x7,%rax
+   14000159b:	0f b6 00             	movzbl (%rax),%eax
+   14000159e:	0f b6 c0             	movzbl %al,%eax
+   1400015a1:	48 8b 55 10          	mov    0x10(%rbp),%rdx
+   1400015a5:	48 83 c2 08          	add    $0x8,%rdx
+   1400015a9:	0f b6 12             	movzbl (%rdx),%edx
+   1400015ac:	0f b6 d2             	movzbl %dl,%edx
+   1400015af:	c1 e2 08             	shl    $0x8,%edx
+   1400015b2:	09 c2                	or     %eax,%edx
+   1400015b4:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   1400015b8:	48 83 c0 09          	add    $0x9,%rax
+   1400015bc:	0f b6 00             	movzbl (%rax),%eax
+   1400015bf:	0f b6 c0             	movzbl %al,%eax
+   1400015c2:	c1 e0 10             	shl    $0x10,%eax
+   1400015c5:	09 c2                	or     %eax,%edx
+   1400015c7:	48 8b 45 10          	mov    0x10(%rbp),%rax
+   1400015cb:	48 83 c0 0a          	add    $0xa,%rax
+   1400015cf:	0f b6 00             	movzbl (%rax),%eax
+   1400015d2:	0f b6 c0             	movzbl %al,%eax
+   1400015d5:	c1 e0 18             	shl    $0x18,%eax
+   1400015d8:	09 c2                	or     %eax,%edx
+   1400015da:	48 8b 45 20          	mov    0x20(%rbp),%rax
+   1400015de:	89 50 04             	mov    %edx,0x4(%rax)
+   1400015e1:	b8 00 00 00 00       	mov    $0x0,%eax
+   1400015e6:	48 83 c4 30          	add    $0x30,%rsp
+   1400015ea:	5d                   	pop    %rbp
+   1400015eb:	c3                   	ret

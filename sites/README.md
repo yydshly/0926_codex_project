@@ -38,4 +38,4 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 
 ## 010 · Ghidra
 
-[在线能力总图与交互实验台](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/)汇总输入、加载器与 SLEIGH/p-code 原理、输出、扩展方式，以及无源码审查、固件和版本研究场景。网页用自制 COFF 样本说明证据链，尚未运行 Ghidra。[网页源码](010-ghidra/index.html) · [研究记录与验证边界](../projects/010-ghidra/README.md)。
+[在线能力总图与游戏存档实测](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#game-demo)汇总 Ghidra 的输入、原理、输出、扩展方式与使用场景。自制 Windows EXE 已实际运行三份存档并由 Ghidra 12.1.4 反编译；网页可切换真实结果并查看报告。另有 COFF 教学交互。[网页源码](010-ghidra/index.html) · [研究记录与验证边界](../projects/010-ghidra/README.md)。

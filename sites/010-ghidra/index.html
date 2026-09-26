@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="一图看懂 Ghidra：程序与固件如何经加载器、SLEIGH、p-code 和反编译形成可核对的函数、伪代码与图；附使用场景、扩展方式及自制 COFF 样本演示。">
+  <meta name="description" content="一图看懂 Ghidra 的能力、原理、输入输出与扩展方式；用真实 Windows 游戏存档客户端展示 EXE 运行结果、Ghidra 反编译证据和故障定位。">
   <title>010 · Ghidra 二进制分析实验台</title>
   <link rel="stylesheet" href="./style.css">
   <script src="./app.js" defer></script>
@@ -14,7 +14,7 @@
   <header class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="../../README.md" aria-label="返回研究项目总览"><span class="brand-mark">[ 010 ]</span><span>RESEARCH / GHIDRA</span></a>
-      <nav aria-label="页面导航"><a href="#overview">一张总图</a><a href="#capabilities">核心能力</a><a href="#inputs">输入方式</a><a href="#workbench">场景演示</a><a href="#mechanism">技术原理</a><a href="#casebook">使用场景</a><a href="#sources">来源</a></nav>
+      <nav aria-label="页面导航"><a href="#overview">一张总图</a><a href="#game-demo">游戏实测</a><a href="#capabilities">核心能力</a><a href="#inputs">输入方式</a><a href="#mechanism">技术原理</a><a href="#casebook">使用场景</a><a href="#sources">来源</a></nav>
       <a class="top-link" href="../../projects/010-ghidra/README.md">研究记录 <span aria-hidden="true">↗</span></a>
     </div>
   </header>
@@ -27,8 +27,8 @@
           <div class="overline"><span class="pulse"></span> OPEN SOURCE REVERSE ENGINEERING / CASE 010</div>
           <h1 id="hero-title">让二进制<br><em>说出它的逻辑。</em></h1>
           <p class="hero-lede">没有源码，也能从文件格式、机器指令和数据流中还原程序在做什么。用一个真实编译的样本，走一遍 Ghidra 的分析路径。</p>
-          <div class="hero-actions"><a class="button button-accent" href="#overview">先看一张总图 <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="#workbench">进入交互实验台 <span aria-hidden="true">↗</span></a></div>
-          <p class="hero-footnote">本页展示的是本仓库自制样本及教学交互；未在此网页运行 Ghidra，也未声称展示 Ghidra 的实机截图。</p>
+          <div class="hero-actions"><a class="button button-accent" href="#game-demo">查看游戏客户端实测 <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="#overview">先看一张总图 <span aria-hidden="true">↗</span></a></div>
+          <p class="hero-footnote">游戏案例已在本机运行 EXE，并用 Ghidra 12.1.4 反编译；网页按钮展示记录结果，不在浏览器中运行 EXE 或 Ghidra。</p>
         </div>
         <div class="hero-visual" aria-label="样本分析摘要">
           <div class="visual-top"><span><i></i><i></i><i></i></span><span>frame_gate.obj</span><span>COFF / x64</span></div>
@@ -47,7 +47,56 @@
       <div class="wrap">
         <div class="section-label"><span>00</span> / ONE-PAGE MAP</div>
         <div class="overview-heading"><div><h2 id="overview-title">一张图看懂 Ghidra</h2><p>从输入、分析原理到输出，再看如何扩展，以及它对这个研究仓库有什么用。</p></div><a href="../../projects/010-ghidra/assets/capability-map.svg" target="_blank" rel="noopener">打开大图 ↗</a></div>
-        <figure class="overview-figure"><div class="overview-scroll"><img src="../../projects/010-ghidra/assets/capability-map.svg" width="1600" height="1080" alt="Ghidra 能力总图：可输入程序、固件、批量文件、调试目标和项目；经加载器、SLEIGH、p-code、分析器与反编译器形成函数、图、伪代码、工程和报告；可通过脚本、Headless、插件与处理器定义扩展。" loading="eager"></div><figcaption>本仓库依据<a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra 官方仓库</a>和<a href="https://ghidra.re/ghidra_docs/languages/html/sleigh.html">SLEIGH 文档</a>绘制的原理图。图中的能力属于 Ghidra；本站未运行 Ghidra，本项目实际核对范围见<a href="../../projects/010-ghidra/README.md">研究记录</a>。<span class="overview-swipe">手机上可左右滑动查看。</span></figcaption></figure>
+        <figure class="overview-figure"><div class="overview-scroll"><img src="../../projects/010-ghidra/assets/capability-map.svg" width="1600" height="1080" alt="Ghidra 能力总图：可输入程序、固件、批量文件、调试目标和项目；经加载器、SLEIGH、p-code、分析器与反编译器形成函数、图、伪代码、工程和报告；可通过脚本、Headless、插件与处理器定义扩展。" loading="eager"></div><figcaption>本仓库依据<a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra 官方仓库</a>和<a href="https://ghidra.re/ghidra_docs/languages/html/sleigh.html">SLEIGH 文档</a>绘制的原理图。图中的通用能力来自官方资料；下方游戏存档案例另有本机 Ghidra 实测，详见<a href="../../projects/010-ghidra/README.md">研究记录</a>。<span class="overview-swipe">手机上可左右滑动查看。</span></figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section save-section" id="game-demo" aria-labelledby="save-title">
+      <div class="wrap">
+        <div class="section-label"><span>CASE</span> / REAL WINDOWS EXECUTABLE</div>
+        <div class="section-heading"><h2 id="save-title">游戏存档加载失败，<br>到底卡在哪一步？</h2><p>本仓库编译了一个真实的 Windows x64 小客户端 <code>game_save.exe</code>，让它读取三份 12 字节存档。先看程序实际输出，再看 Ghidra 从 EXE 里找到的校验逻辑。</p></div>
+        <div class="save-proof"><span><b>PE / x64</b> 实际编译的 EXE</span><span><b>3 个存档</b> 实际运行并记录退出码</span><span><b>Ghidra 12.1.4</b> 导入 EXE 并反编译</span></div>
+        <div class="save-demo-grid">
+          <div class="save-panel save-run-panel">
+            <div class="save-panel-kicker">01 / OBSERVED PROGRAM BEHAVIOR</div>
+            <h3>只改一个字节，结果就变了</h3>
+            <p>三个按钮切换本机执行 <code>game_save.exe</code> 时保存的输出。选择文件后，浏览器也能按已确认的规则复核你自己的 12 字节存档。</p>
+            <div class="save-presets" role="group" aria-label="真实运行过的存档案例"><button type="button" data-save-case="valid" aria-pressed="true">正常存档</button><button type="button" data-save-case="checksum" aria-pressed="false">校验字节损坏</button><button type="button" data-save-case="version" aria-pressed="false">版本不兼容</button></div>
+            <div class="save-bytes-head"><span>输入存档 / HEX</span><span id="save-diff-label">末字节 6A · 校验通过</span></div>
+            <div class="save-bytes" id="save-bytes" aria-label="存档各字节，变动字节高亮"></div>
+            <div class="save-console"><span>本机实际运行 / STDOUT</span><strong id="save-stdout">SAVE OK: level=7 score=10000</strong><small>process exit code: <b id="save-exit">0</b></small></div>
+            <p class="save-case-note" id="save-case-note">关卡和分数被读取，校验通过。</p>
+            <div class="save-local"><label for="save-file">试一份自己的存档 <span>仅在浏览器读取，不上传、不执行</span></label><input type="file" id="save-file" accept=".sav,application/octet-stream"><p id="save-local-result" role="status" aria-live="polite">可下载下方样本，修改一个字节后再选入。</p></div>
+          </div>
+          <div class="save-panel save-analysis-panel">
+            <div class="save-panel-kicker">02 / ACTUAL GHIDRA OUTPUT</div>
+            <h3>从 EXE 定位到校验函数</h3>
+            <p>Ghidra 导入的是编译后的 <code>game_save.exe</code>。下面摘录它实际生成的 <code>inspect_save</code> 伪代码；可与原始报告逐行对照。</p>
+            <div class="save-function"><span>FUNCTION</span><strong id="save-function-name">inspect_save @ 1400014a4</strong></div>
+            <pre class="save-code" id="save-ghidra-code">        local_9 = 0x5a;
+        for (local_18 = 6; local_18 &lt; 0xb; local_18 = local_18 + 1) {
+          local_9 = local_9 ^ *(byte *)(local_18 + (longlong)param_1);
+        }
+        if (local_9 == *(byte *)((longlong)param_1 + 0xb)) {
+          if ((*(char *)((longlong)param_1 + 6) == '\0') ||
+             (0x32 &lt; *(byte *)((longlong)param_1 + 6))) {
+            uVar2 = 7;
+          }
+          else {
+            *param_3 = *(undefined1 *)((longlong)param_1 + 6);
+            *(undefined4 *)(param_3 + 4) = *(undefined4 *)((longlong)param_1 + 7);
+            uVar2 = 0;
+          }
+        }
+        else {
+          uVar2 = 6;
+        }</pre>
+            <div class="save-conclusion"><strong>这解释了什么？</strong><p id="save-conclusion">第 12 字节和前面载荷字节算出的校验值不一致时，函数返回 6；主程序显示 “checksum mismatch”。</p></div>
+          </div>
+        </div>
+        <div class="save-steps"><div><span>1 / 输入</span><p>同一个 EXE，分别读取正常与损坏的 <code>.sav</code> 文件。</p></div><div><span>2 / 二进制证据</span><p>Ghidra 找函数、比较条件和返回值；运行报告核对实际分支。</p></div><div><span>3 / 结论</span><p>定位“加载失败”原因，可据此修复自己的存档格式或提交故障证据。</p></div></div>
+        <div class="save-links"><a href="../../projects/010-ghidra/game-save-demo/game_save.exe" download>下载实际 EXE ↗</a><a href="../../projects/010-ghidra/game-save-demo/valid.sav" download>正常存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/bad-checksum.sav" download>损坏存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/bad-version.sav" download>版本错误存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/run-report.txt">实际运行记录 ↗</a><a href="../../projects/010-ghidra/game-save-demo/ghidra-report.txt">Ghidra 原始报告 ↗</a><a href="../../projects/010-ghidra/game-save-demo/game_save.c">样本源码 ↗</a></div>
+        <p class="save-boundary">这是本仓库自制的最小游戏客户端，帮助你看清分析方法，不代表对商业游戏的结论。按钮展示已记录的 EXE 运行结果；文件选择器只在浏览器复核规则。源码提供给读者验证，Ghidra 分析时输入的是编译后的 EXE。</p>
       </div>
     </section>
 
@@ -127,7 +176,7 @@
       </div>
     </section>
 
-    <section class="section sources" id="sources"><div class="wrap"><div class="section-label"><span>07</span> / SOURCES & LIMITS</div><div class="section-heading"><h2>来源、归属与边界</h2><p>把官方能力、样本验证和页面模拟分开记录，便于复查。</p></div><div class="source-grid"><div><h3>官方资料</h3><ul><li><a href="https://github.com/NationalSecurityAgency/ghidra">NSA / Ghidra 仓库</a>：功能、扩展与平台说明</li><li><a href="https://ghidra.re/ghidra_docs/languages/html/sleigh.html">SLEIGH 手册</a>、<a href="https://ghidra.re/ghidra_docs/languages/html/pcoderef.html">p-code 参考</a>：中间表示原理</li><li><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm">导入器说明</a>：COFF 等文件格式</li><li><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GettingStarted.md">Getting Started</a>、<a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md">BSim 教程</a></li></ul></div><div><h3>本项目产物</h3><ul><li><a href="../../projects/010-ghidra/fixture/frame_gate.c">自制样本源码</a>、<a href="../../projects/010-ghidra/fixture/build.ps1">构建与四例验证脚本</a></li><li><a href="../../projects/010-ghidra/fixture/frame_gate.obj">本地编译的 COFF 对象文件</a>、<a href="../../projects/010-ghidra/fixture/dumpbin-report.txt">检查与验证记录</a></li><li><a href="../../projects/010-ghidra/README.md">完整研究记录</a>：验证步骤、局限和图片来源</li></ul></div><div><h3>使用边界</h3><p>本次实际编译并检查了自制样本，四个样例输入通过编译后的校验程序；尚未安装或运行 Ghidra。页面中的伪代码、p-code 层和测试追踪是教学表达，不能当作 Ghidra 的实机输出。Ghidra 主体按 Apache 2.0 发布，部分独立组件另有许可证。</p><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/NOTICE">查看官方许可说明 ↗</a></div></div></div></section>
+    <section class="section sources" id="sources"><div class="wrap"><div class="section-label"><span>07</span> / SOURCES & LIMITS</div><div class="section-heading"><h2>来源、归属与边界</h2><p>把官方能力、样本验证和页面模拟分开记录，便于复查。</p></div><div class="source-grid"><div><h3>官方资料</h3><ul><li><a href="https://github.com/NationalSecurityAgency/ghidra">NSA / Ghidra 仓库</a>：功能、扩展与平台说明</li><li><a href="https://ghidra.re/ghidra_docs/languages/html/sleigh.html">SLEIGH 手册</a>、<a href="https://ghidra.re/ghidra_docs/languages/html/pcoderef.html">p-code 参考</a>：中间表示原理</li><li><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm">导入器说明</a>：COFF 等文件格式</li><li><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GettingStarted.md">Getting Started</a>、<a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md">BSim 教程</a></li></ul></div><div><h3>本项目产物</h3><ul><li><a href="../../projects/010-ghidra/game-save-demo/game_save.exe">游戏客户端 EXE</a>、<a href="../../projects/010-ghidra/game-save-demo/run-report.txt">三例实际运行结果</a>、<a href="../../projects/010-ghidra/game-save-demo/ghidra-report.txt">Ghidra 反编译报告</a></li><li><a href="../../projects/010-ghidra/game-save-demo/ExportGameSave.java">Ghidra 导出脚本</a>、<a href="../../projects/010-ghidra/game-save-demo/binary-inspection.txt">指令检查记录</a></li><li><a href="../../projects/010-ghidra/fixture/frame_gate.obj">补充 COFF 教学样本</a>与<a href="../../projects/010-ghidra/fixture/dumpbin-report.txt">检查记录</a></li><li><a href="../../projects/010-ghidra/README.md">完整研究记录</a>：验证步骤、局限和图片来源</li></ul></div><div><h3>使用边界</h3><p>游戏案例已用 Ghidra 12.1.4 分析自制 EXE；上方反编译片段来自实测报告。页面另一个 COFF 样本的伪代码、p-code 层和测试追踪仍是教学表达，不是它在 Ghidra 中的实测输出。未分析第三方游戏。Ghidra 主体按 Apache 2.0 发布，部分独立组件另有许可证。</p><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/NOTICE">查看官方许可说明 ↗</a></div></div></div></section>
   </main>
   <footer><div class="wrap footer-inner"><span>010 / GHIDRA — BINARY ANALYSIS LAB</span><div><a href="../../README.md">研究索引</a><a href="../../projects/010-ghidra/README.md">研究记录</a><a href="https://github.com/NationalSecurityAgency/ghidra">上游仓库</a></div><small>本网页与样本由本研究仓库制作。</small></div></footer>
 </body>

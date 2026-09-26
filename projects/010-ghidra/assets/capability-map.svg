@@ -134,7 +134,7 @@
   <text x="825" y="895" class="zh" fill="#d3e9dc" font-size="17">适合：无源码模块审查 · 固件研究 · 版本变化 · 样本初筛</text>
   <text x="825" y="931" class="zh" fill="#d3e9dc" font-size="17">推荐产物：输入哈希 + 选项 + 函数线索 + 人工核对记录</text>
   <rect x="823" y="953" width="689" height="48" rx="8" fill="#235c4d"/>
-  <text x="842" y="983" class="zh" fill="#e3f3df" font-size="16">本项目当前：已验证自制 COFF 样本；尚未运行 Ghidra。</text>
+  <text x="842" y="983" class="zh" fill="#e3f3df" font-size="16">本项目当前：Ghidra 已实测游戏 EXE 的存档校验逻辑。</text>
 
   <text x="60" y="1057" class="zh muted" font-size="14">本研究仓库原创示意 · 依据 Ghidra 官方仓库、导入器、SLEIGH、Headless 与 BSim 文档 · 伪代码和相似性均需人工复核</text>
 </svg>

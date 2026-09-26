@@ -1,0 +1,53 @@
+GHIDRA 12.1.4 PUBLIC / actual headless decompiler output
+PROGRAM: game_save.exe
+LANGUAGE: x86:LE:64:default
+COMPILER_SPEC: windows
+FUNCTION: inspect_save @ 1400014a4
+
+=== DECOMPILED C ===
+
+undefined8 inspect_save(void *param_1,longlong param_2,undefined1 *param_3)
+
+{
+  int iVar1;
+  undefined8 uVar2;
+  ulonglong local_18;
+  byte local_9;
+
+  if (param_2 == 0xc) {
+    iVar1 = memcmp(param_1,&DAT_140009000,4);
+    if (iVar1 == 0) {
+      if ((*(char *)((longlong)param_1 + 4) == '\x01') &&
+         (*(char *)((longlong)param_1 + 5) == '\x05')) {
+        local_9 = 0x5a;
+        for (local_18 = 6; local_18 < 0xb; local_18 = local_18 + 1) {
+          local_9 = local_9 ^ *(byte *)(local_18 + (longlong)param_1);
+        }
+        if (local_9 == *(byte *)((longlong)param_1 + 0xb)) {
+          if ((*(char *)((longlong)param_1 + 6) == '\0') ||
+             (0x32 < *(byte *)((longlong)param_1 + 6))) {
+            uVar2 = 7;
+          }
+          else {
+            *param_3 = *(undefined1 *)((longlong)param_1 + 6);
+            *(undefined4 *)(param_3 + 4) = *(undefined4 *)((longlong)param_1 + 7);
+            uVar2 = 0;
+          }
+        }
+        else {
+          uVar2 = 6;
+        }
+      }
+      else {
+        uVar2 = 5;
+      }
+    }
+    else {
+      uVar2 = 4;
+    }
+  }
+  else {
+    uVar2 = 3;
+  }
+  return uVar2;
+}

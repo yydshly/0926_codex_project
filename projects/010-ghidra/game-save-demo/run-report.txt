@@ -1,0 +1,19 @@
+GAME SAVE DEMO / actual compiled executable results
+Build: MinGW-w64 GCC, -std=c11 -O0 -fno-inline
+EXE SHA-256: fe7caccd3d193f46b4eded4276d279cfd91004f6a2f219b7a8388e1468a3fbd5
+Format: GSV1 | version 01 | payload length 05 | level 07 | score 10000 little-endian | XOR checksum 6A
+
+=== valid.sav ===
+bytes: 47 53 56 31 01 05 07 10 27 00 00 6A
+stdout: SAVE OK: level=7 score=10000
+exit code: 0
+
+=== bad-checksum.sav ===
+bytes: 47 53 56 31 01 05 07 10 27 00 00 00
+stdout: SAVE REJECTED: checksum mismatch
+exit code: 6
+
+=== bad-version.sav ===
+bytes: 47 53 56 31 02 05 07 10 27 00 00 6A
+stdout: SAVE REJECTED: unsupported version or payload
+exit code: 5
