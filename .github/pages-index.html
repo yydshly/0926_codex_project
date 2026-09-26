@@ -13,7 +13,10 @@
     article{background:white;border:1px solid #d9e5dc;border-radius:15px;padding:25px;box-shadow:0 12px 30px #1026230d}
     article span{color:#1b7047;font-weight:800;font-size:12px;letter-spacing:.1em}h2{font-size:24px;margin:12px 0 8px}
     a{color:#176b46;font-weight:750}a:focus-visible{outline:3px solid #238859;outline-offset:3px}
-    @media(max-width:620px){.grid{grid-template-columns:1fr}.wrap{padding:45px 0}}
+    .feature-card{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:center}
+    .feature-card img{display:block;width:100%;height:auto;border-radius:10px}
+    .feature-card p{margin:8px 0}.feature-card .feature-links{margin-top:14px}
+    @media(max-width:620px){.grid{grid-template-columns:1fr}.wrap{padding:45px 0}.feature-card{grid-template-columns:1fr}}
   </style>
 </head>
 <body><main class="wrap"><p>GITHUB 项目研究集 / 在线展示</p><h1>从能力到原理，逐项看懂。</h1><p>下列网页是研究说明。交互样例会明确标注模拟范围；源码与出处见各项目研究记录。</p>
@@ -27,5 +30,6 @@
     <article><span>008 / 编程 Agent 编排</span><h2>Oh My OpenAgent</h2><p>一张图梳理主 Agent 分派、模型路由、工具和续跑的原理，说明跨模块任务场景及对本研究仓库的价值。</p><a href="./sites/008-oh-my-openagent/">打开在线展示 →</a></article>
     <article><span>009 / 终端文件管理</span><h2>superfile</h2><p>一张图看懂多面板、搜索、预览与批量整理，Go 与本机文件系统的工作原理，以及适用场景和对本仓库的意义。</p><a href="./sites/009-superfile/">打开在线展示 →</a></article>
     <article><span>010 / 二进制逆向分析</span><h2>Ghidra</h2><p>完整引导图汇总输入、能力、原理、输出、扩展与场景；游戏存档实测从 PE 原始字节走到指令、p-code、伪代码和实际运行结果。</p><a href="./sites/010-ghidra/#overview">查看引导图与分析过程 →</a></article>
+    <article class="feature-card"><a href="./sites/013-gitreverse/#summary" aria-label="打开 GitReverse 能力总览与实测对比"><img src="./projects/013-gitreverse/assets/research-summary.svg" alt="GitReverse 能力总览图：两条输入路线、两种文字产物、网页落地实测与研究价值" loading="lazy"></a><div><span>013 / 需求反推与网页实测</span><h2>GitReverse</h2><p><strong>能力：</strong>从公开仓库或网站生成合成开发提示词；网站路线还生成 design.md 设计说明。</p><p><strong>原理：</strong>读取有限的仓库资料或网页文字与品牌线索，再由大模型归纳需求。</p><p><strong>场景与意义：</strong>用于项目初筛、原型需求和页面初稿；帮助我们先提出研究假设，再核对源码、截图与效果。</p><p>Chippy Tea 实测：内容方向可用，原站的布局和品牌视觉仍需人工校对。</p><p class="feature-links"><a href="./sites/013-gitreverse/#summary">看总览图与前后对比 →</a> · <a href="./projects/013-gitreverse/README.md">研究来源</a></p></div></article>
   </div><p><a href="https://github.com/yydshly/0926_codex_project">查看研究记录与项目索引 ↗</a></p></main></body>
 </html>

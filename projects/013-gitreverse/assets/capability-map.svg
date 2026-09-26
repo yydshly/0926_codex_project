@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">GitReverse 能力引导图</title>
+  <desc id="desc">公开 GitHub 仓库经浅层资料读取和模型归纳生成合成开发提示词；网站经页面和视觉线索采集生成设计说明与建站提示词。右侧说明输出边界。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#071324"/>
+      <stop offset="1" stop-color="#132a40"/>
+    </linearGradient>
+    <linearGradient id="repo" x1="0" x2="1">
+      <stop offset="0" stop-color="#176a80"/>
+      <stop offset="1" stop-color="#1f8d98"/>
+    </linearGradient>
+    <linearGradient id="site" x1="0" x2="1">
+      <stop offset="0" stop-color="#6a488e"/>
+      <stop offset="1" stop-color="#9265a4"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#a8d9e4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .txt{font-family:"Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;fill:#eff8fc}
+      .muted{fill:#b6cbd8}
+      .small{font-size:21px}
+      .label{font-size:26px;font-weight:700}
+      .heading{font-size:44px;font-weight:700}
+      .line{stroke:#a8d9e4;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="1200" cy="72" r="180" fill="#1d6874" opacity=".14"/>
+  <circle cx="80" cy="710" r="230" fill="#634c9a" opacity=".13"/>
+  <text x="55" y="72" class="txt heading">GitReverse：从可见证据生成开发提示词</text>
+  <text x="57" y="108" class="txt muted small">两个入口，两条处理链；输出是推测性需求草稿</text>
+
+  <rect x="50" y="140" width="840" height="215" rx="22" fill="#102b3e" stroke="#2b8093" stroke-width="2"/>
+  <rect x="72" y="164" width="190" height="166" rx="15" fill="url(#repo)"/>
+  <text x="92" y="216" class="txt label">公开仓库</text>
+  <text x="92" y="252" class="txt small">GitHub URL</text>
+  <text x="92" y="283" class="txt small">或 owner/repo</text>
+  <path d="M270 246 H314" class="line"/>
+  <rect x="326" y="164" width="245" height="166" rx="15" fill="#17384c" stroke="#45899b"/>
+  <text x="349" y="208" class="txt label">有限资料</text>
+  <text x="349" y="246" class="txt small">元数据 · README</text>
+  <text x="349" y="278" class="txt small">根目录一层文件树</text>
+  <path d="M579 246 H622" class="line"/>
+  <rect x="635" y="164" width="230" height="166" rx="15" fill="#1d4b59" stroke="#64b5ba"/>
+  <text x="660" y="208" class="txt label">模型归纳</text>
+  <text x="660" y="247" class="txt small">一条合成的</text>
+  <text x="660" y="279" class="txt small">开发需求提示词</text>
+
+  <rect x="50" y="378" width="840" height="215" rx="22" fill="#1d273e" stroke="#7662a4" stroke-width="2"/>
+  <rect x="72" y="402" width="190" height="166" rx="15" fill="url(#site)"/>
+  <text x="92" y="454" class="txt label">网站页面</text>
+  <text x="92" y="492" class="txt small">网站 URL</text>
+  <text x="92" y="524" class="txt small">可访问页面</text>
+  <path d="M270 484 H314" class="line"/>
+  <rect x="326" y="402" width="245" height="166" rx="15" fill="#3b3455" stroke="#8e78ac"/>
+  <text x="349" y="446" class="txt label">页面线索</text>
+  <text x="349" y="484" class="txt small">文字 · 品牌样式</text>
+  <text x="349" y="516" class="txt small">可选截图地址</text>
+  <path d="M579 484 H622" class="line"/>
+  <rect x="635" y="402" width="230" height="166" rx="15" fill="#514267" stroke="#ae8fc0"/>
+  <text x="660" y="446" class="txt label">两步生成</text>
+  <text x="660" y="484" class="txt small">设计说明 design.md</text>
+  <text x="660" y="516" class="txt small">建站需求提示词</text>
+
+  <rect x="915" y="140" width="315" height="453" rx="22" fill="#173143" stroke="#577c8d" stroke-width="2"/>
+  <text x="944" y="194" class="txt label">理解边界</text>
+  <rect x="944" y="218" width="254" height="1" fill="#628394"/>
+  <circle cx="954" cy="259" r="5" fill="#77c5c7"/>
+  <text x="970" y="267" class="txt small">无法找回作者原始</text>
+  <text x="970" y="296" class="txt small">提示词</text>
+  <circle cx="954" cy="346" r="5" fill="#77c5c7"/>
+  <text x="970" y="354" class="txt small">仓库路线未逐文件</text>
+  <text x="970" y="383" class="txt small">审查源码</text>
+  <circle cx="954" cy="433" r="5" fill="#77c5c7"/>
+  <text x="970" y="441" class="txt small">页面线索不能证明</text>
+  <text x="970" y="470" class="txt small">后台真实功能</text>
+  <rect x="944" y="503" width="254" height="62" rx="11" fill="#25485a"/>
+  <text x="961" y="542" class="txt small">需进一步核查与验证</text>
+
+  <text x="55" y="647" class="txt small">研究用途：候选项目初筛、原型需求草稿、网页风格参考</text>
+  <text x="55" y="682" class="txt muted" font-size="18">本仓库原创研究示意 · 依据 GitReverse README 与关键源码 · 非官方架构图或运行截图</text>
+</svg>

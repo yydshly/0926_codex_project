@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用 GitReverse 对 Chippy Tea 的提示词和 design.md 制作网页，并与原站截图实测对比。">
+  <title>GitReverse 结果落地实测 · Chippy Tea</title>
+  <style>
+    :root{--ink:#18303a;--muted:#526870;--teal:#0c7771;--line:#d8e3df;--paper:#f6f8f5}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;color:var(--ink);line-height:1.7}a{color:var(--teal)}a:focus-visible{outline:3px solid #f2aa5c;outline-offset:3px}.wrap{width:min(1180px,calc(100% - 38px));margin-inline:auto}
+    header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{min-height:63px;display:flex;align-items:center;justify-content:space-between;gap:16px}.header-inner a{font-size:13px;text-decoration:none;font-weight:750}.brand{color:var(--ink)!important}.header-links{display:flex;gap:19px;flex-wrap:wrap}
+    .hero{padding-block:70px 55px}.eyebrow{font-size:11px;font-weight:850;letter-spacing:.15em;color:var(--teal);text-transform:uppercase;margin:0 0 13px}.hero h1{font-size:clamp(34px,4vw,54px);letter-spacing:-.055em;line-height:1.2;margin:0 0 18px}.hero .lead{max-width:780px;font-size:17px;color:var(--muted);margin:0 0 27px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.button{display:inline-block;padding:11px 18px;border-radius:8px;border:1px solid var(--teal);text-decoration:none;font-size:13px;font-weight:800}.button.primary{background:var(--teal);color:#fff}.button.secondary{background:#fff}
+    section{padding-block:55px}.section-title{font-size:30px;letter-spacing:-.04em;line-height:1.3;margin:0 0 11px}.section-lead{color:var(--muted);margin:0 0 25px;max-width:880px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.step{background:#fff;border:1px solid var(--line);border-radius:13px;padding:21px}.step-num{display:block;color:var(--teal);font-size:11px;letter-spacing:.13em;font-weight:850;margin-bottom:11px}.step h3{font-size:18px;margin:0 0 7px}.step p{font-size:13px;color:var(--muted);margin:0}.step a{font-weight:800}
+    .brief{margin-top:18px;background:#173741;color:#e2f1ee;border-radius:12px;padding:22px 25px}.brief strong{color:#fff}.brief p{font-size:13px;margin:0 0 9px}.brief pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.75 "Microsoft YaHei",system-ui,sans-serif;margin:0;color:#d6e8e6}
+    .comparison-section{background:#edf3ee;border-block:1px solid #dbe8dd}.device-block{margin-top:33px}.device-heading{display:flex;justify-content:space-between;align-items:baseline;gap:15px;margin-bottom:12px}.device-heading h3{font-size:20px;margin:0}.device-heading span{font-size:12px;color:var(--muted)}.comparison-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.shot{margin:0;background:#fff;border:1px solid #d1ddd7;border-radius:11px;overflow:hidden}.shot img{display:block;width:100%;height:auto}.shot figcaption{border-bottom:1px solid #e6ece8;padding:12px 15px;font-size:13px;font-weight:800;display:flex;justify-content:space-between;gap:12px}.shot figcaption a{font-size:11px}.mobile-pair{grid-template-columns:minmax(0,390px) minmax(0,390px);justify-content:center}.caption{font-size:12px;color:var(--muted);margin-top:15px}
+    .findings{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.finding{border:1px solid var(--line);background:#fff;border-radius:12px;padding:21px}.finding strong{font-size:16px}.finding p{font-size:13px;color:var(--muted);margin:7px 0 0}.finding.good{border-top:4px solid #55ad8d}.finding.gap{border-top:4px solid #e6a263}.test-note{background:#fffaf0;border:1px solid #e9dec8;border-radius:12px;padding:20px 23px;margin-top:17px;font-size:13px;color:#594e3c}.test-note p{margin:0 0 7px}.test-note p:last-child{margin:0}
+    .conclusion{background:#173741;color:#fff}.conclusion .section-title{color:#fff}.conclusion p{color:#c7dfdc;max-width:900px;margin:0 0 12px}.conclusion strong{color:#fff}.conclusion a{color:#9de7d5;font-weight:800}footer{background:#102b34;color:#a6c8c7}.footer-inner{padding-block:21px;font-size:12px;display:flex;justify-content:space-between;gap:15px}.footer-inner a{color:#a6dcd3}
+    @media(max-width:780px){.steps{grid-template-columns:1fr}.comparison-pair{gap:9px}.shot figcaption{display:block}.shot figcaption a{display:block;margin-top:4px}.findings{grid-template-columns:1fr}}
+    @media(max-width:550px){.header-inner{align-items:flex-start;flex-direction:column;padding-block:12px;gap:5px}.header-links{gap:13px}.hero{padding-block:50px 30px}.hero .lead{font-size:15px}.comparison-pair,.mobile-pair{grid-template-columns:1fr}.shot img{max-height:75vh;object-fit:contain;object-position:top;background:#eee}.device-heading{display:block}.device-heading span{display:block}.brief{padding:17px}.brief pre{font-size:12px}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap header-inner"><a class="brand" href="./index.html#real-case">← 返回 GitReverse 讲解页</a><div class="header-links"><a href="./chippytea-rebuild/index.html">打开实做网页 ↗</a><a href="https://www.chippytea.com/" target="_blank" rel="noopener noreferrer">打开原网页 ↗</a></div></div></header>
+  <main>
+    <div class="hero wrap"><p class="eyebrow">CHIPPYTEA / 结果落地实测</p><h1>两份文字，能做出什么网页？</h1><p class="lead">把 GitReverse 生成的<strong>提示词</strong>当作页面任务书，把 <strong>design.md</strong> 当作视觉规则，制作了一个可运行的产品介绍页。然后用相同尺寸的真实浏览器截图，与 Chippy Tea 官网对照。</p><div class="hero-actions"><a class="button primary" href="./chippytea-rebuild/index.html">体验实做网页 ↗</a><a class="button secondary" href="#comparison">直接看实测对比 ↓</a></div></div>
+    <section class="wrap" id="method"><p class="eyebrow">01 / 如何使用两个结果</p><h2 class="section-title">从结果到网页，我们实际做了三步</h2><p class="section-lead">第一版的可见内容、颜色和排版依据 GitReverse 的两份输出。下载地址和源码地址是人工从 Chippy Tea 官网核对后补上的；清理交互是本实验编写的<strong>虚构数据示意</strong>，不是 GitReverse 自动生成的应用功能。</p>
+      <div class="steps">
+        <article class="step"><span class="step-num">STEP 01 · 复制任务</span><h3>提示词决定“做什么”</h3><p>从<a href="https://www.gitreverse.com/website/chippytea-com?url=https%3A%2F%2Fchippytea.com%2F" target="_blank" rel="noopener noreferrer">实际提示词</a>提取首屏、下载入口、清理项目示例、统计数字及清理历史等页面内容。</p></article>
+        <article class="step"><span class="step-num">STEP 02 · 应用规范</span><h3>design.md 决定“怎么画”</h3><p>依据<a href="https://www.gitreverse.com/designs/chippytea-com" target="_blank" rel="noopener noreferrer">生成的设计说明</a>使用奶油色背景、深灰文字、灰褐色强调、圆润字体、低阴影与方角组件；文字用的灰褐色略微加深，以保证对比度。</p></article>
+        <article class="step"><span class="step-num">STEP 03 · 实现与检查</span><h3>写出可运行页面</h3><p>把内容与视觉规则转成 HTML、CSS 和 JavaScript；检查桌面、手机、按钮、示意交互与浏览器报错，再和原站截图比较。</p></article>
+      </div>
+      <div class="brief"><p><strong>给编程助手的可复用任务写法：</strong></p><pre>请以 GitReverse 生成的提示词为功能与内容要求，以 design.md 为视觉规范，制作可在浏览器运行的响应式 Chippy Tea 产品介绍页。
+明确把清理项目设为虚构演示；网页不能读取或删除本机文件。
+完成后在 1440×900 与 390×844 截图，与 https://www.chippytea.com/ 的相同视口截图比较，记录相符内容、遗漏和人工补充的部分。</pre></div>
+    </section>
+    <section class="comparison-section" id="comparison"><div class="wrap"><p class="eyebrow">02 / 同尺寸浏览器截图</p><h2 class="section-title">原网页与实做网页，并排看</h2><p class="section-lead">截图均在 Chrome 中以设备缩放 1 捕捉，无浏览器工具栏。原网页截图采集于 2026-09-26，网页、品牌和画面归 Chippy Tea 作者。右侧是本研究依据 GitReverse 输出编写的第一版，未使用原网页截图作为页面素材。</p>
+      <div class="device-block"><div class="device-heading"><h3>桌面首屏</h3><span>1440 × 900 · 初始状态</span></div><div class="comparison-pair"><figure class="shot"><figcaption>原网页 <a href="./chippytea-source-desktop-comparison.png" target="_blank">查看原尺寸 ↗</a></figcaption><img src="./chippytea-source-desktop-comparison.png" alt="Chippy Tea 官网桌面首屏：左右双栏、黄色下载按钮和手绘风应用预览" loading="lazy"></figure><figure class="shot"><figcaption>根据两份结果实做 <a href="./chippytea-rebuild-desktop.png" target="_blank">查看原尺寸 ↗</a></figcaption><img src="./chippytea-rebuild-desktop.png" alt="根据 GitReverse 输出制作的桌面首屏：单列标题、灰褐色按钮和下方示意区" loading="lazy"></figure></div></div>
+      <div class="device-block"><div class="device-heading"><h3>手机首屏</h3><span>390 × 844 · 初始状态</span></div><div class="comparison-pair mobile-pair"><figure class="shot"><figcaption>原网页 <a href="./chippytea-source-mobile-comparison.png" target="_blank">查看原尺寸 ↗</a></figcaption><img src="./chippytea-source-mobile-comparison.png" alt="Chippy Tea 官网手机首屏截图" loading="lazy"></figure><figure class="shot"><figcaption>根据两份结果实做 <a href="./chippytea-rebuild-mobile.png" target="_blank">查看原尺寸 ↗</a></figcaption><img src="./chippytea-rebuild-mobile.png" alt="根据 GitReverse 输出制作的手机首屏截图" loading="lazy"></figure></div></div><p class="caption">截图只用于研究对照；原站的容量数字与清理文件列表本身也标注为虚构示意。</p>
+    </div></section>
+    <section class="wrap" id="findings"><p class="eyebrow">03 / 实测结论</p><h2 class="section-title">它帮我们完成了什么，哪里需要补？</h2><div class="findings">
+      <article class="finding good"><strong>内容方向抓对了</strong><p>两页都围绕“释放 Mac 空间”，也有下载、源码、人工审查、示例清理项目与空间统计。这个层面，提示词足够做第一版营销页。</p></article>
+      <article class="finding good"><strong>生成结果能转成可运行网页</strong><p>实做页可在桌面和手机打开；下载与源码链接可访问，清理示意支持 Review 对话框与 Activity 记录。这些交互由本实验实现，不能算作 GitReverse 直接产出。</p></article>
+      <article class="finding gap"><strong>首屏结构差异明显</strong><p>原站是左文案、右应用预览的双栏；design.md 倾向单列、堆叠式布局。按生成说明实现后，应用预览被推到首屏以下。</p></article>
+      <article class="finding gap"><strong>品牌细节被压平</strong><p>原站有黄色按钮、鱼形标识、胶带装饰和手绘边框；生成说明主要给出奶油色、灰褐色、方角和低阴影，因此实做版保留了气质，却不像原站。</p></article>
+      <article class="finding gap"><strong>素材和行为无法凭文字恢复</strong><p>两份结果没有提供鱼形标识、插图、音乐、精确尺寸或下载地址。这里没有伪造这些素材；链接由人工核对，清理流程只做安全的网页示意。</p></article>
+      <article class="finding gap"><strong>它没有造出 Mac App</strong><p>得到的是产品介绍页与前端演示。它没有磁盘扫描、文件删除、SwiftUI 界面或 Rust 后端。实现原生应用需要继续研究源码与功能。</p></article>
+    </div><div class="test-note"><p><strong>本地实测：</strong>桌面 1440×900、手机 390×844 均无横向溢出和 JavaScript 报错；Review 对话框、示意统计更新、Activity 记录已操作验证。</p><p><strong>对比边界：</strong>这只是一轮输出样本。视觉差异来自生成说明的遗漏，也可能受本次实现选择影响。</p></div></section>
+    <section class="conclusion"><div class="wrap"><p class="eyebrow">现在可以怎样理解它</p><h2 class="section-title">GitReverse 给的是起跑线，产出仍要做。</h2><p>提示词告诉编程助手<strong>做哪些内容</strong>，design.md 提供<strong>视觉方向</strong>；开发者据此写代码，运行后再和原网页比对。此处的可运行页就是这一步的真实产出，截图揭示了它接近与偏离的地方。</p><p>若要高度还原，还需要补充原网页的截图、素材、交互和响应式细节，再进行下一轮实现。<a href="./chippytea-rebuild/index.html">打开实做页 ↗</a></p></div></section>
+  </main>
+  <footer><div class="wrap footer-inner"><span>013 / GitReverse · Chippy Tea 网页落地实验</span><span><a href="../../projects/013-gitreverse/README.md">研究记录与来源 ↗</a></span></div></footer>
+</body>
+</html>

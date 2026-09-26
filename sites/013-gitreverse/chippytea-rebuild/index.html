@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="A Chippy Tea marketing-page experiment built from GitReverse's generated prompt and design system.">
+  <title>chippytea — Free up space on your Mac</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="#top" aria-label="chippytea home">chippytea<span class="wordmark-dot">.</span></a>
+      <nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#demo">See it in action</a><a href="https://github.com/richiemcilroy/chippytea" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" id="top">
+      <p class="eyebrow">A LITTLE MORE ROOM TO BREATHE</p>
+      <h1>Free up space<br>on your Mac.</h1>
+      <p class="hero-copy">chippytea helps you find old build folders, project dependencies and installers you may no longer need. Review their estimated sizes, understand what removing them means, then choose what to keep or remove.</p>
+      <div class="hero-actions"><a class="button primary" href="https://www.chippytea.com/download" target="_blank" rel="noopener noreferrer">Download for Mac <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/richiemcilroy/chippytea#build-and-run" target="_blank" rel="noopener noreferrer">Build from source ↗</a></div>
+      <p class="trust-line">Free &amp; open source <span aria-hidden="true">·</span> Apple Silicon <span aria-hidden="true">·</span> macOS 14 or later<br>No account, no telemetry, nothing deleted on its own.</p>
+    </section>
+
+    <section class="demo-section" id="demo" aria-labelledby="demo-title"><div class="container">
+      <div class="section-heading"><div><p class="eyebrow">SEE IT IN ACTION</p><h2 id="demo-title">A calmer way to clear space.</h2></div><p>Everything starts with a suggestion. You make the decision.</p></div>
+      <div class="demo-app">
+        <div class="demo-header"><div><span class="demo-brand">chippytea</span><span class="demo-note">Illustrative demo</span></div><div class="demo-tabs" role="tablist" aria-label="Demo views"><button id="tab-find" type="button" role="tab" aria-selected="true" aria-controls="panel-find">Find space</button><button id="tab-activity" type="button" role="tab" aria-selected="false" aria-controls="panel-activity">Activity</button></div></div>
+        <div id="panel-find" class="demo-panel" role="tabpanel" aria-labelledby="tab-find">
+          <div class="metric"><span class="metric-number"><span id="saved-number">85.43</span> GB</span><div><strong>saved so far</strong><p>Room reclaimed through cleanups you reviewed.</p></div></div>
+          <div class="demo-content"><div class="list-intro"><h3>Make a bit of room.</h3><span>Estimated sizes</span></div>
+            <div class="cleanup-list">
+              <div class="cleanup-row" data-item="build"><div><strong>Old build folders</strong><small>Build files from past projects</small></div><span>2.40 GB</span><button type="button" data-review="build">Review</button></div>
+              <div class="cleanup-row" data-item="dependencies"><div><strong>Project dependencies</strong><small>Dependencies you may no longer need</small></div><span>1.20 GB</span><button type="button" data-review="dependencies">Review</button></div>
+              <div class="cleanup-row" data-item="installer"><div><strong>Older installer</strong><small>A download left behind</small></div><span>580 MB</span><button type="button" data-review="installer">Review</button></div>
+            </div>
+            <div class="chips"><span class="chips-value" id="chips-number">854</span><div><strong>Your chips</strong><p>A small celebration for every bit of space you free.</p></div></div>
+          </div>
+        </div>
+        <div id="panel-activity" class="demo-panel" role="tabpanel" aria-labelledby="tab-activity" hidden><div class="activity-inner"><h3>Cleanup history</h3><p>Review what you chose in this illustrative session.</p><ul id="activity-list"><li>No decisions yet. Select a suggestion in Find space to try the demo.</li></ul></div></div>
+      </div>
+      <p class="demo-disclaimer">This is an illustrative webpage demo with fictional files and amounts. It does not scan your Mac or delete anything.</p>
+    </div></section>
+
+    <section class="how-section container" id="how-it-works" aria-labelledby="how-title"><div class="section-heading"><div><p class="eyebrow">HOW IT WORKS</p><h2 id="how-title">Your space. Your call.</h2></div><p>Simple steps, with a chance to review before you remove anything.</p></div><div class="how-grid"><article><span>01</span><h3>Choose what to scan</h3><p>Look through folders you select for old builds, dependencies and installers.</p></article><article><span>02</span><h3>Review the suggestions</h3><p>See estimated sizes and understand what each cleanup would mean.</p></article><article><span>03</span><h3>Make the decision</h3><p>Keep what you need, remove what you do not, and check your activity later.</p></article></div></section>
+
+    <section class="end-section"><div class="container end-inner"><div><p class="eyebrow">SPACE TO MAKE MORE</p><h2>Keep the good stuff.<br>Clear the rest.</h2></div><a class="button primary" href="https://www.chippytea.com/download" target="_blank" rel="noopener noreferrer">Download for Mac ↗</a></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>chippytea · Free &amp; open source</span><a href="https://github.com/richiemcilroy/chippytea" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a></div></footer>
+
+  <dialog id="review-dialog" aria-labelledby="review-title"><form method="dialog" class="dialog-content"><p class="eyebrow">REVIEW FIRST</p><h2 id="review-title"></h2><p id="review-description"></p><p class="dialog-size">Estimated space: <strong id="review-size"></strong></p><p class="dialog-note">Illustrative only. Choosing an action here will not change files on your Mac.</p><div class="dialog-actions"><button type="submit" value="cancel" class="button subtle">Cancel</button><button type="submit" value="keep" class="button subtle">Keep it</button><button type="submit" value="remove" class="button primary">Mark as removed</button></div></form></dialog>
+</body>
+</html>
