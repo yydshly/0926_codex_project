@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title description">
+  <title id="title">一张图看懂 Ghidra：输入、核心能力、底层原理、输出、扩展方式与研究价值</title>
+  <desc id="description">左侧是可导入的程序、原始固件、批量文件、调试目标和已有项目；中间是加载器、SLEIGH、p-code、分析器、反编译器与调试器；右侧是函数、引用、伪代码、图和可复核报告；下方说明扩展方式以及对研究仓库的意义。</desc>
+  <defs>
+    <style>
+      .zh{font-family:'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif}
+      .mono{font-family:Consolas,'Cascadia Mono',monospace}
+      .ink{fill:#183136}.muted{fill:#5c7471}.soft{fill:#849c96}.white{fill:#f3faf4}.lime{fill:#b7f06a}.teal{fill:#168b76}
+      .panel{fill:#ffffff;stroke:#cbded5;stroke-width:2}.row{fill:#f5faf5;stroke:#dce8df;stroke-width:1.5}
+      .tag{fill:#e3f5e9}.darkrow{fill:#193d3c;stroke:#35635a;stroke-width:1.5}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#40a895" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+
+  <rect width="1600" height="1080" fill="#eef4ed"/>
+  <path d="M0 0H1600V177H0Z" fill="#102b31"/>
+  <path d="M0 177H1600" stroke="#92d5a7" stroke-width="4"/>
+  <text x="60" y="45" class="mono lime" font-size="19" font-weight="700" letter-spacing="3">010 / GHIDRA · ONE-PAGE MAP</text>
+  <text x="60" y="105" class="zh white" font-size="46" font-weight="800">Ghidra：把二进制变成可核对的程序线索</text>
+  <text x="60" y="145" class="zh" fill="#adc9bc" font-size="21">输入什么  →  如何理解机器指令  →  得到什么  →  如何扩展与复用</text>
+  <rect x="1283" y="32" width="252" height="39" rx="19" fill="#24504a" stroke="#4f9b7e"/>
+  <text x="1409" y="58" class="zh lime" text-anchor="middle" font-size="18" font-weight="700">逆向分析工作台</text>
+
+  <rect x="60" y="205" width="330" height="535" rx="17" class="panel"/>
+  <rect x="60" y="205" width="330" height="63" rx="17" fill="#d8ede2"/>
+  <path d="M60 251H390" stroke="#cbded5" stroke-width="2"/>
+  <text x="84" y="243" class="zh ink" font-size="26" font-weight="800">输入 / 手里有什么</text>
+  <text x="84" y="289" class="mono teal" font-size="15" font-weight="700">FILES · TARGETS · PROJECTS</text>
+
+  <rect x="82" y="309" width="286" height="72" rx="9" class="row"/>
+  <rect x="95" y="324" width="32" height="32" rx="6" class="tag"/><text x="111" y="347" class="mono teal" text-anchor="middle" font-size="17" font-weight="700">01</text>
+  <text x="139" y="338" class="zh ink" font-size="19" font-weight="700">单个程序 / 库</text>
+  <text x="139" y="365" class="mono muted" font-size="14">PE · ELF · Mach-O · COFF</text>
+
+  <rect x="82" y="389" width="286" height="72" rx="9" class="row"/>
+  <rect x="95" y="404" width="32" height="32" rx="6" class="tag"/><text x="111" y="427" class="mono teal" text-anchor="middle" font-size="17" font-weight="700">02</text>
+  <text x="139" y="418" class="zh ink" font-size="19" font-weight="700">应用包 / 字节码</text>
+  <text x="139" y="445" class="mono muted" font-size="14">APK · DEX · other formats</text>
+
+  <rect x="82" y="469" width="286" height="72" rx="9" class="row"/>
+  <rect x="95" y="484" width="32" height="32" rx="6" class="tag"/><text x="111" y="507" class="mono teal" text-anchor="middle" font-size="17" font-weight="700">03</text>
+  <text x="139" y="498" class="zh ink" font-size="19" font-weight="700">原始固件 / 片段</text>
+  <text x="139" y="525" class="zh muted" font-size="15">需指定架构、字节序、基址</text>
+
+  <rect x="82" y="549" width="286" height="72" rx="9" class="row"/>
+  <rect x="95" y="564" width="32" height="32" rx="6" class="tag"/><text x="111" y="587" class="mono teal" text-anchor="middle" font-size="17" font-weight="700">04</text>
+  <text x="139" y="578" class="zh ink" font-size="19" font-weight="700">目录 / 多版本</text>
+  <text x="139" y="605" class="zh muted" font-size="15">批量导入或无界面分析</text>
+
+  <rect x="82" y="629" width="286" height="86" rx="9" class="row"/>
+  <rect x="95" y="645" width="32" height="32" rx="6" class="tag"/><text x="111" y="668" class="mono teal" text-anchor="middle" font-size="17" font-weight="700">05</text>
+  <text x="139" y="657" class="zh ink" font-size="19" font-weight="700">调试目标 / 已有工程</text>
+  <text x="139" y="683" class="zh muted" font-size="15">运行状态、轨迹与历史标注</text>
+  <text x="139" y="703" class="zh soft" font-size="13">通过调试器或项目入口</text>
+
+  <path d="M398 467H424" stroke="#40a895" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="435" y="205" width="710" height="535" rx="17" fill="#12343a" stroke="#2a5b56" stroke-width="2"/>
+  <text x="463" y="246" class="zh white" font-size="26" font-weight="800">核心能力 / 底层原理</text>
+  <text x="1116" y="243" class="mono lime" text-anchor="end" font-size="15" font-weight="700">STATIC ANALYSIS PIPELINE</text>
+  <path d="M463 263H1117" stroke="#426a66" stroke-width="2"/>
+
+  <rect x="462" y="281" width="656" height="84" rx="10" class="darkrow"/>
+  <rect x="480" y="298" width="48" height="48" rx="10" fill="#b7f06a"/><text x="504" y="330" class="mono" fill="#17312c" text-anchor="middle" font-size="20" font-weight="700">1</text>
+  <text x="546" y="312" class="zh white" font-size="22" font-weight="700">加载器：把文件映射成程序</text>
+  <text x="546" y="341" class="zh" fill="#a8cec3" font-size="17">识别格式、节区、地址、符号与可用数据</text>
+
+  <path d="M788 367V375" stroke="#86cfa7" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="462" y="377" width="656" height="84" rx="10" class="darkrow"/>
+  <rect x="480" y="394" width="48" height="48" rx="10" fill="#b7f06a"/><text x="504" y="426" class="mono" fill="#17312c" text-anchor="middle" font-size="20" font-weight="700">2</text>
+  <text x="546" y="408" class="zh white" font-size="22" font-weight="700">SLEIGH：解释处理器指令</text>
+  <text x="546" y="437" class="zh" fill="#a8cec3" font-size="17">机器码 → 汇编指令 + 统一语义 p-code</text>
+
+  <path d="M788 463V471" stroke="#86cfa7" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="462" y="473" width="656" height="84" rx="10" class="darkrow"/>
+  <rect x="480" y="490" width="48" height="48" rx="10" fill="#b7f06a"/><text x="504" y="522" class="mono" fill="#17312c" text-anchor="middle" font-size="20" font-weight="700">3</text>
+  <text x="546" y="504" class="zh white" font-size="22" font-weight="700">分析器：连接证据</text>
+  <text x="546" y="533" class="zh" fill="#a8cec3" font-size="17">恢复函数、交叉引用、控制流与数据流</text>
+
+  <path d="M788 559V567" stroke="#86cfa7" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="462" y="569" width="656" height="84" rx="10" class="darkrow"/>
+  <rect x="480" y="586" width="48" height="48" rx="10" fill="#b7f06a"/><text x="504" y="618" class="mono" fill="#17312c" text-anchor="middle" font-size="20" font-weight="700">4</text>
+  <text x="546" y="600" class="zh white" font-size="22" font-weight="700">反编译器：形成可读的推断</text>
+  <text x="546" y="629" class="zh" fill="#a8cec3" font-size="17">生成类 C 伪代码；与指令、数据人工核对</text>
+
+  <rect x="462" y="671" width="656" height="48" rx="8" fill="#24504b" stroke="#4b8d7b"/>
+  <text x="479" y="701" class="zh lime" font-size="17" font-weight="700">旁路：调试器</text>
+  <text x="621" y="701" class="zh" fill="#cae7d5" font-size="16">观察运行时状态，用动态证据检验静态推断</text>
+
+  <path d="M1153 467H1177" stroke="#40a895" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="1189" y="205" width="351" height="535" rx="17" class="panel"/>
+  <rect x="1189" y="205" width="351" height="63" rx="17" fill="#d8ede2"/>
+  <path d="M1189 251H1540" stroke="#cbded5" stroke-width="2"/>
+  <text x="1213" y="243" class="zh ink" font-size="26" font-weight="800">输出 / 能拿到什么</text>
+  <text x="1213" y="289" class="mono teal" font-size="15" font-weight="700">EVIDENCE · MODELS · REPORTS</text>
+
+  <rect x="1212" y="309" width="305" height="72" rx="9" class="row"/>
+  <text x="1230" y="338" class="zh ink" font-size="19" font-weight="700">程序地图</text>
+  <text x="1230" y="365" class="zh muted" font-size="15">函数、字符串、符号、引用</text>
+  <rect x="1212" y="389" width="305" height="72" rx="9" class="row"/>
+  <text x="1230" y="418" class="zh ink" font-size="19" font-weight="700">指令与关系图</text>
+  <text x="1230" y="445" class="zh muted" font-size="15">汇编、控制流、调用关系</text>
+  <rect x="1212" y="469" width="305" height="72" rx="9" class="row"/>
+  <text x="1230" y="498" class="zh ink" font-size="19" font-weight="700">类 C 伪代码</text>
+  <text x="1230" y="525" class="zh muted" font-size="15">便于理解；不是原始源码</text>
+  <rect x="1212" y="549" width="305" height="72" rx="9" class="row"/>
+  <text x="1230" y="578" class="zh ink" font-size="19" font-weight="700">可保存的研究工程</text>
+  <text x="1230" y="605" class="zh muted" font-size="15">命名、类型、注释与标注</text>
+  <rect x="1212" y="629" width="305" height="86" rx="9" class="row"/>
+  <text x="1230" y="659" class="zh ink" font-size="19" font-weight="700">批量线索与报告</text>
+  <text x="1230" y="685" class="zh muted" font-size="15">脚本结果、相似函数候选</text>
+  <text x="1230" y="705" class="zh soft" font-size="13">结论仍需地址证据和人工核对</text>
+
+  <rect x="60" y="765" width="711" height="260" rx="17" class="panel"/>
+  <rect x="60" y="765" width="711" height="61" rx="17" fill="#d8ede2"/>
+  <path d="M60 812H771" stroke="#cbded5" stroke-width="2"/>
+  <text x="85" y="806" class="zh ink" font-size="26" font-weight="800">怎么扩展 / 四个入口</text>
+  <text x="86" y="855" class="zh ink" font-size="19" font-weight="700">① 脚本与 PyGhidra</text>
+  <text x="86" y="881" class="zh muted" font-size="16">自动提取、批量整理、导出结果</text>
+  <text x="86" y="933" class="zh ink" font-size="19" font-weight="700">③ 加载器 / 分析器 / 插件</text>
+  <text x="86" y="959" class="zh muted" font-size="16">补齐专有格式与领域分析逻辑</text>
+  <text x="424" y="855" class="zh ink" font-size="19" font-weight="700">② Headless + BSim</text>
+  <text x="424" y="881" class="zh muted" font-size="16">规模化处理与相似函数检索</text>
+  <text x="424" y="933" class="zh ink" font-size="19" font-weight="700">④ SLEIGH 语言定义</text>
+  <text x="424" y="959" class="zh muted" font-size="16">支持新的处理器指令语义</text>
+  <rect x="85" y="984" width="661" height="1" fill="#dae7dc"/>
+  <text x="86" y="1007" class="zh soft" font-size="14">扩展前先确认现有导入器、处理器和分析器是否已支持目标。</text>
+
+  <rect x="796" y="765" width="744" height="260" rx="17" fill="#17433e" stroke="#2a6759" stroke-width="2"/>
+  <text x="823" y="808" class="zh white" font-size="26" font-weight="800">对你的研究仓库有什么意义</text>
+  <path d="M823 824H1514" stroke="#548b74" stroke-width="2"/>
+  <text x="825" y="860" class="zh lime" font-size="20" font-weight="700">把“猜它会做什么”改成“拿地址和证据说明”。</text>
+  <text x="825" y="895" class="zh" fill="#d3e9dc" font-size="17">适合：无源码模块审查 · 固件研究 · 版本变化 · 样本初筛</text>
+  <text x="825" y="931" class="zh" fill="#d3e9dc" font-size="17">推荐产物：输入哈希 + 选项 + 函数线索 + 人工核对记录</text>
+  <rect x="823" y="953" width="689" height="48" rx="8" fill="#235c4d"/>
+  <text x="842" y="983" class="zh" fill="#e3f3df" font-size="16">本项目当前：已验证自制 COFF 样本；尚未运行 Ghidra。</text>
+
+  <text x="60" y="1057" class="zh muted" font-size="14">本研究仓库原创示意 · 依据 Ghidra 官方仓库、导入器、SLEIGH、Headless 与 BSim 文档 · 伪代码和相似性均需人工复核</text>
+</svg>

@@ -14,6 +14,7 @@
 | 007 | [palmier-io/palmier-pro](https://github.com/palmier-io/palmier-pro) | macOS AI 剪辑器：按画面与语音找素材，Agent 经 MCP 修改帧级时间线，交付成片或可编辑工程；适合重复初剪与人工复核。 | [研究记录](projects/007-palmier-pro/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/007-palmier-pro/) · [网页源码](sites/007-palmier-pro/index.html) |
 | 008 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 编程 Agent 的任务编排层：主 Agent 按类别分派工作会话，结合模型路由、工具、规则与续跑完成核查；适合跨模块开发，也为本仓库的研究任务分工提供可验证样本。 | [研究记录](projects/008-oh-my-openagent/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/) · [网页源码](sites/008-oh-my-openagent/index.html) |
 | 009 | [yorukot/superfile](https://github.com/yorukot/superfile) | 终端文件管理器：多面板浏览、当前目录搜索、预览与批量整理；Go/Bubble Tea 管理界面状态，本机文件系统执行操作。适合工程目录、SSH 远端和素材整理，为本仓库提供人工文件管理与终端交互设计参考。 | [研究记录](projects/009-superfile/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/009-superfile/) · [网页源码](sites/009-superfile/index.html) |
+| 010 | [NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra) | 二进制逆向工作台：加载器与 SLEIGH/p-code 把程序或固件变成函数、引用、图和类 C 伪代码；适合无源码审查、固件研究与版本对比，为本仓库提供可复核的证据链方法。 | [研究记录](projects/010-ghidra/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/) · [网页源码](sites/010-ghidra/index.html) |
 
 ## 子项目速览
 
@@ -104,6 +105,17 @@
 - **实现原理：** Go 程序通过 Bubble Tea 处理输入与状态，Lip Gloss 排版终端画面；真实文件操作由运行机器的文件系统执行，预览和任务状态作为消息返回界面。
 - **使用场景与对我们的意义：** 适合工程目录、SSH 远端文件维护和素材归档；可帮助人工整理本仓库的 `projects/`、`sites/` 与图片，也提供研究终端交互架构的案例。
 - **边界：** 本研究核对了文档和源码，尚未实机运行；图片预览依赖终端支持，上游称 Windows 尚未完全支持。[研究记录](projects/009-superfile/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/009-superfile/)。
+
+### 010 · Ghidra
+
+<img src="projects/010-ghidra/assets/capability-map.png" width="680" alt="Ghidra 能力总图：程序、固件、调试目标等输入，经加载器、SLEIGH、p-code、分析器和反编译器，形成函数、图、伪代码与可核对报告；下方列出扩展方式和研究价值">
+
+图片说明：本仓库依据 [Ghidra 官方仓库](https://github.com/NationalSecurityAgency/ghidra)与 [SLEIGH 文档](https://ghidra.re/ghidra_docs/languages/html/sleigh.html)绘制的能力与原理引导图，不是 Ghidra 运行截图或本次实测输出。[放大查看 SVG](projects/010-ghidra/assets/capability-map.svg)。
+
+- **能力与输入输出：** 可导入程序、固件和批量文件，结合已有项目或调试目标；输出函数、交叉引用、控制流图、类 C 伪代码、标注工程及脚本报告。
+- **实现原理：** 加载器建立地址空间，SLEIGH 描述指令并转为 p-code；分析器恢复控制流和数据流，反编译器给出可读推断。伪代码仍需和指令、运行证据核对。
+- **场景与对我们的意义：** 用于无源码程序审查、固件研究、版本差异和样本初筛；本仓库可借鉴“输入与选项 → 地址线索 → 人工核对记录”的可复现研究方法。
+- **验证边界：** 本项目编译并检查了自制 x64 COFF 样本，四例输入通过校验；尚未运行 Ghidra。[详细研究](projects/010-ghidra/README.md) · [在线交互展示](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/)。
 
 ## 仓库结构
 

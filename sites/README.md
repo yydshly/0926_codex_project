@@ -35,3 +35,7 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 ## 009 · superfile
 
 [在线能力全景图与真实演示](https://yydshly.github.io/0926_codex_project/sites/009-superfile/)用一张图说明终端文件管理器的能力、Go/Bubble Tea 与本机文件系统的实现链路、工程目录和 SSH 等场景，以及对本仓库人工文件整理与交互设计的意义。页面另有上游真实操作动图和只操作样例数据的交互模拟。[网页源码](009-superfile/index.html) · [研究记录与来源](../projects/009-superfile/README.md)。
+
+## 010 · Ghidra
+
+[在线能力总图与交互实验台](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/)汇总输入、加载器与 SLEIGH/p-code 原理、输出、扩展方式，以及无源码审查、固件和版本研究场景。网页用自制 COFF 样本说明证据链，尚未运行 Ghidra。[网页源码](010-ghidra/index.html) · [研究记录与验证边界](../projects/010-ghidra/README.md)。

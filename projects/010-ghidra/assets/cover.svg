@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Ghidra 二进制分析研究封面</title>
+  <desc id="desc">从自制 x64 COFF 样本的 FRM1 字节，经过反汇编和 p-code 原理，追踪三项输入检查与返回结果。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#102930"/><stop offset="1" stop-color="#08171d"/></linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#2a6261" stroke-opacity=".32"/></pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="38"/></filter>
+  </defs>
+  <rect width="1200" height="620" fill="url(#bg)"/>
+  <rect width="1200" height="620" fill="url(#grid)"/>
+  <circle cx="985" cy="110" r="165" fill="#23a596" opacity=".16" filter="url(#glow)"/>
+  <text x="66" y="74" fill="#b7f06a" font-family="Consolas,monospace" font-size="19" font-weight="700" letter-spacing="3">010 / GHIDRA RESEARCH</text>
+  <text x="66" y="150" fill="#f3f8f3" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="55" font-weight="700">让二进制说出它的逻辑</text>
+  <text x="67" y="190" fill="#aac4bc" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="22">可复现的帧解析样本 · 文件线索 → 指令 → 行为判断</text>
+  <g transform="translate(66 247)">
+    <rect width="315" height="260" rx="14" fill="#102a32" stroke="#47736d"/>
+    <rect width="315" height="42" rx="14" fill="#1c3b42"/>
+    <path d="M0 42h315" stroke="#47736d"/>
+    <circle cx="20" cy="21" r="5" fill="#ef8f7d"/><circle cx="37" cy="21" r="5" fill="#e9cb74"/><circle cx="54" cy="21" r="5" fill="#91e5ad"/>
+    <text x="78" y="27" fill="#d0e4db" font-family="Consolas,monospace" font-size="15">frame_gate.obj</text>
+    <text x="22" y="86" fill="#77afa6" font-family="Consolas,monospace" font-size="15">COFF OBJECT / x64</text>
+    <text x="22" y="140" fill="#a6ddff" font-family="Consolas,monospace" font-size="27" font-weight="700">46 52 4D 31</text>
+    <text x="22" y="174" fill="#a1bcb3" font-family="Consolas,monospace" font-size="15">F  R  M  1    00 03</text>
+    <path d="M22 197h270" stroke="#3b5f60"/>
+    <text x="22" y="227" fill="#b7f06a" font-family="Consolas,monospace" font-size="15">.text$mn  +  .data</text>
+  </g>
+  <path d="M397 376h53" stroke="#b7f06a" stroke-width="3"/><path d="m442 368 10 8-10 8" fill="none" stroke="#b7f06a" stroke-width="3"/>
+  <g transform="translate(469 247)">
+    <rect width="315" height="260" rx="14" fill="#102a32" stroke="#47736d"/>
+    <text x="22" y="44" fill="#b7f06a" font-family="Consolas,monospace" font-size="17" font-weight="700">INSTRUCTION FLOW</text>
+    <path d="M22 60h270" stroke="#3b5f60"/>
+    <text x="22" y="102" fill="#d5b9ff" font-family="Consolas,monospace" font-size="17">cmp eax, 46h</text>
+    <text x="22" y="138" fill="#d5b9ff" font-family="Consolas,monospace" font-size="17">jne 00000092</text>
+    <text x="22" y="188" fill="#d5b9ff" font-family="Consolas,monospace" font-size="17">cmp dword ptr [rsp],eax</text>
+    <text x="22" y="224" fill="#d5b9ff" font-family="Consolas,monospace" font-size="17">jbe 000000D8</text>
+  </g>
+  <path d="M800 376h53" stroke="#b7f06a" stroke-width="3"/><path d="m845 368 10 8-10 8" fill="none" stroke="#b7f06a" stroke-width="3"/>
+  <g transform="translate(872 247)">
+    <rect width="262" height="260" rx="14" fill="#dff3e7"/>
+    <text x="22" y="44" fill="#286b57" font-family="Consolas,monospace" font-size="17" font-weight="700">BEHAVIOR</text>
+    <path d="M22 60h218" stroke="#a7d0ba"/>
+    <text x="22" y="105" fill="#214139" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="21" font-weight="700">① 检查最短头部</text>
+    <text x="22" y="147" fill="#214139" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="21" font-weight="700">② 比对 FRM1</text>
+    <text x="22" y="189" fill="#214139" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="21" font-weight="700">③ 核对载荷长度</text>
+    <rect x="22" y="211" width="218" height="34" rx="6" fill="#1a624f"/>
+    <text x="35" y="234" fill="#d4fcb4" font-family="Consolas,monospace" font-size="15">RET  3 · -1 · -2 · -3</text>
+  </g>
+  <text x="67" y="574" fill="#86aba4" font-family="Consolas,monospace" font-size="16">ORIGINAL RESEARCH ILLUSTRATION · LOCALLY COMPILED SPECIMEN · NOT A GHIDRA SCREENSHOT</text>
+</svg>
