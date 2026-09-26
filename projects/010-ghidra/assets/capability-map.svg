@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title description">
-  <title id="title">一张图看懂 Ghidra：输入、核心能力、底层原理、输出、扩展方式与研究价值</title>
-  <desc id="description">左侧是可导入的程序、原始固件、批量文件、调试目标和已有项目；中间是加载器、SLEIGH、p-code、分析器、反编译器与调试器；右侧是函数、引用、伪代码、图和可复核报告；下方说明扩展方式以及对研究仓库的意义。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1700" viewBox="0 0 1600 1700" role="img" aria-labelledby="title description">
+  <title id="title">Ghidra 完整引导图：能力、输入输出、原理、扩展、游戏存档实测闭环与使用场景</title>
+  <desc id="description">上半部分从输入经过加载器、SLEIGH、p-code、分析器和反编译器到输出，并列出扩展方式及研究价值。下半部分以实际编译的游戏存档客户端为例，从 EXE 与存档输入，经过 PE 识别、函数定位、指令与 p-code、伪代码，走到三份存档的运行核对；另列出未实测的程序初筛、固件和版本比较场景。</desc>
   <defs>
     <style>
       .zh{font-family:'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif}
@@ -12,7 +12,7 @@
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#40a895" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
   </defs>
 
-  <rect width="1600" height="1080" fill="#eef4ed"/>
+  <rect width="1600" height="1700" fill="#eef4ed"/>
   <path d="M0 0H1600V177H0Z" fill="#102b31"/>
   <path d="M0 177H1600" stroke="#92d5a7" stroke-width="4"/>
   <text x="60" y="45" class="mono lime" font-size="19" font-weight="700" letter-spacing="3">010 / GHIDRA · ONE-PAGE MAP</text>
@@ -136,5 +136,73 @@
   <rect x="823" y="953" width="689" height="48" rx="8" fill="#235c4d"/>
   <text x="842" y="983" class="zh" fill="#e3f3df" font-size="16">本项目当前：Ghidra 已实测游戏 EXE 的存档校验逻辑。</text>
 
-  <text x="60" y="1057" class="zh muted" font-size="14">本研究仓库原创示意 · 依据 Ghidra 官方仓库、导入器、SLEIGH、Headless 与 BSim 文档 · 伪代码和相似性均需人工复核</text>
+  <rect x="60" y="1050" width="1480" height="375" rx="17" class="panel"/>
+  <rect x="60" y="1050" width="1480" height="61" rx="17" fill="#d8ede2"/>
+  <path d="M60 1097H1540" stroke="#cbded5" stroke-width="2"/>
+  <text x="85" y="1090" class="zh ink" font-size="25" font-weight="800">实际场景 / 游戏存档加载失败：从文件走到结论</text>
+  <text x="1514" y="1090" class="mono teal" text-anchor="end" font-size="14" font-weight="700">EXE + GHIDRA 12.1.4 · 已实测</text>
+  <text x="85" y="1145" class="zh ink" font-size="18" font-weight="700">收到：game_save.exe（252,764 B）+ bad-checksum.sav（12 B）</text>
+  <text x="85" y="1175" class="zh muted" font-size="17">问题：为什么存档被拒绝？Ghidra 分析 EXE；客户端运行时读取 SAV。</text>
+
+  <rect x="85" y="1200" width="266" height="140" rx="10" class="row"/>
+  <text x="104" y="1230" class="mono teal" font-size="15" font-weight="700">01 / LOAD</text>
+  <text x="104" y="1261" class="zh ink" font-size="20" font-weight="700">识别 PE / x64</text>
+  <text x="104" y="1293" class="mono muted" font-size="15">MZ → PE · 0x8664</text>
+  <text x="104" y="1320" class="mono muted" font-size="14">base 0x140000000</text>
+  <path d="M354 1270H368" stroke="#40a895" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="371" y="1200" width="266" height="140" rx="10" class="row"/>
+  <text x="390" y="1230" class="mono teal" font-size="15" font-weight="700">02 / LOCATE</text>
+  <text x="390" y="1261" class="zh ink" font-size="20" font-weight="700">沿调用找函数</text>
+  <text x="390" y="1293" class="mono muted" font-size="15">main → CALL</text>
+  <text x="390" y="1320" class="mono muted" font-size="14">inspect_save @ 0x1400014A4</text>
+  <path d="M640 1270H654" stroke="#40a895" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="657" y="1200" width="266" height="140" rx="10" class="row"/>
+  <text x="676" y="1230" class="mono teal" font-size="15" font-weight="700">03 / DECODE</text>
+  <text x="676" y="1261" class="zh ink" font-size="20" font-weight="700">机器字节变指令</text>
+  <text x="676" y="1293" class="mono muted" font-size="15">30 45 FF → XOR</text>
+  <text x="676" y="1320" class="mono muted" font-size="14">38 45 FF → CMP</text>
+  <path d="M926 1270H940" stroke="#40a895" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="943" y="1200" width="266" height="140" rx="10" class="row"/>
+  <text x="962" y="1230" class="mono teal" font-size="15" font-weight="700">04 / EXPLAIN</text>
+  <text x="962" y="1261" class="zh ink" font-size="20" font-weight="700">p-code → 伪代码</text>
+  <text x="962" y="1293" class="mono muted" font-size="15">INT_XOR · CBRANCH</text>
+  <text x="962" y="1320" class="zh muted" font-size="14">校验不等 → 返回 6</text>
+  <path d="M1212 1270H1226" stroke="#40a895" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="1229" y="1200" width="266" height="140" rx="10" class="row"/>
+  <text x="1248" y="1230" class="mono teal" font-size="15" font-weight="700">05 / VERIFY</text>
+  <text x="1248" y="1261" class="zh ink" font-size="20" font-weight="700">真实运行核对</text>
+  <text x="1248" y="1293" class="mono muted" font-size="15">末字节 6A → 00</text>
+  <text x="1248" y="1320" class="zh muted" font-size="14">拒绝加载 · 退出码 6</text>
+
+  <rect x="85" y="1355" width="1430" height="51" rx="8" fill="#e4f3e4"/>
+  <text x="103" y="1387" class="zh ink" font-size="18" font-weight="700">交付：定位失败分支，附 EXE 哈希、文件偏移、函数地址、Ghidra 原始输出和实际运行记录；无法恢复原项目源码。</text>
+
+  <rect x="60" y="1445" width="930" height="215" rx="17" class="panel"/>
+  <text x="85" y="1485" class="zh ink" font-size="24" font-weight="800">使用场景 / 同一方法可迁移到哪里</text>
+  <text x="85" y="1513" class="zh muted" font-size="15">以下是工作流示例；本项目未对这些第三方目标实测。</text>
+  <path d="M85 1527H965" stroke="#d7e6da" stroke-width="2"/>
+  <text x="85" y="1557" class="zh ink" font-size="18" font-weight="700">陌生程序初筛</text>
+  <text x="85" y="1584" class="zh muted" font-size="15">输入 EXE / ELF</text>
+  <text x="85" y="1610" class="zh muted" font-size="15">输出带地址的行为线索</text>
+  <text x="380" y="1557" class="zh ink" font-size="18" font-weight="700">固件与专有格式</text>
+  <text x="380" y="1584" class="zh muted" font-size="15">输入裸 bin + 架构资料</text>
+  <text x="380" y="1610" class="zh muted" font-size="15">输出函数 / 数据地图</text>
+  <text x="675" y="1557" class="zh ink" font-size="18" font-weight="700">版本差异调查</text>
+  <text x="675" y="1584" class="zh muted" font-size="15">输入多版二进制</text>
+  <text x="675" y="1610" class="zh muted" font-size="15">输出待核对的变化清单</text>
+  <text x="85" y="1640" class="zh soft" font-size="14">每个场景都走：明确问题 → 核对导入选项 → 定位函数 → 指令 / 伪代码 → 运行或外部证据验证。</text>
+
+  <rect x="1010" y="1445" width="530" height="215" rx="17" fill="#17433e" stroke="#2a6759" stroke-width="2"/>
+  <text x="1035" y="1485" class="zh white" font-size="24" font-weight="800">边界 / 对本仓库的价值</text>
+  <path d="M1035 1501H1515" stroke="#548b74" stroke-width="2"/>
+  <text x="1035" y="1536" class="zh lime" font-size="16" font-weight="700">实测仅自制游戏 EXE；COFF 另作教学验证</text>
+  <text x="1035" y="1570" class="zh" fill="#d3e9dc" font-size="16">复杂产品还需跨模块、动态和人工核对</text>
+  <text x="1035" y="1604" class="zh" fill="#d3e9dc" font-size="16">复用成果：哈希 + 地址 + 原文 + 运行证据</text>
+  <text x="1035" y="1638" class="zh" fill="#d3e9dc" font-size="16">脚本、Headless、插件按实际缺口扩展</text>
+
+  <text x="60" y="1686" class="zh muted" font-size="14">本研究仓库原创引导图 · 上半依据 Ghidra 官方文档 · 下半游戏案例依据本项目 EXE、PE 字节、Ghidra 12.1.4 报告与运行记录 · 其他场景仅为路径示例</text>
 </svg>

@@ -15,9 +15,9 @@
 
 ## 一张图看懂 Ghidra
 
-![Ghidra 能力总图：输入方式、加载与指令分析原理、输出、扩展入口，以及对本研究仓库的意义](assets/capability-map.svg)
+![Ghidra 完整引导图：输入、能力、底层原理、输出、扩展与研究价值；下方接入游戏存档加载失败的真实分析链与其他工作流示例](assets/capability-map.svg)
 
-图片说明：[`assets/capability-map.svg`](assets/capability-map.svg) 是本研究仓库原创绘制的概念图，无外部图片素材。它根据 [Ghidra 官方仓库](https://github.com/NationalSecurityAgency/ghidra)、[导入器说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm)、[SLEIGH 手册](https://ghidra.re/ghidra_docs/languages/html/sleigh.html)、[无界面分析说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/RuntimeScripts/support/analyzeHeadlessREADME.md)和 [BSim 教程](https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md)汇总官方能力与原理。图中输入、输出和扩展是软件能力示意；实际完成范围见下方游戏 EXE 实测与 COFF 样本验证。
+图片说明：[`assets/capability-map.svg`](assets/capability-map.svg) 是本研究仓库原创绘制的引导图，无外部图片素材。上半部分根据 [Ghidra 官方仓库](https://github.com/NationalSecurityAgency/ghidra)、[导入器说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm)、[SLEIGH 手册](https://ghidra.re/ghidra_docs/languages/html/sleigh.html)、[无界面分析说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/RuntimeScripts/support/analyzeHeadlessREADME.md)和 [BSim 教程](https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md)汇总通用能力与原理；下半部分接入本项目自制游戏 EXE 的实际 PE、Ghidra 与运行证据。图中的陌生程序、固件和版本对比属于未实测的工作流示例。[网页从原始字节走到结果](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#analysis-path)。
 
 ## 为什么研究
 
@@ -25,7 +25,7 @@ Ghidra 提供从编译产物到可理解逻辑的完整工作台：加载文件�
 
 ## 核心能力与技术原理
 
-1. **导入与初筛。**加载器识别二进制格式、架构、节区及可用符号。官方导入器帮助明确列出 COFF、PE、ELF、Mach-O、原始二进制等格式。本项目选 COFF 对象文件，是为了能把样本源码、字节和指令一一核对。[官方导入器说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm)
+1. **导入与初筛。**加载器识别二进制格式、架构、节区及可用符号。官方导入器帮助明确列出 COFF、PE、ELF、Mach-O、原始二进制等格式。本项目把游戏 PE 文件实际导入 Ghidra；另用 COFF 对象文件补充字节规则教学。[官方导入器说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm)
 2. **指令语义统一。**SLEIGH 描述处理器指令的编码、汇编显示和语义，并可将指令翻译成 p-code。p-code 是处理器无关的寄存器传送语言，为数据流分析和反编译提供共同基础。[SLEIGH 手册](https://ghidra.re/ghidra_docs/languages/html/sleigh.html)、[p-code 参考](https://ghidra.re/ghidra_docs/languages/html/pcoderef.html)
 3. **反编译与核对。**反编译器从机器行为恢复较高层的表达，便于审查条件、变量与调用关系；结果是推导出的伪代码，不会凭空恢复原始变量名、注释或设计意图。面对优化、无符号或混淆代码时，更需要把伪代码与指令、数据和运行行为交叉核对。[官方仓库](https://github.com/NationalSecurityAgency/ghidra)、[进阶反汇编课程](https://ghidra.re/ghidra_docs/GhidraClass/Advanced/improvingDisassemblyAndDecompilation.pdf)
 4. **自动化与扩展。**Ghidra 有交互和无界面模式；脚本可用 Java 或 Python，扩展可实现分析器、加载器等组件。BSim 可在二进制集合里搜索结构相似函数，适合版本和复用关系调查。[无界面分析说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/RuntimeScripts/support/analyzeHeadlessREADME.md)、[扩展说明](https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GettingStarted.md)、[BSim 教程](https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md)
@@ -115,10 +115,12 @@ PE 文件头可用 [`inspect_pe.py`](game-save-demo/inspect_pe.py) 从发布的 
 
 ## 四类具体使用场景
 
-1. **无源码模块的输入规则：**给定本项目的 COFF 对象文件和帧字节，问“哪些头部通过、哪些被拒绝”。本项目已检查文件头、字符串和指令，并执行四个输入样例；网页可交互复现路径。结论范围仅限这个自制样本。
+1. **游戏存档加载失败（已实测）：**给定自制 Windows EXE 与三份存档，问“哪个条件使存档被拒绝”。本项目从 PE 文件头出发，在 Ghidra 中定位 `inspect_save`，核对机器指令、p-code 和伪代码，再执行客户端确认校验失败返回 `6`、版本错误返回 `5`；交付函数地址、文件偏移和运行记录。[查看完整六步过程](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#analysis-path)。
 2. **陌生程序的行为初筛：**给定授权取得的 EXE、DLL 或 ELF，先导入并检查导入项、字符串、交叉引用和函数，再把关键伪代码与指令对照；产物是带地址证据的待验证行为线索。本项目没有实际分析第三方程序。
 3. **设备固件的格式研究：**给定原始 `bin` 与硬件资料，先确定处理器、字节序和基址，再寻找启动、配置和校验路径；产物是有地址依据的函数地图。错误的加载参数可能产生貌似合理但无效的结果。本项目没有实测固件。
 4. **多个版本的差异调查：**给定两版或一目录二进制，批量导入、提取函数信息，用 BSim 寻找相似函数，再人工比较控制流和数据；产物是待审查函数清单。BSim 相似不等于功能相同。本项目没有实测版本对比。[BSim 教程](https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md)
+
+另有一个 [COFF 帧解析教学样本](#补充教学场景分析一个帧解析模块)：已核对编译产物与四例输入，但没有导入 Ghidra。它用于补充可交互的字节规则实验，不承担上述游戏案例的 Ghidra 证据。
 
 ## 使用场景与研究价值
 
@@ -131,5 +133,5 @@ PE 文件头可用 [`inspect_pe.py`](game-save-demo/inspect_pe.py) 从发布的 
 
 - Ghidra 名称、软件能力和原理资料归 [NSA 与 Ghidra 贡献者](https://github.com/NationalSecurityAgency/ghidra)所有。本项目没有复制上游界面图片或代码。主体许可证为 [Apache 2.0](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)；第三方组件与顶层 `GPL/` 程序按 [NOTICE](https://github.com/NationalSecurityAgency/ghidra/blob/master/NOTICE) 分别核对。
 - [`assets/cover.svg`](assets/cover.svg) 为本研究仓库依据自制样本与公开原理原创绘制，无外部图片素材。它是研究引导图，不是实际 Ghidra 画面。
-- [`assets/capability-map.svg`](assets/capability-map.svg) 为本研究仓库依据上述官方资料原创绘制的能力总图，无外部图片素材；[`assets/capability-map.png`](assets/capability-map.png) 是同一张图的网页渲染版。它们说明产品能力和分析路径，不代表本次 Ghidra 实测输出。
+- [`assets/capability-map.svg`](assets/capability-map.svg) 为本研究仓库原创绘制的完整引导图，无外部图片素材；[`assets/capability-map.png`](assets/capability-map.png) 是同一张图的网页渲染版。上半部分说明官方产品能力，下半部分的游戏流程依据本项目实际证据重新绘制，并非 Ghidra 界面截图；其他三个场景标为未实测。
 - [`fixture/frame_gate.c`](fixture/frame_gate.c)、[`game-save-demo/game_save.c`](game-save-demo/game_save.c)、构建脚本、编译样本、检查记录及网页交互均为本研究仓库制作，不属于上游 Ghidra 项目。Ghidra 实际导出的指令与 p-code 见 [`game-save-demo/ghidra-trace.txt`](game-save-demo/ghidra-trace.txt)，反编译输出见 [`game-save-demo/ghidra-report.txt`](game-save-demo/ghidra-report.txt)。

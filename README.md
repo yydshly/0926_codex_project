@@ -108,13 +108,13 @@
 
 ### 010 · Ghidra
 
-<img src="projects/010-ghidra/assets/capability-map.png" width="680" alt="Ghidra 能力总图：程序、固件、调试目标等输入，经加载器、SLEIGH、p-code、分析器和反编译器，形成函数、图、伪代码与可核对报告；下方列出扩展方式和研究价值">
+<img src="projects/010-ghidra/assets/capability-map.png" width="680" alt="Ghidra 完整引导图：输入、能力、原理、输出、扩展与价值，下方接入游戏存档案例的 PE 识别、函数定位、指令、p-code 和运行核对，以及其他使用场景">
 
-图片说明：本仓库依据 [Ghidra 官方仓库](https://github.com/NationalSecurityAgency/ghidra)与 [SLEIGH 文档](https://ghidra.re/ghidra_docs/languages/html/sleigh.html)绘制的能力与原理引导图，不是 Ghidra 运行截图或本次实测输出。[放大查看 SVG](projects/010-ghidra/assets/capability-map.svg)。
+图片说明：上半部分依据 [Ghidra 官方仓库](https://github.com/NationalSecurityAgency/ghidra)与 [SLEIGH 文档](https://ghidra.re/ghidra_docs/languages/html/sleigh.html)整理；下半部分依据本仓库自制游戏 EXE 的实际分析与运行证据绘制。图为原创引导图，并非 Ghidra 界面截图；其他三个场景为未实测工作流。[放大查看 SVG](projects/010-ghidra/assets/capability-map.svg)。
 
 - **能力与输入输出：** 可导入程序、固件和批量文件，结合已有项目或调试目标；输出函数、交叉引用、控制流图、类 C 伪代码、标注工程及脚本报告。
 - **实现原理：** 加载器建立地址空间，SLEIGH 描述指令并转为 p-code；分析器恢复控制流和数据流，反编译器给出可读推断。伪代码仍需和指令、运行证据核对。
-- **场景与对我们的意义：** 用于无源码程序审查、固件研究、版本差异和样本初筛；本仓库可借鉴“输入与选项 → 地址线索 → 人工核对记录”的可复现研究方法。
+- **场景与对我们的意义：** 已实测游戏存档加载失败的原因定位；无源码程序初筛、固件研究与版本差异是可迁移工作流。本仓库可借鉴“输入与选项 → 地址线索 → 运行核对 → 证据交付”的可复现研究方法。
 - **实测与边界：** 自制游戏 EXE 已由 Ghidra 12.1.4 分析；网页从 PE 文件头、机器字节、指令和 p-code 逐步走到伪代码，并用三份存档的运行结果核对。另一个 COFF 教学样本未导入 Ghidra；未分析第三方游戏。[详细研究](projects/010-ghidra/README.md) · [在线查看完整过程](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#analysis-path)。
 
 ## 仓库结构
