@@ -1,0 +1,16 @@
+PE HEADER / actual bytes from game_save.exe
+SHA-256: fe7caccd3d193f46b4eded4276d279cfd91004f6a2f219b7a8388e1468a3fbd5
+FILE SIZE: 252764 bytes
+OFFSET 0x0: 4D 5A 90 00 03 00 00 00 04 00 00 00 FF FF 00 00  (MZ at start)
+OFFSET 0x3C: 80 00 00 00  (e_lfanew = 0x80)
+OFFSET 0x80: 50 45 00 00 64 86 14 00  (PE signature then machine 0x8664)
+OPTIONAL HEADER: PE32+, image base 0x140000000, entry RVA 0x13F0
+.text: RVA 0x1000, file offset 0x600
+.rdata: RVA 0x9000, file offset 0x7800
+KEY ADDRESS MAPPING FOR THIS BUILD:
+VA 0x1400014A4 -> RVA 0x14A4 -> file offset 0xAA4 -> 55 48 89 E5 48 83 EC 30
+VA 0x1400016A0 -> RVA 0x16A0 -> file offset 0xCA0 -> E8 FF FD FF FF 89 45 EC
+VA 0x140001534 -> RVA 0x1534 -> file offset 0xB34 -> 30 45 FF 48 83 45 F0 01
+VA 0x14000154E -> RVA 0x154E -> file offset 0xB4E -> 38 45 FF 74 0A B8 06 00
+VA 0x140001551 -> RVA 0x1551 -> file offset 0xB51 -> 74 0A B8 06 00 00 00 E9
+VA 0x140001553 -> RVA 0x1553 -> file offset 0xB53 -> B8 06 00 00 00 E9 89 00

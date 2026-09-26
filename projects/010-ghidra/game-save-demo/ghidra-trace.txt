@@ -1,0 +1,85 @@
+GHIDRA 12.1.4 PUBLIC / actual headless listing and p-code
+PROGRAM: game_save.exe
+FORMAT: Portable Executable (PE)
+LANGUAGE: x86:LE:64:default
+IMAGE_BASE: 140000000
+
+=== MEMORY BLOCKS ===
+.text | 140001000 | size 28672 | executable true
+.rdata | 140009000 | size 4608 | executable false
+
+=== FUNCTION CANDIDATES ===
+main: main @ 1400015ec
+save checker: inspect_save @ 1400014a4
+
+=== PATH FROM FILE READING TO CHECKER ===
+140001679 | E8 FA 66 00 00         | CALL 0x140007d78
+    p-code: (register, 0x20, 8) INT_SUB (register, 0x20, 8) , (const, 0x8, 8)
+    p-code:  ---  STORE (const, 0x1b1, 8) , (register, 0x20, 8) , (const, 0x14000167e, 8)
+    p-code:  ---  CALL (ram, 0x140007d78, 8)
+1400016a0 | E8 FF FD FF FF         | CALL 0x1400014a4
+    p-code: (register, 0x20, 8) INT_SUB (register, 0x20, 8) , (const, 0x8, 8)
+    p-code:  ---  STORE (const, 0x1b1, 8) , (register, 0x20, 8) , (const, 0x1400016a5, 8)
+    p-code:  ---  CALL (ram, 0x1400014a4, 8)
+
+=== CHECKER DECISION INSTRUCTIONS ===
+1400014b8 | 48 83 7D 18 0C         | CMP qword ptr [RBP + 0x18],0xc
+    p-code: (unique, 0x8e00, 8) INT_ADD (register, 0x28, 8) , (const, 0x18, 8)
+    p-code: (unique, 0x23d00, 8) LOAD (const, 0x1b1, 4) , (unique, 0x8e00, 8)
+    p-code: (unique, 0x78e00, 8) COPY (unique, 0x23d00, 8)
+    p-code: (register, 0x200, 1) INT_LESS (unique, 0x78e00, 8) , (const, 0xc, 8)
+    p-code: (register, 0x20b, 1) INT_SBORROW (unique, 0x78e00, 8) , (const, 0xc, 8)
+    p-code: (unique, 0x79000, 8) INT_SUB (unique, 0x78e00, 8) , (const, 0xc, 8)
+    p-code: (register, 0x207, 1) INT_SLESS (unique, 0x79000, 8) , (const, 0x0, 8)
+    p-code: (register, 0x206, 1) INT_EQUAL (unique, 0x79000, 8) , (const, 0x0, 8)
+    p-code: (unique, 0x58300, 8) INT_AND (unique, 0x79000, 8) , (const, 0xff, 8)
+    p-code: (unique, 0x58400, 1) POPCOUNT (unique, 0x58300, 8)
+    p-code: (unique, 0x58500, 1) INT_AND (unique, 0x58400, 1) , (const, 0x1, 1)
+    p-code: (register, 0x202, 1) INT_EQUAL (unique, 0x58500, 1) , (const, 0x0, 1)
+1400014fb | 3C 01                  | CMP AL,0x1
+    p-code: (register, 0x200, 1) INT_LESS (register, 0x0, 1) , (const, 0x1, 1)
+    p-code: (register, 0x20b, 1) INT_SBORROW (register, 0x0, 1) , (const, 0x1, 1)
+    p-code: (unique, 0x77500, 1) INT_SUB (register, 0x0, 1) , (const, 0x1, 1)
+    p-code: (register, 0x207, 1) INT_SLESS (unique, 0x77500, 1) , (const, 0x0, 1)
+    p-code: (register, 0x206, 1) INT_EQUAL (unique, 0x77500, 1) , (const, 0x0, 1)
+    p-code: (unique, 0x58300, 1) INT_AND (unique, 0x77500, 1) , (const, 0xff, 1)
+    p-code: (unique, 0x58400, 1) POPCOUNT (unique, 0x58300, 1)
+    p-code: (unique, 0x58500, 1) INT_AND (unique, 0x58400, 1) , (const, 0x1, 1)
+    p-code: (register, 0x202, 1) INT_EQUAL (unique, 0x58500, 1) , (const, 0x0, 1)
+140001518 | C6 45 FF 5A            | MOV byte ptr [RBP + -0x1],0x5a
+    p-code: (unique, 0x8e00, 8) INT_ADD (register, 0x28, 8) , (const, 0xffffffffffffffff, 8)
+    p-code: (unique, 0xd100, 1) COPY (const, 0x5a, 1)
+    p-code:  ---  STORE (const, 0x1b1, 4) , (unique, 0x8e00, 8) , (unique, 0xd100, 1)
+140001534 | 30 45 FF               | XOR byte ptr [RBP + -0x1],AL
+    p-code: (unique, 0x8e00, 8) INT_ADD (register, 0x28, 8) , (const, 0xffffffffffffffff, 8)
+    p-code: (register, 0x200, 1) COPY (const, 0x0, 1)
+    p-code: (register, 0x20b, 1) COPY (const, 0x0, 1)
+    p-code: (unique, 0xd100, 1) LOAD (const, 0x1b1, 4) , (unique, 0x8e00, 8)
+    p-code: (unique, 0xd100, 1) INT_XOR (unique, 0xd100, 1) , (register, 0x0, 1)
+    p-code:  ---  STORE (const, 0x1b1, 4) , (unique, 0x8e00, 8) , (unique, 0xd100, 1)
+    p-code: (unique, 0xd100, 1) LOAD (const, 0x1b1, 4) , (unique, 0x8e00, 8)
+    p-code: (register, 0x207, 1) INT_SLESS (unique, 0xd100, 1) , (const, 0x0, 1)
+    p-code: (unique, 0xd100, 1) LOAD (const, 0x1b1, 4) , (unique, 0x8e00, 8)
+    p-code: (register, 0x206, 1) INT_EQUAL (unique, 0xd100, 1) , (const, 0x0, 1)
+    p-code: (unique, 0xd100, 1) LOAD (const, 0x1b1, 4) , (unique, 0x8e00, 8)
+    p-code: (unique, 0x58300, 1) INT_AND (unique, 0xd100, 1) , (const, 0xff, 1)
+    p-code: (unique, 0x58400, 1) POPCOUNT (unique, 0x58300, 1)
+    p-code: (unique, 0x58500, 1) INT_AND (unique, 0x58400, 1) , (const, 0x1, 1)
+    p-code: (register, 0x202, 1) INT_EQUAL (unique, 0x58500, 1) , (const, 0x0, 1)
+14000154e | 38 45 FF               | CMP byte ptr [RBP + -0x1],AL
+    p-code: (unique, 0x8e00, 8) INT_ADD (register, 0x28, 8) , (const, 0xffffffffffffffff, 8)
+    p-code: (unique, 0x23a00, 1) LOAD (const, 0x1b1, 4) , (unique, 0x8e00, 8)
+    p-code: (unique, 0x79100, 1) COPY (unique, 0x23a00, 1)
+    p-code: (register, 0x200, 1) INT_LESS (unique, 0x79100, 1) , (register, 0x0, 1)
+    p-code: (register, 0x20b, 1) INT_SBORROW (unique, 0x79100, 1) , (register, 0x0, 1)
+    p-code: (unique, 0x79300, 1) INT_SUB (unique, 0x79100, 1) , (register, 0x0, 1)
+    p-code: (register, 0x207, 1) INT_SLESS (unique, 0x79300, 1) , (const, 0x0, 1)
+    p-code: (register, 0x206, 1) INT_EQUAL (unique, 0x79300, 1) , (const, 0x0, 1)
+    p-code: (unique, 0x58300, 1) INT_AND (unique, 0x79300, 1) , (const, 0xff, 1)
+    p-code: (unique, 0x58400, 1) POPCOUNT (unique, 0x58300, 1)
+    p-code: (unique, 0x58500, 1) INT_AND (unique, 0x58400, 1) , (const, 0x1, 1)
+    p-code: (register, 0x202, 1) INT_EQUAL (unique, 0x58500, 1) , (const, 0x0, 1)
+140001551 | 74 0A                  | JZ 0x14000155d
+    p-code:  ---  CBRANCH (ram, 0x14000155d, 8) , (register, 0x206, 1)
+140001553 | B8 06 00 00 00         | MOV EAX,0x6
+    p-code: (register, 0x0, 8) COPY (const, 0x6, 8)

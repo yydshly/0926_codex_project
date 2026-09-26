@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="一图看懂 Ghidra 的能力、原理、输入输出与扩展方式；用真实 Windows 游戏存档客户端展示 EXE 运行结果、Ghidra 反编译证据和故障定位。">
+  <meta name="description" content="一图看懂 Ghidra 的能力与原理；用真实 Windows 游戏存档客户端，逐步追踪 PE 文件头、机器字节、指令、p-code、伪代码和实际运行结果。">
   <title>010 · Ghidra 二进制分析实验台</title>
   <link rel="stylesheet" href="./style.css">
   <script src="./app.js" defer></script>
@@ -54,8 +54,33 @@
     <section class="section save-section" id="game-demo" aria-labelledby="save-title">
       <div class="wrap">
         <div class="section-label"><span>CASE</span> / REAL WINDOWS EXECUTABLE</div>
-        <div class="section-heading"><h2 id="save-title">游戏存档加载失败，<br>到底卡在哪一步？</h2><p>本仓库编译了一个真实的 Windows x64 小客户端 <code>game_save.exe</code>，让它读取三份 12 字节存档。先看程序实际输出，再看 Ghidra 从 EXE 里找到的校验逻辑。</p></div>
+        <div class="section-heading"><h2 id="save-title">游戏存档加载失败，<br>到底卡在哪一步？</h2><p>本仓库编译了一个 Windows x64 小客户端 <code>game_save.exe</code>，让它读取三份 12 字节存档。下面从 EXE 的原始字节开始，逐步走到 Ghidra 反编译和程序实际结果。</p></div>
         <div class="save-proof"><span><b>PE / x64</b> 实际编译的 EXE</span><span><b>3 个存档</b> 实际运行并记录退出码</span><span><b>Ghidra 12.1.4</b> 导入 EXE 并反编译</span></div>
+        <div class="binary-path" id="analysis-path" aria-labelledby="binary-path-title">
+          <div class="binary-path-head"><div><span>FROM BYTES TO BEHAVIOR / 真实证据链</span><h3 id="binary-path-title">二进制是怎样一步步变成可读逻辑的？</h3><p>以“存档末字节损坏”为例。每一步都标出本次 EXE 的实际字节、地址或 Ghidra 输出；下方可切换三份存档查看结果。</p><small class="binary-mobile-hint">手机上代码块可左右滑动查看完整字节与地址。</small></div><a href="../../projects/010-ghidra/game-save-demo/ghidra-trace.txt">查看完整指令与 p-code ↗</a></div>
+          <ol class="binary-path-list">
+            <li class="binary-path-step"><span class="binary-step-no">01</span><div class="binary-step-main"><div class="binary-step-title"><h4>先分清：EXE 是规则，存档是数据</h4><span>输入</span></div><p>Ghidra 导入 <code>game_save.exe</code>，分析程序如何读文件和判断条件；运行客户端时，另把 12 字节 <code>.sav</code> 交给它。损坏案例只把存档最后一字节从 <code>6A</code> 改成 <code>00</code>，EXE 本身没有改变。</p><pre>EXE  252,764 字节 → 要分析的程序
+SAV  47 53 56 31 01 05 07 10 27 00 00 00 → 程序读取的数据</pre></div></li>
+            <li class="binary-path-step"><span class="binary-step-no">02</span><div class="binary-step-main"><div class="binary-step-title"><h4>读文件头，确认它是 x64 的 PE 程序</h4><span>识别与装载</span></div><p>文件从 <code>4D 5A</code>（MZ）开始；偏移 <code>0x3C</code> 指向 <code>0x80</code>，那里是 <code>PE 00 00</code> 签名和 <code>64 86</code> 机器类型。Ghidra 据此选 PE 加载器与 x86-64 语言。镜像基址为 <code>0x140000000</code>，<code>.text</code> 代码节从 <code>0x140001000</code> 开始。</p><pre>文件偏移 0x0000: 4D 5A                 → MZ
+文件偏移 0x0080: 50 45 00 00 64 86  → PE / 0x8664 (x64)
+Ghidra: Portable Executable (PE) / x86:LE:64:default</pre></div></li>
+            <li class="binary-path-step"><span class="binary-step-no">03</span><div class="binary-step-main"><div class="binary-step-title"><h4>沿着调用，找到负责校验的函数</h4><span>函数定位</span></div><p>分析结果中，<code>main</code> 调用读文件函数后，在 <code>0x1400016a0</code> 执行一条 <code>CALL</code>，目标是 <code>0x1400014a4</code>。教学 EXE 保留符号，所以目标直接显示为 <code>inspect_save</code>；真实无符号程序要继续沿调用和字符串查找。</p><pre>0x140001679  E8 FA 66 00 00  CALL 0x140007d78  (读文件)
+0x1400016a0  E8 FF FD FF FF  CALL 0x1400014a4  (inspect_save)</pre><p class="binary-step-note">这里的地址来自 Ghidra；对应 EXE 文件偏移 <code>0xCA0</code>，可在原始文件中找到同一组 <code>E8 FF FD FF FF</code>。</p></div></li>
+            <li class="binary-path-step"><span class="binary-step-no">04</span><div class="binary-step-main"><div class="binary-step-title"><h4>把函数里的机器字节解读为指令</h4><span>反汇编</span></div><p>从地址 <code>0x140001534</code> 减去镜像基址，得到 RVA <code>0x1534</code>；再按节区表换算文件位置：<code>0x1534 − 0x1000 + 0x600 = 0xB34</code>。那里的 <code>30 45 FF</code> 被解码为异或指令；后面是比较、条件跳转和装入错误码 <code>6</code>。</p><pre>0x140001534  30 45 FF        XOR byte ptr [RBP + -0x1],AL
+0x14000154e  38 45 FF        CMP byte ptr [RBP + -0x1],AL
+0x140001551  74 0A           JZ  0x14000155d
+0x140001553  B8 06 00 00 00  MOV EAX,0x6</pre></div></li>
+            <li class="binary-path-step"><span class="binary-step-no">05</span><div class="binary-step-main"><div class="binary-step-title"><h4>将指令转成 p-code，再恢复条件</h4><span>中间表示</span></div><p>Ghidra 的 x86 语言描述把指令提升为更统一的操作。下面是本次实际 p-code 的三项关键操作摘要：异或、按比较结果跳转、把常数 <code>6</code> 写入返回寄存器。分析器据此连接数据流和控制流。</p><pre>0x140001534  INT_XOR  (累积校验值, 当前字节)
+0x140001551  CBRANCH 0x14000155d, 条件位
+0x140001553  COPY    0x6 → 返回寄存器</pre><p class="binary-step-note">上面为便于阅读的操作摘要；<a href="../../projects/010-ghidra/game-save-demo/ghidra-trace.txt">完整原始 p-code</a> 保留寄存器、临时变量和参数。</p></div></li>
+            <li class="binary-path-step"><span class="binary-step-no">06</span><div class="binary-step-main"><div class="binary-step-title"><h4>反编译出判断，再用真实运行交叉核对</h4><span>结论</span></div><p>反编译器把上面的分支组织成类 C 表达：计算值与存档第 12 字节不相等时返回 <code>6</code>。把末字节为 <code>00</code> 的存档交给实际 EXE，程序输出校验失败、退出码也是 <code>6</code>。</p><pre>Ghidra 原文: else {
+               uVar2 = 6;
+             }
+EXE 实际输出: SAVE REJECTED: checksum mismatch  /  exit code 6</pre></div></li>
+          </ol>
+          <div class="binary-path-footer"><strong>你真正看到的过程：</strong><span>文件头识别 → 地址映射 → 调用定位 → 字节解码 → p-code → 伪代码 → 运行验证</span><a href="../../projects/010-ghidra/game-save-demo/pe-header-report.txt">核对 PE 字节与偏移 ↗</a></div>
+        </div>
+        <div class="save-results-head"><span>NOW COMPARE THE OUTCOME</span><h3>换一份存档，看同一套规则如何走向不同分支</h3></div>
         <div class="save-demo-grid">
           <div class="save-panel save-run-panel">
             <div class="save-panel-kicker">01 / OBSERVED PROGRAM BEHAVIOR</div>
@@ -95,7 +120,7 @@
           </div>
         </div>
         <div class="save-steps"><div><span>1 / 输入</span><p>同一个 EXE，分别读取正常与损坏的 <code>.sav</code> 文件。</p></div><div><span>2 / 二进制证据</span><p>Ghidra 找函数、比较条件和返回值；运行报告核对实际分支。</p></div><div><span>3 / 结论</span><p>定位“加载失败”原因，可据此修复自己的存档格式或提交故障证据。</p></div></div>
-        <div class="save-links"><a href="../../projects/010-ghidra/game-save-demo/game_save.exe" download>下载实际 EXE ↗</a><a href="../../projects/010-ghidra/game-save-demo/valid.sav" download>正常存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/bad-checksum.sav" download>损坏存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/bad-version.sav" download>版本错误存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/run-report.txt">实际运行记录 ↗</a><a href="../../projects/010-ghidra/game-save-demo/ghidra-report.txt">Ghidra 原始报告 ↗</a><a href="../../projects/010-ghidra/game-save-demo/game_save.c">样本源码 ↗</a></div>
+        <div class="save-links"><a href="../../projects/010-ghidra/game-save-demo/game_save.exe" download>下载实际 EXE ↗</a><a href="../../projects/010-ghidra/game-save-demo/valid.sav" download>正常存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/bad-checksum.sav" download>损坏存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/bad-version.sav" download>版本错误存档 ↗</a><a href="../../projects/010-ghidra/game-save-demo/pe-header-report.txt">PE 文件头与偏移 ↗</a><a href="../../projects/010-ghidra/game-save-demo/ghidra-trace.txt">Ghidra 指令与 p-code ↗</a><a href="../../projects/010-ghidra/game-save-demo/run-report.txt">实际运行记录 ↗</a><a href="../../projects/010-ghidra/game-save-demo/ghidra-report.txt">Ghidra 原始报告 ↗</a><a href="../../projects/010-ghidra/game-save-demo/game_save.c">样本源码 ↗</a></div>
         <p class="save-boundary">这是本仓库自制的最小游戏客户端，帮助你看清分析方法，不代表对商业游戏的结论。教学构建保留了函数符号，真实游戏中定位函数通常更费时。按钮展示已记录的 EXE 运行结果；文件选择器只在浏览器复核规则。源码提供给读者验证，Ghidra 分析时输入的是编译后的 EXE。</p>
       </div>
     </section>
@@ -176,7 +201,7 @@
       </div>
     </section>
 
-    <section class="section sources" id="sources"><div class="wrap"><div class="section-label"><span>07</span> / SOURCES & LIMITS</div><div class="section-heading"><h2>来源、归属与边界</h2><p>把官方能力、样本验证和页面模拟分开记录，便于复查。</p></div><div class="source-grid"><div><h3>官方资料</h3><ul><li><a href="https://github.com/NationalSecurityAgency/ghidra">NSA / Ghidra 仓库</a>：功能、扩展与平台说明</li><li><a href="https://ghidra.re/ghidra_docs/languages/html/sleigh.html">SLEIGH 手册</a>、<a href="https://ghidra.re/ghidra_docs/languages/html/pcoderef.html">p-code 参考</a>：中间表示原理</li><li><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm">导入器说明</a>：COFF 等文件格式</li><li><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GettingStarted.md">Getting Started</a>、<a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md">BSim 教程</a></li></ul></div><div><h3>本项目产物</h3><ul><li><a href="../../projects/010-ghidra/game-save-demo/game_save.exe">游戏客户端 EXE</a>、<a href="../../projects/010-ghidra/game-save-demo/run-report.txt">三例实际运行结果</a>、<a href="../../projects/010-ghidra/game-save-demo/ghidra-report.txt">Ghidra 反编译报告</a></li><li><a href="../../projects/010-ghidra/game-save-demo/ExportGameSave.java">Ghidra 导出脚本</a>、<a href="../../projects/010-ghidra/game-save-demo/binary-inspection.txt">指令检查记录</a></li><li><a href="../../projects/010-ghidra/fixture/frame_gate.obj">补充 COFF 教学样本</a>与<a href="../../projects/010-ghidra/fixture/dumpbin-report.txt">检查记录</a></li><li><a href="../../projects/010-ghidra/README.md">完整研究记录</a>：验证步骤、局限和图片来源</li></ul></div><div><h3>使用边界</h3><p>游戏案例已用 Ghidra 12.1.4 分析自制 EXE；上方反编译片段来自实测报告。页面另一个 COFF 样本的伪代码、p-code 层和测试追踪仍是教学表达，不是它在 Ghidra 中的实测输出。未分析第三方游戏。Ghidra 主体按 Apache 2.0 发布，部分独立组件另有许可证。</p><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/NOTICE">查看官方许可说明 ↗</a></div></div></div></section>
+    <section class="section sources" id="sources"><div class="wrap"><div class="section-label"><span>07</span> / SOURCES & LIMITS</div><div class="section-heading"><h2>来源、归属与边界</h2><p>把官方能力、样本验证和页面模拟分开记录，便于复查。</p></div><div class="source-grid"><div><h3>官方资料</h3><ul><li><a href="https://github.com/NationalSecurityAgency/ghidra">NSA / Ghidra 仓库</a>：功能、扩展与平台说明</li><li><a href="https://ghidra.re/ghidra_docs/languages/html/sleigh.html">SLEIGH 手册</a>、<a href="https://ghidra.re/ghidra_docs/languages/html/pcoderef.html">p-code 参考</a>：中间表示原理</li><li><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm">导入器说明</a>：COFF 等文件格式</li><li><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GettingStarted.md">Getting Started</a>、<a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md">BSim 教程</a></li></ul></div><div><h3>本项目产物</h3><ul><li><a href="../../projects/010-ghidra/game-save-demo/game_save.exe">游戏客户端 EXE</a>、<a href="../../projects/010-ghidra/game-save-demo/run-report.txt">三例实际运行结果</a>、<a href="../../projects/010-ghidra/game-save-demo/ghidra-report.txt">Ghidra 反编译报告</a></li><li><a href="../../projects/010-ghidra/game-save-demo/pe-header-report.txt">PE 文件头报告</a>、<a href="../../projects/010-ghidra/game-save-demo/ghidra-trace.txt">Ghidra 指令与 p-code 报告</a></li><li><a href="../../projects/010-ghidra/game-save-demo/TraceGameSave.java">过程导出脚本</a>、<a href="../../projects/010-ghidra/game-save-demo/inspect_pe.py">PE 字节核对脚本</a></li><li><a href="../../projects/010-ghidra/game-save-demo/ExportGameSave.java">Ghidra 导出脚本</a>、<a href="../../projects/010-ghidra/game-save-demo/binary-inspection.txt">指令检查记录</a></li><li><a href="../../projects/010-ghidra/fixture/frame_gate.obj">补充 COFF 教学样本</a>与<a href="../../projects/010-ghidra/fixture/dumpbin-report.txt">检查记录</a></li><li><a href="../../projects/010-ghidra/README.md">完整研究记录</a>：验证步骤、局限和图片来源</li></ul></div><div><h3>使用边界</h3><p>游戏案例已用 Ghidra 12.1.4 分析自制 EXE；上方反编译片段来自实测报告。页面另一个 COFF 样本的伪代码、p-code 层和测试追踪仍是教学表达，不是它在 Ghidra 中的实测输出。未分析第三方游戏。Ghidra 主体按 Apache 2.0 发布，部分独立组件另有许可证。</p><a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/NOTICE">查看官方许可说明 ↗</a></div></div></div></section>
   </main>
   <footer><div class="wrap footer-inner"><span>010 / GHIDRA — BINARY ANALYSIS LAB</span><div><a href="../../README.md">研究索引</a><a href="../../projects/010-ghidra/README.md">研究记录</a><a href="https://github.com/NationalSecurityAgency/ghidra">上游仓库</a></div><small>本网页与样本由本研究仓库制作。</small></div></footer>
 </body>

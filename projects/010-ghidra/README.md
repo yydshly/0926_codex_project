@@ -58,6 +58,21 @@ Ghidra 提供从编译产物到可理解逻辑的完整工作台：加载文件�
 
 这些输出和退出码保存在 [`run-report.txt`](game-save-demo/run-report.txt)。随后用官方 **Ghidra 12.1.4 PUBLIC** 无界面分析导入相同 EXE，通过 [`ExportGameSave.java`](game-save-demo/ExportGameSave.java) 导出 [`ghidra-report.txt`](game-save-demo/ghidra-report.txt)。Ghidra 识别为 `x86:LE:64:default`、`windows` 编译器规范，并在地址 `1400014a4` 找到 `inspect_save`。报告中的反编译结果显示从 `0x5a` 开始逐字节异或、与偏移 `0xb` 比较；不相等时返回 `6`，版本条件失败时返回 `5`。这与客户端的三次实际运行相互印证。另存的 [`binary-inspection.txt`](game-save-demo/binary-inspection.txt) 提供编译器级符号和指令摘录。
 
+### 从原始字节走到这个结论
+
+这里有**两种不同的二进制输入**：`game_save.exe` 是需要逆向分析的程序，`.sav` 是运行时交给程序处理的数据。Ghidra 读取的是 EXE；本机执行 EXE 时才读取存档。网页按钮切换的是已记录的运行结果。为了回答“Ghidra 怎样从二进制走到伪代码”，我们又导出了 [`pe-header-report.txt`](game-save-demo/pe-header-report.txt) 和 Ghidra 的 [`ghidra-trace.txt`](game-save-demo/ghidra-trace.txt)：
+
+| 步骤 | 此次实际证据 | 如何走向下一步 |
+| --- | --- | --- |
+| 识别文件 | 文件偏移 `0` 为 `4D 5A`；`0x3C` 处的值为 `0x80`；`0x80` 处为 `50 45 00 00 64 86` | 确认 PE 签名与机器类型 `0x8664`（x64）；Ghidra 报告 `Portable Executable (PE)`、`x86:LE:64:default` |
+| 建立地址 | 镜像基址 `0x140000000`，`.text` 节 RVA `0x1000`、文件偏移 `0x600` | 例如 `0x140001534` 的 RVA 是 `0x1534`，对应文件偏移 `0x1534 - 0x1000 + 0x600 = 0xB34` |
+| 找到函数 | `main` 中 `0x1400016a0` 的字节为 `E8 FF FD FF FF`，Ghidra 列为 `CALL 0x1400014a4` | 调用目标是 `inspect_save`；本教学构建保留了该符号。`0x140001679` 的调用对应读文件函数，之后才进入校验 |
+| 解码指令 | `0x140001534` 是 `30 45 FF` → `XOR byte ptr [RBP + -0x1],AL`；`0x14000154e` 是 `38 45 FF` → `CMP ...`；`0x140001553` 是 `B8 06 00 00 00` → `MOV EAX,0x6` | 指令显示程序在累积异或值、比较，并准备错误码 `6` |
+| 统一语义 | 同一段 Ghidra p-code 含 `INT_XOR`、`CBRANCH` 和 `COPY 0x6` | 数据流与分支条件可供反编译器组织成较高层表达；网页只摘录操作名，完整原文见报告 |
+| 反编译与运行核对 | [`ghidra-report.txt`](game-save-demo/ghidra-report.txt) 中不等分支令 `uVar2 = 6`；损坏存档的实际输出为 `SAVE REJECTED: checksum mismatch`、退出码 `6` | 伪代码的解释得到本机运行支持，结论限于此 EXE 和这三份存档 |
+
+PE 文件头可用 [`inspect_pe.py`](game-save-demo/inspect_pe.py) 从发布的 EXE 重新计算；Ghidra 的指令与 p-code 由 [`TraceGameSave.java`](game-save-demo/TraceGameSave.java) 在实际导入后导出。完整过程也在[网页的六步证据链](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#analysis-path)中逐步展示。SLEIGH 指令解码、p-code 和反编译负责把机器行为表达得更易读；这不意味着恢复原始源码、变量名或设计意图。
+
 复现方式：在有 MinGW-w64 GCC 的 Windows 上运行 [`build.ps1`](game-save-demo/build.ps1) 生成 EXE 与三份存档；在有 Java 21 和 Ghidra 12.1.4 的环境中用 `analyzeHeadless <临时工程目录> <工程名> -import <game_save.exe 路径> -scriptPath <game-save-demo 目录> -postScript ExportGameSave.java <报告路径>` 导出反编译文本。重新编译会改变 EXE 哈希和地址，需重新运行 Ghidra 并更新证据。本次发布的 EXE SHA-256 为 `fe7caccd3d193f46b4eded4276d279cfd91004f6a2f219b7a8388e1468a3fbd5`。
 
 [网页交互查看三例结果](https://yydshly.github.io/0926_codex_project/sites/010-ghidra/#game-demo)：按钮切换已保存的真实输出；你也可选择本地 12 字节 `.sav`，由浏览器按已核对规则计算结果。浏览器不会执行 EXE，也不会启动 Ghidra。这个演示说明 Ghidra 如何帮助定位存档加载失败的**具体分支**；它不能凭 EXE 恢复原项目源码、服务器逻辑或所有游戏行为。
@@ -90,7 +105,7 @@ Ghidra 提供从编译产物到可理解逻辑的完整工作台：加载文件�
 
 | 页面区域 | 属性与边界 |
 | --- | --- |
-| 游戏存档案例 | 展示真实运行的三份 `.sav` 输出与实际 Ghidra 12.1.4 反编译摘录；按钮切换保存的结果，文件选择器只做本地规则复核 |
+| 游戏存档案例 | 展示真实 PE 文件头、地址映射、Ghidra 12.1.4 指令与 p-code、反编译摘录及三份 `.sav` 的实际运行输出；按钮切换保存的结果，文件选择器只做本地规则复核 |
 | 文件线索 | 来自本地 `dumpbin` 检查的实际 COFF 文件头、节区和字符串摘录 |
 | 机器指令 | 来自本地 `dumpbin /disasm` 的节内偏移摘录，随所选输入切换重点片段 |
 | p-code 原理 | 根据官方文档绘制的等价关系示意；不是本样本在 Ghidra 中产生的实测 p-code |
@@ -117,4 +132,4 @@ Ghidra 提供从编译产物到可理解逻辑的完整工作台：加载文件�
 - Ghidra 名称、软件能力和原理资料归 [NSA 与 Ghidra 贡献者](https://github.com/NationalSecurityAgency/ghidra)所有。本项目没有复制上游界面图片或代码。主体许可证为 [Apache 2.0](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)；第三方组件与顶层 `GPL/` 程序按 [NOTICE](https://github.com/NationalSecurityAgency/ghidra/blob/master/NOTICE) 分别核对。
 - [`assets/cover.svg`](assets/cover.svg) 为本研究仓库依据自制样本与公开原理原创绘制，无外部图片素材。它是研究引导图，不是实际 Ghidra 画面。
 - [`assets/capability-map.svg`](assets/capability-map.svg) 为本研究仓库依据上述官方资料原创绘制的能力总图，无外部图片素材；[`assets/capability-map.png`](assets/capability-map.png) 是同一张图的网页渲染版。它们说明产品能力和分析路径，不代表本次 Ghidra 实测输出。
-- [`fixture/frame_gate.c`](fixture/frame_gate.c)、[`game-save-demo/game_save.c`](game-save-demo/game_save.c)、构建脚本、编译样本、检查记录及网页交互均为本研究仓库制作，不属于上游 Ghidra 项目。Ghidra 原始反编译输出另见 [`game-save-demo/ghidra-report.txt`](game-save-demo/ghidra-report.txt)。
+- [`fixture/frame_gate.c`](fixture/frame_gate.c)、[`game-save-demo/game_save.c`](game-save-demo/game_save.c)、构建脚本、编译样本、检查记录及网页交互均为本研究仓库制作，不属于上游 Ghidra 项目。Ghidra 实际导出的指令与 p-code 见 [`game-save-demo/ghidra-trace.txt`](game-save-demo/ghidra-trace.txt)，反编译输出见 [`game-save-demo/ghidra-report.txt`](game-save-demo/ghidra-report.txt)。
