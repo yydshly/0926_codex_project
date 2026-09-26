@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Chat2DB 如何理解数据库 · 001 研究展示</title>
+  <meta name="description" content="拆解 Chat2DB 将自然语言、数据库元数据和业务描述关联起来的架构与原理。">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./mapping.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../README.md" aria-label="返回研究集首页"><span class="brand-mark">01</span><span>GitHub 项目研究集</span></a>
+      <a class="header-link" href="../../projects/001-chat2db/README.md">阅读完整研究记录 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">001 / CHAT2DB / 核心原理</p>
+          <h1>一句人话，怎样<span>对应</span>数据库字段？</h1>
+          <p class="hero-lead">Chat2DB 连接真实数据库，把表结构交给你配置的 AI 模型，再由模型推断该用哪些字段和条件。决定准确率的关键，是这些字段有没有写清业务含义。</p>
+          <a class="primary-link" href="#overview">看能力总图 <span aria-hidden="true">↓</span></a>
+          <a class="hero-secondary" href="#mapping">直接看关联过程</a>
+          <p class="hero-note">这是研究讲解页。下方订单均为编造的教学数据，不连接 Chat2DB 或真实数据库。</p>
+        </div>
+        <figure class="hero-figure">
+          <img src="./assets/official-workspace.webp" alt="Chat2DB 官方工作台画面：左侧数据库树、中间 SQL 与结果、右侧 AI 助手" width="3606" height="2025">
+          <figcaption>官方产品画面：左侧看数据库，中间写和运行 SQL，右侧使用 AI。来源：<a href="https://github.com/OtterMind/Chat2DB/blob/main/README.md">Chat2DB README</a>。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="overview-section section-pad" id="overview" aria-labelledby="overview-title">
+      <div class="overview-wrap">
+        <p class="section-kicker">一张图看全局</p>
+        <h2 id="overview-title">入口、模块、外部依赖、复杂业务与出口</h2>
+        <p class="overview-intro">先从左到右看三种入口，再看中间的 AI 与数据库两条链路；最下方说明复杂业务口径如何进入，以及最终得到什么。点击图可打开原始矢量图放大查看。</p>
+        <figure class="overview-figure">
+          <div class="overview-scroll">
+            <a href="./assets/architecture-map.svg" target="_blank" rel="noopener" aria-label="在新窗口打开可放大的 Chat2DB 能力总图">
+              <img src="./assets/architecture-map.svg" alt="Chat2DB 总览图：自然语言、直接 SQL 和 CLI/MCP 三类入口；工作台内部的交互层、AI 编排、语义上下文、元数据工具、数据库连接执行；外部大模型和真实数据库；复杂业务的事实与规则；SQL、结果、数据库操作和程序化输出" width="1800" height="1370">
+            </a>
+          </div>
+          <figcaption>蓝色表示已核对的 Community 主线；紫色包括模型与产品文档中的 AI 数据集，后者在当前 Community 的界面可用性仍待实测；橙色是研究建议和教学示例。图由本研究项目绘制，<a href="../../projects/001-chat2db/README.md">查看逐项证据与局限 ↗</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="roles section-pad" aria-labelledby="roles-title">
+      <div class="wrap">
+        <p class="section-kicker">先分清角色</p>
+        <h2 id="roles-title">它们各自负责什么？</h2>
+        <div class="role-grid">
+          <article class="role-card"><span class="role-num">01</span><h3>数据库</h3><p>真正存放订单、商品、客户等记录。查询的最终答案由其中的数据计算出来。</p><span class="role-tag">数据放在哪里</span></article>
+          <article class="role-card"><span class="role-num">02</span><h3>Chat2DB</h3><p>连接数据库，展示表结构，发送查询语句，显示查询结果，也能管理和编辑数据。</p><span class="role-tag">如何查看与操作</span></article>
+          <article class="role-card"><span class="role-num">03</span><h3>AI 模型</h3><p>听懂自然语言问题，参考表结构起草 SQL，或解释、改进已有 SQL。它需要人核对。</p><span class="role-tag">谁帮你写查询</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mapping-section section-pad" id="mapping" aria-labelledby="mapping-title">
+      <div class="wrap">
+        <p class="section-kicker">核心架构 · 源码核对</p>
+        <h2 id="mapping-title">它怎样把“有效订单金额”对应到数据库？</h2>
+        <p class="section-intro">先确定当前数据源，再读取真实表结构；模型结合问题和可用描述推断 SQL。生成 SQL 与执行查询是两步。</p>
+        <ol class="mapping-flow" aria-label="语义关联的五个环节">
+          <li><span>01</span><strong>问题与范围</strong><small>ChatRequest：问题、数据源、库、schema</small></li>
+          <li><span>02</span><strong>真实结构</strong><small>工具读取表、字段、注释、键与 DDL</small></li>
+          <li><span>03</span><strong>业务描述</strong><small>数据库注释或额外提供的规则</small></li>
+          <li><span>04</span><strong>模型推断</strong><small>结合方言生成 SQL 草稿</small></li>
+          <li><span>05</span><strong>核对与执行</strong><small>查看 SQL，再由数据库计算</small></li>
+        </ol>
+
+        <div class="meaning-grid">
+          <div class="meaning-schema">
+            <p class="meaning-kicker">模拟订单表 · orders</p>
+            <h3>数据库实际提供什么</h3>
+            <dl>
+              <div><dt>created_at</dt><dd>下单时间</dd></div>
+              <div><dt>paid_at</dt><dd>支付时间</dd></div>
+              <div><dt>list_amount</dt><dd>商品标价</dd></div>
+              <div><dt>pay_amount</dt><dd>实付金额</dd></div>
+              <div><dt>status</dt><dd>订单状态</dd></div>
+            </dl>
+            <p>这些描述解释了字段，却还没定义“有效订单金额”的统计规则。</p>
+          </div>
+          <div class="meaning-demo">
+            <p class="meaning-kicker">固定教学示例 · 不调用模型</p>
+            <h3>问：2026 年 8 月有效订单金额是多少？</h3>
+            <div class="meaning-controls" role="group" aria-label="查看有无业务规则时的关联结果">
+              <button type="button" class="meaning-button is-active" data-meaning="raw" aria-pressed="true">只有表结构</button>
+              <button type="button" class="meaning-button" data-meaning="defined" aria-pressed="false">补充业务规则</button>
+            </div>
+            <div class="meaning-result" id="meaning-result" aria-live="polite">
+              <p class="meaning-state">当前：只有数据库字段说明</p>
+              <p>模型能看到这些字段存在，但无法唯一确定三件事：</p>
+              <ul><li>“8 月”按下单时间还是支付时间？</li><li>“金额”按标价还是实付金额？</li><li>哪些订单状态算“有效”？</li></ul>
+              <p class="meaning-conclusion">如果仍要求生成 SQL，模型只能作假设；SQL 能运行也不能证明业务含义正确。</p>
+            </div>
+          </div>
+        </div>
+        <p class="meaning-note"><strong>源码与产品文档的边界：</strong>已核对的 Community 源码支持读取元数据、工具调用和把请求中的业务上下文交给模型。官方文档另介绍“AI 数据集”，可给表和字段补写 AI 名称与注释；当前 Community 版本是否完整提供该界面，仍待实测。<a href="../../projects/001-chat2db/README.md">查看完整架构与源码证据 ↗</a></p>
+      </div>
+    </section>
+
+    <section class="sim-section section-pad" id="try-it" aria-labelledby="try-title">
+      <div class="wrap">
+        <p class="section-kicker">模拟演示 · 无真实连接</p>
+        <h2 id="try-title">问一个问题，看看数据怎么变成答案</h2>
+        <p class="section-intro">选择问题后，依次点击“AI 起草 SQL”和“模拟运行”。你能看到 AI 写语句与数据库返回结果是两个步骤。</p>
+        <div class="sim-grid">
+          <aside class="database-panel" aria-label="模拟数据库内容">
+            <div class="panel-heading"><span class="panel-dot blue"></span><span>示例数据库</span><span class="panel-meta">教学数据</span></div>
+            <div class="db-tree"><span class="tree-db">▾ shop_demo</span><span class="tree-table">▾ orders <small>订单表</small></span><span class="tree-field">order_id <small>订单号</small></span><span class="tree-field">city <small>城市</small></span><span class="tree-field">product <small>商品</small></span><span class="tree-field">amount <small>金额</small></span></div>
+            <div class="sample-table-wrap"><p class="table-label">orders 表里的 4 条记录</p><table class="sample-table"><thead><tr><th>订单</th><th>城市</th><th>商品</th><th>金额</th></tr></thead><tbody><tr><td>1001</td><td>北京</td><td>键盘</td><td>199</td></tr><tr><td>1002</td><td>上海</td><td>鼠标</td><td>89</td></tr><tr><td>1003</td><td>北京</td><td>显示器</td><td>899</td></tr><tr><td>1004</td><td>深圳</td><td>键盘</td><td>199</td></tr></tbody></table></div>
+          </aside>
+
+          <div class="work-panel">
+            <div class="panel-heading"><span class="panel-dot violet"></span><span>Chat2DB 工作台 · 概念模拟</span></div>
+            <div class="work-content">
+              <div class="step-label"><span>1</span> 选择一个自然语言问题</div>
+              <div class="question-list" role="group" aria-label="选择模拟问题">
+                <button type="button" class="question-button is-active" data-question="beijing-total" aria-pressed="true">北京订单的总金额是多少？</button>
+                <button type="button" class="question-button" data-question="top-product" aria-pressed="false">按金额算，哪种商品卖得最多？</button>
+                <button type="button" class="question-button" data-question="beijing-orders" aria-pressed="false">列出北京的订单</button>
+              </div>
+              <div class="step-label"><span>2</span> 让 AI 起草 SQL</div>
+              <div class="code-wrap"><div class="code-head"><span>SQL 草稿</span><span id="sql-label">等待起草</span></div><pre><code id="sql-output">点击下方按钮，查看这个问题对应的示例 SQL。</code></pre></div>
+              <div class="work-actions"><button type="button" class="action-button generate-button" id="generate">AI 起草 SQL</button><button type="button" class="action-button run-button" id="run" disabled>模拟运行查询</button></div>
+              <p class="work-status" id="status" role="status" aria-live="polite">请选择问题，随后查看 SQL 草稿。</p>
+              <div class="result-wrap" id="result-wrap" hidden><div class="step-label"><span>3</span> 数据库返回结果</div><div class="result-box" id="result-output"></div></div>
+            </div>
+          </div>
+        </div>
+        <p class="sim-disclaimer"><strong>为什么要看 SQL？</strong>能运行不等于答对问题。例如“卖得最多”可能指订单数、件数或金额；这里的问题明确指定“按金额”。退款和销售额还涉及跨表与时间口径，<a href="#complex-metrics">看一个更复杂的例子 ↓</a></p>
+      </div>
+    </section>
+
+    <section class="complex-section section-pad" id="complex-metrics" aria-labelledby="complex-title">
+      <div class="wrap">
+        <p class="section-kicker">进阶例子 · 退款与销售额</p>
+        <h2 id="complex-title">同一句“8 月净销售额”，可能是 800，也可能是 900</h2>
+        <p class="section-intro">以下金额和表名都是教学假设。它展示的是业务口径如何改变查询，不是 Chat2DB 的真实计算结果。</p>
+        <div class="complex-facts" aria-label="教学数据">
+          <div><span>8 月成功收款</span><strong>1,000 元</strong></div>
+          <div><span>8 月完成退款 · 来自 7 月订单</span><strong>200 元</strong></div>
+          <div><span>9 月完成退款 · 来自 8 月订单</span><strong>100 元</strong></div>
+        </div>
+        <div class="metric-grid">
+          <article class="metric-card">
+            <p class="metric-tag">口径 A · 按资金发生月</p>
+            <h3>8 月净收款</h3>
+            <p>8 月发生的成功收款，减去 8 月完成的成功退款。退款原订单属于哪个月，不影响本月退款归属。</p>
+            <div class="metric-formula">1,000 − 200 <strong>= 800 元</strong></div>
+          </article>
+          <article class="metric-card">
+            <p class="metric-tag">口径 B · 按支付订单月</p>
+            <h3>8 月支付订单的最终净额</h3>
+            <p>先找到 8 月支付的订单，再扣除这些订单截至约定日期发生的退款；这里包括 9 月的 100 元退款。</p>
+            <div class="metric-formula">1,000 − 100 <strong>= 900 元</strong></div>
+          </article>
+        </div>
+        <div class="complex-explain">
+          <h3>Chat2DB 在这里做什么？</h3>
+          <p>它能向模型提供 <code>payments</code> 和 <code>refunds</code> 的表结构、字段注释与关联线索；请求还可附带业务说明。模型据此生成 SQL。要选择 A 还是 B，必须先明确业务定义；直接连接一笔支付与多笔退款后相加，还可能把支付金额重复计算。</p>
+          <p>产品文档中的 AI 数据集可以补写表和字段说明。已核对的 Community 路径没有显示由系统强制执行的“净销售额”指标公式与口径校验。<a href="../../projects/001-chat2db/README.md">查看示意 SQL、架构和证据 ↗</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="capabilities section-pad" aria-labelledby="cap-title">
+      <div class="wrap">
+        <p class="section-kicker">能力全景</p>
+        <h2 id="cap-title">除了问答，它还是数据库工作台</h2>
+        <div class="cap-grid"><article><span>⌘</span><h3>连接与浏览</h3><p>连接多种数据库，查看表、字段、视图等结构。</p></article><article><span>{ }</span><h3>SQL 开发</h3><p>编辑、补全、格式化、执行并保存 SQL。</p></article><article><span>✦</span><h3>AI 辅助</h3><p>用自选模型生成、解释、优化查询语句。</p></article><article><span>▥</span><h3>数据管理</h3><p>编辑数据、管理数据库对象、导入和导出。</p></article><article><span>▥</span><h3>可视化</h3><p>查看结果、图表、仪表盘和 ER 图。</p></article><article><span>↔</span><h3>外部集成</h3><p>借助 CLI 与 MCP 将数据库能力接入其他工具。</p></article></div>
+        <p class="source-note">能力依据：<a href="https://github.com/OtterMind/Chat2DB">官方仓库 README</a>。本页只模拟查询流程，未实测这些产品功能。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap footer-inner"><p>001 · Chat2DB 研究展示｜模拟页由本研究仓库制作，官方截图归原权利人。</p><a href="../../projects/001-chat2db/README.md">查看来源、许可与研究记录 ↗</a></div></footer>
+</body>
+</html>

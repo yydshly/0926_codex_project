@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1370" viewBox="0 0 1800 1370" role="img" aria-labelledby="title desc">
+  <title id="title">Chat2DB 能力、模块、入口、出口与复杂业务语义关联总图</title>
+  <desc id="desc">上方是自然语言、手动 SQL 操作和 CLI/MCP 三类入口；中间展示 Chat2DB Community 工作台、AI 编排、元数据工具、数据库服务与外部模型和数据库的关系；下方展示复杂指标需要结合真实表结构与人工业务定义，以及 SQL、结果、图表、数据管理和程序化输出。</desc>
+  <defs>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1730" /><stop offset="1" stop-color="#213b70" /></linearGradient>
+    <marker id="arrowBlue" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1 L10 5.5 L1 10 Z" fill="#5273da" /></marker>
+    <marker id="arrowPurple" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1 L10 5.5 L1 10 Z" fill="#8657c8" /></marker>
+    <marker id="arrowTeal" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1 L10 5.5 L1 10 Z" fill="#178995" /></marker>
+    <filter id="shadow" x="-10%" y="-20%" width="125%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#16335a" flood-opacity=".10" /></filter>
+    <style>
+      text{font-family:Inter,"Noto Sans SC","Microsoft YaHei",sans-serif;fill:#263b5e}
+      .title{font-size:43px;font-weight:800;fill:#fff;letter-spacing:-1px}
+      .subtitle{font-size:19px;fill:#ccd9ee}
+      .section{font-size:20px;font-weight:800;fill:#264a8a}
+      .group{font-size:18px;font-weight:800;fill:#4363ad}
+      .head{font-size:23px;font-weight:800;fill:#1e3559}
+      .body{font-size:17px;fill:#566983}
+      .body2{font-size:16px;fill:#62748e}
+      .mini{font-size:14px;fill:#677892}
+      .chip{font-size:14px;font-weight:800}
+      .num{font-size:14px;font-weight:800;fill:#5273da}
+      .card{fill:#fff;stroke:#dce5f2;stroke-width:2;filter:url(#shadow)}
+      .inner{fill:#f8faff;stroke:#dce5f2;stroke-width:2}
+      .verified{fill:#eef3ff;stroke:#cddaf8;stroke-width:2}
+      .doc{fill:#f6efff;stroke:#dccbf3;stroke-width:2}
+      .suggested{fill:#fff4e6;stroke:#f1d9b5;stroke-width:2}
+      .external{fill:#f7f9fc;stroke:#bac8da;stroke-width:2;stroke-dasharray:8 6}
+      .lineBlue{fill:none;stroke:#5273da;stroke-width:3.5;marker-end:url(#arrowBlue)}
+      .linePurple{fill:none;stroke:#8657c8;stroke-width:3.5;marker-end:url(#arrowPurple)}
+      .lineTeal{fill:none;stroke:#178995;stroke-width:3.5;marker-end:url(#arrowTeal)}
+      .lineThin{fill:none;stroke:#9aabc4;stroke-width:2.5;stroke-dasharray:7 7}
+    </style>
+  </defs>
+
+  <rect width="1800" height="1370" fill="#f4f7fc" />
+  <rect width="1800" height="128" fill="#0b1730" />
+  <text x="70" y="64" class="title" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#ffffff" font-size="43" font-weight="800" letter-spacing="-1">Chat2DB 能力与语义关联总图</text>
+  <text x="70" y="101" class="subtitle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#ccd9ee" font-size="19">入口 → 工作台与内部模块 → 外部模型 / 真实数据库 → 业务口径 → 出口</text>
+  <rect x="1450" y="43" width="278" height="40" rx="20" fill="#314e88" />
+  <text x="1481" y="69" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#e7eeff" font-size="16px" font-weight="700">以 Community 为主线</text>
+
+  <text x="70" y="166" class="section" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#264a8a" font-size="20" font-weight="800">三类入口</text>
+  <rect x="70" y="186" width="490" height="125" rx="16" class="card" fill="#ffffff" stroke="#dce5f2" stroke-width="2" />
+  <text x="94" y="217" class="num" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#5273da" font-size="14" font-weight="800">01 / 人用自然语言</text>
+  <text x="94" y="251" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">AI Copilot · 编辑器中的 AI</text>
+  <text x="94" y="283" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">选择数据源和模型，提出业务问题</text>
+  <rect x="655" y="186" width="490" height="125" rx="16" class="card" fill="#ffffff" stroke="#dce5f2" stroke-width="2" />
+  <text x="679" y="217" class="num" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#5273da" font-size="14" font-weight="800">02 / 人直接操作</text>
+  <text x="679" y="251" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">SQL 工作区 · 数据库树</text>
+  <text x="679" y="283" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">手写 SQL、浏览对象、编辑与导入导出</text>
+  <rect x="1240" y="186" width="490" height="125" rx="16" class="card" fill="#ffffff" stroke="#dce5f2" stroke-width="2" />
+  <text x="1264" y="217" class="num" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#5273da" font-size="14" font-weight="800">03 / 程序化调用</text>
+  <text x="1264" y="251" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">独立 CLI · MCP</text>
+  <text x="1264" y="283" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">脚本与 Agent 接入兼容的 Community 运行时</text>
+
+  <rect x="70" y="347" width="1190" height="474" rx="20" fill="#fff" stroke="#b9c9e9" stroke-width="3" />
+  <path d="M315 311 V344" fill="none" stroke="#5273da" stroke-width="3.5" marker-end="url(#arrowBlue)" /><path d="M900 311 V344" fill="none" stroke="#5273da" stroke-width="3.5" marker-end="url(#arrowBlue)" /><path d="M1485 311 V328 H1200 V344" fill="none" stroke="#8657c8" stroke-width="3.5" marker-end="url(#arrowPurple)" /><text x="96" y="381" class="group" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#4363ad" font-size="18" font-weight="800">CHAT2DB COMMUNITY：本机数据库工作台与服务端</text>
+  <rect x="1290" y="347" width="440" height="474" rx="20" class="external" fill="#f7f9fc" stroke="#bac8da" stroke-width="2" stroke-dasharray="8 6" />
+  <text x="1316" y="381" class="group" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#4363ad" font-size="18" font-weight="800">用户连接的外部系统</text>
+
+  <rect x="95" y="405" width="280" height="370" rx="16" class="inner" fill="#f8faff" stroke="#dce5f2" stroke-width="2" />
+  <text x="117" y="444" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">交互层</text>
+  <text x="117" y="479" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">数据库连接与对象树</text>
+  <text x="117" y="511" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">SQL 编辑、补全、历史</text>
+  <text x="117" y="543" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">AI 聊天与 SQL 草稿</text>
+  <text x="117" y="575" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">数据查看、编辑</text>
+  <text x="117" y="607" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">图表、看板、ER 图</text>
+  <rect x="117" y="650" width="235" height="89" rx="10" fill="#eaf0fb" />
+  <text x="131" y="681" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">React / Umi 前端</text>
+  <text x="131" y="710" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">把选择和问题送往后端</text>
+
+  <rect x="405" y="405" width="370" height="170" rx="16" class="verified" fill="#eef3ff" stroke="#cddaf8" stroke-width="2" />
+  <text x="426" y="443" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">AI 编排</text>
+  <text x="426" y="476" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">AiChatStreamAdapter · Spring AI</text>
+  <text x="426" y="508" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">提示词、模型配置、工具回调</text>
+  <text x="426" y="540" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">生成 / 解释 / 优化 SQL</text>
+  <rect x="405" y="605" width="370" height="170" rx="16" class="verified" fill="#eef3ff" stroke="#cddaf8" stroke-width="2" />
+  <text x="426" y="643" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">请求与语义上下文</text>
+  <text x="426" y="676" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">数据源、库、schema、方言</text>
+  <text x="426" y="708" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">问题类型、历史、可选 systemPrompt</text>
+  <text x="426" y="740" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">复杂业务定义需明确提供并核对</text>
+
+  <rect x="805" y="405" width="430" height="170" rx="16" class="verified" fill="#eef3ff" stroke="#cddaf8" stroke-width="2" />
+  <text x="826" y="443" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">数据库元数据工具</text>
+  <text x="826" y="476" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">list_all_tables · get_tables_schema</text>
+  <text x="826" y="508" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">表 / 列 / 注释 / DDL / 主外键 / 索引</text>
+  <text x="826" y="540" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">把真实结构作为模型推断依据</text>
+  <rect x="805" y="605" width="430" height="170" rx="16" class="verified" fill="#eef3ff" stroke="#cddaf8" stroke-width="2" />
+  <text x="826" y="643" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">数据库连接与执行</text>
+  <text x="826" y="676" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">驱动 / 插件 / JDBC · SQL 执行</text>
+  <text x="826" y="708" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">对象与数据管理、导入导出</text>
+  <text x="826" y="740" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">结果返回界面；操作受数据库权限约束</text>
+
+  <rect x="1315" y="405" width="390" height="170" rx="16" class="doc" fill="#f6efff" stroke="#dccbf3" stroke-width="2" />
+  <text x="1336" y="443" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">用户配置的大模型</text>
+  <text x="1336" y="476" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">结合问题、结构和业务说明</text>
+  <text x="1336" y="508" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">推断 SQL；可能产生错误假设</text>
+  <text x="1336" y="540" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">模型不是业务定义的权威来源</text>
+  <rect x="1315" y="605" width="390" height="170" rx="16" class="external" fill="#f7f9fc" stroke="#bac8da" stroke-width="2" stroke-dasharray="8 6" />
+  <text x="1336" y="643" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">用户的真实数据库</text>
+  <text x="1336" y="676" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">MySQL / PostgreSQL / 其他插件</text>
+  <text x="1336" y="708" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">保存业务记录，按 SQL 计算结果</text>
+  <text x="1336" y="740" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">它不知道“销售额”应采用哪种口径</text>
+
+  <path d="M405 548 H377" fill="none" stroke="#5273da" stroke-width="3.5" marker-end="url(#arrowBlue)" /><path d="M375 479 H405" class="lineBlue" fill="none" stroke="#5273da" stroke-width="3.5" marker-end="url(#arrowBlue)" />
+  <path d="M775 479 H805" class="lineBlue" fill="none" stroke="#5273da" stroke-width="3.5" marker-end="url(#arrowBlue)" />
+  <path d="M1020 575 V605" class="lineBlue" fill="none" stroke="#5273da" stroke-width="3.5" marker-end="url(#arrowBlue)" />
+  <path d="M590 605 V575" class="linePurple" fill="none" stroke="#8657c8" stroke-width="3.5" marker-end="url(#arrowPurple)" />
+  <path d="M1235 682 H1315" class="lineTeal" fill="none" stroke="#178995" stroke-width="3.5" marker-end="url(#arrowTeal)" />
+  <path d="M775 423 V392 H1510 V405" class="linePurple" fill="none" stroke="#8657c8" stroke-width="3.5" marker-end="url(#arrowPurple)" />
+  <path d="M235 775 V800 H1020 V775" class="lineBlue" fill="none" stroke="#5273da" stroke-width="3.5" marker-end="url(#arrowBlue)" />
+  <text x="470" y="792" class="mini" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#677892" font-size="14">手写 SQL / 数据操作也可直达执行服务</text>
+
+  <text x="70" y="860" class="section" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#264a8a" font-size="20" font-weight="800">复杂业务怎样关联：事实、规则与模型推断必须一起看</text>
+  <text x="70" y="887" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">下方是同一问题的语义链；业务规则进入上方上下文后，模型才有依据生成对应 SQL。</text>
+  <rect x="70" y="910" width="500" height="178" rx="16" class="verified" fill="#eef3ff" stroke="#cddaf8" stroke-width="2" />
+  <text x="92" y="947" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">① 数据库事实</text>
+  <text x="92" y="981" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">支付表、退款表、字段注释</text>
+  <text x="92" y="1013" class="body" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#566983" font-size="17">关联键与一对多关系</text>
+  <text x="92" y="1057" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">可证明“有什么数据”，不能定义指标口径</text>
+  <rect x="650" y="910" width="500" height="178" rx="16" class="doc" fill="#f6efff" stroke="#dccbf3" stroke-width="2" />
+  <text x="672" y="947" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">② 业务定义来源</text>
+  <text x="672" y="980" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">源码：请求可附加 systemPrompt</text>
+  <text x="672" y="1010" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">产品文档：AI 数据集的表 / 列说明*</text>
+  <text x="672" y="1040" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">建议：经测试的数据库视图 / 指标表</text>
+  <text x="672" y="1068" class="mini" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#677892" font-size="14">* 当前 Community 的界面可用性待实测</text>
+  <rect x="1230" y="910" width="500" height="178" rx="16" class="suggested" fill="#fff4e6" stroke="#f1d9b5" stroke-width="2" />
+  <text x="1252" y="947" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">③ “净销售额”需确定</text>
+  <text x="1252" y="980" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">按支付月还是退款发生月？哪些状态？</text>
+  <text x="1252" y="1010" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">部分退款如何聚合？税费、币种、时区？</text>
+  <text x="1252" y="1057" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">同样的示例数据可得到 800 或 900</text>
+  <path d="M570 998 H650" class="linePurple" fill="none" stroke="#8657c8" stroke-width="3.5" marker-end="url(#arrowPurple)" />
+  <path d="M1150 998 H1230" class="linePurple" fill="none" stroke="#8657c8" stroke-width="3.5" marker-end="url(#arrowPurple)" />
+
+  <text x="70" y="1138" class="section" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#264a8a" font-size="20" font-weight="800">出口：得到的内容与对数据库采取的动作</text>
+  <rect x="70" y="1160" width="385" height="118" rx="15" class="card" fill="#ffffff" stroke="#dce5f2" stroke-width="2" />
+  <text x="92" y="1197" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">SQL 草稿与解释</text>
+  <text x="92" y="1230" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">生成、解释、优化；先核对语义</text>
+  <rect x="485" y="1160" width="385" height="118" rx="15" class="card" fill="#ffffff" stroke="#dce5f2" stroke-width="2" />
+  <text x="507" y="1197" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">结果与可视化</text>
+  <text x="507" y="1230" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">真实查询表格、图表、看板、ER 图</text>
+  <rect x="900" y="1160" width="385" height="118" rx="15" class="card" fill="#ffffff" stroke="#dce5f2" stroke-width="2" />
+  <text x="922" y="1197" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">数据库操作</text>
+  <text x="922" y="1230" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">编辑数据、对象变更、导入导出</text>
+  <rect x="1315" y="1160" width="415" height="118" rx="15" class="card" fill="#ffffff" stroke="#dce5f2" stroke-width="2" />
+  <text x="1337" y="1197" class="head" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#1e3559" font-size="23" font-weight="800">程序化结果</text>
+  <text x="1337" y="1230" class="body2" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#62748e" font-size="16">独立 CLI 的 JSON / MCP 工具调用</text>
+
+  <line x1="70" y1="1310" x2="1730" y2="1310" stroke="#d8e1ef" stroke-width="2" />
+  <circle cx="86" cy="1337" r="7" fill="#5273da" /><text x="103" y="1343" class="mini" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#677892" font-size="14">Community 源码 / README 已核对</text>
+  <circle cx="479" cy="1337" r="7" fill="#8657c8" /><text x="496" y="1343" class="mini" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#677892" font-size="14">产品文档或模型依赖</text>
+  <circle cx="777" cy="1337" r="7" fill="#e8a241" /><text x="794" y="1343" class="mini" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#677892" font-size="14">研究建议与示例，不是内置保证</text>
+  <text x="1270" y="1343" class="mini" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" fill="#677892" font-size="14">研究图；未安装连接实测 · 2026-09-26</text>
+</svg>
