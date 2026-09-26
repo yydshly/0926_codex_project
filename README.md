@@ -4,17 +4,18 @@
 
 ## 项目索引
 
-| 编号 | 源库（直达原仓库） | 能力与原理摘要 | 研究记录 | 网页展示 |
-| --- | --- | --- | --- | --- |
-| 001 | [OtterMind/Chat2DB](https://github.com/OtterMind/Chat2DB) | 本地优先的数据库工作台：连接多种数据库，浏览表结构、编写和执行 SQL、管理数据并查看图表。AI 结合所选库的表与字段信息，把自然语言转成可核对的 SQL，再由数据库执行。适合开发排查、DBA 管理和临时分析；销售额、退款等复杂指标仍需明确业务口径。 | [Chat2DB 研究](projects/001-chat2db/README.md) | [在线展示](https://yydshly.github.io/0926_codex_project/sites/001-chat2db/) · [网页源码](sites/001-chat2db/index.html) |
-| 002 | [browser-use/web-ui](https://github.com/browser-use/web-ui) | 让 AI 浏览器代理的任务可配置、过程可观察、运行可控制；底层按“读取页面 → 模型决策 → 浏览器执行 → 再核对”循环。适合资料初探、受控网页操作与代理评测。 | [Browser Use Web UI 研究](projects/002-browser-use-web-ui/README.md) | [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/) · [网页源码](sites/002-browser-use-web-ui/index.html) |
-| 003 | [anandprtp/Antra](https://github.com/anandprtp/Antra) | 桌面音乐曲库工具：将多平台链接和在线曲库统一为曲目目标，经音源匹配、下载校验、打标归档生成本地文件；适合研究多源数据一致化与可追溯交付。 | [Antra 研究](projects/003-antra/README.md) | [在线能力展示](https://yydshly.github.io/0926_codex_project/sites/003-antra/) · [网页源码](sites/003-antra/index.html) |
+| 编号 | 原仓库 | 能力摘要 | 研究与展示 |
+| --- | --- | --- | --- |
+| 001 | [OtterMind/Chat2DB](https://github.com/OtterMind/Chat2DB) | 数据库工作台；AI 依据表结构辅助写 SQL，结果由数据库执行。 | [研究记录](projects/001-chat2db/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/001-chat2db/) · [网页源码](sites/001-chat2db/index.html) |
+| 002 | [browser-use/web-ui](https://github.com/browser-use/web-ui) | 配置、运行并观察浏览器代理，展示读取、决策、执行与核对循环。 | [研究记录](projects/002-browser-use-web-ui/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/) · [网页源码](sites/002-browser-use-web-ui/index.html) |
+| 003 | [anandprtp/Antra](https://github.com/anandprtp/Antra) | 匹配多来源音源，下载、校验、打标并整理本地曲库。 | [研究记录](projects/003-antra/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/003-antra/) · [网页源码](sites/003-antra/index.html) |
+| 004 | [stemdeckapp/stemdeck](https://github.com/stemdeckapp/stemdeck) | Demucs 估计六类音轨，支持试听、循环练习、混音与导出。 | [研究记录](projects/004-stemdeck/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/) · [网页源码](sites/004-stemdeck/index.html) |
 
-| 004 | [stemdeckapp/stemdeck](https://github.com/stemdeckapp/stemdeck) | 在本机用 Demucs 估计人声、鼓、贝斯、吉他、钢琴、其他六类音轨，再进行试听、循环练习、混音与导出；适合研究音频分离如何成为创作与练习工作流。 | [StemDeck 研究](projects/004-stemdeck/README.md) | [在线能力展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/) · [网页源码](sites/004-stemdeck/index.html) |
+## 子项目速览
 
-## 001 · Chat2DB 能力与原理速览
+### 001 · Chat2DB
 
-![Chat2DB 能力与语义关联总图：三类入口、内部模块、外部模型与数据库、复杂业务定义及输出](projects/001-chat2db/assets/architecture-map.png)
+<img src="projects/001-chat2db/assets/architecture-map.png" width="460" alt="Chat2DB 能力与语义关联总图：入口、内部模块、模型与数据库、业务定义及输出">
 
 图片说明：本仓库绘制的 Chat2DB 研究引导图，依据[原仓库](https://github.com/OtterMind/Chat2DB)、[独立 CLI 仓库](https://github.com/OtterMind/Chat2DB-CLI)与已核对源码整理；是分析示意，不是官方架构图或运行截图。[放大查看 SVG](projects/001-chat2db/assets/architecture-map.svg)。
 
@@ -25,17 +26,19 @@
 - **使用场景与对我的意义：** 适合开发排查、DBA 管理、临时分析和受控 Agent 查询。它提供了研究或构建自然语言数据助手的完整样本：从数据库结构到模型推断，再到可核对的 SQL 和真实结果。
 - **关键边界：** 退款、销售额等指标必须明确统计口径；字段注释和模型推断不能自动证明业务答案正确。当前研究未安装 Chat2DB 连接真实数据库。[查看详细研究与源码证据](projects/001-chat2db/README.md)。
 
-## 002 · Browser Use Web UI 能力与价值速览
+### 002 · Browser Use Web UI
 
-![Browser Use Web UI 能力与价值总览：界面、代理、模型与浏览器分工，以及循环原理、模块、场景和研究意义](projects/002-browser-use-web-ui/assets/understanding-map.png)
+<img src="projects/002-browser-use-web-ui/assets/understanding-map.png" width="460" alt="Browser Use Web UI 能力与价值总览：界面、代理、模型与浏览器的分工">
 
 图片说明：本仓库依据[原仓库文档与源码](https://github.com/browser-use/web-ui)绘制的理解汇总图，不是原产品运行截图或真实任务结果。[放大查看 SVG](projects/002-browser-use-web-ui/assets/understanding-map.svg)。
 
-**能力与原理：**Web UI 负责任务入口、设置、过程展示与控制；`browser-use` 和浏览器控制层负责网页操作。**模块效果：**模型与浏览器设置决定运行条件，Run Agent 展示步骤，Deep Research 汇总资料，配置与工具扩展便于复用。**对我的意义：**可用来研究代理机制，并探索带来源证据和人工验收的资料收集流程。[研究记录](projects/002-browser-use-web-ui/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/)
+- **能力与原理：** Web UI 负责任务入口、设置、过程展示与控制；`browser-use` 和浏览器控制层负责网页操作。
+- **模块效果：** 模型与浏览器设置决定运行条件，Run Agent 展示步骤，Deep Research 汇总资料，配置与工具扩展便于复用。
+- **研究价值：** 可探索带来源证据和人工验收的资料收集流程。[研究记录](projects/002-browser-use-web-ui/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/002-browser-use-web-ui/)。
 
-## 003 · Antra 能力与原理速览
+### 003 · Antra
 
-<img src="sites/003-antra/assets/capability-map.png" width="440" alt="Antra 完整能力地图：入口、核心处理、支撑模块、本地出口与研究价值">
+<img src="sites/003-antra/assets/capability-map.png" width="460" alt="Antra 完整能力地图：入口、核心处理、支撑模块、本地出口与研究价值">
 
 图片说明：本仓库依据 [Antra 官方功能说明](https://github.com/anandprtp/Antra/blob/07aeef19966d8e2b72ed53f53442596e8a53255c/FEATURES.md)与关键源码绘制的研究引导图，不是官方架构图或实测结果。[放大查看 SVG](sites/003-antra/assets/capability-map.svg)。
 
@@ -44,13 +47,15 @@
 - **场景与意义：** 适合经授权建立个人曲库、维护更新歌单，也提供研究多源数据一致化、身份匹配和交付校验的案例。
 - **边界：** 尚未进行真实下载；音源可用性、文件质量、内容权限和标签完整度需核查。[研究记录](projects/003-antra/README.md) · [在线能力展示](https://yydshly.github.io/0926_codex_project/sites/003-antra/)。
 
-## 004 · StemDeck 能力速览
+### 004 · StemDeck
 
-<img src="projects/004-stemdeck/assets/capability-map.png" width="440" alt="StemDeck 能力引导图：六类音源分离、分析与练习模块、使用场景和音频创作产品价值">
+<img src="projects/004-stemdeck/assets/capability-map.png" width="460" alt="StemDeck 能力引导图：六类音源分离、分析与练习模块、使用场景和音频创作产品价值">
 
 图片说明：本研究依据 [StemDeck 官方仓库](https://github.com/stemdeckapp/stemdeck)和 Demucs 模型资料绘制；这是分析图，不是分离音质实测。[放大查看 SVG](projects/004-stemdeck/assets/capability-map.svg)。
 
-**能力与原理：** 本地音频经 FFmpeg 预处理，由 Demucs 估计固定六类音轨，再进入分析、波形播放、循环练习与导出流程。**效果与场景：** 可把歌曲变成可静音、独奏和重混的练习素材，适合乐器跟练、歌唱、扒谱和创作准备。**对音频创作产品的价值：** 它示范了从分离模型到可用工作台的完整路径；新音色识别、时间线编排等仍需另行设计。输出并非录音室原始分轨，质量尚待实测。[研究记录](projects/004-stemdeck/README.md) · [在线能力展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/)。
+- **能力与原理：** 本地音频经 FFmpeg 预处理，由 Demucs 估计固定六类音轨，再进入分析、波形播放、循环练习与导出流程。
+- **效果与场景：** 可把歌曲变成可静音、独奏和重混的练习素材，适合乐器跟练、歌唱、扒谱和创作准备。
+- **对音频创作产品的价值：** 它示范了从分离模型到可用工作台的路径；新音色识别、时间线编排等仍需另行设计。输出并非录音室原始分轨，质量尚待实测。[研究记录](projects/004-stemdeck/README.md) · [在线能力展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/)。
 
 ## 仓库结构
 
