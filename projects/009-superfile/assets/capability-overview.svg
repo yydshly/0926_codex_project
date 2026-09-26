@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1370" role="img" aria-labelledby="title desc">
+  <title id="title">superfile 能力全景：原理、功能与效果</title>
+  <desc id="desc">一张研究示意图说明 superfile 是运行在终端的文件管理器。键盘和鼠标输入经 Bubble Tea 状态模型与 Lip Gloss 终端排版，Go 调用本机文件系统执行真实操作，再返回预览和进度。功能包含多面板导航、当前目录文件名搜索与排序、预览、文件操作、批量处理和配置集成。图中还列出终端图片预览与 Windows 支持边界。</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#081923"/><stop offset="1" stop-color="#102b35"/></linearGradient>
+    <linearGradient id="accent" x2="1"><stop stop-color="#76ecd0"/><stop offset="1" stop-color="#b7ed9d"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="15" flood-color="#001014" flood-opacity=".22"/></filter>
+    <style>
+      text{font-family:Arial,"Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+      .eyebrow{fill:#80ddc8;font-size:21px;font-weight:700;letter-spacing:2.5px}
+      .main{fill:#f4fbf8;font-size:66px;font-weight:800}
+      .sub{fill:#b9d4d0;font-size:26px}
+      .section{fill:#e8f8f3;font-size:29px;font-weight:800}
+      .mini{fill:#86cdbc;font-size:18px;font-weight:700;letter-spacing:1.7px}
+      .boxTitle{fill:#f1fbf7;font-size:27px;font-weight:800}
+      .boxBody{fill:#b7d4d0;font-size:21px}
+      .cardTitle{fill:#f3fbf7;font-size:29px;font-weight:800}
+      .cardBody{fill:#c5d8d5;font-size:22px}
+      .effect{fill:#9eeccb;font-size:21px;font-weight:700}
+      .small{fill:#9db9b5;font-size:18px}
+      .badge{fill:#0b3033;font-size:18px;font-weight:800}
+    </style>
+  </defs>
+  <rect width="1800" height="1370" fill="url(#bg)"/>
+  <circle cx="1650" cy="40" r="320" fill="#78e4c4" opacity=".055"/>
+  <circle cx="100" cy="1300" r="360" fill="#95e9ae" opacity=".04"/>
+  <path d="M60 201h1680" stroke="#3c686c" stroke-width="2"/>
+  <text x="60" y="58" class="eyebrow">PROJECT 009  /  YORUKOT · SUPERFILE</text>
+  <text x="60" y="128" class="main">一个终端文件管理器，如何完成文件工作</text>
+  <text x="62" y="177" class="sub">多面板看目录 → 选中文件 → 真实读写磁盘 → 在终端看到预览、状态与结果</text>
+  <rect x="1535" y="36" width="205" height="48" rx="24" fill="#1f5b58" stroke="#5bd1b4"/>
+  <text x="1637" y="68" text-anchor="middle" fill="#c2f8dc" font-size="20" font-weight="700">不是网页服务</text>
+
+  <text x="60" y="257" class="section">技术原理</text>
+  <text x="205" y="256" class="small">本机运行 spf；在 SSH 场景中，需在远端运行，操作远端当前用户可访问的文件</text>
+  <g filter="url(#shadow)">
+    <rect x="60" y="287" width="381" height="181" rx="20" fill="#19363d" stroke="#407477"/>
+    <rect x="493" y="287" width="381" height="181" rx="20" fill="#19363d" stroke="#407477"/>
+    <rect x="926" y="287" width="381" height="181" rx="20" fill="#19363d" stroke="#407477"/>
+    <rect x="1359" y="287" width="381" height="181" rx="20" fill="#19363d" stroke="#407477"/>
+  </g>
+  <text x="85" y="324" class="mini">01  输入与配置</text>
+  <text x="85" y="365" class="boxTitle">键盘、鼠标、快捷键</text>
+  <text x="85" y="401" class="boxBody">选择文件、切换面板、下命令</text>
+  <text x="85" y="435" class="boxBody">主题与编辑器由配置决定</text>
+  <text x="518" y="324" class="mini">02  终端交互</text>
+  <text x="518" y="365" class="boxTitle">Bubble Tea + Lip Gloss</text>
+  <text x="518" y="401" class="boxBody">消息进入 Update，改变模型状态</text>
+  <text x="518" y="435" class="boxBody">View 排版面板；命令处理任务</text>
+  <text x="951" y="324" class="mini">03  真实执行</text>
+  <text x="951" y="365" class="boxTitle">Go + 本机文件系统</text>
+  <text x="951" y="401" class="boxBody">读取目录、复制、移动与删除</text>
+  <text x="951" y="435" class="boxBody">可调用已安装的外部工具</text>
+  <text x="1384" y="324" class="mini">04  可见反馈</text>
+  <text x="1384" y="365" class="boxTitle">终端画面 + 磁盘结果</text>
+  <text x="1384" y="401" class="boxBody">文件列表、预览、元数据</text>
+  <text x="1384" y="435" class="boxBody">剪贴板、进度与操作完成</text>
+  <path d="M448 374h35m-12-9 12 9-12 9M881 374h35m-12-9 12 9-12 9M1314 374h35m-12-9 12 9-12 9" fill="none" stroke="#8ae6c3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1570 477v22H685v-22" fill="none" stroke="#508f89" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="1127" y="495" text-anchor="middle" class="small">预览、任务完成等消息返回模型，刷新画面</text>
+
+  <text x="60" y="550" class="section">支持哪些能力 · 用户实际看到什么</text>
+  <text x="1150" y="549" class="small">根据官方教程、配置文档及关键源码整理</text>
+
+  <g filter="url(#shadow)">
+    <rect x="60" y="578" width="534" height="234" rx="22" fill="#17343b" stroke="#35686a"/>
+    <rect x="633" y="578" width="534" height="234" rx="22" fill="#17343b" stroke="#35686a"/>
+    <rect x="1206" y="578" width="534" height="234" rx="22" fill="#17343b" stroke="#35686a"/>
+    <rect x="60" y="835" width="534" height="234" rx="22" fill="#17343b" stroke="#35686a"/>
+    <rect x="633" y="835" width="534" height="234" rx="22" fill="#17343b" stroke="#35686a"/>
+    <rect x="1206" y="835" width="534" height="234" rx="22" fill="#17343b" stroke="#35686a"/>
+  </g>
+  <rect x="83" y="602" width="47" height="35" rx="10" fill="url(#accent)"/><text x="106" y="627" text-anchor="middle" class="badge">01</text>
+  <text x="146" y="630" class="cardTitle">多面板导航</text>
+  <text x="84" y="672" class="cardBody">并排浏览不同目录；侧栏固定常用路径</text>
+  <text x="84" y="705" class="cardBody">切换焦点、显示或隐藏点文件</text>
+  <path d="M84 737h485" stroke="#3a6768"/>
+  <text x="84" y="778" class="effect">效果：来源与目标目录同时可见</text>
+
+  <rect x="656" y="602" width="47" height="35" rx="10" fill="url(#accent)"/><text x="679" y="627" text-anchor="middle" class="badge">02</text>
+  <text x="719" y="630" class="cardTitle">搜索与排序</text>
+  <text x="657" y="672" class="cardBody">动态筛选当前目录的文件名</text>
+  <text x="657" y="705" class="cardBody">按名称、大小、修改时间排序</text>
+  <path d="M657 737h485" stroke="#3a6768"/>
+  <text x="657" y="778" class="effect">效果：快速缩小当前目录的列表</text>
+
+  <rect x="1229" y="602" width="47" height="35" rx="10" fill="url(#accent)"/><text x="1252" y="627" text-anchor="middle" class="badge">03</text>
+  <text x="1292" y="630" class="cardTitle">预览与信息</text>
+  <text x="1230" y="672" class="cardBody">文件与图片预览、元数据面板</text>
+  <text x="1230" y="705" class="cardBody">图片可用 Kitty 协议或 ANSI 降级</text>
+  <path d="M1230 737h485" stroke="#3a6768"/>
+  <text x="1230" y="778" class="effect">效果：操作前先判断文件内容</text>
+
+  <rect x="83" y="859" width="47" height="35" rx="10" fill="url(#accent)"/><text x="106" y="884" text-anchor="middle" class="badge">04</text>
+  <text x="146" y="887" class="cardTitle">文件与目录操作</text>
+  <text x="84" y="929" class="cardBody">新建、重命名、复制、剪切、粘贴</text>
+  <text x="84" y="962" class="cardBody">删除、永久删除、压缩与解压</text>
+  <path d="M84 994h485" stroke="#3a6768"/>
+  <text x="84" y="1035" class="effect">效果：真实改变运行机器上的文件</text>
+
+  <rect x="656" y="859" width="47" height="35" rx="10" fill="url(#accent)"/><text x="679" y="884" text-anchor="middle" class="badge">05</text>
+  <text x="719" y="887" class="cardTitle">批量处理与状态</text>
+  <text x="657" y="929" class="cardBody">选择多个条目；查看剪贴板与进度</text>
+  <text x="657" y="962" class="cardBody">复制或移动过程反馈在界面中</text>
+  <path d="M657 994h485" stroke="#3a6768"/>
+  <text x="657" y="1035" class="effect">效果：多文件整理过程可核对</text>
+
+  <rect x="1229" y="859" width="47" height="35" rx="10" fill="url(#accent)"/><text x="1252" y="884" text-anchor="middle" class="badge">06</text>
+  <text x="1292" y="887" class="cardTitle">配置与工具集成</text>
+  <text x="1230" y="929" class="cardBody">主题、快捷键、编辑器与命令行</text>
+  <text x="1230" y="962" class="cardBody">可选 exiftool、MD5、zoxide 等</text>
+  <path d="M1230 994h485" stroke="#3a6768"/>
+  <text x="1230" y="1035" class="effect">效果：适配个人终端工作流</text>
+
+  <rect x="60" y="1103" width="817" height="158" rx="20" fill="#133c3e" stroke="#4b9c87"/>
+  <text x="86" y="1144" class="section">典型使用场景</text>
+  <text x="86" y="1185" class="cardBody">工程目录整理  /  SSH 远端文件维护  /  素材预览与归档</text>
+  <text x="86" y="1223" class="small">本仓库可用于人工整理 projects/、sites/ 和图片素材。</text>
+  <rect x="900" y="1103" width="840" height="158" rx="20" fill="#17303a" stroke="#66878b"/>
+  <text x="926" y="1144" class="section">使用边界</text>
+  <text x="926" y="1185" class="cardBody">搜索是当前目录的文件名筛选；图片质量依赖终端协议。</text>
+  <text x="926" y="1223" class="small">上游说明 Windows 尚未完全支持；外部工具需另行安装和启用。</text>
+
+  <path d="M60 1295h1680" stroke="#3c686c" stroke-width="2"/>
+  <text x="60" y="1327" class="small">依据：superfile 官方教程 / 图像预览与插件文档 / Go 源码（model.go、file_operations.go）</text>
+  <text x="60" y="1351" class="small">研究示意图 · 2026-09-26 · 非运行截图或性能实测；真实运行画面见原仓库 demo.gif</text>
+</svg>

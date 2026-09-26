@@ -21,6 +21,8 @@ on:
       - "sites/007-palmier-pro/**"
       - "projects/008-oh-my-openagent/**"
       - "sites/008-oh-my-openagent/**"
+      - "projects/009-superfile/**"
+      - "sites/009-superfile/**"
   workflow_dispatch:
 
 permissions:
@@ -59,6 +61,8 @@ jobs:
           cp -R projects/007-palmier-pro _site/projects/
           cp -R sites/008-oh-my-openagent _site/sites/
           cp -R projects/008-oh-my-openagent _site/projects/
+          cp -R sites/009-superfile _site/sites/
+          cp -R projects/009-superfile _site/projects/
           cp README.md _site/README.md
           cp .github/pages-index.html _site/index.html
       - name: Configure Pages

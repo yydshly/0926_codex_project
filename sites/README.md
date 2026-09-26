@@ -31,3 +31,7 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 ## 008 · Oh My OpenAgent
 
 [在线能力全景图](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/)说明主 Agent 如何按任务类别下发独立工作、路由模型，并借助工具、规则和续跑完成核查；展示跨模块开发场景，以及本研究仓库可借鉴的分工和验收方式。图中的 008 需求真实，OmO 调度为文档支持的示例，未实际运行。[网页源码](008-oh-my-openagent/index.html) · [研究记录与来源](../projects/008-oh-my-openagent/README.md)。
+
+## 009 · superfile
+
+[在线能力全景图与真实演示](https://yydshly.github.io/0926_codex_project/sites/009-superfile/)用一张图说明终端文件管理器的能力、Go/Bubble Tea 与本机文件系统的实现链路、工程目录和 SSH 等场景，以及对本仓库人工文件整理与交互设计的意义。页面另有上游真实操作动图和只操作样例数据的交互模拟。[网页源码](009-superfile/index.html) · [研究记录与来源](../projects/009-superfile/README.md)。

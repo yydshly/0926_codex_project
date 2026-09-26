@@ -13,6 +13,7 @@
 | 006 | [vercel/eve](https://github.com/vercel/eve) | 把模型、工具、持久会话和人工审批组合成可部署的 Agent 服务。 | [研究记录](projects/006-vercel-eve/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/006-vercel-eve/) · [网页源码](sites/006-vercel-eve/index.html) |
 | 007 | [palmier-io/palmier-pro](https://github.com/palmier-io/palmier-pro) | macOS AI 剪辑器：按画面与语音找素材，Agent 经 MCP 修改帧级时间线，交付成片或可编辑工程；适合重复初剪与人工复核。 | [研究记录](projects/007-palmier-pro/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/007-palmier-pro/) · [网页源码](sites/007-palmier-pro/index.html) |
 | 008 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 编程 Agent 的任务编排层：主 Agent 按类别分派工作会话，结合模型路由、工具、规则与续跑完成核查；适合跨模块开发，也为本仓库的研究任务分工提供可验证样本。 | [研究记录](projects/008-oh-my-openagent/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/) · [网页源码](sites/008-oh-my-openagent/index.html) |
+| 009 | [yorukot/superfile](https://github.com/yorukot/superfile) | 终端文件管理器：多面板浏览、当前目录搜索、预览与批量整理；Go/Bubble Tea 管理界面状态，本机文件系统执行操作。适合工程目录、SSH 远端和素材整理，为本仓库提供人工文件管理与终端交互设计参考。 | [研究记录](projects/009-superfile/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/009-superfile/) · [网页源码](sites/009-superfile/index.html) |
 
 ## 子项目速览
 
@@ -92,6 +93,17 @@
 - **能力与原理：** OmO 为编程智能体提供主 Agent 编排、任务类别与模型路由、独立工作会话、LSP/AST/MCP 工具、规则注入和续跑机制；可选 Team Mode 用共享任务与消息协调并行成员。不同发行版的能力范围不同。
 - **场景：** 适合需要探索、计划、跨模块实施与核查的开发工作；单文件小修复可直接由主 Agent 处理。
 - **对我们的意义：** 可借鉴其分工与验收方式，把新项目研究拆成来源核对、能力归纳、网页制作与最终检查，并用固定任务比较质量、耗时和人工介入。当前只有文档研究和静态展示，尚无 OmO 实测结论。[详细研究](projects/008-oh-my-openagent/README.md) · [在线能力地图](https://yydshly.github.io/0926_codex_project/sites/008-oh-my-openagent/)。
+
+### 009 · superfile
+
+<img src="projects/009-superfile/assets/capability-overview.svg" width="460" alt="superfile 能力全景：技术原理、六组文件管理能力、可见效果和使用边界">
+
+图片说明：本仓库依据 [superfile 官方教程](https://superfile.dev/getting-started/tutorial/)、[图像预览说明](https://superfile.dev/getting-started/image-preview/)和[关键源码](https://github.com/yorukot/superfile/blob/main/src/internal/model.go)绘制的研究引导图；不是上游运行截图或本机实测。[放大查看 SVG](projects/009-superfile/assets/capability-overview.svg)。
+
+- **能力与效果：** 并排浏览目录，筛选当前目录文件名，预览内容；新建、重命名、复制移动、删除和压缩文件，选择多项后批量处理，并在界面查看剪贴板与进度。
+- **实现原理：** Go 程序通过 Bubble Tea 处理输入与状态，Lip Gloss 排版终端画面；真实文件操作由运行机器的文件系统执行，预览和任务状态作为消息返回界面。
+- **使用场景与对我们的意义：** 适合工程目录、SSH 远端文件维护和素材归档；可帮助人工整理本仓库的 `projects/`、`sites/` 与图片，也提供研究终端交互架构的案例。
+- **边界：** 本研究核对了文档和源码，尚未实机运行；图片预览依赖终端支持，上游称 Windows 尚未完全支持。[研究记录](projects/009-superfile/README.md) · [在线展示](https://yydshly.github.io/0926_codex_project/sites/009-superfile/)。
 
 ## 仓库结构
 
