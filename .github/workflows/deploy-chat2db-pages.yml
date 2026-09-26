@@ -13,6 +13,8 @@ on:
       - "sites/002-browser-use-web-ui/**"
       - "projects/003-antra/**"
       - "sites/003-antra/**"
+      - "projects/004-stemdeck/**"
+      - "sites/004-stemdeck/**"
   workflow_dispatch:
 
 permissions:
@@ -43,6 +45,8 @@ jobs:
           cp -R projects/002-browser-use-web-ui _site/projects/
           cp -R sites/003-antra _site/sites/
           cp -R projects/003-antra _site/projects/
+          cp -R sites/004-stemdeck _site/sites/
+          cp -R projects/004-stemdeck _site/projects/
           cp README.md _site/README.md
           cp .github/pages-index.html _site/index.html
       - name: Configure Pages

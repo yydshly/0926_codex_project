@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1370" viewBox="0 0 1800 1370" role="img" aria-labelledby="title desc">
+  <title id="title">StemDeck 能力全景图：六类音源分离、功能模块、场景与产品价值</title>
+  <desc id="desc">图从左至右展示音频导入、格式准备、Demucs 六音源分离、六类输出；下方展示音乐分析、多轨练习与导出模块、使用场景、对音频创作产品的可借鉴之处和能力边界。</desc>
+  <defs>
+    <linearGradient id="background" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1320"/>
+      <stop offset="1" stop-color="#111c2a"/>
+    </linearGradient>
+    <linearGradient id="highlight" x2="1" y2="1">
+      <stop offset="0" stop-color="#293344"/>
+      <stop offset="1" stop-color="#1a2736"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8496aa"/>
+    </marker>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans CJK SC", "PingFang SC", Arial, sans-serif; fill: #eef4f8; }
+      .muted { fill: #b7c5d0; }
+      .soft { fill: #91a6b7; }
+      .gold { fill: #ffc452; }
+      .section { fill: #ffc452; font-size: 18px; font-weight: 700; letter-spacing: 2px; }
+      .body { font-size: 20px; }
+      .small { font-size: 17px; }
+      .card-title { font-size: 25px; font-weight: 700; }
+      .pill-title { font-size: 21px; font-weight: 700; }
+      .line { stroke: #8496aa; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .divider { stroke: #344556; stroke-width: 2; }
+      .panel { fill: #182536; stroke: #35485a; stroke-width: 2; }
+      .panel-soft { fill: #152232; stroke: #344658; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="1800" height="1370" fill="url(#background)"/>
+
+  <!-- Header -->
+  <text x="64" y="74" font-size="48" font-weight="700">StemDeck：从歌曲到可操作的声部</text>
+  <text x="65" y="115" class="muted" font-size="23">一张图看能力、模块、原理、使用场景，以及对音频创作产品的价值</text>
+  <rect x="1425" y="41" width="311" height="46" rx="23" fill="#43341d" stroke="#c3913d" stroke-width="2"/>
+  <text x="1580" y="71" text-anchor="middle" class="gold" font-size="18" font-weight="700">已实现能力 · 文档／源码核对</text>
+  <line x1="64" y1="145" x2="1736" y2="145" class="divider"/>
+
+  <!-- Main pipeline -->
+  <text x="64" y="183" class="section">01  核心处理链路</text>
+  <rect x="64" y="210" width="260" height="337" rx="20" class="panel"/>
+  <rect x="365" y="210" width="270" height="337" rx="20" class="panel"/>
+  <rect x="677" y="210" width="385" height="337" rx="20" fill="url(#highlight)" stroke="#ad8139" stroke-width="2"/>
+  <rect x="1104" y="210" width="632" height="337" rx="20" class="panel"/>
+  <path d="M 328 372 H 354" class="line"/>
+  <path d="M 639 372 H 666" class="line"/>
+  <path d="M 1066 372 H 1093" class="line"/>
+
+  <text x="88" y="255" class="gold" font-size="17" font-weight="700">INPUT / 输入</text>
+  <text x="88" y="297" class="card-title">已有歌曲</text>
+  <text x="88" y="341" class="body">本地音频／视频</text>
+  <text x="88" y="377" class="small muted">MP3 · WAV · FLAC</text>
+  <text x="88" y="407" class="small muted">OGG · MP4 · M4A</text>
+  <line x1="88" y1="430" x2="300" y2="430" class="divider"/>
+  <text x="88" y="465" class="body">在线链接</text>
+  <text x="88" y="496" class="small muted">YouTube / SoundCloud</text>
+
+  <text x="389" y="255" class="gold" font-size="17" font-weight="700">PREP / 准备</text>
+  <text x="389" y="297" class="card-title">统一音频格式</text>
+  <text x="389" y="342" class="body">FFmpeg 解码／转码</text>
+  <text x="389" y="376" class="small muted">本地上传统一为</text>
+  <text x="389" y="406" class="small muted">44.1 kHz 双声道 WAV</text>
+  <line x1="389" y1="430" x2="611" y2="430" class="divider"/>
+  <text x="389" y="465" class="body">任务队列与进度</text>
+  <text x="389" y="496" class="small muted">FastAPI · SSE · 可取消</text>
+
+  <text x="701" y="255" class="gold" font-size="17" font-weight="700">AI SEPARATION / 核心模型</text>
+  <text x="701" y="297" class="card-title">Demucs htdemucs_6s</text>
+  <text x="701" y="343" class="body">波形 + 频谱双分支</text>
+  <text x="701" y="377" class="small muted">跨域 Transformer 估计音源</text>
+  <text x="701" y="407" class="small muted">输出类别在模型中预先固定</text>
+  <line x1="701" y1="430" x2="1038" y2="430" class="divider"/>
+  <text x="701" y="465" class="body">PyTorch 常驻工作进程</text>
+  <text x="701" y="496" class="small muted">CUDA / MPS / CPU 回退</text>
+
+  <text x="1128" y="255" class="gold" font-size="17" font-weight="700">STEMS / 六类估计音轨</text>
+  <g font-size="21" font-weight="700">
+    <rect x="1128" y="277" width="271" height="61" rx="12" fill="#3b2636"/>
+    <circle cx="1155" cy="307" r="8" fill="#f47b99"/>
+    <text x="1175" y="314">人声 Vocals</text>
+    <rect x="1415" y="277" width="294" height="61" rx="12" fill="#3e3028"/>
+    <circle cx="1442" cy="307" r="8" fill="#f9a948"/>
+    <text x="1462" y="314">鼓 Drums</text>
+    <rect x="1128" y="349" width="271" height="61" rx="12" fill="#3e3a27"/>
+    <circle cx="1155" cy="379" r="8" fill="#f4d561"/>
+    <text x="1175" y="386">贝斯 Bass</text>
+    <rect x="1415" y="349" width="294" height="61" rx="12" fill="#223d34"/>
+    <circle cx="1442" cy="379" r="8" fill="#78d29c"/>
+    <text x="1462" y="386">吉他 Guitar</text>
+    <rect x="1128" y="421" width="271" height="61" rx="12" fill="#352d47"/>
+    <circle cx="1155" cy="451" r="8" fill="#c299f1"/>
+    <text x="1175" y="458">钢琴 Piano</text>
+    <rect x="1415" y="421" width="294" height="61" rx="12" fill="#293c49"/>
+    <circle cx="1442" cy="451" r="8" fill="#9bbbd2"/>
+    <text x="1462" y="458">其他 Other</text>
+  </g>
+  <text x="1128" y="517" class="small muted">可选：再将人声细分为主唱／伴唱（另一模型）</text>
+
+  <rect x="64" y="565" width="1672" height="57" rx="12" fill="#2b301f" stroke="#8e8948" stroke-width="2"/>
+  <text x="900" y="602" text-anchor="middle" class="gold" font-size="22" font-weight="700">固定六类 ≠ 歌曲原本只有六条录音轨；小提琴、合成器等通常进入“其他”或与相近声部串音</text>
+
+  <!-- Product modules -->
+  <text x="64" y="671" class="section">02  拆分之后，产品还做什么</text>
+  <rect x="64" y="696" width="518" height="225" rx="20" class="panel-soft"/>
+  <rect x="608" y="696" width="548" height="225" rx="20" class="panel-soft"/>
+  <rect x="1182" y="696" width="554" height="225" rx="20" class="panel-soft"/>
+  <text x="92" y="741" class="card-title">音乐分析</text>
+  <text x="92" y="784" class="body">BPM · 调性／调式 · 响度／峰值</text>
+  <text x="92" y="818" class="body">节拍网格 · 波形峰值 · 音轨强度</text>
+  <text x="92" y="872" class="small muted">librosa / pyloudnorm；分析值需人工核对</text>
+  <text x="636" y="741" class="card-title">多轨练习与试听</text>
+  <text x="636" y="784" class="body">静音 · 独奏 · 音量 · 循环片段</text>
+  <text x="636" y="818" class="body">速度 · 移调 · 节拍器 · 对齐波形</text>
+  <text x="636" y="872" class="small muted">Web Audio + Canvas；远程移调需要 HTTPS</text>
+  <text x="1210" y="741" class="card-title">混音、导出与运行形态</text>
+  <text x="1210" y="784" class="body">单轨 WAV · 自选混音 · 本地曲库</text>
+  <text x="1210" y="818" class="body">Web 服务 · Docker · Tauri 桌面版</text>
+  <text x="1210" y="872" class="small muted">FFmpeg 混音；“Original”伴奏轨是已有分轨求和</text>
+
+  <!-- Use cases -->
+  <text x="64" y="970" class="section">03  用户怎么用</text>
+  <rect x="64" y="995" width="518" height="155" rx="20" class="panel"/>
+  <rect x="608" y="995" width="548" height="155" rx="20" class="panel"/>
+  <rect x="1182" y="995" width="554" height="155" rx="20" class="panel"/>
+  <text x="92" y="1039" class="pill-title">练习／扒谱</text>
+  <text x="92" y="1076" class="body">去掉原乐器，保留伴奏；循环难点</text>
+  <text x="92" y="1111" class="small muted">关注：节拍、和声、演奏细节</text>
+  <text x="636" y="1039" class="pill-title">唱歌／卡拉 OK</text>
+  <text x="636" y="1076" class="body">降低主唱，使用伴奏或主唱参考</text>
+  <text x="636" y="1111" class="small muted">关注：人声残留与伴奏损失</text>
+  <text x="1210" y="1039" class="pill-title">Remix／素材准备</text>
+  <text x="1210" y="1076" class="body">取出声部，重新搭配并导出</text>
+  <text x="1210" y="1111" class="small muted">关注：音质、作品使用权、后续剪辑</text>
+
+  <!-- Value -->
+  <text x="64" y="1199" class="section">04  对你的音频创作产品有什么价值</text>
+  <rect x="64" y="1221" width="1672" height="103" rx="20" fill="#243345" stroke="#bd9044" stroke-width="2"/>
+  <text x="92" y="1263" class="pill-title">可借鉴：素材准备层 + 多轨交互工作流</text>
+  <text x="92" y="1297" class="small muted">导入、分离任务、播放／循环、混音导出与本地部署可作起点；编曲时间线、录音、效果器、更多乐器模型需继续开发。</text>
+  <text x="64" y="1351" class="soft" font-size="15">依据：StemDeck README / 源码、Demucs 论文与官方模型说明 · 截至 2026-09-26 · 本研究尚未运行或试听，不宣称实际音质／性能结果</text>
+</svg>

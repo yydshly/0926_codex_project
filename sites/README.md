@@ -15,3 +15,7 @@ GitHub Pages 发布内容由 .github/workflows/deploy-chat2db-pages.yml 生成�
 ## 003 · Antra
 
 [在线完整能力地图](https://yydshly.github.io/0926_codex_project/sites/003-antra/)展示入口、内部模块、出口、使用场景和研究价值；[本地源码](003-antra/index.html)保留静态概念交互，不连接真实音源。
+
+## 004 · StemDeck
+
+[在线能力展示](https://yydshly.github.io/0926_codex_project/sites/004-stemdeck/)以原创能力图为入口，汇总六轨分离的能力、效果、技术原理、使用场景，以及对音频创作产品的参考价值。[网页源码](004-stemdeck/index.html)。

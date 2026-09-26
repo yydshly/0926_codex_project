@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>004 · StemDeck 能力展示｜GitHub 优秀项目研究集</title>
+  <meta name="description" content="一图读懂 StemDeck：它如何把歌曲估计为六类音轨，能带来什么练习与创作效果，技术原理、使用场景及对音频创作产品的参考价值。">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #091018;
+      --panel: #111b26;
+      --panel-2: #172431;
+      --line: #2a3947;
+      --text: #edf3f5;
+      --muted: #a8bac5;
+      --gold: #f1b43e;
+      --gold-soft: #ffdda0;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 system-ui, -apple-system, "Microsoft YaHei", sans-serif; }
+    a { color: var(--gold-soft); }
+    a:hover { color: #fff; }
+    button { font: inherit; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: auto; }
+    .topbar { border-bottom: 1px solid var(--line); background: rgba(9, 16, 24, .94); }
+    .topbar .wrap { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { color: var(--text); text-decoration: none; font-size: .9rem; letter-spacing: .08em; font-weight: 800; }
+    .brand span { color: var(--gold); }
+    .topnav { display: flex; flex-wrap: wrap; gap: 20px; font-size: .88rem; }
+    .topnav a { color: var(--muted); text-decoration: none; }
+    .topnav a:hover { color: #fff; }
+    .hero { padding: 68px 0 45px; }
+    .eyebrow { margin: 0 0 12px; color: var(--gold); font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { max-width: 850px; margin: 0; font-size: clamp(2.6rem, 7vw, 5.3rem); line-height: 1.1; letter-spacing: -.045em; }
+    h1 span { color: var(--gold); }
+    .lede { max-width: 800px; margin: 24px 0 0; color: var(--muted); font-size: 1.16rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; min-height: 43px; padding: 9px 17px; border-radius: 9px; border: 1px solid var(--line); color: var(--text); text-decoration: none; font-weight: 700; font-size: .9rem; }
+    .button.primary { border-color: var(--gold); background: var(--gold); color: #17202a; }
+    .status { color: var(--muted); font-size: .85rem; }
+    .screenshot { margin: 10px auto 0; border: 1px solid #34424e; border-radius: 13px; overflow: hidden; background: #05090c; box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+    .screenshot img { display: block; width: 100%; height: auto; }
+    .screenshot figcaption { padding: 13px 18px; color: var(--muted); font-size: .83rem; background: #111b25; }
+    .map-link { display: block; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .map-link img { display: block; width: 100%; height: auto; }
+    .hero-map { margin: 36px 0 0; }
+    .hero-map .map-link { box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+    .hero-map figcaption { margin-top: 10px; color: var(--muted); font-size: .84rem; }
+    .summary { margin-top: 28px; padding: 20px 24px; border: 1px solid #876632; border-radius: 12px; background: #241f1b; }
+    .summary strong { color: var(--gold); }
+    .summary p { margin: 6px 0 0; }
+    section { padding: 70px 0; }
+    section + section { border-top: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
+    h2 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.25; }
+    .section-head p { max-width: 570px; margin: 0; color: var(--muted); }
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .step { min-height: 180px; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+    .step small { color: var(--gold); font-weight: 800; letter-spacing: .12em; }
+    .step h3 { margin: 12px 0 7px; font-size: 1.08rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .stem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .stem { position: relative; overflow: hidden; min-height: 118px; padding: 19px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+    .stem::before { content: ""; display: block; width: 36px; height: 4px; margin-bottom: 18px; border-radius: 2px; background: var(--stem-color); }
+    .stem strong { display: block; font-size: 1.04rem; }
+    .stem span { display: block; margin-top: 4px; color: var(--muted); font-size: .86rem; }
+    .note { margin-top: 16px; padding: 14px 17px; border-left: 3px solid var(--gold); background: #171f24; color: var(--muted); font-size: .91rem; }
+    .scenario-layout { display: grid; grid-template-columns: 255px 1fr; gap: 16px; }
+    .scenario-list { display: grid; align-content: start; gap: 9px; }
+    .scenario-button { width: 100%; padding: 13px 16px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); text-align: left; cursor: pointer; }
+    .scenario-button:hover, .scenario-button[aria-selected="true"] { color: var(--text); border-color: var(--gold); background: #25303a; }
+    .scenario-panel { min-height: 238px; padding: 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel-2); }
+    .scenario-panel .tag { color: var(--gold); font-size: .75rem; font-weight: 800; letter-spacing: .13em; }
+    .scenario-panel h3 { margin: 9px 0 12px; font-size: 1.6rem; }
+    .scenario-panel p { margin: 9px 0; color: var(--muted); }
+    .scenario-panel strong { color: var(--text); }
+    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .card { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+    .card h3 { margin: 0 0 9px; font-size: 1.04rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .sources { color: var(--muted); font-size: .9rem; }
+    .sources li { margin: 8px 0; }
+    footer { padding: 30px 0 45px; border-top: 1px solid var(--line); color: var(--muted); font-size: .84rem; }
+    @media (max-width: 850px) {
+      .section-head { display: block; }
+      .section-head p { margin-top: 10px; }
+      .flow { grid-template-columns: repeat(2, 1fr); }
+      .stem-grid { grid-template-columns: repeat(2, 1fr); }
+      .three { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 28px, 1160px); }
+      .topbar .wrap { padding: 13px 0; align-items: start; flex-direction: column; }
+      .hero { padding-top: 45px; }
+      section { padding: 52px 0; }
+      .flow, .stem-grid, .scenario-layout { grid-template-columns: 1fr; }
+      .scenario-list { grid-template-columns: repeat(2, 1fr); }
+      .scenario-panel { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="./index.html">GITHUB PROJECT RESEARCH <span>/ 004</span></a>
+      <nav class="topnav" aria-label="页面导航">
+        <a href="#capability-map">能力全景图</a>
+        <a href="#effect">能力与效果</a>
+        <a href="#workflow">技术原理</a>
+        <a href="#stems">六条音轨</a>
+        <a href="#scenarios">使用场景</a>
+        <a href="#value">对你的价值</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="wrap">
+      <div class="hero">
+        <p class="eyebrow">Open source audio · project 004</p>
+        <h1>从一首歌，走向<span>可操作的音轨</span>。</h1>
+        <p class="lede">StemDeck 将现成歌曲估计为六类声音，让你分别试听、静音、循环练习、重新搭配并导出。这张图串起它的能力、原理、效果、场景和产品价值。</p>
+        <div class="summary"><strong>一句话摘要</strong><p>它是一个面向练习、学习和素材准备的本地音频工作台：核心是固定六类音源分离，价值是把分离结果接入可用的试听与创作流程；它不会识别无限种乐器，也不会还原录音室原始分轨。</p></div>
+        <div class="hero-actions">
+          <a class="button primary" href="#effect">了解能力与效果</a>
+          <a class="button" href="https://github.com/stemdeckapp/stemdeck">访问原仓库</a>
+          <span class="status">研究展示 · 不执行真实音频分离</span>
+        </div>
+      </div>
+      <figure class="hero-map" id="capability-map">
+        <a class="map-link" href="./assets/capability-map.svg" aria-label="打开 StemDeck 能力全景图原图">
+          <img src="./assets/capability-map.svg" alt="StemDeck 能力全景图：输入与预处理、Demucs 六类音源估计、分析与练习模块、使用场景，以及对音频创作产品的参考价值" loading="eager">
+        </a>
+        <figcaption>研究团队整理的能力引导图。点击放大；它说明产品结构，不代表音质实测结果。</figcaption>
+      </figure>
+    </div>
+
+    <section id="effect">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>它能做什么，效果是什么</h2>
+          <p>这里的“效果”指用户能完成的操作与获得的产物；分离音质会随歌曲变化，本研究尚未用音频样本实测。</p>
+        </div>
+        <div class="three">
+          <div class="card"><h3>能力：从歌曲得到六类声音</h3><p>导入本地音频或受支持的链接，估计人声、鼓、贝斯、吉他、钢琴和其他声音，并显示各轨波形与基础音乐分析。</p></div>
+          <div class="card"><h3>效果：变成可练习的素材</h3><p>可以单听或静音声部、循环难点、调整播放、组合伴奏，最后导出单轨或自选混音，供跟练或继续编辑。</p></div>
+          <div class="card"><h3>边界：不是万能识别器</h3><p>六类是模型预设的输出；小众乐器可能落入“其他”或混入相近音轨。分轨会有串音、伪影，不等于录音室原始分轨。</p></div>
+        </div>
+        <figure class="screenshot">
+          <img src="./assets/official-studio.png" alt="StemDeck 官方工作台截图，左侧为曲库，中间为不同颜色的音轨波形，底部为播放与练习控制" loading="lazy">
+          <figcaption>原项目官方界面示意：曲库、分轨波形和播放控制。歌曲数据来自原截图，并非本研究运行结果。<a href="https://github.com/stemdeckapp/stemdeck/blob/ed8caa0114ab071fc9cb2478427829cc7d06931d/imgs/screenshot/stemdeck.png">图片来源</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>技术原理：先估计，再操作</h2>
+          <p>分离模型负责从混合波形中估计声音来源；StemDeck 把输入、分析、试听和导出连接成一条工作流。</p>
+        </div>
+        <div class="flow">
+          <div class="step"><small>01 / IMPORT</small><h3>导入音频</h3><p>本地文件或受支持的在线链接。FFmpeg 将不同格式准备成模型可处理的音频。</p></div>
+          <div class="step"><small>02 / SEPARATE</small><h3>估计六轨</h3><p>Demucs htdemucs_6s 推断人声、鼓、贝斯、吉他、钢琴和其他声音。</p></div>
+          <div class="step"><small>03 / ANALYZE</small><h3>理解歌曲</h3><p>计算 BPM、调性与响度，展示波形和节奏线索；分析结果仍需人工核对。</p></div>
+          <div class="step"><small>04 / PRACTICE</small><h3>试听与导出</h3><p>静音或独奏音轨、循环片段、调整播放，并导出单轨或选定混音。</p></div>
+        </div>
+        <div class="note">核心模型是混合时间域与频域的 Demucs htdemucs_6s。它根据训练所得的声学规律估计六类波形；FFmpeg 处理输入与输出，后端调度分离和分析，前端负责多轨播放与波形交互。即使只选择一个目标音轨，也会先运行六类估计；选择主要影响显示与混音输出。</div>
+      </div>
+    </section>
+
+    <section id="stems">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>六条音轨，各有用途</h2>
+          <p>下方是模型输出类别的说明，不是本页面生成的真实音频。实际分离会因曲目和编曲而不同。</p>
+        </div>
+        <div class="stem-grid">
+          <div class="stem" style="--stem-color:#f36b86"><strong>人声 Vocals</strong><span>听辨唱法、制作练习伴奏</span></div>
+          <div class="stem" style="--stem-color:#f9a336"><strong>鼓 Drums</strong><span>分析节奏型与击打位置</span></div>
+          <div class="stem" style="--stem-color:#f4d053"><strong>贝斯 Bass</strong><span>听清低频律动和根音</span></div>
+          <div class="stem" style="--stem-color:#6acc83"><strong>吉他 Guitar</strong><span>跟练或研究伴奏织体</span></div>
+          <div class="stem" style="--stem-color:#ae87e7"><strong>钢琴 Piano</strong><span>尝试听辨键盘声部；此轨更易有串音</span></div>
+          <div class="stem" style="--stem-color:#94afca"><strong>其他 Other</strong><span>承接未归入前五类的声音</span></div>
+        </div>
+        <div class="note">Demucs 上游将六音源模型列为实验性模型，尤其指出钢琴轨可能有较多串音和伪影。它输出的是估计音轨，不是录音室原始分轨。</div>
+      </div>
+    </section>
+
+    <section id="scenarios">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>选择一个使用场景</h2>
+          <p>点击场景可查看典型操作、期望产出和需要核对的地方。这些是功能分析，不是本次实测。</p>
+        </div>
+        <div class="scenario-layout">
+          <div class="scenario-list" role="tablist" aria-label="使用场景">
+            <button class="scenario-button" type="button" role="tab" aria-selected="true" aria-controls="scenario-panel" data-scenario="practice">乐器跟练</button>
+            <button class="scenario-button" type="button" role="tab" aria-selected="false" aria-controls="scenario-panel" data-scenario="sing">唱歌与卡拉 OK</button>
+            <button class="scenario-button" type="button" role="tab" aria-selected="false" aria-controls="scenario-panel" data-scenario="study">扒谱与编曲学习</button>
+            <button class="scenario-button" type="button" role="tab" aria-selected="false" aria-controls="scenario-panel" data-scenario="create">创作与视频编辑</button>
+          </div>
+          <div class="scenario-panel" id="scenario-panel" role="tabpanel" aria-live="polite">
+            <span class="tag">USE CASE / 01</span>
+            <h3>乐器跟练</h3>
+            <p><strong>怎么做：</strong><span id="scenario-action">降低原吉他、鼓或贝斯轨，保留其余伴奏，循环难点片段。</span></p>
+            <p><strong>得到什么：</strong><span id="scenario-value">更容易听清自己演奏与伴奏的关系。</span></p>
+            <p><strong>要核对：</strong><span id="scenario-caution">分轨可能残留其他乐器，练习时仍需参照原曲。</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="value">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>对你的音频创作产品有什么价值</h2>
+          <p>它提供的是“歌曲素材 → 可操控声部 → 练习或继续创作”的参考实现，适合用来验证产品路径与交互。</p>
+        </div>
+        <div class="three">
+          <div class="card"><h3>可借鉴的产品闭环</h3><p>把分离结果直接变成静音、独奏、循环、重混和导出动作，形成“听懂素材—拆解—搭配—再创作”的工作流。</p></div>
+          <div class="card"><h3>可复用的技术分工</h3><p>参考 FFmpeg、Demucs、FastAPI、Web Audio 与桌面封装如何协作，先做本地原型，再决定是否加入云端处理。</p></div>
+          <div class="card"><h3>下一步值得扩展</h3><p>围绕创作增加时间线编排、效果器、录音、协作或可插拔分离模型；对新乐器类别，需要另选或训练相应模型。</p></div>
+        </div>
+        <div class="note">产品决策前，建议用获授权的多种曲风样本测试分离质量、处理速度和用户练习体验。CPU 处理可能较慢；在线链接依赖来源平台，作品使用也需核对相应权利。</div>
+        <ul class="sources">
+          <li>功能依据：<a href="https://github.com/stemdeckapp/stemdeck/blob/main/README.md">StemDeck README</a>；<a href="https://github.com/stemdeckapp/stemdeck/blob/main/app/pipeline/runner.py">处理流程源码</a>与<a href="https://github.com/stemdeckapp/stemdeck/blob/main/app/pipeline/demucs_worker.py">分离工作进程源码</a>。</li>
+          <li>模型原理与钢琴轨限制：<a href="https://github.com/facebookresearch/demucs">Demucs 官方仓库</a>、<a href="https://arxiv.org/abs/2211.08553">HT Demucs 论文</a>。</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">004 · StemDeck 研究展示。能力图与场景归纳由本研究仓库编写；界面截图归原项目。<a href="https://github.com/yydshly/0926_codex_project">查看项目仓库</a></div>
+  </footer>
+  <script>
+    const scenarios = {
+      practice: { number: "01", title: "乐器跟练", action: "降低原吉他、鼓或贝斯轨，保留其余伴奏，循环难点片段。", value: "更容易听清自己演奏与伴奏的关系。", caution: "分轨可能残留其他乐器，练习时仍需参照原曲。" },
+      sing: { number: "02", title: "唱歌与卡拉 OK", action: "降低主唱，保留伴奏；需要时使用可选的主唱与伴唱细分。", value: "得到个人练习使用的伴奏与人声参考。", caution: "人声残留和伴奏损失随曲目而变，不能保证完全消除人声。" },
+      study: { number: "03", title: "扒谱与编曲学习", action: "独奏一条音轨，减速并循环，结合 BPM、调性和波形听辨。", value: "更容易分辨节奏、声部进入和低频走向。", caution: "调性、节拍和具体音符需要人工核对；软件不会自动给出准确乐谱。" },
+      create: { number: "04", title: "创作与视频编辑", action: "导出单轨或自选混音，再导入自己的音频或视频编辑软件。", value: "快速准备供个人创作使用的素材。", caution: "输出是模型估计的音轨，质量和使用权都需在最终作品前确认。" }
+    };
+    const buttons = Array.from(document.querySelectorAll(".scenario-button"));
+    const panel = document.getElementById("scenario-panel");
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const item = scenarios[button.dataset.scenario];
+        buttons.forEach((candidate) => candidate.setAttribute("aria-selected", String(candidate === button)));
+        panel.querySelector(".tag").textContent = "USE CASE / " + item.number;
+        panel.querySelector("h3").textContent = item.title;
+        document.getElementById("scenario-action").textContent = item.action;
+        document.getElementById("scenario-value").textContent = item.value;
+        document.getElementById("scenario-caution").textContent = item.caution;
+      });
+    });
+  </script>
+</body>
+</html>
