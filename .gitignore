@@ -1,0 +1,21 @@
+# Local files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Common build outputs and dependencies for future subprojects
+node_modules/
+dist/
+build/
+.next/
+coverage/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local secrets
+.env
+.env.*
+!.env.example
